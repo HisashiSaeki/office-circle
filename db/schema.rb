@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2023_11_07_074413) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "department_id", null: false
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_furigana", null: false
+    t.string "first_name_furigana", null: false
+    t.text "introduction", default: ""
+    t.date "birthdate", null: false
+    t.string "prefecture", null: false
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_employees_on_email", unique: true
