@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <%= flash[:notice] %>
+
+      <div class="row">
+        <div class="col-md-4">
+          <%= image_tag @employee.get_profile_image(300, 300) %>
+        </div>
+        <div class="col-md-8">
+          <div>名前:　<%= @employee.full_name %></div>
+          <div>フリガナ：<%= @employee.full_name_furigana %></div>
+          <div>誕生日：<%= @employee.birthdate.strftime("%-m月%-d日") %></div>
+          <div>出身地：<%= @employee.prefecture %></div>
+          <div>メールアドレス：<%= @employee.email %></div>
+          <div>部署：<%= @employee.department.name %></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 border"><%= @employee.introduction %></div>
+        <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "btn btn-success" %>
+      </div>
+
+      <% if @employee.posts.exists? %>
+        <div class="row">
+          <div class="col">
+            <h4><%= @employee.full_name %>さんの投稿一覧</h4>
+            <div class="my_post_list d-flex">
+              <% @employee.posts.each do |my_post| %>
+                <div class="my_post_item border">
+                  <div><%= my_post.title %></div>
+                  <div><%= my_post.created_at.strftime("%Y-%m-%d") %></div>
+                  <div>
+                    <% if @employee == current_employee %>
+                      <% if my_post.is_published %>
+                        <p>公開</p>
+                      <% else %>
+                        <p>非公開</p>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div><%= my_post.favorites.count %>件</div>
+                  <div><%= my_post.post_comments.count %>件</div>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+      <% else %>
+        <div>まだ投稿がありません</div>
+      <% end %>
+
+      <% if @employee == current_employee %>
+        <% if @favorite_posts.exists? %>
+          <div class="row">
+            <div class="col">
+              <h4>いいねした投稿一覧</h4>
+              <% @favorite_posts.each do |favorite_post| %>
+                <div>
+                  <div><%= favorite_post.title %></div>
+                  <div><%= favorite_post.created_at.strftime("%Y-%m-%d") %></div>
+                  <div><%= favorite_post.favorites.count  %></div>
+                  <div><%= favorite_post.post_comments.count  %></div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <div>いいねした投稿はありません</div>
+        <% end %>
+      <% end %>
+
+      <% if @employee.groups.exists? %>
+      <div class="row">
+        <div class="col">
+          <h4>参加中のグループ一覧</h4>
+          <% @employee.groups.each do |group| %>
+            <div>
+              <div><%= group.name %></div>
+              <div><%= group.creater %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

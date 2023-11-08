@@ -8,8 +8,8 @@ class Employee < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :groups
   has_many :group_members, dependent: :destroy
+  has_many :groups, through: :group_members
   
   has_one_attached :profile_image
   
