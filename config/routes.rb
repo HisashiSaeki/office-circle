@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
   
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
+  devise_for :employees, controllers: {
+    registrations: "public/registrations",
+    sessions: "public/sessions",
+    passwords: "public/passwords"
+  }
+  
   scope module: :public do
     resources :employees, only: [:index, :show, :edit, :update]
     resources :posts do
@@ -20,13 +29,5 @@ Rails.application.routes.draw do
     resources :departments, only: [:create, :index, :edit, :update, :destroy]
   end
   
-  devise_for :admin, skip: [:registrations, :passwords], controllers: {
-    sessions: "admin/sessions"
-  }
-  devise_for :employees, controllers: {
-    registrations: "public/registrations",
-    sessions: "public/registrations",
-    passwords: "public/passwords"
-  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,29 +1,65 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>新規登録</h2>
+      
+      <div class="col-md-8 mx-auto">
+        <%= form_with model: @employee, url: employee_registration_path do |f| %>
+          <%= render "public/shared/error_messages", resource: resource %>
+          
+          <div class="field">
+            <%= f.label "氏名" %><br />
+            <%= f.text_field :last_name, autofocus: true, placeholder: "姓" %>
+            <%= f.text_field :first_name, placeholder: "名" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label "氏名(カナ)" %><br />
+            <%= f.text_field :last_name_furigana, placeholder: "セイ" %>
+            <%= f.text_field :first_name_furigana, placeholder: "メイ" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :birthdate, "生年月日" %><br />
+            <%= f.date_field :birthdate %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :prefecture, "出身地" %><br />
+            <%= f.text_field :prefecture, placeholder: "愛媛県" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :department_id, "部署" %><br />
+            <%= f.collection_select :department_id, Department.all, :id, :name, include_blank: "部署を選択してください" %>
+          </div>
+        
+          <div class="field">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, placeholder: "example@gmail.com" %>
+          </div>
+        
+          <div class="field">
+            <%= f.label :password, "パスワード" %>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> 文字以上)</em>
+            <% end %><br />
+            <%= f.password_field :password %>
+          </div>
+        
+          <div class="field">
+            <%= f.label :password_confirmation, "パスワード確認用" %><br />
+            <%= f.password_field :password_confirmation %>
+          </div>
+        
+          <div class="actions">
+            <%= f.submit "新規登録" %>
+          </div>
+        <% end %>
+      
+        <%= render "public/shared/links" %>
+      </div>
+      
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>

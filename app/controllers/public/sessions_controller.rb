@@ -24,4 +24,13 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  
+  def after_sign_in_path_for(resource)
+    employee_path(resource)
+  end
+  
+  def after_sign_out_path_for(resource)
+    new_employee_session_path
+  end
+  
 end
