@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 d-flex mx-auto justify-content-center">
+      
+      <div class="col-md-3">
+        検索エリア
+      </div>
+
+      <div class="col-md-7">
+        <% @employees.each do |employee| %>
+          <div class="employee_box d-flex align-items-center">
+            <div>
+              <%= image_tag employee.get_profile_image(100, 100) %>
+            </div>
+            <div>
+              <%= employee.full_name %></br>
+              <%= employee.department.name %>
+            </div>
+            <div>
+              <% if !employee.introduction %>
+                紹介文がまだ設定されていません
+              <% else %>
+                <%= employee.introduction.truncate(20, omission: "...") %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -11,5 +11,16 @@ class Employee < ApplicationRecord
   has_many :groups
   has_many :group_members, dependent: :destroy
   
+  has_one_attached :profile_image
   
+  def get_profile_image(width,height)
+    unless profile_image.attached?
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+    end
+    profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  def full_name = self.last_name + " " + self.first_name
+  def full_name_furigana = self.last_name_furigana + " " + self.first_name_furigana
 end
