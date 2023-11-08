@@ -1,4 +1,25 @@
 Rails.application.routes.draw do
+  
+  scope module: :public do
+    resources :employees, only: [:index, :show, :edit, :update]
+    resources :posts do
+      resources :favorites, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
+    end
+    resources :groups do
+      resources :group_members, only: [:create, :destroy]
+      resources :notices, only: [:new, :create, :show, :destroy]
+    end
+  end
+  
+  namespace :admin do
+    resources :employees, only: [:index, :show, :edit, :update]
+    resources :posts, only: [:index, :show] do
+      resources :post_comments, only: [:destroy]
+    end
+    resources :departments, only: [:create, :index, :edit, :update, :destroy]
+  end
+  
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
