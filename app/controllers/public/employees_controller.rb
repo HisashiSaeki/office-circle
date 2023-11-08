@@ -8,8 +8,7 @@ class Public::EmployeesController < ApplicationController
   def show
     @employee = Employee.find(params[:id])
     if @employee == current_employee
-      favorites = Favorite.where(employee_id: @employee).select(:post_id)
-      @favorite_posts = Post.where(favorites)
+      @favorite_posts = Post.my_favorite_post(@employee)
     end
   end
   
