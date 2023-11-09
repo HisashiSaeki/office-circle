@@ -9,7 +9,8 @@ class Employee < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :group_members, dependent: :destroy
-  has_many :groups, through: :group_members
+  has_many :groups, through: :group_members, source: :group
+  has_many :favorite_posts, through: :favorites, source: :post
   
   has_one_attached :profile_image
   
