@@ -11,10 +11,14 @@
         <%= f.text_field :body %>
       </div>
       <div class="field">
-        <%= f.label :tag_name, "3.タグを入力してください" %>
-        <%= 
+        <%= f.radio_button :is_published, :true %>
+        <%= f.label :is_published, "投稿を公開する" %>
+        <%= f.radio_button :is_published, :false %>
+        <%= f.label :is_published, "下書きとして投稿する" %>
       </div>
-      <div class="field"></div>
+      <div class="field">
+        <%= f.submit "投稿する" %>
+      </div>
       <% end %>
     </div>
   </div>

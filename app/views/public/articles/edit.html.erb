@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @article do |f| %>
+      <div class="field">
+        <%= f.label :title, "1.タイトルを入力してください" %></br>
+        <%= f.text_field :title, autofocus: true, placeholder: @article.title %>
+      </div>
+      <div class="field">
+        <%= f.label :body, "2.本文を入力してください" %></br>
+        <%= f.text_field :body, placeholder: @article.body %>
+      </div>
+      <div class="field">
+        <%= f.radio_button :is_published, :true %>
+        <%= f.label :is_published, "投稿を公開する" %>
+        <%= f.radio_button :is_published, :false %>
+        <%= f.label :is_published, "下書きとして投稿する" %>
+      </div>
+      <div class="field">
+        <%= f.submit "変更内容を保存する" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
