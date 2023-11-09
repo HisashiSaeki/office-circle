@@ -30,9 +30,9 @@
       <div class="row">
         <div class="col">
           <h4><%= @employee.full_name %>さんの投稿一覧</h4>
-          <% if @employee.posts.exists? %>
+          <% if @my_posts.exists? %>
             <div class="my_post_list d-flex">
-              <% @employee.posts.each do |my_post| %>
+              <% @my_posts.each do |my_post| %>
                 <div class="my_post_item border">
                   <div><%= my_post.title %></div>
                   <div><%= my_post.created_at.strftime("%Y-%m-%d") %></div>
@@ -60,8 +60,8 @@
         <div class="row">
           <div class="col">
             <h4>いいねした投稿一覧</h4>
-            <% if @favorite_posts %>
-              <% @employee.favorite_posts.each do |favorite_post| %>
+            <% if @favorite_posts.exists? %>
+              <% @favorite_posts.each do |favorite_post| %>
                 <div>
                   <div><%= favorite_post.title %></div>
                   <div><%= favorite_post.created_at.strftime("%Y-%m-%d") %></div>
@@ -79,8 +79,8 @@
       <div class="row">
         <div class="col">
           <h4>参加中のグループ一覧</h4>
-          <% if @employee.groups.exists? %>
-            <% @employee.groups.each do |group| %>
+          <% if @groups.exists? %>
+            <% @groups.each do |group| %>
               <div>
                 <div><%= group.name %></div>
                 <div><%= group.creater %></div>
