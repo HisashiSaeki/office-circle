@@ -7,7 +7,7 @@ class Public::EmployeesController < ApplicationController
   
   def show
     @employee = Employee.find(params[:id])
-    @my_articles = article.where(employee_id: @employee).includes(:favorites, :comments)
+    @my_articles = Article.where(employee_id: @employee).includes(:favorites, :comments)
     @favorite_articles = @employee.favorite_articles.includes(:favorites, :comments)
     @groups = @employee.groups.includes(:creater)
   end

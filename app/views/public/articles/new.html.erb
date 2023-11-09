@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @article do |f| %>
+      <div class="field">
+        <%= f.label :title, "1.タイトルを入力してください" %></br>
+        <%= f.text_field :title, autofocus: true %>
+      </div>
+      <div class="field">
+        <%= f.label :body, "2.本文を入力してください" %></br>
+        <%= f.text_field :body %>
+      </div>
+      <div class="field">
+        <%= f.label :tag_name, "3.タグを入力してください" %>
+        <%= 
+      </div>
+      <div class="field"></div>
+      <% end %>
+    </div>
+  </div>
+</div>

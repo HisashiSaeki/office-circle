@@ -8,6 +8,7 @@
 
       <div class="col-md-7">
         <% @employees.each do |employee| %>
+          <%= link_to employee_path(employee) do %>
           <div class="employee_box d-flex align-items-center">
             <div>
               <%= image_tag employee.get_profile_image(100, 100) %>
@@ -24,6 +25,7 @@
               <% end %>
             </div>
           </div>
+          <% end %>
         <% end %>
       </div>
       

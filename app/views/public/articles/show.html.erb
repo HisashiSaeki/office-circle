@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      
+      <div class="article-employee">
+        <div>
+          <%= image_tag @article.employee.get_profile_image(100, 100) %>
+        </div>
+        <%= @article.employee.full_name %>
+        <%= @article.employee.department.name %>
+      </div>
+      <div>
+        <%= @article.favorites.count %>
+      </div>
+      <div>
+        <%= @article.title %>
+      </div>
+      <div class="article-tags">
+        <% @article.tags.each do |tag| %>
+          <%= tag.name %>
+        <% end %>
+      </div>
+      <div class="article-date">
+        <%= @article.create_date %>
+        <%= @article.update_date %>
+      </div>
+      <div class="article-body">
+        <%= @article.body %>
+      </div>
+      <% if @article.employee == current_employee %>
+        <div class="btn-area">
+          <%= link_to "投稿内容を変更する", edit_article_path(@article), class: "btn btn-success" %>
+          <%= link_to "投稿内容を削除する", article_path(@article), method: :delete, class: "btn btn-danger" %>
+        </div>
+      <% end %>
+      
+      <div class="comment-area">
+        <% @comments.each do |comment| %>
+          <div class="comment-contnt">
+            <div class="comment-employee">
+              <%= comment.employee.get_profile_image(100, 100) %>
+              <%= comment.employee.name %>
+              (<%= comment.employe.department %>)
+              <%= comment.create_date %>
+              <% if comment.employee == current_employee %>
+                <%= link_to "コメントを削除する", article_comment_path(comment), method: :delete, class:"btn btn-danger" %>
+              <% end %>
+            </div>
+            <div class="comment">
+              <%= comment.body %>
+            </div>
+          </div>
+        <% end %>
+        
+        <%= form_with model: [@article, @comment] do |f| %>
+          <div>
+            <%= f.text_area :commnt, placeholder: "コメントを入力してください" %>
+            <%= f.submit "コメントを作成", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,43 +1,53 @@
 class Public::ArticlesController < ApplicationController
+  before_action :ensure_correct_employee, only: [:edit, :update, :destroy]
   
   def new
-    @article = article.new
+    @article = Article.new
   end
   
   def create
-    @article = article.new(article_params)
+    @article = Article.new(article_params)
     @article.employee_id = current_employee.id
     # if @article.save(article_params)
       
   end
   
   def index
-    @articles = article.where(is_published: true).incluedes(:employee, :tags, :favorites, :comments)
+    @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments)
   end
   
   def show
-    @article = article.find(params[:id])
+    @article = Article.find(params[:id])
     @comments = Comment.where(article_id: @article).includes(:employee)
+    @comment = Comment.new
   end
   
   def edit
-    @article = article.find(params[:id])
   end
   
   def update
-    @article = article.find(params[:id])
-    @article.save(article_params)
+    if @article.save(article_params)
+      redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
+    end
   end
   
   def destroy
-    @article = article.find(params[:id])
-    @article.destroy
+    if @article.destroy
+      redirect_to articles_path, notice: "投稿内容の削除が完了しました"
+    end
   end
   
   private
   
   def article_params
     params.require(:article).permit(:title, :body, :employee_id, :is_published)
+  end
+  
+  def ensure_correct_employee
+    @article = Article.find(params[:id])
+    unless @post.employee == current_employee
+      redirect_to article_path(@article)
+    end
   end
   
 end
