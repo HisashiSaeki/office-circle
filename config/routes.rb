@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   
   scope module: :public do
     resources :employees, only: [:index, :show, :edit, :update]
-    resources :posts do
+    resources :articles do
       resources :favorites, only: [:create, :destroy]
-      resources :post_comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
     end
     resources :groups do
       resources :group_members, only: [:create, :destroy]
@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   
   namespace :admin do
     resources :employees, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :show] do
-      resources :post_comments, only: [:destroy]
+    resources :articles, only: [:index, :show] do
+      resources :comments, only: [:destroy]
     end
     resources :departments, only: [:create, :index, :edit, :update, :destroy]
   end

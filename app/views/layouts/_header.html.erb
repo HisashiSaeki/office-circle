@@ -4,14 +4,14 @@
     <ul class="content-list d-flex">
       <% if employee_signed_in? %>
         <li><%= link_to "マイページへ", employee_path(current_employee) %></li>
-        <li><%= link_to "新規投稿", new_post_path %></li>
+        <li><%= link_to "新規投稿", new_article_path %></li>
         <li><%= link_to "社員一覧", employees_path %></li>
-        <li><%= link_to "投稿一覧", posts_path %></li>
+        <li><%= link_to "投稿一覧", articles_path %></li>
         <li><%= link_to "グループ一覧", groups_path %></li>
         <li><%= link_to "ログアウト", destroy_employee_session_path, method: :delete %></li>
       <% elsif admin_signed_in? %>
         <li><%= link_to "社員一覧", admin_employees_path %></li>
-        <li><%= link_to "投稿一覧", admin_posts_path %></li>
+        <li><%= link_to "投稿一覧", admin_articles_path %></li>
         <li><%= link_to "部署一覧", admin_departments_path %></li>
         <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
       <% else %>

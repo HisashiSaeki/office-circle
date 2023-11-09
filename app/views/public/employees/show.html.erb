@@ -30,23 +30,23 @@
       <div class="row">
         <div class="col">
           <h4><%= @employee.full_name %>さんの投稿一覧</h4>
-          <% if @my_posts.exists? %>
-            <div class="my_post_list d-flex">
-              <% @my_posts.each do |my_post| %>
-                <div class="my_post_item border">
-                  <div><%= my_post.title %></div>
-                  <div><%= my_post.created_at.strftime("%Y-%m-%d") %></div>
+          <% if @my_articles.exists? %>
+            <div class="my_article_list d-flex">
+              <% @my_articles.each do |my_article| %>
+                <div class="my_article_item border">
+                  <div><%= my_article.title %></div>
+                  <div><%= my_article.created_at.strftime("%Y-%m-%d") %></div>
                   <div>
                     <% if @employee == current_employee %>
-                      <% if my_post.is_published %>
+                      <% if my_article.is_published %>
                         <p>公開</p>
                       <% else %>
                         <p>非公開</p>
                       <% end %>
                     <% end %>
                   </div>
-                  <div><%= my_post.favorites.count %>件</div>
-                  <div><%= my_post.post_comments.count %>件</div>
+                  <div><%= my_article.favorites.count %>件</div>
+                  <div><%= my_article.comments.count %>件</div>
                 </div>
               <% end %>
             </div>
@@ -60,13 +60,13 @@
         <div class="row">
           <div class="col">
             <h4>いいねした投稿一覧</h4>
-            <% if @favorite_posts.exists? %>
-              <% @favorite_posts.each do |favorite_post| %>
+            <% if @favorite_articles.exists? %>
+              <% @favorite_articles.each do |favorite_article| %>
                 <div>
-                  <div><%= favorite_post.title %></div>
-                  <div><%= favorite_post.created_at.strftime("%Y-%m-%d") %></div>
-                  <div><%= favorite_post.favorites.count  %></div>
-                  <div><%= favorite_post.post_comments.count  %></div>
+                  <div><%= favorite_article.title %></div>
+                  <div><%= favorite_article.created_at.strftime("%Y-%m-%d") %></div>
+                  <div><%= favorite_article.favorites.count  %></div>
+                  <div><%= favorite_article.comments.count  %></div>
                 </div>
               <% end %>
             <% else %>
