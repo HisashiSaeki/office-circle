@@ -21,7 +21,7 @@ class Public::ArticlesController < ApplicationController
   end
   
   def index
-    @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments)
+    @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
   end
   
   def show
