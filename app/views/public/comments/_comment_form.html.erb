@@ -1,0 +1,4 @@
+<%= form_with model: [article, comment], local: false do |f| %>
+  <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+  <%= f.submit "コメントを作成", class: "btn btn-success" %>
+<% end %>

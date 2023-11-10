@@ -34,29 +34,11 @@
         </div>
       <% end %>
 
-      <div class="comment-field">
-        <% @comments.each do |comment| %>
-          <div class="comment-content">
-            <div class="comment-employee">
-              <%= image_tag comment.employee.get_profile_image(100, 100) %>
-              <%= comment.employee.full_name %>
-              (<%= comment.employee.department.name %>)
-              コメント日:<%= comment.create_date %>
-              <% if comment.employee == current_employee %>
-                <%= link_to "コメントを削除する", article_comment_path(comment.article, comment), method: :delete, class:"btn btn-danger" %>
-              <% end %>
-            </div>
-            <div class="comment">
-              <%= comment.comment %>
-            </div>
-          </div>
-        <% end %>
-        <div>
-          <%= form_with model: [@article, @comment] do |f| %>
-            <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
-            <%= f.submit "コメントを作成", class: "btn btn-success" %>
-          <% end %>
-        </div>
+      <div class="comment-index">
+        <%= render "public/comments/comment_index", comments: @comments %>
+      </div>
+      <div class="comment-form">
+        <%= render "public/comments/comment_form", {article: @article, comment: @comment} %>
       </div>
 
     </div>
