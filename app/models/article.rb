@@ -8,5 +8,7 @@ class Article < ApplicationRecord
   
   def create_date = self.created_at.strftime("%Y-%m-%d")
   def update_date = self.updated_at.strftime("%Y-%m-%d")
+  
+  def favorited_by?(employee) = favorites.exists?(employee_id: employee.id)
 
 end

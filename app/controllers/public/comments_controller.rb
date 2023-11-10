@@ -6,13 +6,13 @@ class Public::CommentsController < ApplicationController
     @comment = current_employee.comments.new(comment_params)
     @comment.article_id = @article.id
     if @comment.save
-      redirect_to article_path(@article)
+      redirect_back fallback_location: employee_path(current_employee)
     end
   end
   
   def destroy
     @comment.destroy
-    redirect_to article_path(params[:article_id])
+    redirect_back fallback_location: employee_path(current_employee)
   end
   
   private
