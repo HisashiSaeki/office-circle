@@ -7,14 +7,19 @@ class Public::ArticlesController < ApplicationController
   
   def create
     @article = current_employee.articles.new(article_params)
+    list_tags = params[:article][:tag].split(",")
     if params[:post].present?
       @article.is_published = true
-      @article.save
-      redirect_to articles_path
+      if @article.save
+        @article.save_tags(list_tags)
+        redirect_to article_path(@article), notice: "投稿完了しました"
+      end
     elsif params[:draft].present?
       @article.is_published = false
-      @article.save
-      redirect_to employee_path(current_employee)
+      if @article.save
+        @article.save_tags(list_tags)
+        redirect_to article_path(@article), notice: "投稿を下書き保存しました"
+      end
     else
       render :new
     end
@@ -31,15 +36,21 @@ class Public::ArticlesController < ApplicationController
   end
   
   def edit
+    @tag_list = @article.tags.pluck(:name).join(',')
   end
   
   def update
+    list_tags = params[:article][:tag].split(",")
     if params[:post].present?
       @article.is_published = true
-      @article.update(article_params)
+      if @article.update(article_params)
+        @article.update_tags(list_tags)
+      end
     elsif params[:draft].present?
       @article.is_published = false
-      @article.update(article_params)
+      if @article.update(article_params)
+        @article.update_tags(list_tags)
+      end
     else
       render :edit
     end
@@ -64,5 +75,7 @@ class Public::ArticlesController < ApplicationController
       redirect_to article_path(@article)
     end
   end
+  
+  
   
 end
