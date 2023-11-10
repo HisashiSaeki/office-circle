@@ -19,14 +19,9 @@ class Article < ApplicationRecord
   end
   
   def update_tags(send_tags)
-    logger.debug("メソッドスタート")
     current_tags = self.tags.pluck(:name) unless !self.tags
-    logger.debug("current_tags=#{current_tags}")
-    logger.debug("send_tags=#{send_tags}")
     old_tags = current_tags - send_tags
-    logger.debug("old_tags=#{old_tags}")
     new_tags = send_tags - current_tags
-    logger.debug("new_tags=#{new_tags}")
     
     old_tags.each do |old_tag|
       self.tags.delete(Tag.find_by(name: old_tag))
@@ -34,8 +29,6 @@ class Article < ApplicationRecord
     
     new_tags.each do |tag|
       new_tag = Tag.find_or_create_by!(name: tag)
-      logger.debug("new_tag=#{new_tag.name}")
-      logger.debug("メソッドエンド")
       self.tags << new_tag
     end
     
