@@ -33,21 +33,23 @@
           <% if @my_articles.exists? %>
             <div class="my_article_list d-flex">
               <% @my_articles.each do |my_article| %>
-                <div class="my_article_item border">
-                  <div><%= my_article.title %></div>
-                  <div><%= my_article.created_at.strftime("%Y-%m-%d") %></div>
-                  <div>
-                    <% if @employee == current_employee %>
-                      <% if my_article.is_published %>
-                        <p>公開</p>
-                      <% else %>
-                        <p>非公開</p>
+                <%= link_to article_path(my_article)  do %>
+                  <div class="my_article_item border">
+                    <div><%= my_article.title %></div>
+                    <div><%= my_article.created_at.strftime("%Y-%m-%d") %></div>
+                    <div>
+                      <% if @employee == current_employee %>
+                        <% if my_article.is_published %>
+                          <p>公開中</p>
+                        <% else %>
+                          <p>下書き</p>
+                        <% end %>
                       <% end %>
-                    <% end %>
+                    </div>
+                    <div><%= my_article.favorites.count %>件</div>
+                    <div><%= my_article.comments.count %>件</div>
                   </div>
-                  <div><%= my_article.favorites.count %>件</div>
-                  <div><%= my_article.comments.count %>件</div>
-                </div>
+                <% end %>
               <% end %>
             </div>
           <% else %>
@@ -62,12 +64,14 @@
             <h4>いいねした投稿一覧</h4>
             <% if @favorite_articles.exists? %>
               <% @favorite_articles.each do |favorite_article| %>
-                <div>
-                  <div><%= favorite_article.title %></div>
-                  <div><%= favorite_article.created_at.strftime("%Y-%m-%d") %></div>
-                  <div><%= favorite_article.favorites.count  %></div>
-                  <div><%= favorite_article.comments.count  %></div>
-                </div>
+                <%= link_to article_path(favorite_article) do %>
+                  <div>
+                    <div><%= favorite_article.title %></div>
+                    <div><%= favorite_article.created_at.strftime("%Y-%m-%d") %></div>
+                    <div><%= favorite_article.favorites.count  %></div>
+                    <div><%= favorite_article.comments.count  %></div>
+                  </div>
+                <% end %>
               <% end %>
             <% else %>
               <div>いいねした投稿はありません</div>
@@ -81,10 +85,12 @@
           <h4>参加中のグループ一覧</h4>
           <% if @groups.exists? %>
             <% @groups.each do |group| %>
-              <div>
-                <div><%= group.name %></div>
-                <div><%= group.creater %></div>
-              </div>
+              <%= link_to group_path(group) do %>
+                <div>
+                  <div><%= group.name %></div>
+                  <div><%= group.creater %></div>
+                </div>
+              <% end %>
             <% end %>
           <% else %>
             <div>参加中のグループはありません</div>

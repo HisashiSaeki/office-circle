@@ -21,8 +21,8 @@
         <% end %>
       </div>
       <div class="article-date">
-        <%= @article.create_date %>
-        <%= @article.update_date %>
+        投稿日:<%= @article.create_date %>
+        最終更新日:<%= @article.update_date %>
       </div>
       <div class="article-body">
         <%= @article.body %>
@@ -41,7 +41,7 @@
               <%= image_tag comment.employee.get_profile_image(100, 100) %>
               <%= comment.employee.full_name %>
               (<%= comment.employee.department.name %>)
-              <%= comment.create_date %>
+              コメント日:<%= comment.create_date %>
               <% if comment.employee == current_employee %>
                 <%= link_to "コメントを削除する", article_comment_path(comment.article, comment), method: :delete, class:"btn btn-danger" %>
               <% end %>

@@ -7,11 +7,12 @@ class Public::ArticlesController < ApplicationController
   
   def create
     @article = current_employee.articles.new(article_params)
-    @article.is_published = params[:article][:is_published]
-    if @article.is_published == true
+    if params[:post].present?
+      @article.is_published = true
       @article.save
       redirect_to articles_path
-    elsif @article.is_published == false
+    elsif params[:draft].present?
+      @article.is_published = false
       @article.save
       redirect_to employee_path(current_employee)
     else
@@ -33,11 +34,16 @@ class Public::ArticlesController < ApplicationController
   end
   
   def update
-    if @article.update(article_params)
-      redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
+    if params[:post].present?
+      @article.is_published = true
+      @article.update(article_params)
+    elsif params[:draft].present?
+      @article.is_published = false
+      @article.update(article_params)
     else
       render :edit
     end
+    redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
   end
   
   def destroy
