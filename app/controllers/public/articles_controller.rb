@@ -7,7 +7,7 @@ class Public::ArticlesController < ApplicationController
   
   def create
     @article = current_employee.articles.new(article_params)
-    list_tags = params[:article][:tag].split(",")
+    list_tags = params[:article][:tag].split("、")
     if params[:post].present?
       @article.is_published = true
       if @article.save
@@ -36,11 +36,11 @@ class Public::ArticlesController < ApplicationController
   end
   
   def edit
-    @tag_list = @article.tags.pluck(:name).join(',')
+    @tag_list = @article.tags.pluck(:name).join('、')
   end
   
   def update
-    list_tags = params[:article][:tag].split(",")
+    list_tags = params[:article][:tag].split("、")
     if params[:post].present?
       @article.is_published = true
       if @article.update(article_params)

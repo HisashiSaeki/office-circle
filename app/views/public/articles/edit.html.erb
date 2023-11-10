@@ -4,15 +4,15 @@
       <%= form_with model: @article do |f| %>
       <div class="field">
         <%= f.label :title, "1.タイトルを入力してください" %></br>
-        <%= f.text_field :title, autofocus: true, placeholder: @article.title %>
+        <%= f.text_field :title, autofocus: true %>
       </div>
       <div class="field">
         <%= f.label :body, "2.本文を入力してください" %></br>
-        <%= f.text_field :body, placeholder: @article.body %>
+        <%= f.text_field :body %>
       </div>
      <div class="field">
         <%= f.label :tag, "3.タグを入力してください" %></br>
-        <%= f.text_field :tag, placeholder: @tag_list %>
+        <%= f.text_field :tag, value: @tag_list %>
       </div>
       <div class="field">
         <%= f.submit "投稿内容を変更する", name: "post", class: "btn btn-success" %>
