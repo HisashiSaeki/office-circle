@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :employees, only: [:index, :show, :edit, :update]
     resources :articles do
-      resources :favorites, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
     resources :groups do

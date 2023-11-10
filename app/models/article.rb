@@ -6,8 +6,8 @@ class Article < ApplicationRecord
   has_many :article_tags, dependent: :destroy
   has_many :tags, through: :article_tags, source: :tag
   
-  def create_date = self.created_at.strftime("%Y-%m-%d")
-  def update_date = self.updated_at.strftime("%Y-%m-%d")
+  def create_date = created_at.strftime("%Y-%m-%d")
+  def update_date = updated_at.strftime("%Y-%m-%d")
   
   def favorited_by?(employee) = favorites.exists?(employee_id: employee.id)
 

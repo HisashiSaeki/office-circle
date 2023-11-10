@@ -4,13 +4,11 @@ class Public::FavoritesController < ApplicationController
   def create
     @favorite = current_employee.favorites.new(article_id: @article.id)
     @favorite.save
-    redirect_back fallback_location: employee_path(current_employee)
   end
   
   def destroy
     @favorite = current_employee.favorites.find_by(article_id: @article.id)
     @favorite.destroy
-    redirect_back fallback_location: employee_path(current_employee)
   end
   
   private

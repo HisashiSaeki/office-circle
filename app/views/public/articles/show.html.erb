@@ -9,21 +9,9 @@
         <%= @article.employee.full_name %>
         <%= @article.employee.department.name %>
       </div>
-      <% if @article.favorited_by?(current_employee) %>
-        <div>
-          <%= link_to article_favorite_path(@article), method: :delete do %>
-            <i class="fa-solid fa-thumbs-up"></i>
-            <%= @article.favorites.count %>
-          <% end %>
-        </div>
-      <% else %>
-        <div>
-          <%= link_to article_favorites_path(@article), method: :post do %>
-            <i class="fa-regular fa-thumbs-up"></i>
-            <%= @article.favorites.count %>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="favorite">
+        <%= render "public/favorites/favorite", article: @article %>
+      </div>
       <div>
         <%= @article.title %>
       </div>
@@ -40,15 +28,15 @@
         <%= @article.body %>
       </div>
       <% if @article.employee == current_employee %>
-        <div class="btn-area">
+        <div class="btn-group">
           <%= link_to "投稿内容を変更する", edit_article_path(@article), class: "btn btn-success" %>
           <%= link_to "投稿内容を削除する", article_path(@article), method: :delete, class: "btn btn-danger" %>
         </div>
       <% end %>
 
-      <div class="comment-area">
+      <div class="comment-field">
         <% @comments.each do |comment| %>
-          <div class="comment-contnt">
+          <div class="comment-content">
             <div class="comment-employee">
               <%= image_tag comment.employee.get_profile_image(100, 100) %>
               <%= comment.employee.full_name %>
@@ -63,13 +51,12 @@
             </div>
           </div>
         <% end %>
-
-        <%= form_with model: [@article, @comment] do |f| %>
-          <div>
+        <div>
+          <%= form_with model: [@article, @comment] do |f| %>
             <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
             <%= f.submit "コメントを作成", class: "btn btn-success" %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
 
     </div>
