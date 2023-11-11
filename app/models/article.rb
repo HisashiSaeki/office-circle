@@ -11,27 +11,16 @@ class Article < ApplicationRecord
   
   def favorited_by?(employee) = self.favorites.exists?(employee_id: employee.id)
   
-  def save_tags(send_tags)
-    send_tags.each do |tag|
-      new_tag = Tag.find_or_create_by(name: tag)
-      self.tags << new_tag
-    end
-  end
+  def save_tags(send_tags) = send_tags.each { |tag| self.tags << Tag.find_or_create_by(name: tag) }
   
   def update_tags(send_tags)
     current_tags = self.tags.pluck(:name) unless !self.tags
     old_tags = current_tags - send_tags
     new_tags = send_tags - current_tags
     
-    old_tags.each do |old_tag|
-      self.tags.delete(Tag.find_by(name: old_tag))
-    end
+    old_tags.each { |old_tag| self.tags.delete(Tag.find_by(name: old_tag)) }
     
-    new_tags.each do |tag|
-      new_tag = Tag.find_or_create_by!(name: tag)
-      self.tags << new_tag
-    end
-    
+    new_tags.each { |new_tag| self.tags << Tag.find_or_create_by(name: new_tag) }
   end
-
+  
 end
