@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <div class="col-md-8 mx-auto">
+        <%= form_with model: @employee, url: admin_employee_path  do |f| %>
+
+          <div class="field">
+            <%= f.label "氏名" %>
+            <%= f.text_field :last_name, autofocus: true %>
+            <%= f.text_field :first_name %>
+          </div>
+
+          <div class="field">
+            <%= f.label "氏名(カナ)" %>
+            <%= f.text_field :last_name_furigana %>
+            <%= f.text_field :first_name_furigana %>
+          </div>
+
+          <div class="field">
+            <%= f.label :birthdate, "生年月日" %>
+            <%= f.date_field :birthdate %>
+          </div>
+
+          <div class="field">
+            <%= f.label :prefecture, "出身地" %>
+            <%= f.text_field :prefecture %>
+          </div>
+
+          <div class="field">
+            <%= f.label :department_id, "部署" %>
+            <%= f.collection_select :department_id, Department.all, :id, :name, include_blank: "部署を選択してください" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :email, "メールアドレス" %>
+            <%= f.email_field :email %>
+          </div>
+          
+          <div>
+            <%= f.radio_button :is_active, :true %>
+            <%= f.label :is_active, "有効", {value: :true, class: "d-inline-block"} %>
+            <%= f.radio_button :is_active, :false, class: "ml-5" %>
+            <%= f.label :is_active, "停止", {value: :false, class: "d-inline-block"} %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "登録情報を変更" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

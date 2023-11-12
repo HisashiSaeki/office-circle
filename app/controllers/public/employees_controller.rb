@@ -1,4 +1,5 @@
 class Public::EmployeesController < ApplicationController
+  before_action :set_employee, only: [:show, :edit, :update]
   before_action :ensure_correct_employee, only: [:edit, :update]
   
   def index
@@ -7,7 +8,6 @@ class Public::EmployeesController < ApplicationController
   end
   
   def show
-    @employee = Employee.find(params[:id])
     @my_articles = Article.where(employee_id: @employee).includes(:favorites, :comments).order(created_at: "DESC")
     @favorite_articles = @employee.favorite_articles.includes(:favorites, :comments)
     @groups = @employee.groups.includes(:creater)
@@ -31,10 +31,13 @@ class Public::EmployeesController < ApplicationController
   end
   
   def ensure_correct_employee
-    @employee = Employee.find(params[:id])
-    unless @employee == current_employee
+    if @employee != current_employee
       redirect_to employee_path(@employee)
     end
+  end
+  
+  def set_employee
+    @employee = Employee.find(params[:id])
   end
   
 end

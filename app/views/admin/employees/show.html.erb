@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td>社員ID</td>
+            <td><%= @employee.id %></td>
+          </tr>
+          <tr>
+            <td>名前</td>
+            <td><%= @employee.full_name %></td>
+          </tr>
+          <tr>
+            <td>名前(フリガナ)</td>
+            <td><%= @employee.full_name_furigana %></td>
+          </tr>
+          <tr>
+            <td>生年月日</td>
+            <td><%= @employee.birthdate %></td>
+          </tr>
+          <tr>
+            <td>出身地</td>
+            <td><%= @employee.prefecture %></td>
+          </tr>
+          <tr>
+            <td>部署</td>
+            <td><%= @employee.department.name %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= @employee.email %></td>
+          </tr>
+          <tr>
+            <td>社員ステータス</td>
+            <td>
+              <% if @employee.is_active %>
+                有効
+              <% else %>    
+                停止
+              <% end %>    
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "登録情報を変更する", edit_admin_employee_path(@employee), class: "btn btn-success" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

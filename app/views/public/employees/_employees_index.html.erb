@@ -1,14 +1,37 @@
-<%= link_to employee_path(employee) do %>
-  <div class="employee_info d-flex align-items-center">
-    <div>
-      <%= image_tag employee.get_profile_image(100, 100) %>
+<% if employee_signed_in? %>
+  <%= link_to employee_path(employee) do %>
+    <div class="employee_info d-flex align-items-center border">
+      <div>
+        <%= image_tag employee.get_profile_image(100, 100) %>
+      </div>
+      <div>
+        <%= employee.full_name %></br>
+        <%= employee.department.name %>
+      </div>
+      <div>
+        <%= employee.introduction.truncate(20, omission: "...") %>
+      </div>
     </div>
-    <div>
-      <%= employee.full_name %></br>
-      <%= employee.department.name %>
+  <% end %>
+<% else %>
+  <%= link_to admin_employee_path(employee) do %>
+    <div class="employee_info d-flex align-items-center border">
+      <div>
+        <%= image_tag employee.get_profile_image(100, 100) %>
+      </div>
+      <div>
+        <%= employee.full_name %></br>
+        <%= employee.department.name %>
+      </div>
+      <div><%= employee.email %></div>
+      <div>
+        <% if employee.is_active %>
+          有効
+        <% else %>    
+          停止
+        <% end %>    
+      </div>
     </div>
-    <div>
-      <%= employee.introduction.truncate(20, omission: "...") %>
-    </div>
-  </div> 
+  <% end %>
 <% end %>
+
