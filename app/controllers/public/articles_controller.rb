@@ -31,8 +31,12 @@ class Public::ArticlesController < ApplicationController
   
   def show
     @article = Article.find(params[:id])
-    @comments = Comment.where(article_id: @article).includes(:employee)
-    @comment = Comment.new
+    if @article.is_published == false && @article.employee != current_employee
+      render :index
+    else
+      @comments = Comment.where(article_id: @article).includes(:employee)
+      @comment = Comment.new
+    end
   end
   
   def edit
@@ -65,9 +69,7 @@ class Public::ArticlesController < ApplicationController
   
   private
   
-  def article_params
-    params.require(:article).permit(:title, :body)
-  end
+  def article_params = params.require(:article).permit(:title, :body)
   
   def ensure_correct_employee
     @article = Article.find(params[:id])
