@@ -3,6 +3,7 @@ class Employee < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
   
   belongs_to :department
   has_many :articles, dependent: :destroy
@@ -12,7 +13,9 @@ class Employee < ApplicationRecord
   has_many :groups, through: :group_members, source: :group
   has_many :favorite_articles, through: :favorites, source: :article
   
+  
   has_one_attached :profile_image
+  
   
   def get_profile_image(width,height)
     unless profile_image.attached?
@@ -23,5 +26,13 @@ class Employee < ApplicationRecord
   end
   
   def full_name = self.last_name + " " + self.first_name
+    
   def full_name_furigana = self.last_name_furigana + " " + self.first_name_furigana
+    
+  def self.search(keyword)
+    self.where(
+      "first_name LIKE ? or last_name LIKE ? or first_name_furigana LIKE ? or last_name_furigana LIKE ?", 
+      "%#{keyword}%","%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
+      )
+  end
 end

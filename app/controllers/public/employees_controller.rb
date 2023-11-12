@@ -3,6 +3,7 @@ class Public::EmployeesController < ApplicationController
   
   def index
     @employees = Employee.includes(:department)
+    @departments = Department.all
   end
   
   def show

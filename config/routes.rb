@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   }
   
   scope module: :public do
+    
+    get "search" => "searches#keyword_search"
+    get "department_search" => "searches#department_search"
+    get "tag_search" => "searches#tag_search"
+    
     resources :employees, only: [:index, :show, :edit, :update]
     resources :articles do
       resource :favorites, only: [:create, :destroy]

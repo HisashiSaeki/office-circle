@@ -32,7 +32,7 @@ class Public::ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     if @article.is_published == false && @article.employee != current_employee
-      render :index
+      redirect_to articles_path
     else
       @comments = Comment.where(article_id: @article).includes(:employee)
       @comment = Comment.new
@@ -73,7 +73,7 @@ class Public::ArticlesController < ApplicationController
   
   def ensure_correct_employee
     @article = Article.find(params[:id])
-    unless @article.employee == current_employee
+    if @article.employee != current_employee
       redirect_to article_path(@article)
     end
   end
