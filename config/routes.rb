@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   
   scope module: :public do
     
-    get "search" => "searches#keyword_search"
+    get "employees_search" => "searches#employees_search"
+    get "articles_search" => "searches#articles_search"
+    get "groups_search" => "searches#groups_search"
     get "department_search" => "searches#department_search"
     get "tag_search" => "searches#tag_search"
     
