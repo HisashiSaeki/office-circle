@@ -8,7 +8,7 @@ class Article < ApplicationRecord
   
   
   def create_date = self.created_at.strftime("%Y-%m-%d")
-  
+    
   def update_date = self.updated_at.strftime("%Y-%m-%d")
   
   def favorited_by?(employee) = self.favorites.exists?(employee_id: employee.id)
@@ -16,12 +16,12 @@ class Article < ApplicationRecord
   def save_tags(send_tags) = send_tags.each { |tag| self.tags << Tag.find_or_create_by(name: tag) }
   
   def update_tags(send_tags)
-    # 編集前の投稿にタグが付いていれば、current_tagsに入れる
-    current_tags = self.tags.pluck(:name) unless !self.tags
-    old_tags = current_tags - send_tags
-    new_tags = send_tags - current_tags
-    old_tags.each { |old_tag| self.tags.delete(Tag.find_by(name: old_tag)) }
-    new_tags.each { |new_tag| self.tags << Tag.find_or_create_by(name: new_tag) }
+-    # 編集前の投稿にタグが付いていれば、current_tagsに入れる
+     current_tags = self.tags.pluck(:name) unless !self.tags
+     old_tags = current_tags - send_tags
+     new_tags = send_tags - current_tags
+-    old_tags.each { |old_tag| self.tags.delete(Tag.find_by(name: old_tag)) }
+-    new_tags.each { |new_tag| self.tags << Tag.find_or_create_by(name: new_tag) }
   end
-  
+
 end

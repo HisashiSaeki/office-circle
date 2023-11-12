@@ -16,6 +16,7 @@ class Public::SearchesController < ApplicationController
   end
   
   def tag_search
+    
   end
   
 end

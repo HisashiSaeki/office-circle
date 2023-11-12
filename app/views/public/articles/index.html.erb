@@ -2,39 +2,27 @@
   <div class="row">
     <div class="col-md-10 d-flex mx-auto justify-content-center">
       
-      <div class="col-md-3">
-        検索エリア
+      <div class="sidebar col-md-3">
+        <div class="search_form">
+          <%= render "public/searches/search_form", keyword: @keyword %>
+        </div>
+        <div class="tag_search">
+          <% @tags.each do |tag| %>
+          <ul class="tag_list">
+            <%= link_to tag_search_path(tag_id: tag.id), remote: true do %>
+              <li>
+                <i class="fa-solid fa-tag"></i>
+                <%= tag.name %>
+                (<%= tag.article_tags.count %>)
+              </li>
+            <% end %>
+          </ul>
+          <% end %>
+        </div>
       </div>
 
       <div class="articles-index col-md-7">
-        <% @articles.each do |article| %>
-        <%= link_to article_path(article) do %>
-          <div class="article_box d-flex align-items-center">
-            <div>
-              <%= image_tag article.employee.get_profile_image(100, 100) %></br>
-              <%= article.employee.full_name %>
-            </div>
-            <div>
-              <%= article.title %>
-            </div>
-            <div>
-              <%= article.created_at.strftime("%Y-%m-%d") %>
-            </div>
-            <% article.tags.each do |tag| %>
-              <div>
-                <i class="fa-solid fa-tag"></i>
-                <%= tag.name %>
-              </div>
-            <% end %>
-            <div>
-              <%= article.favorites.count %>件
-            </div>
-            <div>
-              <%= article.comments.count %>件
-            </div>
-          </div>
-          <% end %>
-        <% end %>
+        <%= render partial: "public/articles/articles_index", collection: @articles, as: "article" %>
       </div>
       
     </div>

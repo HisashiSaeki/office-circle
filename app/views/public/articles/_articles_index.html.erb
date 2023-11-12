@@ -1,0 +1,26 @@
+<%= link_to article_path(article) do %>
+  <div class="article_box d-flex align-items-center">
+    <div>
+      <%= image_tag article.employee.get_profile_image(100, 100) %></br>
+      <%= article.employee.full_name %>
+    </div>
+    <div>
+      <%= article.title %>
+    </div>
+    <div>
+      <%= article.created_at.strftime("%Y-%m-%d") %>
+    </div>
+    <% article.tags.each do |tag| %>
+      <div>
+        <i class="fa-solid fa-tag"></i>
+        <%= tag.name %>
+      </div>
+    <% end %>
+    <div>
+      <%= article.favorites.count %>件
+    </div>
+    <div>
+      <%= article.comments.count %>件
+    </div>
+  </div>
+<% end %>
