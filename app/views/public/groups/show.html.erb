@@ -7,10 +7,12 @@
           <ul>
             <h5>グループリーダーからのお知らせ</h5>
             <% if @notices.present? %>
-              <%= @notices.each do |notice| %>
-                <%= link_to group_notice_path(group_id: @group, notice_id: notice.id) do %>
-                  <li><%= notice.title %></li>
-                <% end %>
+              <% @notices.each do |notice| %>
+                <ul>
+                  <%= link_to group_notice_path(@group, notice) do %>
+                    <li><%= notice.title %></li>
+                  <% end %>
+                </ul>
               <% end %>
             <% end %>
           </ul>

@@ -1,0 +1,12 @@
+<div class="field">
+  <%= @notice.title %>
+</div>
+<div class="field">
+  <%= @notice.body %>
+</div>
+<div class="field">
+  <%= link_to "グループ詳細ページに戻る", group_path(@notice.group), class: "btn btn-primary" %>
+  <% if @notice.group.is_created_by?(current_employee) %>
+    <%= link_to "お知らせを削除する", group_notice_path(group_id: @notice.group, notice_id: @notice), method: :delete, class: "btn btn-danger" %>
+  <% end %>
+</div>
