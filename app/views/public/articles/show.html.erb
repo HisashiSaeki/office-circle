@@ -9,9 +9,11 @@
         <%= @article.employee.full_name %>
         <%= @article.employee.department.name %>
       </div>
-      <div class="favorite">
-        <%= render "public/favorites/favorite", article: @article %>
-      </div>
+      <% if !admin_signed_in? %>
+        <div class="favorite">
+          <%= render "public/favorites/favorite", article: @article %>
+        </div>
+      <% end %>
       <div>
         <%= @article.title %>
       </div>

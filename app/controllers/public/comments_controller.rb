@@ -22,7 +22,7 @@ class Public::CommentsController < ApplicationController
   
   def ensure_correct_employee
     @comment = Comment.find(params[:id])
-    unless @comment.employee == current_employee
+    unless @comment.employee == current_employee || admin_signed_in?
       redirect_to articles_path
     end
   end

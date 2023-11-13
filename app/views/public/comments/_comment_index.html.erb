@@ -5,7 +5,7 @@
       <%= comment.employee.full_name %>
       (<%= comment.employee.department.name %>)
       コメント日:<%= comment.create_date %>
-      <% if comment.employee == current_employee %>
+      <% if comment.employee == current_employee || admin_signed_in? %>
         <%= link_to "コメントを削除する", article_comment_path(comment.article, comment), method: :delete, remote: true, class:"btn btn-danger" %>
       <% end %>
     </div>
