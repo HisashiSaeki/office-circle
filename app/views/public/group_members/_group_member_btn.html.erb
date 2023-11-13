@@ -1,0 +1,5 @@
+<% if current_employee.joining_group? %>
+  <%= link_to "退会", group_group_member(group_id: group), class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "参加", group_group_members(group_id: group), class: "btn btn-success" %>
+<% end %>

@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      
+      <div class="sidebar col-md-3">
+        <div class="notices_field">
+          <ul>
+            <%= @notices.each do |notice| %>
+              <%= link_to group_notice_path(group_id: @group, notice_id: notice.id) do %>
+                <li><%= notice.title %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="creater_field">
+          <div class="creater_image">
+            <%= image_tag @group.creater.get_profile_image(100, 100) %>
+          </div>
+          <h5>グループリーダー</h5>
+          <%= @group.creater.full_name %>
+          (<%= @group.creater.department.name %>)
+          <% if @group.created_by?(current_employee) %>
+            <%= link_to "お知らせを作成する", new_group_notice_path(group_id: @group), class: "btn btn-primary" %>
+          <% end %>
+        </div>
+        
+        <div class="group_name">
+          <%= @group.name %>
+        </div>
+        
+        <div class="group_created_at">
+          <%= @group.create_date %>
+        </div>
+        
+        <div class="group_description">
+          <h4>グループ紹介/活動内容</h4>
+          <div class="description">
+            <%= @group.description %>
+          </div>
+        </div>
+        
+        <div class="group_member_field">
+          <div>グループメンバー</div>
+          <div class="group_members">
+            <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
+          </div>
+        </div>
+        
+        <div class="btn-field">
+          <%= render "public/group_members/group_member_btn", group: @group %>
+          <% if @group.created_by?(current_employee) %>
+            <%= link_to "グループを編集する", edit_group_path(@group), class: "btn btn-success" %>
+            <%= link_to "グループを削除する", group_path(@group), class: "btn btn-danger" %>
+          <% end %>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>

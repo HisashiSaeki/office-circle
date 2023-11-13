@@ -1,0 +1,17 @@
+<%= form_with model: group do |f| %>
+  <div class="field">
+    <%= f.label :name, "グループ名を入力してください" %>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :description, "活動内容や紹介文を入力してください" %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <% if current_page?(action: "new") %>
+      <%= f.submit "グループを登録" %>
+    <% else %>
+      <%= f.submit "変更内容を保存" %>
+    <% end %>
+  </div>
+<% end %>
