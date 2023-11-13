@@ -1,0 +1,15 @@
+<% if current_page?(action: "index") %>
+  <%= form_with model: department, url: admin_departments_path, method: :post do |f| %>
+    <%= f.label :name, "部署名" %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.submit "登録", class: "btn btn-success" %>
+  <% end %>
+<% else %>
+  <%= form_with model: department, url: admin_department_path, method: :patch do |f| %>
+    <%= f.label :name, "部署名" %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.submit "登録", class: "btn btn-success" %>
+  <% end %>
+<% end %>
+
+

@@ -1,0 +1,12 @@
+<%= render "department_form", department: @department %>
+
+<% @departments.each do |department| %>
+<table class="table">
+  <tbody>
+    <tr>
+      <td><%= department.name %></td>
+      <td><%= link_to "編集", edit_admin_department_path(department) %></td>
+    </tr>
+  </tbody>
+</table>
+<% end %>
