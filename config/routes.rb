@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
     end
     resources :groups do
-      resources :group_members, only: [:create, :destroy]
+      resource :group_members, only: [:create, :destroy]
       resources :notices, only: [:new, :create, :show, :destroy]
     end
   end

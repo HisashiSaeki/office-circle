@@ -5,6 +5,12 @@ class Group < ApplicationRecord
   has_many :employees, through: :group_members, source: :employee
   belongs_to :creater, class_name: "Employee"
   
+  with_options presence: do
+    validates :name
+    validates :description
+    validates :creater_id
+  end
+  
   # グループ画像の挿入は検討中
   # has_one_attached :group_image
   
@@ -20,8 +26,6 @@ class Group < ApplicationRecord
   def create_date = self.created_at.strftime("%Y-%m-%d")
   
   def is_created_by?(employee) = self.creater_id == employee.id
-    
-  def joining_group?(employee) = group_members.exists?(employee_id: employee.id)
   
 end
 
