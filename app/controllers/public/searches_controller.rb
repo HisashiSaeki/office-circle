@@ -2,7 +2,7 @@ class Public::SearchesController < ApplicationController
   before_action :set_keyword, only: [:employees_search, :articles_search, :groups_search]
 
   def employees_search
-      @employees = Employee.search(params[:keyword]).includes(:department)
+      @employees = Employee.search(params[:keyword]).includes(:department).order(created_at: "DESC")
   end
   
   def articles_search
@@ -10,18 +10,20 @@ class Public::SearchesController < ApplicationController
   end
   
   def groups_search
-    @groups = Group.search(params[:keyword])
+    @groups = Group.search(params[:keyword]).order(created_at: "DESC")
   end
 
   def department_search
-    @employees = Employee.where(department_id: params[:department_id]).includes(:department)
+    @employees = Employee.where(department_id: params[:department_id]).includes(:department).order(created_at: "DESC")
   end
 
   def tag_search
     @articles = Tag.find(params[:tag_id]).articles.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
   end
   
+  
   private
+  
   
   def set_keyword 
     @keyword = params[:keyword]

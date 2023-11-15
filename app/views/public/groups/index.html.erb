@@ -8,26 +8,8 @@
         <%= link_to "グループを新規作成する", new_group_path, class: "btn btn-primary" %>
       </div>
       <div class="groups_field">
-        <% @groups.each do |group| %>
-          <%= link_to group_path(group) do %>
-            <div class="group border">
-              <div class="group_name">
-                <%= group.name %>
-              </div>
-              <div class="creater_field">
-                <%= group.creater.full_name %>
-                (<%= group.creater.department.name %>)</br>
-                <%= group.create_date %>
-              </div>
-              <div>
-                メンバー数:<%= group.group_members.count %>人
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+        <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
       </div>
-      
-      
     </div>
   </div>
 </div>

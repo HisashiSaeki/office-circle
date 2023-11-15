@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-10 d-flex mx-auto justify-content-center">
 
-      <div class="sidebar col-md-3">
+      <div class="sidebar col-md-4">
         <div class="search_form">
           <%= render "public/searches/search_form", keyword: @keyword %>
         </div>
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="employees_index col-md-7">
+      <div class="employees_index col-md-8">
         <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
       </div>
       

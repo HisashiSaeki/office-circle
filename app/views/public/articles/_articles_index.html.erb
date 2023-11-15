@@ -10,6 +10,15 @@
     <div>
       <%= article.created_at.strftime("%Y-%m-%d") %>
     </div>
+    <% if article.employee == current_employee && current_page?(employee_path(article.employee)) %>
+      <div>
+        <% if article.is_published %>
+          <p>公開中</p>
+        <% else %>
+          <p>下書き</p>
+        <% end %>
+      </div>
+    <% end %>
     <% article.tags.each do |tag| %>
       <div>
         <i class="fa-solid fa-tag"></i>

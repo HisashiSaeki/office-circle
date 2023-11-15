@@ -13,6 +13,7 @@
           <div>出身地：<%= @employee.prefecture %></div>
           <div>メールアドレス：<%= @employee.email %></div>
           <div>部署：<%= @employee.department.name %></div>
+          <div>入社日：<%= @employee.created_at.strftime("%Y年%-m月%-d日") %></div>
         </div>
       </div>
 
@@ -26,75 +27,25 @@
         </div>
         <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "btn btn-success" %>
       </div>
-
-      <div class="row">
-        <div class="col">
-          <h4><%= @employee.full_name %>さんの投稿一覧</h4>
-          <% if @my_articles.exists? %>
-            <div class="my_article_list d-flex">
-              <% @my_articles.each do |my_article| %>
-                <%= link_to article_path(my_article)  do %>
-                  <div class="my_article_item border">
-                    <div><%= my_article.title %></div>
-                    <div><%= my_article.created_at.strftime("%Y-%m-%d") %></div>
-                    <div>
-                      <% if @employee == current_employee %>
-                        <% if my_article.is_published %>
-                          <p>公開中</p>
-                        <% else %>
-                          <p>下書き</p>
-                        <% end %>
-                      <% end %>
-                    </div>
-                    <div><%= my_article.favorites.count %>件</div>
-                    <div><%= my_article.comments.count %>件</div>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          <% else %>
-            <div>まだ投稿がありません</div>
+      
+      <div class="tabs d-flex justify-content-between align-items-center">
+        <ul class="nav nav-tabs">
+          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#my_articles"><%= @employee.full_name %>さんの投稿一覧</a></li>
+          <% if @employee == current_employee %>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#favorite_articles">いいねした投稿一覧</a></li>
           <% end %>
-        </div>
+          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#groups">参加中のグループ一覧</a></li>
+        </ul>
       </div>
-
-      <% if @employee == current_employee %>
-        <div class="row">
-          <div class="col">
-            <h4>いいねした投稿一覧</h4>
-            <% if @favorite_articles.exists? %>
-              <% @favorite_articles.each do |favorite_article| %>
-                <%= link_to article_path(favorite_article) do %>
-                  <div>
-                    <div><%= favorite_article.title %></div>
-                    <div><%= favorite_article.created_at.strftime("%Y-%m-%d") %></div>
-                    <div><%= favorite_article.favorites.count  %></div>
-                    <div><%= favorite_article.comments.count  %></div>
-                  </div>
-                <% end %>
-              <% end %>
-            <% else %>
-              <div>いいねした投稿はありません</div>
-            <% end %>
-          </div>
+      <div class="tab-content">
+        <div id="my_articles" class="tab-pane fade show active">
+          <%= render partial: "public/articles/articles_index", collection: @my_articles, as: "article" %>
         </div>
-      <% end %>
-
-      <div class="row">
-        <div class="col">
-          <h4>参加中のグループ一覧</h4>
-          <% if @groups.exists? %>
-            <% @groups.each do |group| %>
-              <%= link_to group_path(group) do %>
-                <div>
-                  <div><%= group.name %></div>
-                  <div><%= group.creater %></div>
-                </div>
-              <% end %>
-            <% end %>
-          <% else %>
-            <div>参加中のグループはありません</div>
-          <% end %>
+        <div id="favorite_articles" class="tab-pane fade">
+          <%= render partial: "public/articles/articles_index", collection: @favorite_articles, as: "article" %>
+        </div>
+        <div id="groups" class="tab-pane fade">
+          <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
         </div>
       </div>
 
