@@ -10,7 +10,7 @@ class Public::EmployeesController < ApplicationController
   def show
     @my_articles = Article.where(employee_id: @employee).includes(:tags).order(created_at: "DESC")
     @favorite_articles = @employee.favorite_articles.includes(:tags)
-    @groups = @employee.groups.includes(:creater)
+    @groups = @employee.groups.includes(:creater).page(params[:page])
   end
 
   def edit

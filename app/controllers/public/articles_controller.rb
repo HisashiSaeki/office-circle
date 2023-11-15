@@ -29,16 +29,6 @@ class Public::ArticlesController < ApplicationController
     @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
   end
   
-  def employee_articles
-    @employee = Employee.find(params[:employee_id])
-    @my_articles = Article.where(employee_id: @employee).includes(:favorites, :comments).order(created_at: "DESC")
-  end
-  
-  def favorite_articles
-    @employee = Employee.find(params[:employee_id])
-    @favorite_articles = @employee.favorite_articles.includes(:favorites, :comments)
-  end
-  
   def show
     @article = Article.find(params[:id])
     if @article.is_published == false && @article.employee != current_employee
