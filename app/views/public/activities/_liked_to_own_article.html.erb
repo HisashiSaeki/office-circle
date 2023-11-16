@@ -4,6 +4,6 @@
     さんがあなたの
     <%= link_to '投稿', article_path(activity.subject.article) %>
     にいいねしました
-    <%= " (#{time_ago_in_words(activity.created_at)}前)" %>
+    (<%= l activity.created_at %>)
   </div>
 <% end %>

@@ -5,8 +5,6 @@ class Comment < ApplicationRecord
   
   validates :comment, presence: true
   
-  def create_date = created_at.strftime("%Y-%m-%d")
-    
     
   private
   

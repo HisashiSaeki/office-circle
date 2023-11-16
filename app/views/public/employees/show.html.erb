@@ -13,7 +13,7 @@
           <div>出身地：<%= @employee.prefecture %></div>
           <div>メールアドレス：<%= @employee.email %></div>
           <div>部署：<%= @employee.department.name %></div>
-          <div>入社日：<%= @employee.created_at.strftime("%Y年%-m月%-d日") %></div>
+          <div>入社日：<%= l @employee.created_at, format: :date %></div>
         </div>
       </div>
 
@@ -27,7 +27,7 @@
         </div>
         <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "btn btn-success" %>
       </div>
-      
+
       <div class="tabs d-flex justify-content-between align-items-center">
         <ul class="nav nav-tabs">
           <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#my_articles"><%= @employee.full_name %>さんの投稿一覧</a></li>

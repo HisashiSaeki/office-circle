@@ -7,10 +7,6 @@ class Article < ApplicationRecord
   has_many :tags, through: :article_tags, source: :tag
   
   
-  def create_date = self.created_at.strftime("%Y-%m-%d")
-    
-  def update_date = self.updated_at.strftime("%Y-%m-%d")
-  
   def favorited_by?(employee) = self.favorites.exists?(employee_id: employee.id)
   
   def save_tags(send_tags) = send_tags.each { |tag| self.tags << Tag.find_or_create_by(name: tag) }

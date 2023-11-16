@@ -24,8 +24,8 @@
         <% end %>
       </div>
       <div class="article-date">
-        投稿日:<%= @article.create_date %>
-        最終更新日:<%= @article.update_date %>
+        投稿日:<%= l @article.created_at, format: :short %>
+        最終更新日:<%= l @article.updated_at, format: :short %>
       </div>
       <div class="article-body">
         <%= @article.body %>

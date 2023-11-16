@@ -4,7 +4,7 @@
       <%= image_tag comment.employee.get_profile_image(100, 100) %>
       <%= comment.employee.full_name %>
       (<%= comment.employee.department.name %>)
-      コメント日:<%= comment.create_date %>
+      コメント日時:<%= l comment.created_at %>
       <% if comment.employee == current_employee || admin_signed_in? %>
         <%= link_to "コメントを削除する", article_comment_path(comment.article, comment), method: :delete, remote: true, class:"btn btn-danger" %>
       <% end %>
