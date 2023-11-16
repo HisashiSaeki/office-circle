@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     get "department_search" => "searches#department_search"
     get "tag_search" => "searches#tag_search"
     
+    resources :activities, only: [:index] do
+      collection do
+        delete "destroy_all" => "activities#destroy_all"
+      end
+    end
     resources :employees, only: [:index, :show, :edit, :update]
     resources :articles do
       resource :favorites, only: [:create, :destroy]

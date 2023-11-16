@@ -3,6 +3,16 @@
   <div class="content">
     <ul class="content-list d-flex">
       <% if employee_signed_in? %>
+        <li>
+          <%= link_to activities_path do %>
+            <% if current_employee.activities.where(checked: false).exists? %>
+              <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
+            <% else %>
+              <i class="fa-sharp fa-solid fa-bell"></i>
+            <% end %>
+            通知一覧
+          <% end %>
+        </li>
         <li><%= link_to "マイページへ", employee_path(current_employee) %></li>
         <li><%= link_to "新規投稿", new_article_path %></li>
         <li><%= link_to "社員一覧", employees_path %></li>

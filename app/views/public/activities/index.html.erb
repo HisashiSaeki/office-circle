@@ -1,0 +1,9 @@
+<h4>通知</h4>
+  <% if @activities.present? %>
+    <%= link_to "全削除", destroy_all_activities_path(@activities), method: :delete, class:"btn btn-light" %>
+    <% @activities.each do |activity| %>
+        <%= render "#{activity.action_type}", activity: activity %>
+    <% end %>
+  <% else %>
+    通知はありません
+  <% end %>

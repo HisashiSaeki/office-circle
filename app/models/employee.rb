@@ -12,6 +12,7 @@ class Employee < ApplicationRecord
   has_many :group_members, dependent: :destroy
   has_many :groups, through: :group_members, source: :group
   has_many :favorite_articles, through: :favorites, source: :article
+  has_many :activities, dependent: :destroy
   
   
   has_one_attached :profile_image
@@ -33,6 +34,8 @@ class Employee < ApplicationRecord
     self.where(
       "first_name LIKE ? or last_name LIKE ? or first_name_furigana LIKE ? or last_name_furigana LIKE ?", 
       "%#{keyword}%","%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
-      )
+    )
   end
+  
+  
 end
