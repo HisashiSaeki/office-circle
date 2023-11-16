@@ -7,6 +7,6 @@ class Public::ActivitiesController < ApplicationController
   
   def destroy_all
     @activities = current_employee.activities.destroy_all
-    redirect_to notifications_path
+    redirect_to activities_path
   end
 end

@@ -3,6 +3,11 @@ class Comment < ApplicationRecord
   belongs_to :employee
   belongs_to :article
   
+  
+  has_one :activity, as: :subject, dependent: :destroy
+  after_create_commit :create_activities
+  
+  
   validates :comment, presence: true
   
     
