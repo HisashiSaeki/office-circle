@@ -38,10 +38,9 @@ ja:
     - 金曜日
     - 土曜日
     formats:
-      default: "%Y-%m-%d %H:%M"
-      short: "%Y-%m-%d"
-      date: "%Y年%m月%d日"
-      date_short: "%m月%d日"
+      default: "%Y/%m/%d"
+      long: "%Y年%m月%d日(%a)"
+      short: "%m/%d"
     month_names:
     -
     - 1月
@@ -177,7 +176,7 @@ ja:
   time:
     am: 午前
     formats:
-      default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
-      long: "%Y/%m/%d %H:%M"
-      short: "%m/%d %H:%M"
+      default: "%Y年%m月%d日 %H時%M分"
+      date: "%Y年%m月%d日"
+      short: "%m月%d日"
     pm: 午後

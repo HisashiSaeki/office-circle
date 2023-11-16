@@ -8,7 +8,7 @@
       <%= article.title %>
     </div>
     <div>
-      <%= l article.created_at, format: :short %>
+      <%= l article.created_at, format: :date %>
     </div>
     <% if article.employee == current_employee && current_page?(employee_path(article.employee)) %>
       <div>
