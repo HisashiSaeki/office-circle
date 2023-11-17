@@ -14,4 +14,25 @@
  *= require_self
  */
  
+ * {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+   box-sizing: border-box;
+ }
  
+ body {
+   color: #222;
+   font-family: sans-serif;
+   line-height: 1.5;
+ }
+ 
+ a {
+   color: #0069ff;
+   text-decoration-line: none;
+ }
+ 
+ img {
+   max-width: 100%;
+   vertical-align: top;
+ }

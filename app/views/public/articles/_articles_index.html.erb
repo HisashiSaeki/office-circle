@@ -19,12 +19,7 @@
         <% end %>
       </div>
     <% end %>
-    <% article.tags.each do |tag| %>
-      <div>
-        <i class="fa-solid fa-tag"></i>
-        <%= tag.name %>
-      </div>
-    <% end %>
+    <%= render partial: "public/tags/tags", collection: article.tags, as: "tag" %>
       <div>
         <%= article.favorites.count %>件
       </div>

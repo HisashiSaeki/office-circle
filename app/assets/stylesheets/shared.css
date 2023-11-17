@@ -1,0 +1,81 @@
+/*ボタン*/
+.rounded-btn {
+  display: inline-block;
+  min-width: 200px;
+  max-width: 100%;
+  padding: 5px 5px;
+  background-color: #0000FF;
+  color: #fff;
+  border: 2px solid transparent;
+  border-bottom-color: #0000CD;
+  border-radius: 10px;
+  font-size: 1.125em;
+  text-align: center;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.rounded-btn:focus,
+.rounded-btn:hover {
+  background-color: #fff;
+  border-color: currentColor;
+  color: #0000FF; /*通常時の背景色と入れ替え*/
+}
+
+.rounded-btn--edit {
+  background-color: #008000;
+  color: #fff;
+  border-bottom-color: #006400;
+}
+
+.rounded-btn--edit:focus,
+.rounded-btn--edit:hover {
+  color: #008000;
+}
+
+.rounded-btn--danger {
+  background-color: #FF0000;
+  color: #fff;
+  border-bottom-color: #8B0000;
+}
+
+.rounded-btn--danger:focus,
+.rounded-btn--danger:hover {
+  color: #FF0000;
+}
+
+/*タグ*/
+.rounded-tag {
+  display: inline-block;
+  padding: .2em .7em;
+  background-color: #e25c00;
+  border-radius: 1em;
+  color: #fff;
+  font-size: .75em;
+  font-weight: bold;
+  border: 2px solid transparent;
+}
+
+.rounded-tag--link {
+  text-decoration: none;
+  transition: .25s;
+}
+
+.rounded-tag--link:focus,
+.rounded-tag--link:hover {
+  background-color: #fff;
+  border-color: currentColor;
+  color: #e25c00;
+}
+
+.form {
+  
+}
+
+.form__label {
+  
+}
+
+.form__text {
+  
+}

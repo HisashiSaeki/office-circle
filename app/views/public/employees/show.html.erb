@@ -1,54 +1,48 @@
-<div class="container">
+<div class="content">
   <div class="row">
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-4">
+      <%= image_tag @employee.get_profile_image(300, 300) %>
+    </div>
+    <div class="col-md-8">
+      <div>名前:　<%= @employee.full_name %></div>
+      <div>フリガナ：<%= @employee.full_name_furigana %></div>
+      <div>誕生日：<%= @employee.birthdate.strftime("%-m月%-d日") %></div>
+      <div>出身地：<%= @employee.prefecture %></div>
+      <div>メールアドレス：<%= @employee.email %></div>
+      <div>部署：<%= @employee.department.name %></div>
+      <div>入社日：<%= l @employee.created_at, format: :date %></div>
+    </div>
+  </div>
 
-      <div class="row">
-        <div class="col-md-4">
-          <%= image_tag @employee.get_profile_image(300, 300) %>
-        </div>
-        <div class="col-md-8">
-          <div>名前:　<%= @employee.full_name %></div>
-          <div>フリガナ：<%= @employee.full_name_furigana %></div>
-          <div>誕生日：<%= @employee.birthdate.strftime("%-m月%-d日") %></div>
-          <div>出身地：<%= @employee.prefecture %></div>
-          <div>メールアドレス：<%= @employee.email %></div>
-          <div>部署：<%= @employee.department.name %></div>
-          <div>入社日：<%= l @employee.created_at, format: :date %></div>
-        </div>
-      </div>
+  <div class="row">
+    <div class="col-md-12 border">
+      <% if @employee.introduction.size == 0 %>
+        <h4>登録内容変更ボタンから自己紹介文を設定しましょう！</h4>
+      <% else %>
+        <%= @employee.introduction %>
+      <% end %>
+    </div>
+    <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
+  </div>
 
-      <div class="row">
-        <div class="col-md-12 border">
-          <% if @employee.introduction.size == 0 %>
-            <h4>登録内容変更ボタンから自己紹介文を設定しましょう！</h4>
-          <% else %>
-            <%= @employee.introduction %>
-          <% end %>
-        </div>
-        <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "btn btn-success" %>
-      </div>
-
-      <div class="tabs d-flex justify-content-between align-items-center">
-        <ul class="nav nav-tabs">
-          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#my_articles"><%= @employee.full_name %>さんの投稿一覧</a></li>
-          <% if @employee == current_employee %>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#favorite_articles">いいねした投稿一覧</a></li>
-          <% end %>
-          <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#groups">参加中のグループ一覧</a></li>
-        </ul>
-      </div>
-      <div class="tab-content">
-        <div id="my_articles" class="tab-pane fade show active">
-          <%= render partial: "public/articles/articles_index", collection: @my_articles, as: "article" %>
-        </div>
-        <div id="favorite_articles" class="tab-pane fade">
-          <%= render partial: "public/articles/articles_index", collection: @favorite_articles, as: "article" %>
-        </div>
-        <div id="groups" class="tab-pane fade">
-          <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
-        </div>
-      </div>
-
+  <div class="tabs d-flex justify-content-between align-items-center">
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#my_articles"><%= @employee.full_name %>さんの投稿一覧</a></li>
+      <% if @employee == current_employee %>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#favorite_articles">いいねした投稿一覧</a></li>
+      <% end %>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#groups">参加中のグループ一覧</a></li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <div id="my_articles" class="tab-pane fade show active">
+      <%= render partial: "public/articles/articles_index", collection: @my_articles, as: "article" %>
+    </div>
+    <div id="favorite_articles" class="tab-pane fade">
+      <%= render partial: "public/articles/articles_index", collection: @favorite_articles, as: "article" %>
+    </div>
+    <div id="groups" class="tab-pane fade">
+      <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
     </div>
   </div>
 </div>

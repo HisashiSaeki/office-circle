@@ -1,0 +1,65 @@
+.header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: orange;
+}
+
+.header__inner {
+  max-width: 1230px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: orange;
+}
+
+.footer__inner {
+  max-width: 1230px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.content {
+  max-width: 1230px;
+  padding: 60px 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.content--has-column {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content__main {
+  flex: 1;
+  margin-left: 3.33%; /*mainとsideの余白を約40pxに調整*/
+}
+
+.content__side {
+  flex: 0 0 300px; /*sideの幅を調節し、mainの幅は自動調節*/
+}
+
+.nav {
+ width: 700px; 
+}
+
+.nav__list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav__item {
+  padding-right: 30px;
+}
+

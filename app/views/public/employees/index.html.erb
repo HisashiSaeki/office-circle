@@ -1,26 +1,25 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 d-flex mx-auto justify-content-center">
-
-      <div class="sidebar col-md-4">
-        <div class="search_form">
-          <%= render "public/searches/search_form", keyword: @keyword %>
-        </div>
-        <div class="department_search">
-          <% @departments.each do |department| %>
-          <ul class="department_list">
-            <%= link_to department_search_path(department_id: department.id), remote: true do %>
-              <li><%= department.name %></li>
-            <% end %>
-          </ul>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="employees_index col-md-8">
-        <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
-      </div>
-
+<div class="content content--has-column">
+  
+  <div class="content__side">
+    <div class="search_form">
+      <%= render "public/searches/search_form", keyword: @keyword %>
+    </div>
+    <div class="department_search">
+      <% @departments.each do |department| %>
+      <ul class="department_list">
+        <%= link_to department_search_path(department_id: department.id), remote: true do %>
+          <li><%= department.name %></li>
+        <% end %>
+      </ul>
+      <% end %>
     </div>
   </div>
+  
+  <div class="content__main">
+    <div class="employees_index col-md-8">
+      <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
+    </div>
+  </div>
+  
 </div>
+      
