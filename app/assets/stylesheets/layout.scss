@@ -50,16 +50,3 @@
   flex: 0 0 300px; /*sideの幅を調節し、mainの幅は自動調節*/
 }
 
-.nav {
- width: 700px; 
-}
-
-.nav__list {
-  display: flex;
-  justify-content: space-around;
-}
-
-.nav__item {
-  padding-right: 30px;
-}
-

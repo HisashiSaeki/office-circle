@@ -1,7 +1,7 @@
-/*ボタン*/
+// ボタン
 .rounded-btn {
   display: inline-block;
-  min-width: 200px;
+  min-width: 180px;
   max-width: 100%;
   padding: 5px 5px;
   background-color: #0000FF;
@@ -19,7 +19,7 @@
 .rounded-btn:hover {
   background-color: #fff;
   border-color: currentColor;
-  color: #0000FF; /*通常時の背景色と入れ替え*/
+  color: #0000FF; // 通常時の背景色と入れ替え
 }
 
 .rounded-btn--edit {
@@ -44,7 +44,30 @@
   color: #FF0000;
 }
 
-/*タグ*/
+.horizontal-btn-list {
+  display: flex;
+  justify-content: center;
+}
+
+.horizontal-btn-list > *:last-child {
+  margin-right: 0;
+}
+
+.horizontal-btn-list__item {
+  flex: 1 1 0;
+  max-width: 180px;
+  margin-right: 20px;
+}
+
+.horizontal-btn-list__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+// タグ
 .rounded-tag {
   display: inline-block;
   padding: .2em .7em;
@@ -68,14 +91,56 @@
   color: #e25c00;
 }
 
+// form
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group__btn {
+  text-align: center;
+}
+.form-group__link {
+  margin-top: 20px;
+}
+
 .form {
+  padding-bottom: 20px;
+}
+
+.form-label {
   
 }
 
-.form__label {
-  
+.form-text {
+ width: 180px;
+ border: 1px solid #000000;
+ border-radius: 4px;
+ padding: 10px 10px;
 }
 
-.form__text {
-  
+.form-text--size-m {
+  width: 500px;
+  height: 50px;
+}
+
+.form-text--size-l {
+  width: 500px;
+  height: 400px;
+}
+
+//navigation
+.nav__list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav__item {
+  padding-left: 30px;
+}
+
+//table
+.table {
+  border-spacing: 20px;
 }
