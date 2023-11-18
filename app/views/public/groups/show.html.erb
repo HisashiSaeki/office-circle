@@ -1,22 +1,7 @@
-<div class="content--has-column">
 
-  <div class="content__side">
-    <div class="notices_field">
-      <ul>
-        <h5>グループリーダーからのお知らせ</h5>
-        <% if @notices.present? %>
-          <% @notices.each do |notice| %>
-            <ul>
-              <%= link_to group_notice_path(@group, notice) do %>
-                <li><%= notice.title %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  
+      
+        
+        
   <div class="content__main">
     <div class="creater_field">
       <div class="creater_image">
@@ -44,10 +29,38 @@
         <%= @group.description %>
       </div>
     </div>
-
-    <div class="group_member_field">
-      <div>グループメンバー</div>
-      <div class="group_members">
+    
+    <div class="tabs">
+      <input id="notices" type="radio" name="tabs__item" checked>
+      <label class="tabs__item tabs__item--2" for="notices">お知らせ</label>
+      
+      <input id="group-members" type="radio" name="tabs__item">
+      <label class="tabs__item tabs__item--2" for="group-members">グループメンバー</label>
+      
+      <div class="tabs__content" id="notices_content">
+        <% if @notices.present? %>
+          <ul class="vertical-notices">
+            <% @notices.each do |notice| %>
+              <li class="vertical-notices__item">
+                <div class="vertical-notices__header">
+                  <div class="vertical-notices__date">
+                    <%= l notice.created_at, format: :date %>
+                  </div>
+                </div>
+                <%= link_to group_notice_path(@group, notice) do %>
+                  <div class="vertical-notices__title">
+                    <%= notice.title %>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>お知らせはまだありません</p>
+        <% end %>
+      </div>
+      
+      <div class="tabs__content" id="group-members_content">
         <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
       </div>
     </div>

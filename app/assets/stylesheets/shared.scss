@@ -142,10 +142,6 @@
   border-bottom: 1px solid #888;
 }
 
-.search {
-  
-}
-
 .search-form {
   width: 180px;
   height: 36px;
@@ -168,4 +164,71 @@
 .search-btn:hover {
   background-color: #C0C0C0;
   border-color: currentColor;
+}
+
+// タブ
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  margin-top: 50px;
+  padding-bottom: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;}
+
+/*タブのスタイル*/
+.tabs__item {
+  width: calc(100%/3);
+  height: 50px;
+  border-bottom: 3px solid #5ab4bd;
+  background-color: #d9d9d9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #565656;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.tabs__item--2 {
+  width: calc(100%/2);
+}
+
+.tabs__item:hover {
+  opacity: 0.75;
+}
+
+/*ラジオボタンを全て消す*/
+input[name="tabs__item"] {
+  display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.tabs__content {
+  display: none;
+  max-height: 500px;
+  padding: 40px 40px 0;
+  clear: both;
+  overflow: scroll;
+}
+
+
+/*選択されているタブのコンテンツのみを表示*/
+#employee-articles:checked ~ #employee-articles_content,
+#favorite-articles:checked ~ #favorite-articles_content,
+#groups:checked ~ #groups_content {
+  display: block;
+}
+// グループ詳細ページ
+#notices:checked ~ #notices_content,
+#group-members:checked ~ #group-members_content {
+  display: block;
+}
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tabs__item {
+  background-color: #5ab4bd;
+  color: #fff;
 }

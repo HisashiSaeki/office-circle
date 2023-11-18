@@ -1,4 +1,4 @@
-<div class="content">
+
   <div class="row">
     <div class="col-md-4">
       <%= image_tag @employee.get_profile_image(300, 300) %>
@@ -26,25 +26,27 @@
       <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
     <% end %>
   </div>
-
-  <div class="tabs d-flex justify-content-between align-items-center">
-    <ul class="nav nav-tabs">
-      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#my_articles"><%= @employee.full_name %>さんの投稿一覧</a></li>
-      <% if @employee == current_employee %>
-        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#favorite_articles">いいねした投稿一覧</a></li>
-      <% end %>
-      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#groups">参加中のグループ一覧</a></li>
-    </ul>
-  </div>
-  <div class="tab-content">
-    <div id="my_articles" class="tab-pane fade show active">
+  
+  <div class="tabs">
+    <input id="employee-articles" type="radio" name="tabs__item" checked>
+    <label class="tabs__item" for="employee-articles"><%= @employee.full_name %>さんの投稿一覧</label>
+    <% if @employee == current_employee %>
+      <input id="favorite-articles" type="radio" name="tabs__item">
+      <label class="tabs__item" for="favorite-articles">いいねした投稿一覧</label>
+    <% end %>
+    <input id="groups" type="radio" name="tabs__item">
+    <label class="tabs__item" for="groups">参加中のグループ一覧</label>
+    
+    <div class="tabs__content" id="employee-articles_content">
       <%= render partial: "public/articles/article_index", collection: @my_articles, as: "article" %>
     </div>
-    <div id="favorite_articles" class="tab-pane fade">
+    
+    <div class="tabs__content" id="favorite-articles_content">
       <%= render partial: "public/articles/article_index", collection: @favorite_articles, as: "article" %>
     </div>
-    <div id="groups" class="tab-pane fade">
+    
+    <div class="tabs__content" id="groups_content">
       <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
     </div>
   </div>
-</div>
+
