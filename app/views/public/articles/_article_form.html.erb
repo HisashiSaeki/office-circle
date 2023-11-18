@@ -1,0 +1,29 @@
+<div class="form-group">
+
+  <%= form_with model: article do |f| %>
+    <div class="form-group__form">
+      <h2><%= f.label :title, "1.タイトルを入力してください" %></br></h2>
+      <%= f.text_field :title, autofocus: true, class: "form-text form-text--m" %>
+    </div>
+  
+    <div class="form-group__form">
+      <h2><%= f.label :body, "2.本文を入力してください" %></br></h2>
+      <%= f.text_field :body, class: "form-text form-text--l" %>
+    </div>
+  
+   <div class="form-group__form">
+      <h2><%= f.label :tag, "3.タグを入力してください" %></br></h2>
+      <% if current_page?(new_article_path) %>
+        <%= f.text_field :tag, placeholder: "日記,良い話,など", class: "form-text" %>
+      <% else %>
+        <%= f.text_field :tag, value: tag_list, class: "form-text" %>
+      <% end %>
+   </div>
+  
+    <ul class="horizontal-btn-list">
+      <li class="horizontal-btn-list__item"><%= f.submit "投稿する", name: "post", class: "horizontal-btn-list__btn rounded-btn" %></li>
+      <li class="horizontal-btn-list__item"><%= f.submit "下書き保存する", name: "draft", class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %></li>
+    </ul>
+  <% end %>
+
+</div>

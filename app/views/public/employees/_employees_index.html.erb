@@ -1,21 +1,21 @@
 <% if employee_signed_in? %>
   <%= link_to employee_path(employee) do %>
-    <div class="employee_info d-flex align-items-center border">
-      <div>
-        <%= image_tag employee.get_profile_image(100, 100) %>
+    <div class="employee-group">
+      <div class="employee-group__profile-image">
+        <%= image_tag employee.get_profile_image(80, 80) %>
       </div>
-      <div>
-        <%= employee.full_name %></br>
-        <%= employee.department.name %>
+      <div class="employee-group__employee-info">
+        <p><%= employee.full_name %></p>
+        <span><%= employee.department.name %></span>
       </div>
-      <div>
-        <%= employee.introduction.truncate(20, omission: "...") %>
+      <div class="employee-group__employee-description">
+        <%= employee.introduction.truncate(63, omission: "...") %>
       </div>
     </div>
   <% end %>
 <% else %>
   <%= link_to admin_employee_path(employee) do %>
-    <div class="employee_info d-flex align-items-center border">
+    <div>
       <div>
         <%= image_tag employee.get_profile_image(100, 100) %>
       </div>

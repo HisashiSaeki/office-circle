@@ -1,30 +1,34 @@
-<div class="content content--has-column">
+<div class="search-group">
 
-  <div class="content__side">
-    <div class="search_form">
+  <div class="search-group__item">
+    <div class="search">
       <%= render "public/searches/search_form", keyword: @keyword %>
     </div>
-    <div class="tag_search">
+  </div>
+    
+  <div class="search-group__item">
+    <h3>タグ検索</h3>
+    <ul class="tag_list">
       <% @articles.each do |article| %>
         <% article.tags.each do |tag| %>
-          <ul class="tag_list">
-            <%= link_to tag_search_path(tag_id: tag.id), remote: true do %>
-              <li class="rounded-tag rounded-tag--link">
-                <i class="fa-solid fa-tag"></i>
-                <%= tag.name %>
-                (<%= tag.article_tags.count %>)
-              </li>
-            <% end %>
-          </ul>
+          <%= link_to tag_search_path(tag_id: tag.id), remote: true do %>
+            <li class="rounded-tag rounded-tag--link">
+              <i class="fa-solid fa-tag"></i>
+              <%= tag.name %>
+              (<%= tag.article_tags.count %>)
+            </li>
+          <% end %>
         <% end %>
       <% end %>
-    </div>
+    </ul>
   </div>
+  <!--/search-group__item-->
+</div>
+<!--/.search-group-->
 
-  <div class="content__main">
-    <div class="articles_index">
-      <%= render partial: "public/articles/articles_index", collection: @articles, as: "article" %>
-    </div>
+  <div class="article-index">
+    <%= render partial: "public/articles/article_index", collection: @articles, as: "article" %>
   </div>
-
+  
+  
 </div>

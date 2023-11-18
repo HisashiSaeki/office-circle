@@ -1,11 +1,13 @@
-<div class="content">
-  <div class="search_form">
-    <%= render "public/searches/search_form", keyword: @keyword %>
-  </div>
-  <div class="btn-field">
-    <%= link_to "グループを新規作成する", new_group_path, class: "rounded-btn" %>
-  </div>
-  <div class="groups_field">
-    <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
-  </div>
-</div>
+    <div class="group-wrapper">
+      <div class="search_field">
+        <%= render "public/searches/search_form", keyword: @keyword %>
+      </div>
+      <div class="btn-field">
+        <%= link_to "グループを新規作成する", new_group_path, class: "rounded-btn" %>
+      </div>
+    </div>
+    
+    <div class="group-index">
+      <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
+    </div>
+  

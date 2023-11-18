@@ -1,0 +1,22 @@
+.rounded-tag {
+  display: inline-block;
+  padding: .1em .6em;
+  background-color: #e25c00;
+  border-radius: 1em;
+  color: #fff;
+  font-size: .75em;
+  font-weight: bold;
+  border: 2px solid transparent;
+}
+
+.rounded-tag--link {
+  text-decoration: none;
+  transition: .25s;
+}
+
+.rounded-tag--link:focus,
+.rounded-tag--link:hover {
+  background-color: #fff;
+  border-color: currentColor;
+  color: #e25c00;
+}

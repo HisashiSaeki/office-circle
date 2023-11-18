@@ -20,6 +20,6 @@ class Article < ApplicationRecord
      new_tags.each { |new_tag| self.tags << Tag.find_or_create_by(name: new_tag) }
   end
   
-  def self.search(keyword) = self.where("title LIKE ? or body LIKE ?", "%#{keyword}%", "%#{keyword}%")
+  def self.search(keyword) = self.where("title LIKE ?", "%#{keyword}%")
 
 end

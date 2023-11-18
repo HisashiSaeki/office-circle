@@ -10,7 +10,7 @@
         <%= @article.employee.department.name %>
       </div>
       <% if !admin_signed_in? %>
-        <div class="favorite_btn_<%= @article.id %>">
+        <div id="favorite_btn_<%= @article.id %>">
           <%= render "public/favorites/favorite", article: @article %>
         </div>
       <% end %>

@@ -1,28 +1,24 @@
-<div class="content">
+<div class="form-group ">
+  <%= form_with model: @employee, url: employee_session_path do |f| %>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td><%= f.label :email, "メールアドレス" %></td>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-text" %></td>
+        </tr>
+        <tr>
+          <td><%= f.label :password, "パスワード" %></td>
+          <td><%= f.password_field :password, autocomplete: "current-password", class: "form-text" %></td>
+        </tr>
+      </tbody>
+    </table>
   
-  <div class="form-group">
-    <%= form_with model: @employee, url: employee_session_path do |f| %>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><%= f.label :email, "メールアドレス：" %></td>
-            <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-text" %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :password, "パスワード：" %></td>
-            <td><%= f.password_field :password, autocomplete: "current-password", class: "form-text" %></td>
-          </tr>
-        </tbody>
-      </table>
-    
-      <div class="form-group__btn">
-        <%= f.submit "ログイン", class: "rounded-btn" %>
-      </div>
-    <% end %>
-    
-    <div class="form-group__link">
-      <%= render "public/shared/links" %>
+    <div class="form-group__btn">
+      <%= f.submit "ログイン", class: "rounded-btn" %>
     </div>
-    
+  <% end %>
+  
+  <div class="form-group__link">
+    <%= render "public/shared/links" %>
   </div>
 </div>

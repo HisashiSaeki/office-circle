@@ -1,0 +1,41 @@
+  <div class="article-group">
+    <div class="article-group__article-header">
+      <div class="article-header__item">
+        <%= l article.created_at, format: :date%>
+      </div>
+      <div class="article-header__item">
+        <%= article.employee.full_name %>
+      </div>
+      <% if article.employee == current_employee && current_page?(employee_path(article.employee)) %>
+        <div class="article-header__item">
+          <% if article.is_published %>
+            <p class="article-state--published">公開中</p>
+          <% else %>
+            <p class="article-state--private">下書き</p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="article-group__article-title">
+      <%= link_to article_path(article) do %>
+        <h2><%= article.title.truncate(33, omission: "...") %></h2>
+      <% end %>
+    </div>
+
+    <div class="article-group__article-footer">
+      <div class="article-footer__list">
+        <%= render partial: "public/tags/tags", collection: article.tags, as: "tag" %>
+      </div>
+      <div class="horizontal-icon-list article-footer--list">
+        <div id="favorite_btn_<%= article.id %>" class="horizontal-icon-list__item">
+          <%= render "public/favorites/favorite", article: article %>
+        </div>
+        <div class="horizontal-icon-list__item">
+          <i class="fa-regular fa-comments"></i>
+          <%= article.comments.count %>
+        </div>
+      </div>
+    </div>
+
+  </div>

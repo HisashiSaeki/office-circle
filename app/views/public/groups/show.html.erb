@@ -1,68 +1,64 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 mx-auto">
+<div class="content--has-column">
 
-      <div class="sidebar col-md-3">
-        <div class="notices_field">
-          <ul>
-            <h5>グループリーダーからのお知らせ</h5>
-            <% if @notices.present? %>
-              <% @notices.each do |notice| %>
-                <ul>
-                  <%= link_to group_notice_path(@group, notice) do %>
-                    <li><%= notice.title %></li>
-                  <% end %>
-                </ul>
+  <div class="content__side">
+    <div class="notices_field">
+      <ul>
+        <h5>グループリーダーからのお知らせ</h5>
+        <% if @notices.present? %>
+          <% @notices.each do |notice| %>
+            <ul>
+              <%= link_to group_notice_path(@group, notice) do %>
+                <li><%= notice.title %></li>
               <% end %>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <div class="creater_field">
-          <div class="creater_image">
-            <%= image_tag @group.creater.get_profile_image(100, 100) %>
-          </div>
-          <h5>グループリーダー</h5>
-          <%= @group.creater.full_name %>
-          (<%= @group.creater.department.name %>)
-          <% if @group.is_created_by?(current_employee) %>
-            <%= link_to "お知らせを作成する", new_group_notice_path(group_id: @group), class: "btn btn-primary" %>
+            </ul>
           <% end %>
-        </div>
-
-        <div class="group_name">
-          <%= @group.name %>
-        </div>
-
-        <div class="group_created_at">
-          <%= @group.create_date %>
-        </div>
-
-        <div class="group_description">
-          <h4>グループ紹介/活動内容</h4>
-          <div class="description">
-            <%= @group.description %>
-          </div>
-        </div>
-
-        <div class="group_member_field">
-          <div>グループメンバー</div>
-          <div class="group_members">
-            <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
-          </div>
-        </div>
-
-        <div class="group_btn_field">
-          <%= render "public/group_members/group_member_btn", group: @group %>
-          <% if @group.is_created_by?(current_employee) %>
-            <%= link_to "グループを編集する", edit_group_path(@group), class: "btn btn-success" %>
-            <%= link_to "グループを削除する", group_path(@group), method: :delete, class: "btn btn-danger" %>
-          <% end %>
-        </div>
-
-      </div>
-
+        <% end %>
+      </ul>
     </div>
   </div>
+  
+  <div class="content__main">
+    <div class="creater_field">
+      <div class="creater_image">
+        <%= image_tag @group.creater.get_profile_image(100, 100) %>
+      </div>
+      <h5>グループリーダー</h5>
+      <%= @group.creater.full_name %>
+      (<%= @group.creater.department.name %>)
+      <% if @group.is_created_by?(current_employee) %>
+        <%= link_to "お知らせを作成する", new_group_notice_path(group_id: @group), class: "rounded-btn" %>
+      <% end %>
+    </div>
+
+    <div class="group_name">
+      <%= @group.name %>
+    </div>
+
+    <div class="group_created_at">
+      <%= @group.create_date %>
+    </div>
+
+    <div class="group_description">
+      <h4>グループ紹介/活動内容</h4>
+      <div class="description">
+        <%= @group.description %>
+      </div>
+    </div>
+
+    <div class="group_member_field">
+      <div>グループメンバー</div>
+      <div class="group_members">
+        <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
+      </div>
+    </div>
+
+    <div class="group_btn_field">
+      <%= render "public/group_members/group_member_btn", group: @group %>
+      <% if @group.is_created_by?(current_employee) %>
+        <%= link_to "グループを編集する", edit_group_path(@group), class: "rounded-btn rounded-btn--edit" %>
+        <%= link_to "グループを削除する", group_path(@group), method: :delete, class: "rounded-btn rounded-btn--danger" %>
+      <% end %>
+    </div>
+  </div>
+
 </div>

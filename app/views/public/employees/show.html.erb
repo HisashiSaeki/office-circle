@@ -22,7 +22,9 @@
         <%= @employee.introduction %>
       <% end %>
     </div>
-    <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
+    <% if @employee == current_employee %>
+      <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
+    <% end %>
   </div>
 
   <div class="tabs d-flex justify-content-between align-items-center">
@@ -36,10 +38,10 @@
   </div>
   <div class="tab-content">
     <div id="my_articles" class="tab-pane fade show active">
-      <%= render partial: "public/articles/articles_index", collection: @my_articles, as: "article" %>
+      <%= render partial: "public/articles/article_index", collection: @my_articles, as: "article" %>
     </div>
     <div id="favorite_articles" class="tab-pane fade">
-      <%= render partial: "public/articles/articles_index", collection: @favorite_articles, as: "article" %>
+      <%= render partial: "public/articles/article_index", collection: @favorite_articles, as: "article" %>
     </div>
     <div id="groups" class="tab-pane fade">
       <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>

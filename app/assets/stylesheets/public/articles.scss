@@ -1,3 +1,47 @@
 // Place all the styles related to the public/posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.article-group {
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  transition: .25s;
+}
+
+.article-group:focus,
+.article-group:hover {
+  background-color: #F5F5F5;
+}
+
+.article-group__article-header {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 5px;
+}
+
+.article-group__article-header > *:last-child {
+  margin-right: 0;
+}
+
+.article-header__item {
+  margin-right: 10px;
+}
+
+
+.article-group__article-footer {
+  margin-top: 10px;
+}
+
+.article-footer__list {
+  margin-bottom: 3px;
+}
+
+.article-state--published {
+  color: #008000;
+}
+
+.article-state--private {
+  color: #FF0000;
+}

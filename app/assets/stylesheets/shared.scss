@@ -1,9 +1,10 @@
 // ボタン
+
 .rounded-btn {
   display: inline-block;
   min-width: 180px;
   max-width: 100%;
-  padding: 5px 5px;
+  padding: 5px;
   background-color: #0000FF;
   color: #fff;
   border: 2px solid transparent;
@@ -67,28 +68,17 @@
   height: 100%;
 }
 
-// タグ
-.rounded-tag {
-  display: inline-block;
-  padding: .2em .7em;
-  background-color: #e25c00;
-  border-radius: 1em;
-  color: #fff;
-  font-size: .75em;
-  font-weight: bold;
-  border: 2px solid transparent;
+// icon
+.horizontal-icon-list {
+  display: flex;
 }
 
-.rounded-tag--link {
-  text-decoration: none;
-  transition: .25s;
+.horizontal-icon-list > *:last-child {
+  margin-right: 0;
 }
 
-.rounded-tag--link:focus,
-.rounded-tag--link:hover {
-  background-color: #fff;
-  border-color: currentColor;
-  color: #e25c00;
+.horizontal-icon-list__item {
+  margin-right: 10px;
 }
 
 // form
@@ -105,12 +95,8 @@
   margin-top: 20px;
 }
 
-.form {
+.form-group__form {
   padding-bottom: 20px;
-}
-
-.form-label {
-  
 }
 
 .form-text {
@@ -120,12 +106,12 @@
  padding: 10px 10px;
 }
 
-.form-text--size-m {
+.form-text--m {
   width: 500px;
   height: 50px;
 }
 
-.form-text--size-l {
+.form-text--l {
   width: 500px;
   height: 400px;
 }
@@ -137,10 +123,49 @@
 }
 
 .nav-list__item {
-  padding-left: 30px;
+  margin-left: 30px;
 }
 
 //table
 .table {
   border-spacing: 20px;
+}
+
+// search
+.search-group {
+  padding-bottom: 20px;
+}
+
+.search-group__item {
+  margin-bottom: 20px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #888;
+}
+
+.search {
+  
+}
+
+.search-form {
+  width: 180px;
+  height: 36px;
+  padding: 4px 5px;
+  border-radius: 20px;
+}
+
+.search-btn {
+  height: 33px;
+  padding: 1px 15px;
+  background-color: #D3D3D3;
+  border: 1px solid #888;
+  border-bottom-color: #C0C0C0;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.search-btn:focus,
+.search-btn:hover {
+  background-color: #C0C0C0;
+  border-color: currentColor;
 }

@@ -1,15 +1,22 @@
 <%= link_to group_path(group) do %>
-  <div class="group border">
-    <div class="group_name">
-      <%= group.name %>
+  <div class="group">
+    
+    <div class="group__name">
+      <h2><%= group.name %></h2>
     </div>
-    <div class="creater_field">
-      <%= group.creater.full_name %>
-      (<%= group.creater.department.name %>)</br>
-      <%= group.create_date %>
+    
+    <div class="group__footer">
+      <div class="group__item">
+        グループリーダー: <%= group.creater.full_name %>
+        <span>(<%= group.creater.department.name %>)</span>
+      </div>
+      <div class="group__item">
+        <%= group.create_date %>
+      </div>
+      <div class="group__item">
+        メンバー数:<%= group.group_members.count %>人
+      </div>
     </div>
-    <div>
-      メンバー数:<%= group.group_members.count %>人
-    </div>
+    
   </div>
 <% end %>
