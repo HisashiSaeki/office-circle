@@ -1,55 +1,41 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      
-      <%= form_with model: @employee do |f| %>
-        <div class="field">
-          <%= f.label :profile_image, "プロフィール画像" %>
-          <%= f.file_field :profile_image, accept: "image/*" %>
-        </div>
-      
-        <div class="field">
-          <%= f.label "氏名" %>
-          <%= f.text_field :last_name, autofocus: true, placeholder: "姓" %>
-          <%= f.text_field :first_name, placeholder: "名" %>
-        </div>
-        
-        <div class="field">
-          <%= f.label "氏名(カナ)" %>
-          <%= f.text_field :last_name_furigana, placeholder: "セイ" %>
-          <%= f.text_field :first_name_furigana, placeholder: "メイ" %>
-        </div>
-        
-        <div class="field">
-          <%= f.label :birthdate, "生年月日" %>
-          <%= f.date_field :birthdate %>
-        </div>
-        
-        <div class="field">
-          <%= f.label :prefecture, "出身地" %>
-          <%= f.text_field :prefecture, placeholder: "愛媛県" %>
-        </div>
-        
-        <div class="field">
-          <%= f.label :department_id, "部署" %>
-          <%= f.collection_select :department_id, Department.all, :id, :name, include_blank: "部署を選択してください" %>
-        </div>
-      
-        <div class="field">
-          <%= f.label :email, "メールアドレス" %>
-          <%= f.email_field :email, placeholder: "example@gmail.com" %>
-        </div>
-      
-        <div class="field d-flex align-items-center">
-          <%= f.label :introduction, "自己紹介文" %>
-          <%= f.text_area :introduction %>
-        </div>
-        
-        <div class="actions">
-          <%= f.submit "変更内容を保存する" %>
-        </div>
-      <% end %>
-    
+<%= form_with model: @employee do |f| %>
+  <div class="form-group">
+    <div class="form">
+      <p class="form__item"><%= f.label "プロフィール画像" %></p>
+      <p class="form__item"><%= f.file_field :profile_image, accept: "image/*" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label "氏名" %></p>
+      <p class="form__item"><%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-text" %></p>
+      <p class="form__item"><%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label "氏名(カナ)" %></p>
+      <p class="form__item"><%= f.text_field :last_name_furigana, placeholder: "セイ", class: "form-text" %></p>
+      <p class="form__item"><%= f.text_field :first_name_furigana, placeholder: "メイ", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :birthdate, "生年月日" %></p>
+      <p class="form__item"><%= f.date_field :birthdate, class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :prefecture, "出身地" %></p>
+      <p class="form__item"><%= f.text_field :prefecture, placeholder: "愛媛県", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :department_id, "部署" %></p>
+      <p class="form__item"><%= f.collection_select :department_id, Department.all, :id, :name, {include_blank: "部署を選択してください"}, {class: "form-text"} %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :email, "メールアドレス" %></p>
+      <p class="form__item"><%= f.email_field :email, placeholder: "example@gmail.com", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :introduction, "自己紹介文" %></p>
+      <p class="form__item"><%= f.text_area :introduction, class: "form-text form-text--l" %></p>
+    </div>
+    <div class="form-group__btn">
+      <%= f.submit "変更内容を保存する", class: "rounded-btn" %>
     </div>
   </div>
-</div>
+<% end %>

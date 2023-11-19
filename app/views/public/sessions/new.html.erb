@@ -1,18 +1,13 @@
-<div class="form-group ">
+<div class="form-group">
   <%= form_with model: @employee, url: employee_session_path do |f| %>
-    <table class="table">
-      <tbody>
-        <tr>
-          <td><%= f.label :email, "メールアドレス" %></td>
-          <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-text" %></td>
-        </tr>
-        <tr>
-          <td><%= f.label :password, "パスワード" %></td>
-          <td><%= f.password_field :password, autocomplete: "current-password", class: "form-text" %></td>
-        </tr>
-      </tbody>
-    </table>
-  
+    <div class="form form--session">
+      <p class="form__item"><%= f.label :email, "メールアドレス" %></p>
+      <p class="form__item"><%= f.email_field :email, placeholder: "example@gmail.com", class: "form-text" %></p>
+    </div>
+    <div class="form form--session">
+      <p class="form__item"><%= f.label :password, "パスワード" %></p>
+      <p class="form__item"><%= f.password_field :password, placeholder: "6文字以上", class: "form-text" %></p>
+    </div>
     <div class="form-group__btn">
       <%= f.submit "ログイン", class: "rounded-btn" %>
     </div>

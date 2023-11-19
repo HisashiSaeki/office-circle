@@ -99,8 +99,32 @@
   padding-bottom: 20px;
 }
 
+.form {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 20px;
+  min-width: 700px;
+}
+
+.form > *:first-child {
+  min-width: 130px;
+}
+
+.form--session > *:first-child {
+  margin-left: 160px;
+}
+
+.form__item {
+  margin-right: 60px;
+}
+
+.form__item:last-child {
+  margin-right: 0;
+}
+
 .form-text {
- width: 180px;
+ min-width: 180px;
  border: 1px solid #000000;
  border-radius: 4px;
  padding: 10px 10px;

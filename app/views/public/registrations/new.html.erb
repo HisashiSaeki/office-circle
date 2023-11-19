@@ -1,57 +1,45 @@
-<div class="content">
-  <div class="form-group">
-    <%= form_with model: @employee, url: employee_registration_path do |f| %>
-      <%= render "public/shared/error_messages", resource: resource %>
-
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><%= f.label "氏名" %></td>
-            <td><%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-text" %></td>
-            <td><%= f.text_field :first_name, placeholder: "名", class: "form-text" %></td>
-          </tr>
-          <tr>
-            <td><%= f.label "氏名(カナ)" %></td>
-            <td><%= f.text_field :last_name_furigana, placeholder: "セイ", class: "form-text" %></td>
-            <td><%= f.text_field :first_name_furigana, placeholder: "メイ", class: "form-text" %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :birthdate, "生年月日" %></td>
-            <td><%= f.date_field :birthdate, {class: "form-text"} %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :prefecture, "出身地" %></td>
-            <td><%= f.text_field :prefecture, placeholder: "愛媛県", class: "form-text" %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :department_id, "部署" %></td>
-            <td><%= f.collection_select :department_id, Department.all, :id, :name, {include_blank: "部署を選択してください"}, {class: "form-text"}  %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :email, "メールアドレス" %></td>
-            <td><%= f.email_field :email, placeholder: "example@gmail.com", class: "form-text" %></td>
-          </tr>
-          <tr>
-            <td><%= f.label :password, "パスワード" %></td>
-            <td>
-              <%= f.password_field :password, placeholder: "6文字以上", class: "form-text" %>
-            </td>
-          </tr>
-          <tr>
-            <td><%= f.label :password_confirmation, "パスワード確認用" %></td>
-            <td><%= f.password_field :password_confirmation, class: "form-text" %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><%= f.submit "新規登録", class: "rounded-btn" %></td>
-          </tr>
-        </tbody>
-      </table>
-
-    <% end %>
-
+<div class="form-group">
+  <%= form_with model: @employee, url: employee_registration_path do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
+    <div class="form">
+      <p class="form__item"><%= f.label "氏名" %></p>
+      <p class="form__item"><%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-text" %></p>
+      <p class="form__item"><%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label "氏名(カナ)" %></p>
+      <p class="form__item"><%= f.text_field :last_name_furigana, placeholder: "セイ", class: "form-text" %></p>
+      <p class="form__item"><%= f.text_field :first_name_furigana, placeholder: "メイ", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :birthdate, "生年月日" %></p>
+      <p class="form__item"><%= f.date_field :birthdate, class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :prefecture, "出身地" %></p>
+      <p class="form__item"><%= f.text_field :prefecture, placeholder: "愛媛県", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :department_id, "部署" %></p>
+      <p class="form__item"><%= f.collection_select :department_id, Department.all, :id, :name, {include_blank: "部署を選択してください"}, {class: "form-text"} %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :email, "メールアドレス" %></p>
+      <p class="form__item"><%= f.email_field :email, placeholder: "example@gmail.com", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :password, "パスワード" %></p>
+      <p class="form__item"><%= f.password_field :password, placeholder: "6文字以上", class: "form-text" %></p>
+    </div>
+    <div class="form">
+      <p class="form__item"><%= f.label :password_confirmation, "パスワード確認用" %></p>
+      <p class="form__item"><%= f.password_field :password_confirmation, class: "form-text" %></p>
+    </div>
+    <div class="form-group__btn">
+      <%= f.submit "新規登録", class: "rounded-btn" %>
+    </div>
+  <% end %>
     <div class="form-group__link">
       <%= render "public/shared/links" %>
     </div>
-  </div>
 </div>
