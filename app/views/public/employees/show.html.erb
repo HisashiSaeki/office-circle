@@ -1,30 +1,46 @@
 
-  <div class="row">
-    <div class="col-md-4">
-      <%= image_tag @employee.get_profile_image(300, 300) %>
+  <div class="employee-media">
+    <div class="employee-media__image-wrapper">
+      <%= image_tag @employee.get_profile_image(200, 200), class: "employee-media__image" %>
     </div>
-    <div class="col-md-8">
-      <div>名前:　<%= @employee.full_name %></div>
-      <div>フリガナ：<%= @employee.full_name_furigana %></div>
-      <div>誕生日：<%= @employee.birthdate.strftime("%-m月%-d日") %></div>
-      <div>出身地：<%= @employee.prefecture %></div>
-      <div>メールアドレス：<%= @employee.email %></div>
-      <div>部署：<%= @employee.department.name %></div>
-      <div>入社日：<%= l @employee.created_at, format: :date %></div>
+    <div class="employee-media__body">
+      <div class="body__left">
+        <p>名前：</p>
+        <p>フリガナ：</p>
+        <p>誕生日：</p>
+        <p>出身地：</p>
+        <p>メールアドレス：</p>
+        <p>部署：</p>
+        <p>入社日：</p>
+      </div>
+      <div class="body__right">
+        <p><%= @employee.full_name %></p>
+        <p><%= @employee.full_name_furigana %></p>
+        <p><%= @employee.birthdate.strftime("%-m月%-d日") %></p>
+        <p><%= @employee.prefecture %></p>
+        <p><%= @employee.email %></p>
+        <p><%= @employee.department.name %></p>
+        <p><%= l @employee.created_at, format: :date %></p>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12 border">
-      <% if @employee.introduction.size == 0 %>
-        <h4>登録内容変更ボタンから自己紹介文を設定しましょう！</h4>
-      <% else %>
-        <%= @employee.introduction %>
+  <div class="introduction-field">
+    <div class="introduction-field__item">
+      <h2>自己紹介</h2>
+      <div class="text-box">
+        <% if @employee.introduction.size == 0 %>
+          <h4>登録内容変更ボタンから自己紹介文を設定しましょう！</h4>
+        <% else %>
+          <%= @employee.introduction %>
+        <% end %>
+      </div>
+    </div>
+    <div class="introduction-field__item introduction-field__btn">
+      <% if @employee == current_employee %>
+        <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
       <% end %>
     </div>
-    <% if @employee == current_employee %>
-      <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
-    <% end %>
   </div>
   
   <div class="tabs">

@@ -116,6 +116,15 @@
   height: 400px;
 }
 
+.text-box {
+ border: 2px solid #000000;  
+ border-radius: 10px;
+ padding: 20px;
+ min-height: 300px;
+ max-height: 300px;
+ overflow: scroll;
+}
+
 //navigation
 .nav-list {
   display: flex;
@@ -232,3 +241,4 @@ input[name="tabs__item"] {
   background-color: #5ab4bd;
   color: #fff;
 }
+
