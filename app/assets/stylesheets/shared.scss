@@ -1,5 +1,4 @@
 // ボタン
-
 .rounded-btn {
   display: inline-block;
   min-width: 180px;
@@ -40,6 +39,10 @@
   border-bottom-color: #8B0000;
 }
 
+.rounded-btn--danger-s {
+  min-width: 70px;
+}
+
 .rounded-btn--danger:focus,
 .rounded-btn--danger:hover {
   color: #FF0000;
@@ -48,6 +51,10 @@
 .horizontal-btn-list {
   display: flex;
   justify-content: center;
+}
+
+.horizontal-btn-list--right {
+  justify-content: end;
 }
 
 .horizontal-btn-list > *:last-child {
@@ -147,6 +154,12 @@
  min-height: 300px;
  max-height: 300px;
  overflow: scroll;
+}
+
+.text-box--comment {
+  min-width: 100%;
+  min-height: 200px;
+  overflow: scroll;
 }
 
 //navigation
@@ -266,3 +279,14 @@ input[name="tabs__item"] {
   color: #fff;
 }
 
+.horizontal-date {
+  display: flex;
+}
+
+.horizontal-date > *:last-child {
+  margin-right: 0;
+}
+
+.horizontal-date__item {
+  margin-right: 20px;
+}

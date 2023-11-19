@@ -1,2 +1,2 @@
-$(".comment-index").html("<%= j(render "public/comments/comment_index", comments: @comments) %>");
-$("#comment-comment").val("");
+$(".comment-index").html("<%= j(render partial: "public/comments/comment_index", collection: @comments, as: "comment") %>");
+$("#comment_comment").val("");

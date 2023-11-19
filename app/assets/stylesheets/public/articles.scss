@@ -45,3 +45,33 @@
 .article-state--private {
   color: #FF0000;
 }
+
+// 詳細ページ
+.article {
+  
+}
+
+.article-body {
+  padding: 20px;
+}
+
+.article__item {
+  margin-bottom: 20px;
+}
+
+.article > *:last-child {
+  margin-bottom: 0;
+}
+
+.article__horizontal-date {
+  margin-top: 10px;
+}
+
+.article__comment {
+  margin-top: 50px;
+}
+
+.article__comment-title {
+  padding-bottom: 2px;
+  border-bottom: 1px solid #888;
+}

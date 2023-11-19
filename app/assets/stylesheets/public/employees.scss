@@ -30,6 +30,25 @@
   text-align: center;
 }
 
+.employee-profile {
+  display: flex;
+  align-items: center;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.employee-profile > * {
+  margin-right: 20px;
+}
+
+.employee-profile > *:nth-child(3) {
+  margin-left: auto;
+}
+
+.employee-info {
+  display: flex;
+}
+
 .employee-group__employee-description {
   flex: 1 1 500px;
 }

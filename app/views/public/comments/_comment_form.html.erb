@@ -1,4 +1,8 @@
 <%= form_with model: [article, comment], local: false do |f| %>
-  <%= f.text_area :comment, placeholder: "コメントを入力してください" %>
+<div class="comment-form__item">
+  <%= f.text_area :comment, placeholder: "コメントを入力してください", class: "text-box text-box--comment" %>
+</div>
+<div class="comment-form__item comment-form__btn">
   <%= f.submit "コメントを作成", class: "rounded-btn" %>
+</div>
 <% end %>

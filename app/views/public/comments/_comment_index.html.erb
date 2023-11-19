@@ -1,16 +1,18 @@
- <% comments.each do |comment| %>
-  <div class="comment-content">
-    <div class="comment-employee">
-      <%= image_tag comment.employee.get_profile_image(100, 100) %>
+<div class="comment-content">
+  <div class="employee-profile">
+    <div class="image">
+      <%= image_tag comment.employee.get_profile_image(50, 50) %>
+    </div>
+    <div class="employee-info">
       <%= comment.employee.full_name %>
       (<%= comment.employee.department.name %>)
-      コメント日時:<%= l comment.created_at %>
-      <% if comment.employee == current_employee || admin_signed_in? %>
-        <%= link_to "コメントを削除する", article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger" %>
-      <% end %>
+      <%= l comment.created_at %>
     </div>
-    <div class="comment">
-      <%= comment.comment %>
-    </div>
+    <% if comment.employee == current_employee || admin_signed_in? %>
+      <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+    <% end %>
   </div>
-<% end %>
+  <div class="comment-body">
+    <%= comment.comment %>
+  </div>
+</div>
