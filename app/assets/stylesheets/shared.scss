@@ -114,6 +114,21 @@
   min-width: 700px;
 }
 
+.vertical-form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+.vertical-form__item {
+  margin-bottom: 50px;
+}
+
+.vertical-form > *:last-child {
+  margin-bottom: 0;
+}
+
 .form > *:first-child {
   min-width: 130px;
 }

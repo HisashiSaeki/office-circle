@@ -1,18 +1,18 @@
-<div class="">
-  <div class="field">
-    <%= @notice.title %>
-  </div>
-  <div class="field">
-    <%= @notice.body %>
-  </div>
-  <div class="field">
-    <ul class="horizontal-btn-list">
-      <li class="horizontal-btn-list__item"><%= link_to "前のページに戻る", group_path(@notice.group), class: "horizontal-btn-list__btn rounded-btn" %></li>
-      <li class="horizontal-btn-list__item">
-        <% if @notice.group.is_created_by?(current_employee) %>
-          <%= link_to "お知らせを削除する", group_notice_path(group_id: @notice.group, notice_id: @notice), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %>
-        <% end %>
-      </li>
-    </ul>
+<div class="form-group">
+  <div class="vertical-form">
+    <div class="vertical-form__item">
+      <h2><%= @notice.title %></h2>
+    </div>
+    <div class="vertical-form__item">
+      <%= @notice.body %>
+    </div>
   </div>
 </div>
+<ul class="horizontal-btn-list">
+  <li class="horizontal-btn-list__item"><%= link_to "戻る", group_path(@notice.group), class: "horizontal-btn-list__btn rounded-btn" %></li>
+  <li class="horizontal-btn-list__item">
+    <% if @notice.group.is_created_by?(current_employee) %>
+      <%= link_to "お知らせを削除する", group_notice_path(group_id: @notice.group, notice_id: @notice), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %>
+    <% end %>
+  </li>
+</ul>
