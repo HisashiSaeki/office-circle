@@ -1,3 +1,12 @@
 // Place all the styles related to the admin/departments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.vertical-department-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 15px;
+  border-bottom: 1px solid #ddd;
+  width: 450px;
+}

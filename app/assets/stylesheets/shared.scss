@@ -28,6 +28,10 @@
   border-bottom-color: #006400;
 }
 
+.rounded-btn--edit-s {
+  min-width: 70px;
+}
+
 .rounded-btn--edit:focus,
 .rounded-btn--edit:hover {
   color: #008000;
@@ -114,6 +118,10 @@
   min-width: 700px;
 }
 
+.form--center {
+  justify-content: center;
+}
+
 .vertical-form {
   display: flex;
   flex-direction: column;
@@ -190,6 +198,7 @@
 //table
 .table {
   border-spacing: 20px;
+  border: 1px solid #888;
 }
 
 // search
