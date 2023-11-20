@@ -49,6 +49,10 @@
   display: flex;
 }
 
+.vertical-employee-info {
+  display: flex;
+  flex-direction: column;
+}
 .employee-group__employee-description {
   flex: 1 1 500px;
 }

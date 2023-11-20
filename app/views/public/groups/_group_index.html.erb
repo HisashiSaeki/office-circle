@@ -1,19 +1,19 @@
 <%= link_to group_path(group) do %>
-  <div class="group">
+  <div class="group-box">
     
-    <div class="group__name">
+    <div class="group-name">
       <h2><%= group.name %></h2>
     </div>
     
-    <div class="group__footer">
-      <div class="group__item">
+    <div class="group-box__footer">
+      <div class="group-box__item">
         グループリーダー: <%= group.creater.full_name %>
         <span>(<%= group.creater.department.name %>)</span>
       </div>
-      <div class="group__item">
+      <div class="group-box__item">
         <%= group.create_date %>
       </div>
-      <div class="group__item">
+      <div class="group-box__item">
         メンバー数:<%= group.group_members.count %>人
       </div>
     </div>

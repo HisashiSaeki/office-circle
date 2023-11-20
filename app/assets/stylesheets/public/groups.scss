@@ -11,7 +11,7 @@
   margin-bottom: 30px;
 }
 
-.group {
+.group-box {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #000000;
@@ -19,21 +19,39 @@
   transition: .25s;
 }
 
-.group:focus,
-.group:hover {
+.group-box:focus,
+.group-box:hover {
   background-color: #F5F5F5;
 }
 
 
-.group__footer {
+.group-box__footer {
   display: flex;
   justify-content: start;
 }
 
-.group__footer > *:last-child {
+.group-box__footer > *:last-child {
   margin-right: 0;
 }
 
-.group__item {
+.group-box__item {
   margin-right: 10px;
+}
+
+// 詳細ページ
+.group {
+  
+}
+
+.group__item {
+  margin-bottom: 20px;
+}
+
+.group__group-name {
+  padding: 10px;
+}
+
+.group-name {
+  border: 1px solid #888;
+  border-radius: 10px;
 }

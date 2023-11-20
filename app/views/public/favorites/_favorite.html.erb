@@ -1,15 +1,17 @@
-<% if article.favorited_by?(current_employee) %>
-  <div>
-    <%= link_to article_favorites_path(article), method: :delete, remote: true, data: {"turblinks" => false} do %>
-      <i class="fa-solid fa-thumbs-up"></i>
-      <%= article.favorites.count %>
-    <% end %>
-  </div>
-<% else %>
-  <div>
-    <%= link_to article_favorites_path(article), method: :post, remote: true, data: {"turblinks" => false} do %>
-      <i class="fa-regular fa-thumbs-up"></i>
-      <%= article.favorites.count %>
-    <% end %>
-  </div>
+<% if !admin_signed_in? %>
+  <% if article.favorited_by?(current_employee) %>
+    <div>
+      <%= link_to article_favorites_path(article), method: :delete, remote: true, data: {"turblinks" => false} do %>
+        <i class="fa-solid fa-thumbs-up"></i>
+        <%= article.favorites.count %>
+      <% end %>
+    </div>
+  <% else %>
+    <div>
+      <%= link_to article_favorites_path(article), method: :post, remote: true, data: {"turblinks" => false} do %>
+        <i class="fa-regular fa-thumbs-up"></i>
+        <%= article.favorites.count %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
