@@ -1,55 +1,46 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-
-      <div class="col-md-8 mx-auto">
-        <%= form_with model: @employee, url: admin_employee_path  do |f| %>
-
-          <div class="field">
-            <%= f.label "氏名" %>
-            <%= f.text_field :last_name, autofocus: true %>
-            <%= f.text_field :first_name %>
-          </div>
-
-          <div class="field">
-            <%= f.label "氏名(カナ)" %>
-            <%= f.text_field :last_name_furigana %>
-            <%= f.text_field :first_name_furigana %>
-          </div>
-
-          <div class="field">
-            <%= f.label :birthdate, "生年月日" %>
-            <%= f.date_field :birthdate %>
-          </div>
-
-          <div class="field">
-            <%= f.label :prefecture, "出身地" %>
-            <%= f.text_field :prefecture %>
-          </div>
-
-          <div class="field">
-            <%= f.label :department_id, "部署" %>
-            <%= f.collection_select :department_id, Department.all, :id, :name, include_blank: "部署を選択してください" %>
-          </div>
-
-          <div class="field">
-            <%= f.label :email, "メールアドレス" %>
-            <%= f.email_field :email %>
-          </div>
-          
-          <div>
-            <%= f.radio_button :is_active, :true %>
-            <%= f.label :is_active, "有効", {value: :true, class: "d-inline-block"} %>
-            <%= f.radio_button :is_active, :false, class: "ml-5" %>
-            <%= f.label :is_active, "停止", {value: :false, class: "d-inline-block"} %>
-          </div>
-
-          <div class="actions">
-            <%= f.submit "登録情報を変更" %>
-          </div>
-        <% end %>
-      </div>
-
-    </div>
+<div class="form-group">
+  <%= form_with model: @employee, url: admin_employee_path  do |f| %>
+  <div class="form">
+    <p class="form__item">社員ID</p>
+    <p class="form__item"><%= @employee.id %></p>
   </div>
+  <div class="form">
+    <p class="form__item"><%= f.label "氏名" %></p>
+    <p class="form__item"><%= f.text_field :last_name, autofocus: true, class: "form-text" %></p>
+    <p class="form__item"><%= f.text_field :first_name, class: "form-text" %></p>
+  </div>
+  <div class="form">
+    <p class="form__item"><%= f.label "氏名(カナ)" %></p>
+    <p class="form__item"><%= f.text_field :last_name_furigana, class: "form-text" %></p>
+    <p class="form__item"><%= f.text_field :first_name_furigana, class: "form-text" %></p>
+  </div>
+  <div class="form">
+    <p class="form__item"><%= f.label :birthdate, "生年月日" %></p>
+    <p class="form__item"><%= f.date_field :birthdate, class: "form-text" %></p>
+  </div>
+  <div class="form">
+    <p class="form__item"><%= f.label :prefecture, "出身地" %></p>
+    <p class="form__item"><%= f.text_field :prefecture, class: "form-text" %></p>
+  </div>
+  <div class="form">
+    <p class="form__item"><%= f.label :department_id, "部署" %></p>
+    <p class="form__item"><%= f.collection_select :department_id, Department.all, :id, :name, {include_blank: "部署を選択してください"}, {class: "form-text"} %></p>
+  </div>
+  <div class="form">
+    <p class="form__item"><%= f.label :email, "メールアドレス" %></p>
+    <p class="form__item"><%= f.email_field :email, class: "form-text" %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">社員ステータス</p>
+    <p class="form__item">
+      <%= f.radio_button :is_active, :true %>
+      <%= f.label :is_active, "有効", {value: :true} %>
+      <%= f.radio_button :is_active, :false %>
+      <%= f.label :is_active, "停止", {value: :false} %>
+    </p>
+  </div>
+  <div class="form-group__btn">
+    <%= f.submit "登録情報を変更", class: "rounded-btn" %>
+  </div>
+  <% end %>
 </div>

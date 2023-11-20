@@ -1,11 +1,9 @@
 <div class="search-group">
-  
   <div class="search-group__item">
     <div class="search">
       <%= render "public/searches/search_form", keyword: @keyword %>
     </div>
   </div>
-  
   <div class="search-group__item">
     <h3>部署検索</h3>
     <ul class="horizontal-department-list">
@@ -16,12 +14,8 @@
       <% end %>
     </ul>
   </div>
-  
 </div>
-  
-  <div class="employees_index">
-    <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
-  </div>
-  
+<div class="employees_index">
+  <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
 </div>
       

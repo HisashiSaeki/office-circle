@@ -9,9 +9,9 @@
       <% if article.employee == current_employee && current_page?(employee_path(article.employee)) %>
         <div class="article-header__item">
           <% if article.is_published %>
-            <p class="article-state--published">公開中</p>
+            <p class="status">公開中</p>
           <% else %>
-            <p class="article-state--private">下書き</p>
+            <p class="status--non-actived">下書き</p>
           <% end %>
         </div>
       <% end %>

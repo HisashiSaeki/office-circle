@@ -30,6 +30,6 @@ class Admin::SessionsController < Devise::SessionsController
   end
   
   def after_sign_out_path_for(resource)
-    new_registration_path
+    new_employee_session_path
   end
 end
