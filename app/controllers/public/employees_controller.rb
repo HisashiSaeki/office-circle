@@ -31,7 +31,7 @@ class Public::EmployeesController < ApplicationController
   end
 
   def ensure_correct_employee
-    if @employee != current_employee || guest_employee?
+    if @employee != current_employee || @employee.guest_employee?
       redirect_to employee_path(@employee)
     end
   end

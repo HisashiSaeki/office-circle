@@ -1,5 +1,6 @@
 class Public::SearchesController < ApplicationController
   before_action :set_keyword, only: [:employees_search, :articles_search, :groups_search]
+  before_action :set_tags, only: [:articles_search, :tag_search]
 
   def employees_search
       @employees = Employee.search(params[:keyword]).includes(:department).order(created_at: "DESC")
@@ -28,5 +29,9 @@ class Public::SearchesController < ApplicationController
   def set_keyword 
     @keyword = params[:keyword]
   end
-
+  
+  def set_tags
+    tag_list = ArticleTag.pluck(:tag_id)
+    @tags = Tag.where(id: tag_list)
+  end
 end

@@ -25,6 +25,11 @@ main {
   align-items: center;
 }
 
+.header__logo:focus,
+.header__logo:hover {
+  text-decoration: none;
+}
+
 .footer {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -41,6 +46,7 @@ main {
 }
 
 .content {
+  min-width: 800px;
   max-width: 800px;
   padding: 60px 15px;
   margin-right: auto;

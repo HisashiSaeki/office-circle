@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  devise_for :employees, controllers: {
+  devise_for :employees, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions",
-    passwords: "public/passwords"
   }
   devise_scope :employee do
     post "employees/guest_sign_in", to: "public/sessions#guest_sign_in"

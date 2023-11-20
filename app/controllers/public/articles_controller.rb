@@ -7,18 +7,22 @@ class Public::ArticlesController < ApplicationController
   
   def create
     @article = current_employee.articles.new(article_params)
-    list_tags = params[:article][:tag].split("、")
+    list_tags = params[:article][:tag].split("、").uniq
     if params[:post].present?
       @article.is_published = true
       if @article.save
         @article.save_tags(list_tags)
         redirect_to article_path(@article), notice: "投稿完了しました"
+      else
+        render :new
       end
     elsif params[:draft].present?
       @article.is_published = false
       if @article.save
         @article.save_tags(list_tags)
         redirect_to article_path(@article), notice: "投稿を下書き保存しました"
+      else
+        render :new
       end
     else
       render :new
@@ -27,6 +31,8 @@ class Public::ArticlesController < ApplicationController
   
   def index
     @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
+    tag_list = ArticleTag.pluck(:tag_id)
+    @tags = Tag.where(id: tag_list)
   end
   
   def show
@@ -44,21 +50,26 @@ class Public::ArticlesController < ApplicationController
   end
   
   def update
-    list_tags = params[:article][:tag].split("、")
+    list_tags = params[:article][:tag].split("、").uniq
     if params[:post].present?
       @article.is_published = true
       if @article.update(article_params)
         @article.update_tags(list_tags)
+        redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
+      else
+        render :edit
       end
     elsif params[:draft].present?
       @article.is_published = false
       if @article.update(article_params)
         @article.update_tags(list_tags)
+        redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
+      else
+        render :edit
       end
     else
       render :edit
     end
-    redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
   end
   
   def destroy

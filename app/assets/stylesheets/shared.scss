@@ -132,6 +132,11 @@
  font-size: 16px;
 }
 
+.error-message {
+  font-weight: bold;
+  color: red;
+}
+
 // form
 .form-group {
   display: flex;
@@ -148,6 +153,10 @@
 
 .form-group__form {
   padding-bottom: 20px;
+}
+
+.form-group__error {
+  
 }
 
 .form {
@@ -367,7 +376,7 @@ input[name="tabs__item"] {
 .horizontal-date__item {
   margin-right: 20px;
 }
-
+// 社員や記事のステータス
 .status {
   color: #008000;
 }

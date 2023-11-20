@@ -1,4 +1,6 @@
-<span class="rounded-tag rounded-tag--link">
+<%= link_to tag_search_path(tag_id: tag.id), class: "icon" do %>
+<li class="rounded-tag rounded-tag--link">
   <i class="fa-solid fa-tag"></i>
   <%= tag.name %>
-</span>
+</li>
+<% end %>

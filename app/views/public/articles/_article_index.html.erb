@@ -24,9 +24,9 @@
     </div>
 
     <div class="article-group__article-footer">
-      <div class="article-footer__list">
+      <ul class="article-footer__list tag_list">
         <%= render partial: "public/tags/tags", collection: article.tags, as: "tag" %>
-      </div>
+      </ul>
       <div class="horizontal-icon-list article-footer--list">
         <div id="favorite_btn_<%= article.id %>" class="horizontal-icon-list__item">
           <%= render "public/favorites/favorite", article: article %>

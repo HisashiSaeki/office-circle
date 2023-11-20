@@ -11,7 +11,7 @@
       <span>(<%= group.creater.department.name %>)</span>
     </div>
     <div class="group-box__item">
-      <%= group.create_date %>
+      <%= l group.created_at, format: :date %>
     </div>
     <div class="group-box__item">
       メンバー数:<%= group.group_members.count %>人

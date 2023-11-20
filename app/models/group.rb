@@ -23,8 +23,6 @@ class Group < ApplicationRecord
   #   group_image.variant(resize_to_limit: [width, height]).processed
   # end
   
-  def create_date = self.created_at.strftime("%Y-%m-%d")
-  
   def is_created_by?(employee) = self.creater_id == employee.id
     
   def self.search(keyword) = self.where("name LIKE ? or description LIKE ?", "%#{keyword}%", "%#{keyword}%")

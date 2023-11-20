@@ -18,6 +18,18 @@ class Employee < ApplicationRecord
   has_one_attached :profile_image
   
   
+  with_options presence: do
+    validates :last_name
+    validates :first_name
+    validates :last_name_furigana
+    validates :last_name_furigana
+    validates :department_id
+    validates :birthdate
+    validates :prefecture
+    validates :email
+  end
+  
+  
   def get_profile_image(width,height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
