@@ -17,6 +17,12 @@ class Public::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+  
+  def guest_sign_in
+    employee = Employee.guest
+    sign_in employee
+    redirect_to employee_path(employee), notice: "guestuserでログインしました。"
+  end
 
   # protected
 
@@ -30,7 +36,7 @@ class Public::SessionsController < Devise::SessionsController
   end
   
   def after_sign_out_path_for(resource)
-    new_employee_session_path
+    root_path
   end
   
 end

@@ -37,5 +37,23 @@ class Employee < ApplicationRecord
     )
   end
   
+  GUEST_USER_EMAIL = "guest@example.com"
+  
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL ) do |employee|
+      employee.password = SecureRandom.urlsafe_base64
+      employee.last_name = "ゲスト"
+      employee.first_name = "ユーザー"
+      employee.last_name_furigana = "ゲスト"
+      employee.first_name_furigana = "ユーザー"
+      employee.department = Department.find_by(id: 1)
+      employee.birthdate = "1999-11-11"
+      employee.prefecture = "東京都"
+    end
+  end
+  
+  def guest_employee?
+    email == GUEST_USER_EMAIL
+  end
   
 end

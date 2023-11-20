@@ -8,9 +8,12 @@ Rails.application.routes.draw do
     sessions: "public/sessions",
     passwords: "public/passwords"
   }
+  devise_scope :employee do
+    post "employees/guest_sign_in", to: "public/sessions#guest_sign_in"
+  end
   
   scope module: :public do
-    
+    root to: "homes#top"
     get "employees_search" => "searches#employees_search"
     get "articles_search" => "searches#articles_search"
     get "groups_search" => "searches#groups_search"

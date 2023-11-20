@@ -1,22 +1,20 @@
-<%= link_to group_path(group) do %>
-  <div class="group-box">
-    
-    <div class="group-name">
-      <h2><%= group.name %></h2>
-    </div>
-    
-    <div class="group-box__footer">
-      <div class="group-box__item">
-        グループリーダー: <%= group.creater.full_name %>
-        <span>(<%= group.creater.department.name %>)</span>
-      </div>
-      <div class="group-box__item">
-        <%= group.create_date %>
-      </div>
-      <div class="group-box__item">
-        メンバー数:<%= group.group_members.count %>人
-      </div>
-    </div>
-    
+<div class="group-box">
+  <%= link_to group_path(group) do %>
+  <div class="group-box__name">
+    <h2><%= group.name %></h2>
   </div>
-<% end %>
+  <% end %>
+  
+  <div class="group-box__footer">
+    <div class="group-box__item">
+      グループリーダー: <%= group.creater.full_name %>
+      <span>(<%= group.creater.department.name %>)</span>
+    </div>
+    <div class="group-box__item">
+      <%= group.create_date %>
+    </div>
+    <div class="group-box__item">
+      メンバー数:<%= group.group_members.count %>人
+    </div>
+  </div>
+</div>
