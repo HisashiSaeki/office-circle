@@ -2,7 +2,7 @@ class Admin::EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update]
   
   def index
-    @employees = Employee.includes(:department)
+    @employees = Employee.includes(:department).page(params[:page])
     @departments = Department.all
   end
   
