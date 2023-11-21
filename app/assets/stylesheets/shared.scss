@@ -156,7 +156,7 @@
 }
 
 .form-group__error {
-  
+
 }
 
 .form {
@@ -383,4 +383,14 @@ input[name="tabs__item"] {
 
 .status--non-actived {
   color: #FF0000;
+}
+// フラッシュメッセージ
+.notice {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #3CB371;
+  border-radius: 10px;
+  background-color: #3CB371;
+  color: #fff;
+  font-weight: bold;
 }

@@ -1,10 +1,10 @@
 class Public::ArticlesController < ApplicationController
   before_action :ensure_correct_employee, only: [:edit, :update, :destroy]
-  
+
   def new
     @article = Article.new
   end
-  
+
   def create
     @article = current_employee.articles.new(article_params)
     list_tags = params[:article][:tag].split("、").uniq
@@ -12,7 +12,7 @@ class Public::ArticlesController < ApplicationController
       @article.is_published = true
       if @article.save
         @article.save_tags(list_tags)
-        redirect_to article_path(@article), notice: "投稿完了しました"
+        redirect_to article_path(@article), notice: "記事を投稿しました"
       else
         render :new
       end
@@ -28,13 +28,13 @@ class Public::ArticlesController < ApplicationController
       render :new
     end
   end
-  
+
   def index
     @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
     tag_list = ArticleTag.pluck(:tag_id)
     @tags = Tag.where(id: tag_list)
   end
-  
+
   def show
     @article = Article.find(params[:id])
     if @article.is_published == false && @article.employee != current_employee
@@ -44,11 +44,11 @@ class Public::ArticlesController < ApplicationController
       @comment = Comment.new
     end
   end
-  
+
   def edit
     @tag_list = @article.tags.pluck(:name).join('、')
   end
-  
+
   def update
     list_tags = params[:article][:tag].split("、").uniq
     if params[:post].present?
@@ -71,24 +71,24 @@ class Public::ArticlesController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     if @article.destroy
       redirect_to articles_path, notice: "投稿内容の削除が完了しました"
     end
   end
-  
+
   private
-  
+
   def article_params = params.require(:article).permit(:title, :body)
-  
+
   def ensure_correct_employee
     @article = Article.find(params[:id])
     if @article.employee != current_employee
       redirect_to article_path(@article)
     end
   end
-  
-  
-  
+
+
+
 end
