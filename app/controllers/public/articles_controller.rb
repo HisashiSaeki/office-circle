@@ -30,7 +30,7 @@ class Public::ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
+    @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC").page(params[:page])
     tag_list = ArticleTag.pluck(:tag_id)
     @tags = Tag.where(id: tag_list)
   end

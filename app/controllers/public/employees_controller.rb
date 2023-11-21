@@ -3,7 +3,7 @@ class Public::EmployeesController < ApplicationController
   before_action :ensure_correct_employee, only: [:edit, :update]
 
   def index
-    @employees = Employee.includes(:department)
+    @employees = Employee.includes(:department).page(params[:page])
     @departments = Department.all
   end
 

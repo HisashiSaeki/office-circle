@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 4.times do |n|
-  Employee.create!(
+  Employee.find_or_create_by!(
     department_id: "#{n + 1}",
     last_name: "田中#{n + 1}",
     first_name: "太朗#{n + 1}",
@@ -22,12 +22,12 @@
   )
 end
 
-Admin.create!(
+Admin.find_or_create_by!(
   email: "admin@admin.com",
   password: "administrator"
   )
 
-Department.create!(
+Department.find_or_create_by!(
   [
     {name: "営業部"},
     {name: "開発部"},
@@ -37,7 +37,7 @@ Department.create!(
 )
   
 4.times do |n|
-  Post.create!(
+  Post.find_or_create_by!(
     employee_id: "#{n + 1}",
     title: "テストタイトル#{n + 1}",
     body: "テスト本文#{n + 1}",

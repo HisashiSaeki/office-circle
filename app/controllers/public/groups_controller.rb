@@ -17,7 +17,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.includes(:employees)
+    @groups = Group.includes(:employees).page(params[:page])
   end
 
   def show

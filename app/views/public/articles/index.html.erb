@@ -26,6 +26,7 @@
 
   <div class="article-index">
     <%= render partial: "public/articles/article_index", collection: @articles, as: "article" %>
+    <%= paginate @articles %>
   </div>
   
   
