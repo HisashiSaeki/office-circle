@@ -1,0 +1,5 @@
+<% if group.group_members.exists?(employee_id: current_employee.id) %>
+  <%= link_to "退会", group_group_members_path(group), method: :delete, class: "rounded-btn rounded-btn--danger" %>
+<% else %>
+  <%= link_to "参加", group_group_members_path(group), method: :post, class: "rounded-btn" %>
+<% end %>

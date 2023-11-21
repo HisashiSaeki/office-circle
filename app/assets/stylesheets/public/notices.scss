@@ -1,0 +1,30 @@
+// Place all the styles related to the public/notices controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.vertical-notices__item {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.vertical-notices__item:first-child {
+  padding-top: 0;
+}
+
+.vertical-notices__header {
+  margin-bottom: 10px;
+}
+
+.vertical-notices__date {
+  font-size: .875rem;
+}
+
+.vertical-notices__title {
+  text-decoration: none;
+}
+
+.vertical-notices__title:focus,
+.vertical-notices__title:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,100 @@
+// Place all the styles related to the public/employees controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+// 一覧ページ
+.employee-group {
+  display: flex;
+  align-items: center;
+  min-height: 92px;
+  padding: 5px 5px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  transition: .25s;
+}
+
+.employee-group:focus,
+.employee-group:hover {
+  background-color: #F5F5F5;
+}
+
+.employee-group__profile-image {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.employee-group__employee-info {
+  min-width: 120px;
+  max-width: 120px;
+  margin-right: 30px;
+  text-align: center;
+}
+
+.employee-profile {
+  display: flex;
+  align-items: center;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.employee-profile > * {
+  margin-right: 20px;
+}
+
+.employee-profile > *:nth-child(3) {
+  margin-left: auto;
+}
+
+.employee-info {
+  display: flex;
+}
+
+.vertical-employee-info {
+  display: flex;
+  flex-direction: column;
+}
+.employee-group__employee-description {
+  flex: 1 1 500px;
+}
+
+// 詳細ページ
+.employee-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.employee-media__image-wrapper {
+  flex: 0 1 33%;
+  margin-right: 10%;
+}
+
+.employee-media__image {
+  width: 100%;
+}
+
+.employee-media__body {
+  display: flex;
+}
+
+.body__left {
+  margin-right: 5px;
+}
+
+.introduction-field {
+  margin-bottom: 50px;
+}
+
+.introduction-field__item {
+  margin-bottom: 10px;
+}
+
+.introduction-field__item:last-child {
+  margin-bottom: 0;
+}
+
+.introduction-field__btn {
+  text-align: end;
+}

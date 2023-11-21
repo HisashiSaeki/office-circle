@@ -1,0 +1,43 @@
+<div class="form-group">
+  <div class="form">
+    <p class="form__item">社員ID</p>
+    <p class="form__item"><%= @employee.id %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">名前</p>
+    <p class="form__item"><%= @employee.full_name %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">名前(フリガナ)</p>
+    <p class="form__item"><%= @employee.full_name_furigana %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">生年月日</p>
+    <p class="form__item"><%= @employee.birthdate %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">出身地</p>
+    <p class="form__item"><%= @employee.prefecture %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">部署</p>
+    <p class="form__item"><%= @employee.department.name %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">メールアドレス</p>
+    <p class="form__item"><%= @employee.email %></p>
+  </div>
+  <div class="form">
+    <p class="form__item">社員ステータス</p>
+    <p class="form__item">
+      <% if @employee.is_active %>
+        <span class="status">有効</span>
+      <% else %>
+        <span class="status--non-actived">停止</span>
+      <% end %>  
+    </p>
+  </div>
+</div>
+<%= link_to "登録情報を変更する", edit_admin_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
+
+            

@@ -1,0 +1,69 @@
+// Place all the styles related to the public/posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.article-group {
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  transition: .25s;
+}
+
+.article-group:focus,
+.article-group:hover {
+  background-color: #F5F5F5;
+}
+
+.article-group__article-header {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 5px;
+}
+
+.article-group__article-header > *:last-child {
+  margin-right: 0;
+}
+
+.article-header__item {
+  margin-right: 10px;
+}
+
+
+.article-group__article-footer {
+  margin-top: 10px;
+}
+
+.article-footer__list {
+  margin-bottom: 3px;
+}
+
+// 詳細ページ
+.article {
+  
+}
+
+.article-body {
+  padding: 20px;
+}
+
+.article__item {
+  margin-bottom: 20px;
+}
+
+.article > *:last-child {
+  margin-bottom: 0;
+}
+
+.article__horizontal-date {
+  margin-top: 10px;
+}
+
+.article__comment {
+  margin-top: 50px;
+}
+
+.article__comment-title {
+  padding-bottom: 2px;
+  border-bottom: 1px solid #888;
+}

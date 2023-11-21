@@ -1,0 +1,396 @@
+// ボタン
+.rounded-btn {
+  display: inline-block;
+  min-width: 180px;
+  max-width: 100%;
+  padding: 5px;
+  background-color: #0000FF;
+  color: #fff;
+  border: 2px solid transparent;
+  border-bottom-color: #0000CD;
+  border-radius: 10px;
+  font-size: 1.125em;
+  text-align: center;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.rounded-btn:focus,
+.rounded-btn:hover {
+  background-color: #fff;
+  border-color: currentColor;
+  color: #0000FF; // 通常時の背景色と入れ替え
+}
+
+.rounded-btn--guest-session {
+  background-color: #C0C0C0;
+  color: #fff;
+  border-bottom-color: #A9A9A9;
+}
+
+.roudned-btn--guest-session:focus,
+.rounded-btn--guest-session:hover {
+  color: #C0C0C0;
+}
+
+.rounded-btn--edit {
+  background-color: #008000;
+  color: #fff;
+  border-bottom-color: #006400;
+}
+
+.rounded-btn--edit-s {
+  min-width: 70px;
+}
+
+.rounded-btn--edit:focus,
+.rounded-btn--edit:hover {
+  color: #008000;
+}
+
+.rounded-btn--danger {
+  background-color: #FF0000;
+  color: #fff;
+  border-bottom-color: #8B0000;
+}
+
+.rounded-btn--danger-s {
+  min-width: 70px;
+}
+
+.rounded-btn--danger:focus,
+.rounded-btn--danger:hover {
+  color: #FF0000;
+}
+
+.horizontal-btn-list {
+  display: flex;
+  justify-content: center;
+}
+
+.horizontal-btn-list--right {
+  justify-content: end;
+}
+
+.horizontal-btn-list > *:last-child {
+  margin-right: 0;
+}
+
+.horizontal-btn-list__item {
+  flex: 1 1 0;
+  max-width: 180px;
+  margin-right: 20px;
+}
+
+.horizontal-btn-list__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.vertical-btn-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vertical-btn-list > *:last-child {
+  margin-bottom: 0;
+}
+
+.vertical-btn-list__item {
+  margin-bottom: 20px;
+}
+
+.vertical-btn-list__btn {
+
+}
+
+// icon
+
+.icon:focus,
+.icon:hover {
+  text-decoration-line: none;
+}
+
+.horizontal-icon-list {
+  display: flex;
+}
+
+.horizontal-icon-list > *:last-child {
+  margin-right: 0;
+}
+
+.horizontal-icon-list__item {
+  margin-right: 10px;
+}
+
+.count-num {
+ font-weight: normal;
+ font-size: 16px;
+}
+
+.error-message {
+  font-weight: bold;
+  color: red;
+}
+
+// form
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group__btn {
+  text-align: center;
+}
+.form-group__link {
+  margin-top: 20px;
+}
+
+.form-group__form {
+  padding-bottom: 20px;
+}
+
+.form-group__error {
+
+}
+
+.form {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 20px;
+  min-width: 700px;
+}
+
+.form--center {
+  justify-content: center;
+}
+
+.vertical-form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 20px;
+}
+
+.vertical-form__item {
+  margin-bottom: 50px;
+}
+
+.vertical-form > *:last-child {
+  margin-bottom: 0;
+}
+
+.form > *:first-child {
+  min-width: 130px;
+}
+
+.form--session > *:first-child {
+  margin-left: 160px;
+}
+
+.form__item {
+  margin-right: 60px;
+}
+
+.form__item:last-child {
+  margin-right: 0;
+}
+
+.form-text {
+ min-width: 180px;
+ border: 1px solid #000000;
+ border-radius: 4px;
+ padding: 10px 10px;
+}
+
+.form-text--m {
+  width: 500px;
+  height: 50px;
+}
+
+.form-text--l {
+  width: 500px;
+  height: 400px;
+}
+
+.text-box {
+ border: 2px solid #000000;
+ border-radius: 10px;
+ padding: 20px;
+ min-height: 300px;
+ max-height: 300px;
+ overflow: scroll;
+}
+
+.text-box--comment {
+  min-width: 100%;
+  min-height: 200px;
+  overflow: scroll;
+}
+
+//navigation
+.nav-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-list__item {
+  margin-left: 30px;
+}
+
+//table
+.table {
+  border-spacing: 20px;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #888;
+}
+
+.tbody > .tbody__list:focus,
+.tbody > .tbody__list:hover {
+  background-color: #F5F5F5;
+}
+
+// search
+.search-group {
+  padding-bottom: 20px;
+}
+
+.search-group__item {
+  margin-bottom: 20px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #888;
+}
+
+.search-form {
+  width: 180px;
+  height: 36px;
+  padding: 4px 5px;
+  border-radius: 20px;
+}
+
+.search-btn {
+  height: 33px;
+  padding: 1px 15px;
+  background-color: #D3D3D3;
+  border: 1px solid #888;
+  border-bottom-color: #C0C0C0;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.search-btn:focus,
+.search-btn:hover {
+  background-color: #C0C0C0;
+  border-color: currentColor;
+}
+
+// タブ
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  margin-top: 50px;
+  padding-bottom: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;}
+
+/*タブのスタイル*/
+.tabs__item {
+  width: calc(100%/3);
+  height: 50px;
+  border-bottom: 3px solid #5ab4bd;
+  background-color: #d9d9d9;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #565656;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.tabs__item--2 {
+  width: calc(100%/2);
+}
+
+.tabs__item:hover {
+  opacity: 0.75;
+}
+
+/*ラジオボタンを全て消す*/
+input[name="tabs__item"] {
+  display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.tabs__content {
+  display: none;
+  max-height: 500px;
+  padding: 40px 40px 0;
+  clear: both;
+  overflow: scroll;
+}
+
+
+/*選択されているタブのコンテンツのみを表示*/
+#employee-articles:checked ~ #employee-articles_content,
+#favorite-articles:checked ~ #favorite-articles_content,
+#groups:checked ~ #groups_content {
+  display: block;
+}
+// グループ詳細ページ
+#notices:checked ~ #notices_content,
+#group-members:checked ~ #group-members_content {
+  display: block;
+}
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tabs__item {
+  background-color: #5ab4bd;
+  color: #fff;
+}
+
+.horizontal-date {
+  display: flex;
+}
+
+.horizontal-date > *:last-child {
+  margin-right: 0;
+}
+
+.horizontal-date__item {
+  margin-right: 20px;
+}
+// 社員や記事のステータス
+.status {
+  color: #008000;
+}
+
+.status--non-actived {
+  color: #FF0000;
+}
+// フラッシュメッセージ
+.notice {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #3CB371;
+  border-radius: 10px;
+  background-color: #3CB371;
+  color: #fff;
+  font-weight: bold;
+}

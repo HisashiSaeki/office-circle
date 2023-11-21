@@ -1,0 +1,49 @@
+// Place all the styles related to the public/groups controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.group-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #888;
+  margin-bottom: 30px;
+}
+
+.group-box {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  transition: .25s;
+}
+
+.group-box:focus,
+.group-box:hover {
+  background-color: #F5F5F5;
+}
+
+
+.group-box__footer {
+  display: flex;
+  justify-content: start;
+}
+
+.group-box__footer > *:last-child {
+  margin-right: 0;
+}
+
+.group-box__item {
+  margin-right: 10px;
+}
+
+// 詳細ページ
+
+.group__item {
+  margin-bottom: 20px;
+}
+
+.group__group-name {
+  padding: 10px;
+}

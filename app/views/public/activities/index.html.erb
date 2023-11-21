@@ -1,0 +1,21 @@
+<div class="activity">
+  <div class="activity__header">
+    <h2>通知一覧</h2>
+    <% if @activities.present? %>
+      <%= link_to "全削除", destroy_all_activities_path(@activities), method: :delete, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+    <% end %>
+  </div>
+
+  <ul class="activity__item vertical-activities">
+    <% if @activities.present? %>
+      <% @activities.each do |activity| %>
+      <li class="vertical-activities__item">
+        <%= render "#{activity.action_type}", activity: activity %>
+      </li>
+      <% end %>
+    <% else %>
+      通知はありません
+    <% end %>
+  </ul>
+</div>
+  

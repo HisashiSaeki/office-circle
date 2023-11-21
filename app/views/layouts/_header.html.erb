@@ -1,0 +1,35 @@
+<header class="header">
+  <div class="header__inner">
+    <%= link_to root_path, class: "header__logo" do %>
+      <h2 class="logo">OfficeCircle</h2>
+    <% end %>
+    <nav>
+      <ul class="nav-list">
+        <% if employee_signed_in? %>
+          <li class="nav-list__item">
+            <%= link_to activities_path do %>
+              <% if current_employee.activities.where(checked: false).exists? %>
+                <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
+              <% else %>
+                <i class="fa-sharp fa-solid fa-bell"></i>
+              <% end %>
+              通知一覧
+            <% end %>
+          </li>
+          <li class="nav-list__item"><%= link_to "マイページへ", employee_path(current_employee) %></li>
+          <li class="nav-list__item"><%= link_to "新規投稿", new_article_path %></li>
+          <li class="nav-list__item"><%= link_to "社員一覧", employees_path %></li>
+          <li class="nav-list__item"><%= link_to "投稿一覧", articles_path %></li>
+          <li class="nav-list__item"><%= link_to "グループ一覧", groups_path %></li>
+          <li class="nav-list__item"><%= link_to "ログアウト", destroy_employee_session_path, method: :delete %></li>
+        <% elsif admin_signed_in? %>
+          <li class="nav-list__item"><%= link_to "社員一覧", admin_employees_path %></li>
+          <li class="nav-list__item"><%= link_to "投稿一覧", articles_path %></li>
+          <li class="nav-list__item"><%= link_to "部署一覧", admin_departments_path %></li>
+          <li class="nav-list__item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+        <% else %>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

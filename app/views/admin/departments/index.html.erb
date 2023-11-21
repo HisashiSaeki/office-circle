@@ -1,0 +1,15 @@
+<div class="form-group">
+  <%= render "department_form", department: @department %>
+  <ul class="vertical-department-list">
+      <h2 class="vertical-department-list__item">部署一覧</h2>
+    <% @departments.each do |department| %>
+      <li class="vertical-department-list__item">
+        <div class="vertical-department__name">
+          <%= department.name %>
+        </div>
+        <%= link_to "編集", edit_admin_department_path(department), class: "rounded-btn rounded-btn--edit rounded-btn--edit-s" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+

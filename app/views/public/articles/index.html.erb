@@ -1,0 +1,33 @@
+<div class="search-group">
+
+  <div class="search-group__item">
+    <div class="search">
+      <%= render "public/searches/search_form", keyword: @keyword %>
+    </div>
+  </div>
+    
+  <div class="search-group__item">
+    <h3>タグ検索</h3>
+    <ul class="tag_list">
+      <% @tags.each do |tag| %>
+        <%= link_to tag_search_path(tag_id: tag.id), class: "icon" do %>
+          <li class="rounded-tag rounded-tag--link">
+            <i class="fa-solid fa-tag"></i>
+            <%= tag.name %>
+            (<%= tag.article_tags.count %>)
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <!--/search-group__item-->
+</div>
+<!--/.search-group-->
+
+  <div class="article-index">
+    <%= render partial: "public/articles/article_index", collection: @articles, as: "article" %>
+    <%= paginate @articles %>
+  </div>
+  
+  
+</div>

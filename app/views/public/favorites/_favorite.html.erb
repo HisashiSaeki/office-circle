@@ -1,0 +1,17 @@
+<% if !admin_signed_in? %>
+  <% if article.favorited_by?(current_employee) %>
+    <%= link_to article_favorites_path(article), method: :delete, remote: true, data: {"turblinks" => false}, class: "icon" do %>
+      <i class="fa-solid fa-thumbs-up"></i>
+    <% end %>
+    <span class="count-num">
+      <%= article.favorites.count %>
+    </span>
+  <% else %>
+    <%= link_to article_favorites_path(article), method: :post, remote: true, data: {"turblinks" => false}, class: "icon" do %>
+      <i class="fa-regular fa-thumbs-up"></i>
+    <% end %>
+    <span class="count-num">
+      <%= article.favorites.count %>
+    </span>
+  <% end %>
+<% end %>
