@@ -1,6 +1,7 @@
 <div class="form-group">
   <div class="vertical-form">
   <%= form_with model: [@group, @notice] do |f| %>
+    <%= render "layouts/error_message", model: f.object %>
     <div class="vertical-form__item">
       <h2><%= f.label :title, "1.件名を入力" %></br></h2>
       <%= f.text_field :title, autofocus: true, class: "form-text form-text--m" %>

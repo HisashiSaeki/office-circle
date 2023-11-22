@@ -53,11 +53,11 @@
   <label class="tabs__item" for="groups">参加中のグループ一覧</label>
   
   <div class="tabs__content" id="employee-articles_content">
-    <%= render partial: "public/articles/article_index", collection: @my_articles, as: "article" %>
+    <%= render partial: "public/articles/article_record", collection: @my_articles, as: "article" %>
   </div>
   
   <div class="tabs__content" id="favorite-articles_content">
-    <%= render partial: "public/articles/article_index", collection: @favorite_articles, as: "article" %>
+    <%= render partial: "public/articles/article_record", collection: @favorite_articles, as: "article" %>
   </div>
   
   <div class="tabs__content" id="groups_content">

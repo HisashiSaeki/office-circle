@@ -6,6 +6,7 @@ class Admin::DepartmentsController < ApplicationController
     if @department.save
       redirect_back fallback_location: admin_employees_path, notice: "部署の登録が完了しました"
     else
+      @departments = Department.all
       render :index
     end
   end

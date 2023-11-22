@@ -1,14 +1,7 @@
 <div class="form-group">
 
-  <% if article.errors.any? %>
-    <ul class="form-group__error">
-      <% article.errors.full_messages.each do |message| %>
-        <li class="error-message"><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
   <%= form_with model: article do |f| %>
+    <%= render "layouts/error_message", model: f.object %>
     <div class="form-group__form">
       <h2><%= f.label :title, "1.タイトルを入力してください" %></br></h2>
       <%= f.text_field :title, autofocus: true, class: "form-text form-text--m" %>

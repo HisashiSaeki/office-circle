@@ -8,7 +8,9 @@
       <span><%= employee.department.name %></span>
     </div>
     <div class="employee-group__employee-description">
-      <%= employee.introduction.truncate(63, omission: "...") %>
+      <% if employee.introduction %>
+        <%= employee.introduction.truncate(63, omission: "...") %>
+      <% end %>
     </div>
   </div>
 <% end %>

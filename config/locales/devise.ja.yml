@@ -2,6 +2,13 @@ ja:
   activerecord:
     attributes:
       user:
+        department: 部署
+        last_name: 苗字
+        first_name: 名前
+        last_name_furigana: 苗字のフリガナ
+        first_name_furigana: 名前のフリガナ
+        birthdate: 生年月日
+        prefecture: 出身都道府県
         confirmation_sent_at: パスワード確認送信時刻
         confirmation_token: パスワード確認用トークン
         confirmed_at: パスワード確認時刻

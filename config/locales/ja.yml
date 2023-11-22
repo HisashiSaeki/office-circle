@@ -4,6 +4,24 @@ ja:
       article:
         title: "タイトル"
         body: "本文"
+      employee:
+        department: "部署"
+        last_name: "苗字"
+        first_name: "名前"
+        last_name_furigana: "苗字のフリガナ"
+        first_name_furigana: "名前のフリガナ"
+        birthdate: "生年月日"
+        prefecture: "出身地"
+        email: "メールアドレス"
+        introduction: "自己紹介文"
+      department:
+        name: "部署名"
+      group:
+        name: "グループ名"
+        description: "活動内容"
+      notice:
+        title: "件名"
+        body: "本文"
 
     errors:
       messages:
