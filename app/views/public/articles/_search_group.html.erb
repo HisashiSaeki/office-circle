@@ -1,0 +1,13 @@
+<div class="search-group">
+  <div class="search-group__item">
+    <div class="search">
+      <%= render "public/searches/search_form", keyword: keyword %>
+    </div>
+  </div>
+  <div class="search-group__item">
+    <h3>タグ検索</h3>
+    <ul class="tag_list">
+      <%= render partial: "public/tags/tags", collection: tags, as: "tag", locals: {full: true} %>
+    </ul>
+  </div>
+</div>

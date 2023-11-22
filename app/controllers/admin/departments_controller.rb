@@ -20,7 +20,7 @@ class Admin::DepartmentsController < ApplicationController
   
   def update
     if @department.update(department_params)
-      redirect_to admin_departments_path, notice: "部署情報の変更が完了しました"
+      redirect_to admin_departments_path, notice: "部署名の変更が完了しました"
     else
       render :edit
     end

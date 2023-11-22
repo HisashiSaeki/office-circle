@@ -1,5 +1,5 @@
 <div class="form-group">
-  
+
   <% if article.errors.any? %>
     <ul class="form-group__error">
       <% article.errors.full_messages.each do |message| %>
@@ -21,10 +21,10 @@
 
    <div class="form-group__form">
       <h2><%= f.label :tag, "3.タグを入力してください" %></br></h2>
-      <% if current_page?(new_article_path) %>
-        <%= f.text_field :tag, placeholder: "日記,良い話,など", class: "form-text" %>
-      <% else %>
+      <% if article.id %>
         <%= f.text_field :tag, value: tag_list, class: "form-text" %>
+      <% else %>
+        <%= f.text_field :tag, placeholder: "日記,良い話,など", class: "form-text" %>
       <% end %>
    </div>
 

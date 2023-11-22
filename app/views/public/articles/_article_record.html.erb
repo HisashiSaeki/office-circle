@@ -1,13 +1,13 @@
-<div class="article-group">
-  <div class="article-group__article-header">
-    <div class="article-header__item">
-      <%= l article.created_at, format: :date%>
+<div class="article-record">
+  <div class="article-record__article-record-header">
+    <div class="article-record-header__item">
+      <%= l article.created_at, format: :date %>
     </div>
-    <div class="article-header__item">
+    <div class="article-record-header__item">
       <%= article.employee.full_name %>
     </div>
     <% if article.employee == current_employee && current_page?(employee_path(article.employee)) %>
-      <div class="article-header__item">
+      <div class="article-record-header__item">
         <% if article.is_published %>
           <p class="status">公開中</p>
         <% else %>
@@ -17,17 +17,17 @@
     <% end %>
   </div>
 
-  <div class="article-group__article-title">
+  <div class="article-record__title">
     <%= link_to article_path(article) do %>
       <h2><%= article.title.truncate(28, omission: "...") %></h2>
     <% end %>
   </div>
 
-  <div class="article-group__article-footer">
-    <ul class="article-footer__list tag_list">
+  <div class="article-record__article-record-footer">
+    <ul class="article-record-footer__list tag_list">
       <%= render partial: "public/tags/tags", collection: article.tags, as: "tag" %>
     </ul>
-    <div class="horizontal-icon-list article-footer--list">
+    <div class="horizontal-icon-list article-record-footer__list">
       <div id="favorite_btn_<%= article.id %>" class="horizontal-icon-list__item">
         <%= render "public/favorites/favorite", article: article %>
       </div>

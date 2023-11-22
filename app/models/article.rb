@@ -13,7 +13,27 @@ class Article < ApplicationRecord
   end
 
 
-  def favorited_by?(employee) = self.favorites.exists?(employee_id: employee.id)
+  def favorited_by?(employee) = favorites.exists?(employee_id: employee.id)
+    
+  def save_published
+    self.is_published = true
+    self.save
+  end
+  
+  def save_private
+    self.is_published = false
+    self.save
+  end
+  
+  def update_published(article_params)
+    self.is_published = true
+    self.update(article_params)
+  end
+  
+  def update_private(article_params)
+    self.is_published = false
+    self.update(article_params)
+  end
 
   def save_tags(send_tags) = send_tags.each { |tag| self.tags << Tag.find_or_create_by(name: tag) }
 
@@ -26,6 +46,10 @@ class Article < ApplicationRecord
      new_tags.each { |new_tag| self.tags << Tag.find_or_create_by(name: new_tag) }
   end
 
-  def self.search(keyword) = self.where("title LIKE ?", "%#{keyword}%")
+  def self.search(keyword) = where("title LIKE ?", "%#{keyword}%")
+  
+  def self.is_published_articles
+    where(is_published: true).includes(:employee, :tags)
+  end
 
 end

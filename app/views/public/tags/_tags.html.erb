@@ -2,5 +2,8 @@
 <li class="rounded-tag rounded-tag--link">
   <i class="fa-solid fa-tag"></i>
   <%= tag.name %>
+  <% if local_assigns[:full] %>
+    (<%= tag.article_tags.count %>)
+  <% end %>
 </li>
 <% end %>

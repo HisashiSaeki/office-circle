@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+// グループ一覧ページ
 .group-wrapper {
   display: flex;
   justify-content: space-between;
@@ -39,11 +40,16 @@
 }
 
 // 詳細ページ
-
 .group__item {
   margin-bottom: 20px;
 }
 
 .group__group-name {
   padding: 10px;
+}
+
+// 選択されているタブのコンテンツのみを表示する
+#notices:checked ~ #notices_content,
+#group-members:checked ~ #group-members_content {
+  display: block;
 }
