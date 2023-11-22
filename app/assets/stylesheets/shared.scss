@@ -383,3 +383,8 @@ input[name="tabs__item"] {
   color: #fff;
   font-weight: bold;
 }
+
+// エラー
+.field_with_errors {
+  display: contents;
+}
