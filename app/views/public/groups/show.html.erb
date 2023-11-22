@@ -27,7 +27,7 @@
   <div class="group__item">
     <h2>グループ紹介/活動内容</h2>
     <div class="text-box">
-      <%= @group.description %>
+      <%= safe_join(@group.description.split("\n"), tag.br) %>
     </div>
   </div>
   

@@ -4,7 +4,7 @@
       <h2><%= @notice.title %></h2>
     </div>
     <div class="vertical-form__item">
-      <%= @notice.body %>
+      <%= safe_join(@notice.body.split("\n"), tag.br) %>
     </div>
   </div>
 </div>
