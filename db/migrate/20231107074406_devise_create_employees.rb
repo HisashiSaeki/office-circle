@@ -37,7 +37,7 @@ class DeviseCreateEmployees < ActiveRecord::Migration[6.1]
       t.string :first_name, null: false
       t.string :last_name_furigana, null: false
       t.string :first_name_furigana, null: false
-      t.text :introduction, default: ""
+      t.text :introduction
       t.date :birthdate, null: false
       t.string :prefecture, null: false
       t.boolean :is_active, null: false, default: true
