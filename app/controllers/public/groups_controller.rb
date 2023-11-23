@@ -21,9 +21,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find(params[:id])
-    @employees = @group.employees.includes(:department)
-    @notices = Notice.where(group_id: @group.id)
+    @group = Group.includes(:notices, employees: :department).find(params[:id])
   end
 
   def edit
@@ -38,22 +36,18 @@ class Public::GroupsController < ApplicationController
   end
 
   def destroy
-    @group.destroy
-    redirect_to groups_path
+    redirect_to groups_path if @group.destroy
   end
 
 
   private
+  
 
-  def group_params
-    params.require(:group).permit(:name, :description)
-  end
+  def group_params = params.require(:group).permit(:name, :description)
 
   def ensure_correct_creater
     @group = Group.find(params[:id])
-    unless @group.is_created_by?(current_employee)
-      redirect_to group_path(@group)
-    end
+    redirect_to group_path(@group) unless @group.is_created_by?(current_employee)
   end
 
 end

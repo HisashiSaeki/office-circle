@@ -1,7 +1,7 @@
 <div class="form-group">
 
   <%= form_with model: article do |f| %>
-    <%= render "layouts/error_message", model: f.object %>
+    <%= render "public/shared/error_messages", resource: f.object %>
     
     <div class="form-group__form">
       <h2><%= f.label :title, "1.タイトルを入力してください" %></br></h2>

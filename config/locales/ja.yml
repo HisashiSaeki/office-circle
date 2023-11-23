@@ -1,5 +1,12 @@
 ja:
   activerecord:
+    models:
+      department: "部署"
+      employee: "社員"
+      article: "記事"
+      group: "グループ"
+      notice: "お知らせ"
+      
     attributes:
       article:
         title: "タイトル"
@@ -13,6 +20,7 @@ ja:
         birthdate: "生年月日"
         prefecture: "出身地"
         email: "メールアドレス"
+        password: "パスワード"
         introduction: "自己紹介文"
       department:
         name: "部署名"

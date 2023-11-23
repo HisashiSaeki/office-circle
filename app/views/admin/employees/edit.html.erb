@@ -1,6 +1,6 @@
 <div class="form-group">
   <%= form_with model: @employee, url: admin_employee_path  do |f| %>
-    <%= render "layouts/error_message", model: f.object %>
+    <%= render "admin/shared/error_messages", resource: f.object %>
     <div class="form">
       <p class="form__item">社員ID</p>
       <p class="form__item"><%= @employee.id %></p>

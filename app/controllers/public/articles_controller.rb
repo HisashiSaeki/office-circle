@@ -79,17 +79,11 @@ class Public::ArticlesController < ApplicationController
   private
   
 
-  def article_params 
-    params.require(:article).permit(:title, :body)
-  end
+  def article_params = params.require(:article).permit(:title, :body)
 
   def ensure_correct_employee
     @article = Article.find(params[:id])
-    unless @article.employee == current_employee
-      redirect_to article_path(@article)
-    end
+    redirect_to article_path(@article) unless @article.employee == current_employee
   end
-
-
 
 end

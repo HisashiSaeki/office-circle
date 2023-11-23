@@ -1,6 +1,6 @@
 <div class="form-group">
   <%= form_with model: @employee, url: employee_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+  <%= render "public/shared/error_messages", resource: f.object %>
     <div class="form">
       <p class="form__item"><%= f.label "氏名" %></p>
       <p class="form__item"><%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-text" %></p>

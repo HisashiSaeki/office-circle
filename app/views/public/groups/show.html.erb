@@ -45,9 +45,9 @@
     <label class="tabs__item tabs__item--2" for="group-members">グループメンバー</label>
 
     <div class="tabs__content" id="notices_content">
-      <% if @notices.present? %>
+      <% if @group.notices.present? %>
         <ul class="vertical-notices">
-          <% @notices.each do |notice| %>
+          <% @group.notices.each do |notice| %>
             <li class="vertical-notices__item">
               <div class="vertical-notices__header">
                 <div class="vertical-notices__date">
@@ -68,8 +68,8 @@
     </div>
     <!--/.tabs__content-->
     <div class="tabs__content" id="group-members_content">
-      <% if @employees.present? %>
-        <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
+      <% if @group.employees.present? %>
+        <%= render partial: "public/employees/employees_index", collection: @group.employees, as: "employee" %>
       <% else %>
         <p>グループメンバーがいません</p>
       <% end %>

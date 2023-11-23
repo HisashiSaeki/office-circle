@@ -19,7 +19,7 @@ class Public::SearchesController < ApplicationController
   end
 
   def tag_search
-    @articles = Tag.find(params[:tag_id]).articles.is_published_articles.order(created_at: "DESC").page(params[:page])
+    @articles = Tag.find(params[:tag_id]).articles.is_published_articles.page(params[:page])
   end
   
   

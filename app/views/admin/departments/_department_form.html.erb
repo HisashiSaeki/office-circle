@@ -1,6 +1,6 @@
 <% if department.id %>
   <%= form_with model: department, url: admin_department_path, method: :patch do |f| %>
-    <%= render "layouts/error_message", model: f.object %>
+    <%= render "admin/shared/error_messages", resource: f.object %>
     <div class="form form--center">
       <p class="form__item"><%= f.text_field :name, autofocus: true, placeholder: "部署名を入力", class: "form-text" %></p>
       <%= f.submit "登録", class: "rounded-btn" %>
@@ -8,7 +8,7 @@
   <% end %>
 <% else %>
   <%= form_with model: department, url: admin_departments_path, method: :post do |f| %>
-    <%= render "layouts/error_message", model: f.object %>
+    <%= render "admin/shared/error_messages", resource: f.object %>
     <div class="form form--center">
       <p class="form__item"><%= f.text_field :name, autofocus: true, placeholder: "部署名を入力", class: "form-text" %></p>
       <%= f.submit "登録", class: "rounded-btn" %>

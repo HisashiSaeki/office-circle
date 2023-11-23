@@ -64,8 +64,6 @@ class Employee < ApplicationRecord
     end
   end
   
-  def guest_employee?
-    email == GUEST_USER_EMAIL
-  end
+  def guest_employee? = email == GUEST_USER_EMAIL
   
 end

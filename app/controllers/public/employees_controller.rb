@@ -10,7 +10,7 @@ class Public::EmployeesController < ApplicationController
   def show
     @my_articles = Article.where(employee_id: @employee).includes(:tags).order(created_at: "DESC")
     @favorite_articles = @employee.favorite_articles.includes(:tags)
-    @groups = @employee.groups.includes(:creater).page(params[:page])
+    @groups = @employee.groups.includes(:creater)
   end
 
   def edit
@@ -26,14 +26,10 @@ class Public::EmployeesController < ApplicationController
 
   private
 
-  def employee_params
-    params.require(:employee).permit(:profile_image, :last_name, :first_name, :last_name_furigana, :first_name_furigana, :birthdate, :prefecture, :department_id, :introduction, :email, :is_active)
-  end
+  def employee_params = params.require(:employee).permit(:profile_image, :last_name, :first_name, :last_name_furigana, :first_name_furigana, :birthdate, :prefecture, :department_id, :introduction, :email, :is_active)
 
   def ensure_correct_employee
-    if @employee != current_employee || @employee.guest_employee?
-      redirect_to employee_path(@employee)
-    end
+    redirect_to employee_path(@employee) if @employee != current_employee || @employee.guest_employee?
   end
 
   def set_employee

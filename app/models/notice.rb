@@ -7,4 +7,6 @@ class Notice < ApplicationRecord
     validates :title, length: { maximum: 100 }
     validates :body
   end
+  
+  
 end
