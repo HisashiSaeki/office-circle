@@ -8,8 +8,11 @@
       (<%= comment.employee.department.name %>)
       <%= l comment.created_at %>
     </div>
-    <% if comment.employee == current_employee || admin_signed_in? %>
+    <% if admin_signed_in? %>
+      <%= link_to "削除", admin_article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+    <% elsif comment.employee == current_employee %>
       <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+    <% else %>
     <% end %>
   </div>
   <div class="comment-body">

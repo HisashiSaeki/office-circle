@@ -1,6 +1,15 @@
-<%= link_to tag_search_path(tag_id: tag.id), class: "icon" do %>
-<li class="rounded-tag rounded-tag--link">
-  <i class="fa-solid fa-tag"></i>
-  <%= tag.name %>
-</li>
+<% if admin_signed_in? %>
+  <%= link_to admin_tag_search_path(tag_id: tag.id), class: "icon" do %>
+  <li class="rounded-tag rounded-tag--link">
+    <i class="fa-solid fa-tag"></i>
+    <%= tag.name %>
+  </li>
+  <% end %>
+<% else %>
+  <%= link_to tag_search_path(tag_id: tag.id), class: "icon" do %>
+  <li class="rounded-tag rounded-tag--link">
+    <i class="fa-solid fa-tag"></i>
+    <%= tag.name %>
+  </li>
+  <% end %>
 <% end %>

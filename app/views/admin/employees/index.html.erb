@@ -1,20 +1,4 @@
-<div class="search-group">
-  <div class="search-group__item">
-    <div class="search">
-      <%= render "public/searches/search_form", keyword: @keyword %>
-    </div>
-  </div>
-  <div class="search-group__item">
-    <h3>部署検索</h3>
-    <ul class="horizontal-department-list">
-      <% @departments.each do |department| %>
-        <%= link_to department_search_path(department_id: department.id), remote: true, class: "horizontal-department-list__item" do %>
-          <li class="department-name"><%= department.name %></li>
-        <% end %>
-      <% end %>
-    </ul>
-  </div>
-</div>
+<%= render "admin/employees/search_group", keyword: @keyword, departments: @departments %>
 
 <table class="table">
   <thead>
@@ -26,26 +10,8 @@
       <th>社員ステータス</th>
     </tr>
   </thead>
-  <tbody class="tbody">
-    <% @employees.each do |employee| %>
-        <tr class="tbody__list">
-          <td class="td"><%= employee.id %></td>
-          <td class="td">
-            <%= link_to admin_employee_path(employee) do %>
-              <%= employee.full_name %>
-            <% end %>
-          </td>
-          <td class="td"><%= employee.department.name %></td>
-          <td class="td"><%= employee.email %></td>
-          <td class="td">
-            <% if employee.is_active %>
-              <span class="status">有効</span>
-            <% else %>
-              <span class="status--non-actived">停止</span>
-            <% end %>
-          </td>
-        </tr>
-    <% end %>
+  <tbody class="tbody employee_record_group">
+    <%= render partial: "admin/employees/employee_record", collection: @employees, as: "employee" %>
   </tbody>
 </table>
 <%= paginate @employees %>
