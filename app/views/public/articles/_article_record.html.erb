@@ -19,6 +19,7 @@
 
   <div class="article-record__title">
     <%= link_to article_path(article) do %>
+      <!--一覧表示の際に１行程度で収まる文字数を指定-->
       <h2><%= article.title.truncate(28, omission: "...") %></h2>
     <% end %>
   </div>

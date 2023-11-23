@@ -17,7 +17,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.includes(:employees).page(params[:page])
+    @groups = Group.includes(:employees).order(created_at: "DESC").page(params[:page])
   end
 
   def show

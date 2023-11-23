@@ -11,8 +11,8 @@ class Article < ApplicationRecord
     validates :title, length: { maximum: 100 }
     validates :body
   end
-
-
+  
+  
   def favorited_by?(employee) = favorites.exists?(employee_id: employee.id)
     
   def save_published
@@ -39,7 +39,7 @@ class Article < ApplicationRecord
 
   def update_tags(send_tags)
      # 編集前の投稿にタグが付いていれば、current_tagsに入れる
-     current_tags = self.tags.pluck(:name) unless !self.tags
+     current_tags = self.tags.pluck(:name) if self.tags
      old_tags = current_tags - send_tags
      new_tags = send_tags - current_tags
      old_tags.each { |old_tag| self.tags.delete(Tag.find_by(name: old_tag)) }
@@ -48,8 +48,6 @@ class Article < ApplicationRecord
 
   def self.search(keyword) = where("title LIKE ?", "%#{keyword}%")
   
-  def self.is_published_articles
-    where(is_published: true).includes(:employee, :tags)
-  end
+  def self.is_published_articles = where(is_published: true).includes(:employee, :tags)
 
 end

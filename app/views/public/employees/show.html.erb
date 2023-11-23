@@ -43,25 +43,42 @@
 </div>
 
 <div class="tabs">
-  <input id="employee-articles" type="radio" name="tabs__item" checked>
-  <label class="tabs__item" for="employee-articles"><%= @employee.full_name %>さんの投稿一覧</label>
   <% if @employee == current_employee %>
+    <input id="employee-articles" type="radio" name="tabs__item" checked>
+    <label class="tabs__item" for="employee-articles"><%= @employee.full_name %>さんの投稿</label>
     <input id="favorite-articles" type="radio" name="tabs__item">
-    <label class="tabs__item" for="favorite-articles">いいねした投稿一覧</label>
+    <label class="tabs__item" for="favorite-articles">いいねした投稿</label>
+    <input id="groups" type="radio" name="tabs__item">
+    <label class="tabs__item" for="groups">参加中のグループ</label>
+  <% else %>
+    <input id="employee-articles" type="radio" name="tabs__item" checked>
+    <label class="tabs__item tabs__item--2" for="employee-articles"><%= @employee.full_name %>さんの投稿</label>
+    <input id="groups" type="radio" name="tabs__item">
+    <label class="tabs__item tabs__item--2" for="groups">参加中のグループ</label>
   <% end %>
-  <input id="groups" type="radio" name="tabs__item">
-  <label class="tabs__item" for="groups">参加中のグループ一覧</label>
   
   <div class="tabs__content" id="employee-articles_content">
-    <%= render partial: "public/articles/article_record", collection: @my_articles, as: "article" %>
+    <% if @my_articles.present? %>
+      <%= render partial: "public/articles/article_record", collection: @my_articles, as: "article" %>
+    <% else %>
+      <p>投稿がありません</p>
+    <% end %>
   </div>
   
   <div class="tabs__content" id="favorite-articles_content">
-    <%= render partial: "public/articles/article_record", collection: @favorite_articles, as: "article" %>
+    <% if @favorite_articles.present? %>
+      <%= render partial: "public/articles/article_record", collection: @favorite_articles, as: "article" %>
+    <% else %>
+      <p>いいねした投稿はありません</p>
+    <% end %>
   </div>
   
   <div class="tabs__content" id="groups_content">
-    <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
+    <% if @groups.present? %>
+      <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
+    <% else %>
+      <p>参加中のグループはありません</p>
+    <% end %>
   </div>
 </div>
 

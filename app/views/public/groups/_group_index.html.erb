@@ -1,10 +1,12 @@
 <div class="group-box">
-  <%= link_to group_path(group) do %>
   <div class="group-box__name">
-    <h2><%= group.name %></h2>
+    <%= link_to group_path(group) do %>
+      <!--一覧表示の際に１行程度で収まる文字数を指定-->
+      <h2><%= group.name.truncate(32, omission: "...") %></h2>
+    <% end %>
   </div>
-  <% end %>
-  
+
+
   <div class="group-box__footer">
     <div class="group-box__item">
       グループリーダー: <%= group.creater.full_name %>

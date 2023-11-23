@@ -34,7 +34,7 @@ class Public::ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    if @article.is_published == false && @article.employee != current_employee
+    if !@article.is_published && !@article.employee == current_employee
       redirect_to articles_path
     else
       @comments = Comment.where(article_id: @article).includes(:employee)
@@ -85,7 +85,7 @@ class Public::ArticlesController < ApplicationController
 
   def ensure_correct_employee
     @article = Article.find(params[:id])
-    if @article.employee != current_employee
+    unless @article.employee == current_employee
       redirect_to article_path(@article)
     end
   end

@@ -4,7 +4,7 @@ class Notice < ApplicationRecord
   
   
   with_options presence: do
-    validates :title
+    validates :title, length: { maximum: 100 }
     validates :body
   end
 end

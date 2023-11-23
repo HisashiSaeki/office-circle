@@ -9,6 +9,7 @@
     </div>
     <div class="employee-group__employee-description">
       <% if employee.introduction %>
+        <!--一覧表示の際に2行程度で収まる文字数を指定-->
         <%= employee.introduction.truncate(63, omission: "...") %>
       <% end %>
     </div>

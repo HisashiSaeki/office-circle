@@ -15,7 +15,7 @@
       <% end %>
     </div>
   </div>
-  
+
   <div class="group__group-name">
     <h2><%= @group.name %></h2>
   </div>
@@ -30,20 +30,20 @@
       <%= safe_join(@group.description.split("\n"), tag.br) %>
     </div>
   </div>
-  
+
   <% if @group.is_created_by?(current_employee) %>
     <ul class="group__item horizontal-btn-list horizontal-btn-list--right">
       <li class="horizontal-btn-list__item"><%= link_to "グループを編集する", edit_group_path(@group), class: "horizontal-btn-list__btn rounded-btn rounded-btn--edit" %></li>
       <li class="horizontal-btn-list__item"><%= link_to "グループを削除する", group_path(@group), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %></li>
     </ul>
   <% end %>
-  
+
   <div class="tabs group__item">
     <input id="notices" type="radio" name="tabs__item" checked>
     <label class="tabs__item tabs__item--2" for="notices">お知らせ</label>
     <input id="group-members" type="radio" name="tabs__item">
     <label class="tabs__item tabs__item--2" for="group-members">グループメンバー</label>
-    
+
     <div class="tabs__content" id="notices_content">
       <% if @notices.present? %>
         <ul class="vertical-notices">
@@ -63,17 +63,17 @@
           <% end %>
         </ul>
       <% else %>
-        <p>お知らせはまだありません</p>
+        <p>お知らせはありません</p>
       <% end %>
     </div>
     <!--/.tabs__content-->
     <div class="tabs__content" id="group-members_content">
-      <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
+      <% if @employees.present? %>
+        <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
+      <% else %>
+        <p>グループメンバーがいません</p>
+      <% end %>
     </div>
   </div>
   <!--.tabs-->
-
-  <div class="group__item">
-    
-  </div>
 </div>

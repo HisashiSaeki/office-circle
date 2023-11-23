@@ -9,7 +9,7 @@ class Public::NoticesController < ApplicationController
     @notice = Notice.new(notice_params)
     @notice.group_id = @group.id
     if @notice.save
-      redirect_to group_path(@group), notice: "お知らせを作成しました"
+      redirect_to group_notice_path(@group, @notice), notice: "お知らせを作成しました"
     else
       render :new
     end
