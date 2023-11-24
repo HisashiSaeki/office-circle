@@ -109,6 +109,10 @@
 }
 
 // icon
+.icon {
+  color: #FF9F29;
+}
+
 .icon:focus,
 .icon:hover {
   text-decoration-line: none;
@@ -197,6 +201,10 @@
  border: 1px solid #000000;
  border-radius: 4px;
  padding: 10px 10px;
+}
+
+.form-text--long {
+  min-width: 500px;
 }
 
 .form-text--m {
@@ -294,12 +302,14 @@
   padding-bottom: 40px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;}
+  margin: 0 auto;
+  border-radius: 10px;
+}
 
 .tabs__item {
   width: calc(100%/3);
   height: 50px;
-  border-bottom: 3px solid #5ab4bd;
+  border-bottom: 3px solid #1A4D2E;
   background-color: #d9d9d9;
   line-height: 50px;
   font-size: 16px;
@@ -316,8 +326,16 @@
   width: calc(100%/2);
 }
 
+.tabs__item:first-child {
+  border-top-left-radius: 10px;
+}
+
+.tabs__item:last-child {
+  border-top-right-radius: 10px;
+}
+
 .tabs__item:hover {
-  opacity: 0.75;
+  cursor: pointer;
 }
 
 input[name="tabs__item"] {
@@ -326,7 +344,7 @@ input[name="tabs__item"] {
 
 .tabs__content {
   display: none;
-  max-height: 500px;
+  max-height: 1000px;
   padding: 40px 40px 0;
   clear: both;
   overflow: scroll;
@@ -341,7 +359,7 @@ input[name="tabs__item"] {
 
 /*選択されているタブのスタイルを変える*/
 .tabs input:checked + .tabs__item {
-  background-color: #5ab4bd;
+  background-color: #1A4D2E;
   color: #fff;
 }
 
@@ -368,9 +386,9 @@ input[name="tabs__item"] {
 .notice {
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #3CB371;
+  border: 1px solid #38e29b;
   border-radius: 10px;
-  background-color: #3CB371;
+  background-color: #38e29b;
   color: #fff;
   font-weight: bold;
 }
@@ -378,4 +396,8 @@ input[name="tabs__item"] {
 // エラー
 .field_with_errors {
   display: contents;
+}
+
+.footer-copyright {
+  color: #fff;
 }

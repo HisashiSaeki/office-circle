@@ -56,7 +56,7 @@
               </div>
               <%= link_to group_notice_path(@group, notice) do %>
                 <div class="vertical-notices__title">
-                  <%= notice.title.truncate(88, omission: "...") %>
+                  <p class="notice-title"><%= notice.title.truncate(88, omission: "...") %></p>
                 </div>
               <% end %>
             </li>
