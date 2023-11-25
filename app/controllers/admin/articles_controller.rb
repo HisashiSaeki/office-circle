@@ -7,12 +7,9 @@ class Admin::ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    if !@article.is_published && admin_signed_in?
-      redirect_to articles_path
-    else
-      @comments = Comment.where(article_id: @article).includes(:employee)
-      @comment = Comment.new
-    end
+    redirect_to articles_path if !@article.is_published && admin_signed_in?
+    @comments = Comment.where(article_id: @article).includes(:employee)
+    @comment = Comment.new
   end
   
 end

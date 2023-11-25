@@ -28,7 +28,6 @@ Employee.find_or_create_by!( email: "tanaka@example.com" ) do |employee|
   employee.introduction = "田中太郎です。よろしくお願いします。人と話をすることが好きです。たくさんの人とお話しできればと思っています！"
   employee.birthdate = "1996-04-01"
   employee.prefecture = "東京都"
-  employee.email = "tanaka@example.com"
   employee.password = password
   employee.is_active = true
 end
@@ -42,7 +41,6 @@ Employee.find_or_create_by!( email: "satou@example.com" ) do |employee|
   employee.introduction = "佐藤健太です。よろしくお願いします。猫が好きです。たくさんの人と猫の話をしたいです！"
   employee.birthdate = "1996-04-02"
   employee.prefecture = "京都府"
-  employee.email = "satou@example.com"
   employee.password = password
   employee.is_active = true
 end
@@ -56,7 +54,6 @@ Employee.find_or_create_by!( email: "yamada@example.com" ) do |employee|
   employee.introduction = "山田花子と申します。よろしくお願いします。犬が大好きで、毎日の生活に欠かせません。趣味は犬の訓練や散歩で、新しいトリックを教えたり、可愛いポーズを覚えさせることが好きです。仕事では誠実さと協力精神を大切にし、チームとの連携を重視しています。皆さんと楽しいひとときを過ごせることを楽しみにしています！"
   employee.birthdate = "1998-04-03"
   employee.prefecture = "大阪府"
-  employee.email = "yamada@example.com"
   employee.password = password
   employee.is_active = true
 end
@@ -70,7 +67,6 @@ Employee.find_or_create_by!( email: "suzuki@example.com" ) do |employee|
   employee.introduction = "鈴木美香と申します。よろしくお願いします。特に好きなのは自然の中での散歩です。新しい場所を発見することが好きで、週末には友達と一緒に山や公園に出かけます。自然の美しさからインスピレーションを得て、仕事にも活かしています。また、趣味で写真を撮ることもあり、季節ごとの風景や可愛い動物たちをキャッチするのが楽しみです。皆さんともっと自然を感じながら交流できることを楽しみにしています！"
   employee.birthdate = "1998-10-10"
   employee.prefecture = "奈良県"
-  employee.email = "suzuki@example.com"
   employee.password = password
   employee.is_active = true
 end
@@ -84,7 +80,6 @@ Employee.find_or_create_by!( email: "takahashi@example.com" ) do |employee|
   employee.introduction = "高橋一郎と言います。バイクが大好きで、週末には友達とツーリングに出かけることが楽しみです。新しい場所を訪れることで、さまざまな景色や文化に触れ、リフレッシュしています。仕事ではチームプレーヤーとして協力し、新しいアイデアにも常にオープンです。一緒に働けることを楽しみにしています！"
   employee.birthdate = "1980-11-12"
   employee.prefecture = "北海道"
-  employee.email = "takahasi@example.com"
   employee.password = password
   employee.is_active = true
 end
@@ -98,9 +93,22 @@ Employee.find_or_create_by!( email: "watanabe@example.com" ) do |employee|
   employee.introduction = "渡辺太一と言います。ゲームが大好きで、特にRPGやアクションゲームがお気に入りです。休日には友達とオンラインで協力プレイを楽しむこともあります。仕事ではチームの一員としてコミュニケーションを大切にし、クリエイティブなアプローチで問題に取り組みます。一緒に新しいプロジェクトに挑戦できることを楽しみにしています！"
   employee.birthdate = "1997-1-1"
   employee.prefecture = "島根県"
-  employee.email = "watanabe@example.com"
   employee.password = password
   employee.is_active = true
+end
+
+30.times do |n|
+  Employee.find_or_create_by!( email: "test#{n + 1}@example.com" ) do |employee|
+    employee.last_name = "テスト#{n + 1}"
+    employee.first_name = "君#{n + 1}"
+    employee.last_name_furigana = "テスト#{n + 1}"
+    employee.first_name_furigana =  "クン#{n + 1}"
+    employee.department_id = 1
+    employee.birthdate = "1996-06-22"
+    employee.prefecture = "東京都"
+    employee.password = password
+    employee.is_active = true
+  end
 end
 
 puts "adminを作成"
@@ -221,6 +229,56 @@ Article.find_or_create_by!( title: "最近良かったこと", employee_id: 1 ) 
   article.is_published = true
 end
 
+30.times do |n|
+  Article.find_or_create_by!( title: "テスト#{n + 1}" ) do |article|
+    article.employee_id = 7
+    article.title = "テスト#{n + 1}"
+    article.body = "テスト#{n + 1}"
+    article.is_published = true
+  end
+end
+
+puts "タグを作成"
+
+30.times do |n|
+  Tag.find_or_create_by!( name: "テスト#{n + 1}" ) do |tag|
+   tag.name = "テスト#{n + 1}"
+  end
+end
+
+puts "記事にタグ付け"
+
+10.times do |n|
+  ArticleTag.find_or_create_by!( article_id: 11, tag_id: "#{n + 1}" ) do |article_tag|
+   article_tag.article_id = 11
+   article_tag.tag_id = "#{n + 1}" 
+  end
+end
+
+20.times do |n|
+  ArticleTag.find_or_create_by!( article_id: 12, tag_id: "#{n + 1}" ) do |article_tag|
+   article_tag.article_id = 12
+   article_tag.tag_id = "#{n + 1}" 
+  end
+end
+
+30.times do |n|
+  ArticleTag.find_or_create_by!( article_id: 13, tag_id: "#{n + 1}" ) do |article_tag|
+   article_tag.article_id = 13
+   article_tag.tag_id = "#{n + 1}" 
+  end
+end
+
+puts "コメントを作成"
+
+30.times do |n|
+  Comment.find_or_create_by!( article_id: 1, employee_id: "#{n + 7}" ) do |comment|
+    comment.employee_id = "#{n + 7}"
+    comment.article_id = 1
+    comment.comment = "テスト#{n + 1}テスト#{n + 1}テスト#{n + 1}\nテスト#{n + 1}テスト#{n + 1}テスト#{n + 1}"
+  end
+end
+
 puts "groupを作成"
 
 Group.find_or_create_by!( name: "色々なジャンルの勉強会をしましょう！" ) do |group|
@@ -261,6 +319,40 @@ Group.find_or_create_by!( name: "バイクについて話しましょう！" ) d
   group.description = "グループの主旨: バイク愛好者が集まり、バイクに関する情報や体験を共有するコミュニティです。
 活動内容: ツーリング計画やおすすめのバイクギアについての情報交換、バイクメンテナンスのノウハウを共有します。
 活動頻度: 月に１回、オンラインでのミーティングや季節によるツーリングイベントを開催し、メンバー同士が親睦を深めます。"
+end
+
+30.times do |n|
+  Group.find_or_create_by!( name: "テスト#{n + 1}" ) do |group|
+    group.creater_id = "#{n + 7}"
+    group.name = "テスト#{n + 1}"
+    group.description = "テスト#{n + 1}"
+  end
+end
+
+puts "グループメンバーを作成"
+
+30.times do |n|
+  GroupMember.find_or_create_by!( group_id: 6, employee_id: "#{n + 7}" ) do |group_member|
+    group_member.group_id = 6
+    group_member.employee_id = "#{n + 7}"
+  end
+end
+
+30.times do |n|
+  GroupMember.find_or_create_by!( group_id: "#{n + 6}", employee_id: 7 ) do |group_member|
+    group_member.group_id = "#{n + 6}"
+    group_member.employee_id = 7
+  end
+end
+
+puts "お知らせを作成"
+
+30.times do |n|
+  Notice.find_or_create_by!( title: "テスト#{n + 1}" ) do |notice|
+    notice.group_id = 6
+    notice.title = "テスト#{n + 1}"
+    notice.body = "テスト#{n + 1}"
+  end
 end
 
 puts "seedを終了"

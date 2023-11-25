@@ -37,7 +37,7 @@
   </div>
   <div class="introduction-field__item introduction-field__btn">
     <% if @employee == current_employee && !@employee.guest_employee? %>
-      <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
+      <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn" %>
     <% end %>
   </div>
 </div>
@@ -75,7 +75,7 @@
   
   <div class="tabs__content" id="groups_content">
     <% if @groups.present? %>
-      <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
+      <%= render partial: "public/groups/group_record", collection: @groups, as: "group" %>
     <% else %>
       <p>参加中のグループはありません</p>
     <% end %>

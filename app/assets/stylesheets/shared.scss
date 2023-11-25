@@ -4,10 +4,10 @@
   min-width: 180px;
   max-width: 100%;
   padding: 5px;
-  background-color: #0000FF;
+  background-color: #1A4D2E;
   color: #fff;
   border: 2px solid transparent;
-  border-bottom-color: #0000CD;
+  border-bottom-color: #174529;
   border-radius: 10px;
   font-size: 1.125em;
   text-align: center;
@@ -19,33 +19,22 @@
 .rounded-btn:hover {
   background-color: #fff;
   border-color: currentColor;
-  color: #0000FF; // 通常時の背景色と入れ替え
+  color: #1A4D2E; // 通常時の背景色と入れ替え
+}
+
+.rounded-btn--s {
+  min-width: 70px;
 }
 
 .rounded-btn--guest-session {
-  background-color: #C0C0C0;
+  background-color: #000000;
   color: #fff;
-  border-bottom-color: #A9A9A9;
+  // border-bottom-color: #000000;
 }
 
 .roudned-btn--guest-session:focus,
 .rounded-btn--guest-session:hover {
-  color: #C0C0C0;
-}
-
-.rounded-btn--edit {
-  background-color: #008000;
-  color: #fff;
-  border-bottom-color: #006400;
-}
-
-.rounded-btn--edit-s {
-  min-width: 70px;
-}
-
-.rounded-btn--edit:focus,
-.rounded-btn--edit:hover {
-  color: #008000;
+  color: #000000;
 }
 
 .rounded-btn--danger {
@@ -376,7 +365,7 @@ input[name="tabs__item"] {
 }
 // 社員や記事のステータス
 .status {
-  color: #008000;
+  color: #1A4D2E;
 }
 
 .status--non-actived {
@@ -386,9 +375,9 @@ input[name="tabs__item"] {
 .notice {
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #38e29b;
+  border: 1px solid #1A4D2E;
   border-radius: 10px;
-  background-color: #38e29b;
+  background-color: #1A4D2E;
   color: #fff;
   font-weight: bold;
 }
@@ -397,7 +386,11 @@ input[name="tabs__item"] {
 .field_with_errors {
   display: contents;
 }
-
+// コピーライト
 .footer-copyright {
   color: #fff;
+}
+// ページネーション
+.pagination a {
+  color: #000000;
 }

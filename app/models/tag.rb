@@ -2,7 +2,7 @@ class Tag < ApplicationRecord
   has_many :article_tags
   has_many :articles, -> { order(created_at: :desc) }, through: :article_tags, source: :article
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   def self.is_published_article_tags
     published_articles = Article.where(is_published: true)

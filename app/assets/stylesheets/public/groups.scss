@@ -12,7 +12,7 @@
   margin-bottom: 30px;
 }
 
-.group-box {
+.group-record {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #000000;
@@ -20,22 +20,22 @@
   transition: .25s;
 }
 
-.group-box:focus,
-.group-box:hover {
+.group-record:focus,
+.group-record:hover {
   background-color: #F5F5F5;
 }
 
 
-.group-box__footer {
+.group-record__footer {
   display: flex;
   justify-content: start;
 }
 
-.group-box__footer > *:last-child {
+.group-record__footer > *:last-child {
   margin-right: 0;
 }
 
-.group-box__item {
+.group-record__item {
   margin-right: 10px;
 }
 

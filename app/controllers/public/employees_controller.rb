@@ -3,7 +3,7 @@ class Public::EmployeesController < ApplicationController
   before_action :ensure_correct_employee, only: [:edit, :update]
 
   def index
-    @employees = Employee.includes(:department).page(params[:page])
+    @employees = Employee.includes(:department).order(created_at: "DESC").page(params[:page])
     @departments = Department.all
   end
 
@@ -26,7 +26,21 @@ class Public::EmployeesController < ApplicationController
 
   private
 
-  def employee_params = params.require(:employee).permit(:profile_image, :last_name, :first_name, :last_name_furigana, :first_name_furigana, :birthdate, :prefecture, :department_id, :introduction, :email, :is_active)
+  def employee_params
+    params.require(:employee).permit(
+      :profile_image,
+      :last_name,
+      :first_name,
+      :last_name_furigana,
+      :first_name_furigana,
+      :birthdate,
+      :prefecture,
+      :department_id,
+      :introduction,
+      :email,
+      :is_active
+    )
+  end
 
   def ensure_correct_employee
     redirect_to employee_path(@employee) if @employee != current_employee || @employee.guest_employee?

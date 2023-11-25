@@ -69,7 +69,7 @@
     <!--/.tabs__content-->
     <div class="tabs__content" id="group-members_content">
       <% if @group.employees.present? %>
-        <%= render partial: "public/employees/employees_index", collection: @group.employees, as: "employee" %>
+        <%= render partial: "public/employees/employee_record", collection: @group.employees, as: "employee" %>
       <% else %>
         <p>グループメンバーがいません</p>
       <% end %>

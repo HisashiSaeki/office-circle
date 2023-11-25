@@ -1,6 +1,7 @@
 class Admin::SearchesController < ApplicationController
   before_action :set_keyword, only: [:employees_search, :articles_search]
   before_action :set_tags, only: [:articles_search, :tag_search]
+  before_action :set_departments, only: [:employees_search, :department_search]
 
   def employees_search
       @employees = Employee.search(@keyword).includes(:department).page(params[:page])
@@ -11,7 +12,7 @@ class Admin::SearchesController < ApplicationController
   end
 
   def department_search
-    @employees = Employee.where(department_id: params[:department_id]).includes(:department).page(params[:page])
+    @employees = Department.find(params[:department_id]).employees.page(params[:page])
   end
 
   def tag_search
@@ -29,4 +30,10 @@ class Admin::SearchesController < ApplicationController
   def set_tags
     @tags = Tag.is_published_article_tags
   end
+  
+  def set_departments
+    @departments = Department.all
+  end
+  
+  
 end

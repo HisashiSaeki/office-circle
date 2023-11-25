@@ -31,9 +31,7 @@ class Admin::DepartmentsController < ApplicationController
   private
   
   
-  def department_params
-    params.require(:department).permit(:name)
-  end
+  def department_params = params.require(:department).permit(:name)
   
   def set_department
     @department = Department.find(params[:id])

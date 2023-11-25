@@ -16,7 +16,7 @@
    <div class="form-group__form">
       <h2><%= f.label :tag, "3.タグを入力してください" %></br></h2>
       <% if article.id %>
-        <%= f.text_field :tag, value: tag_list, class: "form-text" %>
+        <%= f.text_field :tag, value: tag_list, class: "form-text form-text--long" %>
       <% else %>
         <%= f.text_field :tag, placeholder: "趣味、休日など", class: "form-text form-text--long" %>
       <% end %>

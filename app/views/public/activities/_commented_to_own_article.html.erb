@@ -1,6 +1,6 @@
 <%= link_to transition_path(activity) do %>
   <div>
-    <%= link_to activity.subject.employee.first_name, employee_path(activity.subject.employee), class: "activity-link" %>
+    <%= link_to activity.subject.employee.full_name, employee_path(activity.subject.employee), class: "activity-link" %>
     さんがあなたの
     <%= link_to '投稿', article_path(activity.subject.article), class: "activity-link" %>
     にコメントしました

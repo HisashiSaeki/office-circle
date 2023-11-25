@@ -34,7 +34,7 @@ class Public::ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    if !@article.is_published && !@article.employee == current_employee
+    if !@article.is_published && @article.employee != current_employee
       redirect_to articles_path
     else
       @comments = Comment.where(article_id: @article).includes(:employee)
@@ -56,7 +56,7 @@ class Public::ArticlesController < ApplicationController
         @tag_list = @article.tags.pluck(:name).join('、')
         render :edit
       end
-    elsif params[:draft].present?
+    else
       if @article.update_private(article_params)
         @article.update_tags(list_tags)
         redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
@@ -64,9 +64,6 @@ class Public::ArticlesController < ApplicationController
         @tag_list = @article.tags.pluck(:name).join('、')
         render :edit
       end
-    else
-      @tag_list = @article.tags.pluck(:name).join('、')
-      render :edit
     end
   end
 
@@ -83,7 +80,7 @@ class Public::ArticlesController < ApplicationController
 
   def ensure_correct_employee
     @article = Article.find(params[:id])
-    redirect_to article_path(@article) unless @article.employee == current_employee
+    redirect_to article_path(@article) if @article.employee != current_employee
   end
 
 end
