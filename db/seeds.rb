@@ -100,9 +100,9 @@ end
 30.times do |n|
   Employee.find_or_create_by!( email: "test#{n + 1}@example.com" ) do |employee|
     employee.last_name = "テスト#{n + 1}"
-    employee.first_name = "君#{n + 1}"
+    employee.first_name = "君"
     employee.last_name_furigana = "テスト#{n + 1}"
-    employee.first_name_furigana =  "クン#{n + 1}"
+    employee.first_name_furigana = "クン"
     employee.department_id = 1
     employee.birthdate = "1996-06-22"
     employee.prefecture = "東京都"
