@@ -52,6 +52,6 @@ class Article < ApplicationRecord
 
   def self.search(keyword) = where("title LIKE ?", "%#{keyword}%")
   
-  def self.is_published_articles = where(is_published: true).includes(:employee, :tags)
+  def self.is_published_articles = where(is_published: true).includes(:employee, :tags, :favorites, :comments)
 
 end

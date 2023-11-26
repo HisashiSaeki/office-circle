@@ -1,4 +1,7 @@
 <div class="article-record-group">
+  <% unless articles.present? %>
+    <h2>検索結果はありません</h2>
+  <% end %>
   <%= render partial: "public/articles/article_record", collection: articles, as: "article" %>
   <%= paginate articles %>
 </div>

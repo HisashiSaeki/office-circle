@@ -4,14 +4,14 @@
       <i class="fa-solid fa-thumbs-up icon"></i>
     <% end %>
     <span class="count-num">
-      <%= article.favorites.count %>
+      <%= article.favorites.size %>
     </span>
   <% else %>
     <%= link_to article_favorites_path(article), method: :post, remote: true, data: {"turblinks" => false} do %>
       <i class="fa-regular fa-thumbs-up icon"></i>
     <% end %>
     <span class="count-num">
-      <%= article.favorites.count %>
+      <%= article.favorites.size %>
     </span>
   <% end %>
 <% end %>

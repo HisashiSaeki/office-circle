@@ -1,4 +1,7 @@
 <div class="group-record-group">
+  <% unless groups.present? %>
+    <h2>検索結果はありません</h2>
+  <% end %>
   <%= render partial: "public/groups/group_record", collection: groups, as: "group" %>
   <%= paginate groups %>
 </div>

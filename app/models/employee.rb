@@ -6,13 +6,13 @@ class Employee < ApplicationRecord
          
   
   belongs_to :department
-  has_many :articles, -> { includes(:tags) }, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :group_members, dependent: :destroy
-  has_many :groups, -> { includes(:creater) }, through: :group_members, source: :group
-  has_many :favorite_articles, -> { includes(:tags) }, through: :favorites, source: :article
   has_many :activities, dependent: :destroy
+  has_many :articles, -> { includes(:tags, :favorites, :comments) }, dependent: :destroy
+  has_many :groups, -> { includes(:creater, :group_members) }, through: :group_members, source: :group
+  has_many :favorite_articles, -> { includes(:tags, :favorites, :comments) }, through: :favorites, source: :article
   
   
   has_one_attached :profile_image
