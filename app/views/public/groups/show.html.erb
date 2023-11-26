@@ -10,7 +10,7 @@
         (<%= @group.creater.department.name %>)
       </div>
       <%= render "public/group_members/group_member_btn", group: @group %>
-      <% if @group.is_created_by?(current_employee) %>
+      <% if @group.created_by?(current_employee) %>
         <%= link_to "お知らせを作成する", new_group_notice_path(group_id: @group), class: "rounded-btn" %>
       <% end %>
     </div>
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <% if @group.is_created_by?(current_employee) %>
+  <% if @group.created_by?(current_employee) %>
     <ul class="group__item horizontal-btn-list horizontal-btn-list--right">
       <li class="horizontal-btn-list__item"><%= link_to "グループを編集する", edit_group_path(@group), class: "horizontal-btn-list__btn rounded-btn rounded-btn--edit" %></li>
       <li class="horizontal-btn-list__item"><%= link_to "グループを削除する", group_path(@group), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %></li>

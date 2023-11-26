@@ -8,28 +8,28 @@ class Public::NoticesController < ApplicationController
 
   def create
     @notice = @group.notices.new(notice_params)
-    if @notice.save
-      redirect_to group_notice_path(@group, @notice), notice: "お知らせを作成しました"
-    else
-      render :new
-    end
+    @notice.save ? (redirect_to group_notice_path(@group, @notice), notice: "お知らせを作成しました") : (render :new)
   end
 
   def show
   end
 
   def destroy
-    redirect_to group_path(@group), notice: "お知らせを削除しました" if @notice.destroy
+    @notice.destroy
+    redirect_to group_path(@group), notice: "お知らせを削除しました"
   end
 
 
   private
+  
 
-  def notice_params = params.require(:notice).permit(:title, :body)
+  def notice_params 
+    params.require(:notice).permit(:title, :body)
+  end
 
   def ensure_correct_creater
     @group = Group.find(params[:group_id])
-    redirect_to group_path(@group) unless @group.is_created_by?(current_employee)
+    redirect_to group_path(@group) unless @group.created_by?(current_employee)
   end
 
   def set_notice

@@ -8,16 +8,11 @@ class Public::GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.creater_id = current_employee.id
-    if @group.save
-      redirect_to group_path(@group)
-    else
-      render :new
-    end
-
+    @group.save ? (redirect_to group_path(@group)) : (render :new)
   end
 
   def index
-    @groups = Group.includes(:employees).order(created_at: "DESC").page(params[:page])
+    @groups = Group.includes(:creater).order(created_at: "DESC").page(params[:page])
   end
 
   def show
@@ -28,11 +23,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def update
-    if @group.update(group_params)
-      redirect_to group_path(@group)
-    else
-      render :edit
-    end
+    @group.update(group_params) ? (redirect_to group_path(@group)) : (render :edit)
   end
 
   def destroy
@@ -43,11 +34,13 @@ class Public::GroupsController < ApplicationController
   private
   
 
-  def group_params = params.require(:group).permit(:name, :description)
-
+  def group_params 
+    params.require(:group).permit(:name, :description)
+  end
+  
   def ensure_correct_creater
     @group = Group.find(params[:id])
-    redirect_to group_path(@group) unless @group.is_created_by?(current_employee)
+    redirect_to group_path(@group) unless @group.created_by?(current_employee)
   end
 
 end

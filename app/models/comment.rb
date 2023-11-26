@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   
-  belongs_to :employee
+  belongs_to :employee, ->{ includes(:department)}
   belongs_to :article
   
   

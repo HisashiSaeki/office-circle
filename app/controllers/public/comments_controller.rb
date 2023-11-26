@@ -16,7 +16,9 @@ class Public::CommentsController < ApplicationController
   private
   
   
-  def comment_params = params.require(:comment).permit(:comment)
+  def comment_params 
+    params.require(:comment).permit(:comment)
+  end
   
   def ensure_correct_employee
     @comment = Comment.find(params[:id])
