@@ -12,7 +12,7 @@ class Public::SearchesController < ApplicationController
   end
   
   def groups_search
-    @groups = Group.search(@keyword).order(created_at: "DESC").page(params[:page])
+    @groups = Group.search(@keyword).includes(:creater).order(created_at: "DESC").page(params[:page])
   end
 
   def department_search
@@ -20,7 +20,7 @@ class Public::SearchesController < ApplicationController
   end
 
   def tag_search
-    @articles = Tag.find(params[:tag_id]).articles.is_published_articles.page(params[:page])
+    @articles = Tag.find(params[:tag_id]).articles.page(params[:page])
   end
   
   
@@ -32,7 +32,7 @@ class Public::SearchesController < ApplicationController
   end
   
   def set_tags 
-    @tags = Tag.is_published_article_tags
+    @tags = Tag.published_article_tags
   end
   
   def set_departments

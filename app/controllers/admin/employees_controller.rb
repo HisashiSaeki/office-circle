@@ -13,11 +13,7 @@ class Admin::EmployeesController < ApplicationController
   end
   
   def update
-    if @employee.update(employee_params)
-      redirect_to admin_employee_path(@employee), notice: "登録情報の更新が完了しました"
-    else
-      render :edit
-    end
+    @employee.update(employee_params) ? (redirect_to admin_employee_path(@employee), notice: "登録情報の更新が完了しました") : (render :edit)
   end
   
   private

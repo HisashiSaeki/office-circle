@@ -16,7 +16,7 @@ class Admin::SearchesController < ApplicationController
   end
 
   def tag_search
-    @articles = Tag.find(params[:tag_id]).articles.is_published_articles.order(created_at: "DESC").page(params[:page])
+    @articles = Tag.find(params[:tag_id]).articles.page(params[:page])
   end
 
 
@@ -28,7 +28,7 @@ class Admin::SearchesController < ApplicationController
   end
 
   def set_tags
-    @tags = Tag.is_published_article_tags
+    @tags = Tag.published_article_tags
   end
   
   def set_departments

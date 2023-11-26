@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
 
-  belongs_to :employee
+  belongs_to :employee, -> { includes(:department)}
   has_many :comments, -> { includes(employee: :department)}, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :article_tags, dependent: :destroy

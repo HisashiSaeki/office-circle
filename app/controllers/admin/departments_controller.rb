@@ -20,20 +20,20 @@ class Admin::DepartmentsController < ApplicationController
   end
   
   def update
-    if @department.update(department_params)
-      redirect_to admin_departments_path, notice: "部署名の変更が完了しました"
-    else
-      render :edit
-    end
+    @department.update(department_params) ? (redirect_to admin_departments_path, notice: "部署の変更が完了しました") : (render :edit)
   end
 
   
   private
   
   
-  def department_params = params.require(:department).permit(:name)
+  def department_params
+    params.require(:department).permit(:name)
+  end
   
   def set_department
     @department = Department.find(params[:id])
   end
+  
+  
 end

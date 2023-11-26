@@ -29,7 +29,7 @@ class Public::ArticlesController < ApplicationController
 
   def index
     @articles = Article.is_published_articles.order(created_at: "DESC").page(params[:page])
-    @tags = Tag.is_published_article_tags
+    @tags = Tag.published_article_tags
   end
 
   def show
