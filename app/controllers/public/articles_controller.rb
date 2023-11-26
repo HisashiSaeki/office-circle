@@ -33,17 +33,13 @@ class Public::ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
-    if !@article.is_published && @article.employee != current_employee
-      redirect_to articles_path
-    else
-      @comments = Comment.where(article_id: @article).includes(:employee)
-      @comment = Comment.new
-    end
+    @article = Article.includes(:comments).find(params[:id])
+    redirect_to articles_path if !@article.is_published && !@article.created_by?(current_employee)
+    @comment = Comment.new
   end
 
   def edit
-    @tag_list = @article.tags.pluck(:name).join('、')
+    @tag_list = @article.join_tags
   end
 
   def update
@@ -53,7 +49,7 @@ class Public::ArticlesController < ApplicationController
         @article.update_tags(list_tags)
         redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
       else
-        @tag_list = @article.tags.pluck(:name).join('、')
+        @tag_list = @article.join_tags
         render :edit
       end
     else
@@ -61,7 +57,7 @@ class Public::ArticlesController < ApplicationController
         @article.update_tags(list_tags)
         redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
       else
-        @tag_list = @article.tags.pluck(:name).join('、')
+        @tag_list = @article.join_tags
         render :edit
       end
     end
@@ -71,16 +67,16 @@ class Public::ArticlesController < ApplicationController
     @article.destroy
     redirect_to articles_path, notice: "投稿内容の削除が完了しました"
   end
-  
+
 
   private
-  
+
 
   def article_params = params.require(:article).permit(:title, :body)
 
   def ensure_correct_employee
     @article = Article.find(params[:id])
-    redirect_to article_path(@article) if @article.employee != current_employee
+    redirect_to article_path(@article) unless @article.created_by?(current_employee)
   end
 
 end

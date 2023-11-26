@@ -21,7 +21,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.includes(:notices, employees: :department).find(params[:id])
+    @group = Group.includes(:notices, :employees).find(params[:id])
   end
 
   def edit

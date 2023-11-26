@@ -19,7 +19,7 @@
   </div>
 
   <div class="article__item article-title">
-    <h2><%= article.title %></h2>
+    <h2><%= safe_join(article.title.split("\n"), tag.br) %></h2>
   </div>
 
   <div class=" article__item">

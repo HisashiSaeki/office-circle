@@ -28,7 +28,7 @@ ja:
         name: "グループ名"
         description: "活動内容"
       notice:
-        title: "件名"
+        title: "タイトル"
         body: "本文"
 
     errors:

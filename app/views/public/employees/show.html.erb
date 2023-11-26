@@ -29,7 +29,7 @@
     <h2>自己紹介</h2>
     <div class="text-box">
       <% if @employee.introduction.present? %>
-        <%= safe_join(@employee.introduction.split("\n"), tag.br) %>
+        <p><%= safe_join(@employee.introduction.split("\n"), tag.br) %></p>
       <% else %>
         <h4>登録内容変更ボタンから自己紹介文を設定しましょう！</h4>
       <% end %>

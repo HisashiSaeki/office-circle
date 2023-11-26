@@ -189,7 +189,8 @@
  min-width: 180px;
  border: 1px solid #000000;
  border-radius: 4px;
- padding: 10px 10px;
+ padding: 5px 10px;
+ font-size: 16px;
 }
 
 .form-text--long {
@@ -198,7 +199,7 @@
 
 .form-text--m {
   width: 500px;
-  height: 50px;
+  height: 70px;
 }
 
 .form-text--l {
@@ -383,8 +384,18 @@ input[name="tabs__item"] {
 }
 
 // エラー
-.field_with_errors {
-  display: contents;
+.error-message-list {
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  border-radius: 10px;
+  background-color: #FFE4E1;
+}
+
+.error-message-list__message {
+  list-style: inside;
+  color: #8B0000;
 }
 // コピーライト
 .footer-copyright {

@@ -2,7 +2,7 @@ class Group < ApplicationRecord
 
   has_many :notices, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :group_members, dependent: :destroy
-  has_many :employees, -> { order(created_at: :desc) }, through: :group_members, source: :employee
+  has_many :employees, -> { includes(:department).order(created_at: :desc) }, through: :group_members, source: :employee
   belongs_to :creater, class_name: "Employee"
 
   with_options presence: do
