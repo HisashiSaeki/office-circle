@@ -1,0 +1,10 @@
+<% if admin_signed_in? %>
+  <%= link_to admin_department_search_path(department_id: department.id), class: "horizontal-department-list__item" do %>
+    <li class="department-name"><%= department.name %></li>
+  <% end %>
+<% else %>
+  <%= link_to department_search_path(department_id: department.id), class: "horizontal-department-list__item" do %>
+    <li class="department-name"><%= department.name %></li>
+  <% end %>
+<% end %>
+

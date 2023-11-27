@@ -1,0 +1,22 @@
+<div class="group-record">
+  <div class="group-record__name">
+    <%= link_to group_path(group) do %>
+      <!--一覧表示の際に１行程度で収まる文字数を指定-->
+      <h3 class="group-name"><%= group.name.truncate(32, omission: "...") %></h3>
+    <% end %>
+  </div>
+
+
+  <div class="group-record__footer">
+    <div class="group-record__item">
+      グループリーダー: <%= group.creater.full_name %>
+      <span>(<%= group.creater.department.name %>)</span>
+    </div>
+    <div class="group-record__item">
+      <%= l group.created_at, format: :date %>
+    </div>
+    <div class="group-record__item">
+      メンバー数:<%= group.group_members.size %>人
+    </div>
+  </div>
+</div>

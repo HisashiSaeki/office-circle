@@ -1,9 +1,10 @@
 <div class="form-group">
   <div class="vertical-form">
   <%= form_with model: [@group, @notice] do |f| %>
+    <%= render "public/shared/error_messages", resource: f.object %>
     <div class="vertical-form__item">
       <h2><%= f.label :title, "1.件名を入力" %></br></h2>
-      <%= f.text_field :title, autofocus: true, class: "form-text form-text--m" %>
+      <%= f.text_area :title, autofocus: true, class: "form-text form-text--m" %>
     </div>
     <div class="vertical-form__item">
       <h2><%= f.label :body, "2.本文を入力" %></br></h2>

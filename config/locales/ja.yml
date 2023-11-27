@@ -1,7 +1,33 @@
 ja:
   activerecord:
+    models:
+      department: "部署"
+      employee: "社員"
+      article: "記事"
+      group: "グループ"
+      notice: "お知らせ"
+      
     attributes:
-      articles:
+      article:
+        title: "タイトル"
+        body: "本文"
+      employee:
+        department: "部署"
+        last_name: "苗字"
+        first_name: "名前"
+        last_name_furigana: "苗字のフリガナ"
+        first_name_furigana: "名前のフリガナ"
+        birthdate: "生年月日"
+        prefecture: "出身地"
+        email: "メールアドレス"
+        password: "パスワード"
+        introduction: "自己紹介文"
+      department:
+        name: "部署名"
+      group:
+        name: "グループ名"
+        description: "活動内容"
+      notice:
         title: "タイトル"
         body: "本文"
 

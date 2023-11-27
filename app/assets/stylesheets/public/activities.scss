@@ -1,6 +1,18 @@
 // Place all the styles related to the public/activities controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.activity__header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.vertical-activities {
+  max-height: 500px;
+  overflow: scroll;
+}
+
 .vertical-activities__item {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -16,9 +28,7 @@
   background-color: #F5F5F5;
 }
 
-.activity__header {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 10px;
+.activity-link {
+  color: #0000FF;
 }
 

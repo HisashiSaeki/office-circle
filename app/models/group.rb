@@ -1,31 +1,27 @@
 class Group < ApplicationRecord
-  
-  has_many :notices, dependent: :destroy
+
   has_many :group_members, dependent: :destroy
-  has_many :employees, through: :group_members, source: :employee
-  belongs_to :creater, class_name: "Employee"
+  has_many :employees, -> { includes(:department).order(created_at: :desc) }, through: :group_members, source: :employee
+  belongs_to :creater, -> { includes(:department)}, class_name: "Employee"
+  has_many :notices, -> { order(created_at: :desc) }, dependent: :destroy
   
+  
+  after_create_commit :create_group_members
+  
+
   with_options presence: do
-    validates :name
+    validates :name, length: { maximum: 100 }
     validates :description
     validates :creater_id
   end
   
-  # グループ画像の挿入は検討中
-  # has_one_attached :group_image
   
-  
-  # def get_group_image(width,height)
-  #   unless group_image.attached?
-  #     file_path = Rails.root.join('app/assets/images/no_image.jpg')
-  #     group_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
-  #   end
-  #   group_image.variant(resize_to_limit: [width, height]).processed
-  # end
-  
-  def is_created_by?(employee) = self.creater_id == employee.id
-    
+  def create_group_members = GroupMember.create(employee_id: self.creater_id, group_id: self.id)
+
+  def created_by?(employee) = self.creater_id == employee.id
+
   def self.search(keyword) = self.where("name LIKE ? or description LIKE ?", "%#{keyword}%", "%#{keyword}%")
-  
+    
+
 end
 

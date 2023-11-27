@@ -1,17 +1,22 @@
 <div class="comment-content">
   <div class="employee-profile">
-    <div class="image">
-      <%= image_tag comment.employee.get_profile_image(50, 50) %>
-    </div>
+    <%= image_tag comment.employee.get_profile_image(50, 50) %>
+    
     <div class="employee-info">
       <%= comment.employee.full_name %>
       (<%= comment.employee.department.name %>)
       <%= l comment.created_at %>
     </div>
-    <% if comment.employee == current_employee || admin_signed_in? %>
+    
+    <% if admin_signed_in? %>
+      <%= link_to "削除", admin_article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+    <% elsif comment.created_by?(current_employee) %>
       <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+    <% else %>
     <% end %>
+    
   </div>
+  
   <div class="comment-body">
     <%= comment.comment %>
   </div>

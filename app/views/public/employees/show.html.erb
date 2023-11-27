@@ -29,7 +29,7 @@
     <h2>自己紹介</h2>
     <div class="text-box">
       <% if @employee.introduction.present? %>
-        <%= @employee.introduction %>
+        <p><%= safe_join(@employee.introduction.split("\n"), tag.br) %></p>
       <% else %>
         <h4>登録内容変更ボタンから自己紹介文を設定しましょう！</h4>
       <% end %>
@@ -37,31 +37,48 @@
   </div>
   <div class="introduction-field__item introduction-field__btn">
     <% if @employee == current_employee && !@employee.guest_employee? %>
-      <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn rounded-btn--edit" %>
+      <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn" %>
     <% end %>
   </div>
 </div>
 
 <div class="tabs">
-  <input id="employee-articles" type="radio" name="tabs__item" checked>
-  <label class="tabs__item" for="employee-articles"><%= @employee.full_name %>さんの投稿一覧</label>
   <% if @employee == current_employee %>
+    <input id="employee-articles" type="radio" name="tabs__item" checked>
+    <label class="tabs__item" for="employee-articles"><%= @employee.full_name %>さんの投稿</label>
     <input id="favorite-articles" type="radio" name="tabs__item">
-    <label class="tabs__item" for="favorite-articles">いいねした投稿一覧</label>
+    <label class="tabs__item" for="favorite-articles">いいねした投稿</label>
+    <input id="groups" type="radio" name="tabs__item">
+    <label class="tabs__item" for="groups">参加中のグループ</label>
+  <% else %>
+    <input id="employee-articles" type="radio" name="tabs__item" checked>
+    <label class="tabs__item tabs__item--2" for="employee-articles"><%= @employee.full_name %>さんの投稿</label>
+    <input id="groups" type="radio" name="tabs__item">
+    <label class="tabs__item tabs__item--2" for="groups">参加中のグループ</label>
   <% end %>
-  <input id="groups" type="radio" name="tabs__item">
-  <label class="tabs__item" for="groups">参加中のグループ一覧</label>
   
   <div class="tabs__content" id="employee-articles_content">
-    <%= render partial: "public/articles/article_index", collection: @my_articles, as: "article" %>
+    <% if @articles.present? %>
+      <%= render partial: "public/articles/article_record", collection: @articles, as: "article" %>
+    <% else %>
+      <p>投稿がありません</p>
+    <% end %>
   </div>
   
   <div class="tabs__content" id="favorite-articles_content">
-    <%= render partial: "public/articles/article_index", collection: @favorite_articles, as: "article" %>
+    <% if @favorite_articles.present? %>
+      <%= render partial: "public/articles/article_record", collection: @favorite_articles, as: "article" %>
+    <% else %>
+      <p>いいねした投稿はありません</p>
+    <% end %>
   </div>
   
   <div class="tabs__content" id="groups_content">
-    <%= render partial: "public/groups/group_index", collection: @groups, as: "group" %>
+    <% if @groups.present? %>
+      <%= render partial: "public/groups/group_record", collection: @groups, as: "group" %>
+    <% else %>
+      <p>参加中のグループはありません</p>
+    <% end %>
   </div>
 </div>
 

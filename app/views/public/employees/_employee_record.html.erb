@@ -1,0 +1,20 @@
+<%= link_to employee_path(employee) do %>
+  <div class="employee-record">
+    <div class="employee-record__profile-image">
+      <%= image_tag employee.get_profile_image(80, 80) %>
+    </div>
+    <div class="employee-record__employee-info">
+      <p class="employee-name"><%= employee.full_name %></p>
+      <span class="employee-department"><%= employee.department.name %></span>
+    </div>
+    <div class="employee-record__employee-description">
+      <% if employee.introduction %>
+        <!--一覧表示の際に2行程度で収まる文字数を指定-->
+        <p class="employee-introduction"><%= employee.introduction.truncate(63, omission: "...") %></p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+  
+

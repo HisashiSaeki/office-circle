@@ -1,9 +1,9 @@
 <%= link_to transition_path(activity) do %>
-  <div>
-    <%= link_to activity.subject.employee.first_name, employee_path(activity.subject.employee) %>
+  <%= content_tag(:div) do %>
+    <%= link_to activity.subject.employee.full_name, employee_path(activity.subject.employee), class: "activity-link" %>
     さんがあなたの
-    <%= link_to '投稿', article_path(activity.subject.article) %>
+    <%= link_to '投稿', article_path(activity.subject.article), class: "activity-link" %>
     にいいねしました
     <%= " (#{time_ago_in_words(activity.created_at)}前)" %>
-  </div>
+  <% end %>
 <% end %>

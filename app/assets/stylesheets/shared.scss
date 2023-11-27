@@ -4,10 +4,10 @@
   min-width: 180px;
   max-width: 100%;
   padding: 5px;
-  background-color: #0000FF;
+  background-color: #1A4D2E;
   color: #fff;
   border: 2px solid transparent;
-  border-bottom-color: #0000CD;
+  border-bottom-color: #174529;
   border-radius: 10px;
   font-size: 1.125em;
   text-align: center;
@@ -19,33 +19,22 @@
 .rounded-btn:hover {
   background-color: #fff;
   border-color: currentColor;
-  color: #0000FF; // 通常時の背景色と入れ替え
+  color: #1A4D2E; // 通常時の背景色と入れ替え
+}
+
+.rounded-btn--s {
+  min-width: 70px;
 }
 
 .rounded-btn--guest-session {
-  background-color: #C0C0C0;
+  background-color: #000000;
   color: #fff;
-  border-bottom-color: #A9A9A9;
+  // border-bottom-color: #000000;
 }
 
 .roudned-btn--guest-session:focus,
 .rounded-btn--guest-session:hover {
-  color: #C0C0C0;
-}
-
-.rounded-btn--edit {
-  background-color: #008000;
-  color: #fff;
-  border-bottom-color: #006400;
-}
-
-.rounded-btn--edit-s {
-  min-width: 70px;
-}
-
-.rounded-btn--edit:focus,
-.rounded-btn--edit:hover {
-  color: #008000;
+  color: #000000;
 }
 
 .rounded-btn--danger {
@@ -109,6 +98,9 @@
 }
 
 // icon
+.icon {
+  color: #FF9F29;
+}
 
 .icon:focus,
 .icon:hover {
@@ -132,12 +124,7 @@
  font-size: 16px;
 }
 
-.error-message {
-  font-weight: bold;
-  color: red;
-}
-
-// form
+// 入力form
 .form-group {
   display: flex;
   flex-direction: column;
@@ -155,8 +142,8 @@
   padding-bottom: 20px;
 }
 
-.form-group__error {
-
+.form-group--session {
+  margin-top: 15%;
 }
 
 .form {
@@ -176,6 +163,10 @@
   flex-direction: column;
   align-items: start;
   margin-bottom: 20px;
+}
+
+.vertical-form--m {
+  min-width: 500px;
 }
 
 .vertical-form__item {
@@ -206,12 +197,17 @@
  min-width: 180px;
  border: 1px solid #000000;
  border-radius: 4px;
- padding: 10px 10px;
+ padding: 5px 10px;
+ font-size: 16px;
+}
+
+.form-text--long {
+  min-width: 500px;
 }
 
 .form-text--m {
   width: 500px;
-  height: 50px;
+  height: 70px;
 }
 
 .form-text--l {
@@ -219,6 +215,7 @@
   height: 400px;
 }
 
+// テキスト表示用
 .text-box {
  border: 2px solid #000000;
  border-radius: 10px;
@@ -263,7 +260,7 @@
   background-color: #F5F5F5;
 }
 
-// search
+// 検索エリア
 .search-group {
   padding-bottom: 20px;
 }
@@ -299,19 +296,19 @@
 }
 
 // タブ
-/*タブ切り替え全体のスタイル*/
 .tabs {
   margin-top: 50px;
   padding-bottom: 40px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;}
+  margin: 0 auto;
+  border-radius: 10px;
+}
 
-/*タブのスタイル*/
 .tabs__item {
   width: calc(100%/3);
   height: 50px;
-  border-bottom: 3px solid #5ab4bd;
+  border-bottom: 3px solid #1A4D2E;
   background-color: #d9d9d9;
   line-height: 50px;
   font-size: 16px;
@@ -328,24 +325,29 @@
   width: calc(100%/2);
 }
 
-.tabs__item:hover {
-  opacity: 0.75;
+.tabs__item:first-child {
+  border-top-left-radius: 10px;
 }
 
-/*ラジオボタンを全て消す*/
+.tabs__item:last-child {
+  border-top-right-radius: 10px;
+}
+
+.tabs__item:hover {
+  cursor: pointer;
+}
+
 input[name="tabs__item"] {
   display: none;
 }
 
-/*タブ切り替えの中身のスタイル*/
 .tabs__content {
   display: none;
-  max-height: 500px;
+  max-height: 1000px;
   padding: 40px 40px 0;
   clear: both;
   overflow: scroll;
 }
-
 
 /*選択されているタブのコンテンツのみを表示*/
 #employee-articles:checked ~ #employee-articles_content,
@@ -353,44 +355,61 @@ input[name="tabs__item"] {
 #groups:checked ~ #groups_content {
   display: block;
 }
-// グループ詳細ページ
-#notices:checked ~ #notices_content,
-#group-members:checked ~ #group-members_content {
-  display: block;
-}
 
 /*選択されているタブのスタイルを変える*/
 .tabs input:checked + .tabs__item {
-  background-color: #5ab4bd;
+  background-color: #1A4D2E;
   color: #fff;
 }
 
-.horizontal-date {
-  display: flex;
-}
-
-.horizontal-date > *:last-child {
-  margin-right: 0;
-}
-
-.horizontal-date__item {
-  margin-right: 20px;
-}
 // 社員や記事のステータス
 .status {
-  color: #008000;
+  color: #1A4D2E;
 }
 
 .status--non-actived {
   color: #FF0000;
 }
-// フラッシュメッセージ
+// フラッシュメッセージ(message_type)
 .notice {
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #3CB371;
+  border: 1px solid #1A4D2E;
   border-radius: 10px;
-  background-color: #3CB371;
+  background-color: #1A4D2E;
   color: #fff;
   font-weight: bold;
+}
+
+.alert {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #FFE4E1;
+  border-radius: 10px;
+  background-color: #FFE4E1;
+  color: #8B0000;
+  font-weight: bold;
+}
+
+// バリデーションエラーメッセージ
+.error-message-list {
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  border-radius: 10px;
+  background-color: #FFE4E1;
+}
+
+.error-message-list__message {
+  list-style: inside;
+  color: #8B0000;
+}
+// コピーライト
+.footer-copyright {
+  color: #fff;
+}
+// ページネーション
+.pagination a {
+  color: #000000;
 }

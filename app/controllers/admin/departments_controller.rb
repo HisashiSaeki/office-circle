@@ -6,6 +6,7 @@ class Admin::DepartmentsController < ApplicationController
     if @department.save
       redirect_back fallback_location: admin_employees_path, notice: "部署の登録が完了しました"
     else
+      @departments = Department.all
       render :index
     end
   end
@@ -19,11 +20,7 @@ class Admin::DepartmentsController < ApplicationController
   end
   
   def update
-    if @department.update(department_params)
-      redirect_to admin_departments_path, notice: "部署情報の変更が完了しました"
-    else
-      render :edit
-    end
+    @department.update(department_params) ? (redirect_to admin_departments_path, notice: "部署の変更が完了しました") : (render :edit)
   end
 
   
@@ -37,4 +34,6 @@ class Admin::DepartmentsController < ApplicationController
   def set_department
     @department = Department.find(params[:id])
   end
+  
+  
 end

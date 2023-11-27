@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.article-group {
+.article-record {
   padding: 10px 10px;
   margin-bottom: 10px;
   border: 1px solid #000000;
@@ -10,38 +10,39 @@
   transition: .25s;
 }
 
-.article-group:focus,
-.article-group:hover {
+.article-record:focus,
+.article-record:hover {
   background-color: #F5F5F5;
 }
 
-.article-group__article-header {
+.article-record__article-record-header {
   display: flex;
   justify-content: start;
   margin-bottom: 5px;
 }
 
-.article-group__article-header > *:last-child {
+.article-record__article-record-header > *:last-child {
   margin-right: 0;
 }
 
-.article-header__item {
+.article-record-header__item {
   margin-right: 10px;
 }
 
 
-.article-group__article-footer {
+.article-record__article-record-footer {
   margin-top: 10px;
 }
 
-.article-footer__list {
+.article-record-footer__list {
   margin-bottom: 3px;
 }
 
-// 詳細ページ
-.article {
-  
+.article-title {
+  color: #000000;
 }
+
+// 詳細ページ
 
 .article-body {
   padding: 20px;
@@ -66,4 +67,16 @@
 .article__comment-title {
   padding-bottom: 2px;
   border-bottom: 1px solid #888;
+}
+
+.horizontal-date {
+  display: flex;
+}
+
+.horizontal-date > *:last-child {
+  margin-right: 0;
+}
+
+.horizontal-date__item {
+  margin-right: 20px;
 }

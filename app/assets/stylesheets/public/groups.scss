@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+// グループ一覧ページ
 .group-wrapper {
   display: flex;
   justify-content: space-between;
@@ -11,7 +12,7 @@
   margin-bottom: 30px;
 }
 
-.group-box {
+.group-record {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #000000;
@@ -19,31 +20,40 @@
   transition: .25s;
 }
 
-.group-box:focus,
-.group-box:hover {
+.group-record:focus,
+.group-record:hover {
   background-color: #F5F5F5;
 }
 
 
-.group-box__footer {
+.group-record__footer {
   display: flex;
   justify-content: start;
 }
 
-.group-box__footer > *:last-child {
+.group-record__footer > *:last-child {
   margin-right: 0;
 }
 
-.group-box__item {
+.group-record__item {
   margin-right: 10px;
 }
 
-// 詳細ページ
+.group-name {
+  color: #000000;
+}
 
+// 詳細ページ
 .group__item {
   margin-bottom: 20px;
 }
 
 .group__group-name {
   padding: 10px;
+}
+
+// 選択されているタブのコンテンツのみを表示する
+#notices:checked ~ #notices_content,
+#group-members:checked ~ #group-members_content {
+  display: block;
 }

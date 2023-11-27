@@ -13,17 +13,24 @@ class Admin::EmployeesController < ApplicationController
   end
   
   def update
-    if @employee.update(employee_params)
-      redirect_to admin_employee_path(@employee), notice: "登録情報の更新が完了しました"
-    else
-      render :edit
-    end
+    @employee.update(employee_params) ? (redirect_to admin_employee_path(@employee), notice: "登録情報の更新が完了しました") : (render :edit)
   end
   
   private
   
   def employee_params
-    params.require(:employee).permit(:last_name, :first_name, :last_name_furigana, :first_name_furigana, :birthdate, :prefecture, :department_id, :introduction, :email, :is_active)
+    params.require(:employee).permit(
+      :last_name, 
+      :first_name, 
+      :last_name_furigana, 
+      :first_name_furigana, 
+      :birthdate, 
+      :prefecture, 
+      :department_id, 
+      :introduction, 
+      :email, 
+      :is_active
+    )
   end
   
   def set_employee

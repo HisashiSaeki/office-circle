@@ -1,4 +1,5 @@
 <%= form_with model: @employee do |f| %>
+  <%= render "public/shared/error_messages", resource: f.object %>
   <div class="form-group">
     <div class="form">
       <p class="form__item"><%= f.label "プロフィール画像" %></p>

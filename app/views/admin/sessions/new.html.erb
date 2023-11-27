@@ -1,5 +1,6 @@
-<div class="form-group">
+<div class="form-group form-group--session">
   <%= form_with model: @admin, url: admin_session_path do |f| %>
+    <%= render "admin/shared/error_messages", resource: f.object %>
     <div class="form form--session">
       <p class="form__item"><%= f.label :email, "メールアドレス" %></p>
       <p class="form__item"><%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-text" %></p>

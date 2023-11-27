@@ -36,6 +36,11 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
+    get "employees_search" => "searches#employees_search"
+    get "articles_search" => "searches#articles_search"
+    get "department_search" => "searches#department_search"
+    get "tag_search" => "searches#tag_search"
+    
     resources :employees, only: [:index, :show, :edit, :update]
     resources :articles, only: [:index, :show] do
       resources :comments, only: [:destroy]

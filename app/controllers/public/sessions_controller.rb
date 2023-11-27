@@ -45,8 +45,8 @@ class Public::SessionsController < Devise::SessionsController
     return if !employee
     return unless employee.valid_password?(params[:employee][:password])
     if !employee.is_active
-      flash[:notice] = "退会済みです。再度ご登録ください。"
-      redirect_to new_employee_registration_path
+      flash[:notice] = "アカウント停止中です。管理者にご連絡ください。"
+      redirect_to root_path
     end
   end
   

@@ -1,25 +1,26 @@
 class Public::SearchesController < ApplicationController
   before_action :set_keyword, only: [:employees_search, :articles_search, :groups_search]
   before_action :set_tags, only: [:articles_search, :tag_search]
+  before_action :set_departments, only: [:employees_search, :department_search]
 
   def employees_search
-      @employees = Employee.search(params[:keyword]).includes(:department).order(created_at: "DESC")
+      @employees = Employee.search(@keyword).includes(:department).order(created_at: "DESC").page(params[:page])
   end
   
   def articles_search
-    @articles = Article.search(params[:keyword]).where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
+    @articles = Article.search(@keyword).is_published_articles.order(created_at: "DESC").page(params[:page])
   end
   
   def groups_search
-    @groups = Group.search(params[:keyword]).order(created_at: "DESC")
+    @groups = Group.search(@keyword).includes(:creater).order(created_at: "DESC").page(params[:page])
   end
 
   def department_search
-    @employees = Employee.where(department_id: params[:department_id]).includes(:department).order(created_at: "DESC")
+    @employees = Department.find(params[:department_id]).employees.page(params[:page])
   end
 
   def tag_search
-    @articles = Tag.find(params[:tag_id]).articles.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC")
+    @articles = Tag.find(params[:tag_id]).articles.page(params[:page])
   end
   
   
@@ -30,8 +31,11 @@ class Public::SearchesController < ApplicationController
     @keyword = params[:keyword]
   end
   
-  def set_tags
-    tag_list = ArticleTag.pluck(:tag_id)
-    @tags = Tag.where(id: tag_list)
+  def set_tags 
+    @tags = Tag.published_article_tags
+  end
+  
+  def set_departments
+    @departments = Department.all
   end
 end

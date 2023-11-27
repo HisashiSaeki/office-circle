@@ -8,6 +8,11 @@
   border-bottom: 1px solid #ddd;
 }
 
+.vertical-notices__item:focus,
+.vertical-notices__item:hover {
+  background-color: #F5F5F5;
+}
+
 .vertical-notices__item:first-child {
   padding-top: 0;
 }
@@ -27,4 +32,8 @@
 .vertical-notices__title:focus,
 .vertical-notices__title:hover {
   text-decoration: underline;
+}
+
+.notice-title {
+  color: #000000;
 }

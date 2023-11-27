@@ -9,16 +9,14 @@ class Public::ArticlesController < ApplicationController
     @article = current_employee.articles.new(article_params)
     list_tags = params[:article][:tag].split("、").uniq
     if params[:post].present?
-      @article.is_published = true
-      if @article.save
+      if @article.save_published
         @article.save_tags(list_tags)
         redirect_to article_path(@article), notice: "記事を投稿しました"
       else
         render :new
       end
     elsif params[:draft].present?
-      @article.is_published = false
-      if @article.save
+      if @article.save_private
         @article.save_tags(list_tags)
         redirect_to article_path(@article), notice: "投稿を下書き保存しました"
       else
@@ -30,65 +28,58 @@ class Public::ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.where(is_published: true).includes(:employee, :tags, :favorites, :comments).order(created_at: "DESC").page(params[:page])
-    tag_list = ArticleTag.pluck(:tag_id)
-    @tags = Tag.where(id: tag_list)
+    @articles = Article.is_published_articles.order(created_at: "DESC").page(params[:page])
+    @tags = Tag.published_article_tags
   end
 
   def show
-    @article = Article.find(params[:id])
-    if @article.is_published == false && @article.employee != current_employee
-      redirect_to articles_path
-    else
-      @comments = Comment.where(article_id: @article).includes(:employee)
-      @comment = Comment.new
-    end
+    @article = Article.includes(:comments).find(params[:id])
+    redirect_to articles_path if !@article.is_published && !@article.created_by?(current_employee)
+    @comment = Comment.new
   end
 
   def edit
-    @tag_list = @article.tags.pluck(:name).join('、')
+    @tag_list = @article.join_tags
   end
 
   def update
     list_tags = params[:article][:tag].split("、").uniq
     if params[:post].present?
-      @article.is_published = true
-      if @article.update(article_params)
+      if @article.update_published(article_params)
         @article.update_tags(list_tags)
         redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
       else
-        render :edit
-      end
-    elsif params[:draft].present?
-      @article.is_published = false
-      if @article.update(article_params)
-        @article.update_tags(list_tags)
-        redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
-      else
+        @tag_list = @article.join_tags
         render :edit
       end
     else
-      render :edit
+      if @article.update_private(article_params)
+        @article.update_tags(list_tags)
+        redirect_to article_path(@article), notice: "投稿内容の変更が完了しました"
+      else
+        @tag_list = @article.join_tags
+        render :edit
+      end
     end
   end
 
   def destroy
-    if @article.destroy
-      redirect_to articles_path, notice: "投稿内容の削除が完了しました"
-    end
+    @article.destroy
+    redirect_to articles_path, notice: "投稿内容の削除が完了しました"
   end
+
 
   private
 
-  def article_params = params.require(:article).permit(:title, :body)
 
+  def article_params 
+    params.require(:article).permit(:title, :body)
+  end
+  
   def ensure_correct_employee
     @article = Article.find(params[:id])
-    if @article.employee != current_employee
-      redirect_to article_path(@article)
-    end
+    redirect_to article_path(@article) unless @article.created_by?(current_employee)
   end
-
-
+  
 
 end

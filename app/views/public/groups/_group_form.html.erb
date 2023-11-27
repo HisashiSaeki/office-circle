@@ -1,18 +1,19 @@
 <div class="form-group">
   <%= form_with model: group do |f| %>
+    <%= render "public/shared/error_messages", resource: f.object %>
     <div class="form-group__form">
       <h2><%= f.label :name, "1.グループ名を入力してください" %></br></h2>
-      <%= f.text_field :name, autofocus: true, class: "form-text form-text--m" %>
+      <%= f.text_area :name, autofocus: true, class: "form-text form-text--m" %>
     </div>
     <div class="form-group__form">
       <h2><%= f.label :description, "2.活動内容や紹介文を入力してください" %></br></h2>
-      <%= f.text_field :description, class: "form-text form-text--l" %>
+      <%= f.text_area :description, class: "form-text form-text--l" %>
     </div>
     <div class="form-group__btn">
-      <% if current_page?(action: "new") %>
-        <%= f.submit "グループを登録", class: "rounded-btn" %>
-      <% else %>
+      <% if group.id %>
         <%= f.submit "変更内容を保存", class: "rounded-btn" %>
+      <% else %>
+        <%= f.submit "グループを登録", class: "rounded-btn" %>
       <% end %>
     </div>
   <% end %>

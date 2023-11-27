@@ -1,0 +1,7 @@
+<div class="employee-record-group">
+  <% unless employees.present? %>
+    <h2>検索結果はありません</h2>
+  <% end %>
+  <%= render partial: "public/employees/employee_record", collection: employees, as: "employee" %>
+  <%= paginate employees %>
+</div>

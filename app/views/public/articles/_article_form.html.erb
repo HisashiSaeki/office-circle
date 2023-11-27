@@ -1,30 +1,24 @@
 <div class="form-group">
-  
-  <% if article.errors.any? %>
-    <ul class="form-group__error">
-      <% article.errors.full_messages.each do |message| %>
-        <li class="error-message"><%= message %></li>
-      <% end %>
-    </ul>
-  <% end %>
 
   <%= form_with model: article do |f| %>
+    <%= render "public/shared/error_messages", resource: f.object %>
+    
     <div class="form-group__form">
       <h2><%= f.label :title, "1.タイトルを入力してください" %></br></h2>
-      <%= f.text_field :title, autofocus: true, class: "form-text form-text--m" %>
+      <%= f.text_area :title, autofocus: true, class: "form-text form-text--m" %>
     </div>
 
     <div class="form-group__form">
       <h2><%= f.label :body, "2.本文を入力してください" %></br></h2>
-      <%= f.text_field :body, class: "form-text form-text--l" %>
+      <%= f.text_area :body, class: "form-text form-text--l" %>
     </div>
 
    <div class="form-group__form">
       <h2><%= f.label :tag, "3.タグを入力してください" %></br></h2>
-      <% if current_page?(new_article_path) %>
-        <%= f.text_field :tag, placeholder: "日記,良い話,など", class: "form-text" %>
+      <% if article.id %>
+        <%= f.text_field :tag, value: tag_list, class: "form-text form-text--long" %>
       <% else %>
-        <%= f.text_field :tag, value: tag_list, class: "form-text" %>
+        <%= f.text_field :tag, placeholder: "趣味、休日など", class: "form-text form-text--long" %>
       <% end %>
    </div>
 

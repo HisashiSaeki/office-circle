@@ -9,4 +9,10 @@
 
 .department-name {
   font-size: 1.125em;
+  color: #000000;
+}
+
+.department-name:focus,
+.department-name:hover {
+  text-decoration-line: underline;
 }

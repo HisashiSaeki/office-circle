@@ -6,13 +6,13 @@ class Employee < ApplicationRecord
          
   
   belongs_to :department
-  has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :group_members, dependent: :destroy
-  has_many :groups, through: :group_members, source: :group
-  has_many :favorite_articles, through: :favorites, source: :article
   has_many :activities, dependent: :destroy
+  has_many :articles, -> { includes(:tags, :favorites, :comments) }, dependent: :destroy
+  has_many :groups, -> { includes(:creater, :group_members) }, through: :group_members, source: :group
+  has_many :favorite_articles, -> { includes(:tags, :favorites, :comments) }, through: :favorites, source: :article
   
   
   has_one_attached :profile_image
@@ -22,11 +22,9 @@ class Employee < ApplicationRecord
     validates :last_name
     validates :first_name
     validates :last_name_furigana
-    validates :last_name_furigana
-    validates :department_id
+    validates :first_name_furigana
     validates :birthdate
     validates :prefecture
-    validates :email
   end
   
   
@@ -64,8 +62,6 @@ class Employee < ApplicationRecord
     end
   end
   
-  def guest_employee?
-    email == GUEST_USER_EMAIL
-  end
+  def guest_employee? = email == GUEST_USER_EMAIL
   
 end

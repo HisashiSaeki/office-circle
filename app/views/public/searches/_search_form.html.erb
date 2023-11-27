@@ -1,16 +1,38 @@
-<% if current_page?(employees_path) || current_page?(admin_employees_path) %>
-  <%= form_with url: employees_search_path, method: :get, local: false, data: {"turblinks" => false} do |f| %>
-    <%= f.search_field :keyword, value: @keyword, placeholder: "名前を入力", class: "search-form" %>
-    <%= f.submit "検索", class: "search-btn" %>
+<% if admin_signed_in? %>
+
+  <% if current_page?(admin_employees_path) || current_page?(admin_employees_search_path)  || current_page?(admin_department_search_path) %>
+    <%= form_with url: admin_employees_search_path, method: :get do |f| %>
+      <%= f.search_field :keyword, value: @keyword, placeholder: "氏名を入力", class: "search-form" %>
+      <%= f.submit "検索", class: "search-btn" %>
+    <% end %>
+    
+  <% else %>
+    <%= form_with url: admin_articles_search_path, method: :get do |f| %>
+      <%= f.search_field :keyword, value: @keyword, placeholder: "記事タイトルを入力", class: "search-form" %>
+      <%= f.submit "検索", class: "search-btn" %>
+    <% end %>
   <% end %>
-<% elsif current_page?(articles_path) || current_page?(articles_search_path)  || current_page?(tag_search_path)  %>
-  <%= form_with url: articles_search_path, method: :get do |f| %>
-    <%= f.search_field :keyword, value: @keyword, placeholder: "記事タイトルを入力", class: "search-form" %>
-    <%= f.submit "検索", class: "search-btn" %>
-  <% end %>
+  
 <% else %>
-  <%= form_with url: groups_search_path, method: :get, local: false, data: {"turblinks" => false} do |f| %>
-    <%= f.search_field :keyword, value: @keyword, placeholder: "キーワードを入力", class: "search-form" %>
-    <%= f.submit "検索", class: "search-btn" %>
+
+  <% if current_page?(employees_path) || current_page?(employees_search_path)  || current_page?(department_search_path) %>
+    <%= form_with url: employees_search_path, method: :get do |f| %>
+      <%= f.search_field :keyword, value: @keyword, placeholder: "氏名を入力", class: "search-form" %>
+      <%= f.submit "検索", class: "search-btn" %>
+    <% end %>
+    
+  <% elsif current_page?(articles_path) || current_page?(articles_search_path)  || current_page?(tag_search_path)  %>
+    <%= form_with url: articles_search_path, method: :get do |f| %>
+      <%= f.search_field :keyword, value: @keyword, placeholder: "記事タイトルを入力", class: "search-form" %>
+      <%= f.submit "検索", class: "search-btn" %>
+    <% end %>
+    
+  <% else %>
+    <%= form_with url: groups_search_path, method: :get do |f| %>
+      <%= f.search_field :keyword, value: @keyword, placeholder: "キーワードを入力", class: "search-form" %>
+      <%= f.submit "検索", class: "search-btn" %>
+    <% end %>
   <% end %>
+
 <% end %>
+  

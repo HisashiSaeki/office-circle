@@ -1,0 +1,15 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>社員ID</th>
+      <th>社員名</th>
+      <th>所属部署</th>
+      <th>メールアドレス</th>
+      <th>社員ステータス</th>
+    </tr>
+  </thead>
+  <tbody class="tbody employee_record_group">
+    <%= render partial: "admin/employees/employee_record", collection: employees, as: "employee" %>
+  </tbody>
+</table>
+<%= paginate employees %>

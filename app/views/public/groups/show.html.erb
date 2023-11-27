@@ -1,21 +1,24 @@
 <div class="group">
   <div class="group__item">
+    
     <div class="employee-profile">
-      <div class="image">
-        <%= image_tag @group.creater.get_profile_image(100, 100) %>
-      </div>
+      <%= image_tag @group.creater.get_profile_image(100, 100) %>
+      
       <div class="vertical-employee-info">
         <h5>グループリーダー</h5>
         <%= @group.creater.full_name %>
         (<%= @group.creater.department.name %>)
       </div>
+      
       <%= render "public/group_members/group_member_btn", group: @group %>
-      <% if @group.is_created_by?(current_employee) %>
+      
+      <% if @group.created_by?(current_employee) %>
         <%= link_to "お知らせを作成する", new_group_notice_path(group_id: @group), class: "rounded-btn" %>
       <% end %>
     </div>
+    
   </div>
-  
+
   <div class="group__group-name">
     <h2><%= @group.name %></h2>
   </div>
@@ -27,27 +30,27 @@
   <div class="group__item">
     <h2>グループ紹介/活動内容</h2>
     <div class="text-box">
-      <%= @group.description %>
+      <%= safe_join(@group.description.split("\n"), tag.br) %>
     </div>
   </div>
-  
-  <% if @group.is_created_by?(current_employee) %>
+
+  <% if @group.created_by?(current_employee) %>
     <ul class="group__item horizontal-btn-list horizontal-btn-list--right">
       <li class="horizontal-btn-list__item"><%= link_to "グループを編集する", edit_group_path(@group), class: "horizontal-btn-list__btn rounded-btn rounded-btn--edit" %></li>
       <li class="horizontal-btn-list__item"><%= link_to "グループを削除する", group_path(@group), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %></li>
     </ul>
   <% end %>
-  
+
   <div class="tabs group__item">
     <input id="notices" type="radio" name="tabs__item" checked>
     <label class="tabs__item tabs__item--2" for="notices">お知らせ</label>
     <input id="group-members" type="radio" name="tabs__item">
     <label class="tabs__item tabs__item--2" for="group-members">グループメンバー</label>
-    
+
     <div class="tabs__content" id="notices_content">
-      <% if @notices.present? %>
+      <% if @group.notices.present? %>
         <ul class="vertical-notices">
-          <% @notices.each do |notice| %>
+          <% @group.notices.each do |notice| %>
             <li class="vertical-notices__item">
               <div class="vertical-notices__header">
                 <div class="vertical-notices__date">
@@ -56,24 +59,24 @@
               </div>
               <%= link_to group_notice_path(@group, notice) do %>
                 <div class="vertical-notices__title">
-                  <%= notice.title.truncate(88, omission: "...") %>
+                  <p class="notice-title"><%= notice.title.truncate(88, omission: "...") %></p>
                 </div>
               <% end %>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <p>お知らせはまだありません</p>
+        <p>お知らせはありません</p>
       <% end %>
     </div>
-    <!--/.tabs__content-->
+    
     <div class="tabs__content" id="group-members_content">
-      <%= render partial: "public/employees/employees_index", collection: @employees, as: "employee" %>
+      <% if @group.employees.present? %>
+        <%= render partial: "public/employees/employee_record", collection: @group.employees, as: "employee" %>
+      <% else %>
+        <p>グループメンバーがいません</p>
+      <% end %>
     </div>
   </div>
-  <!--.tabs-->
-
-  <div class="group__item">
-    
-  </div>
+  
 </div>

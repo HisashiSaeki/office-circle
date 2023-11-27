@@ -3,16 +3,12 @@ class Public::GroupMembersController < ApplicationController
   
   def create
     group_member = current_employee.group_members.new(group_id: @group.id)
-    group_member.save
-    flash[:notice] = "グループに参加しました"
-    redirect_back fallback_location: groups_path
+    redirect_back fallback_location: groups_path, notice: "グループに参加しました" if group_member.save
   end
   
   def destroy
     group_member = current_employee.group_members.find_by(group_id: @group.id)
-    group_member.destroy
-    flash[:notice] = "グループから退会しました"
-    redirect_back fallback_location: groups_path
+    redirect_back fallback_location: groups_path, notice: "グループから退会しました" if group_member.destroy
   end
   
   
