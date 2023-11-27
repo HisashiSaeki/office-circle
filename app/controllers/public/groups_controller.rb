@@ -28,7 +28,7 @@ class Public::GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to groups_path
+    redirect_to groups_path, notice: "グループを削除しました"
   end
 
 

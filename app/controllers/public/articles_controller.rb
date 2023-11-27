@@ -11,7 +11,7 @@ class Public::ArticlesController < ApplicationController
     if params[:post].present?
       if @article.save_published
         @article.save_tags(list_tags)
-        redirect_to article_path(@article), notice: "記事を投稿しました"
+        redirect_to article_path(@article), notice: "投稿完了しました"
       else
         render :new
       end
@@ -65,7 +65,7 @@ class Public::ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    redirect_to articles_path, notice: "投稿内容の削除が完了しました"
+    redirect_to articles_path, notice: "投稿の削除が完了しました"
   end
 
 

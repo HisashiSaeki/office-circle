@@ -39,7 +39,7 @@
   <% if article.created_by?(current_employee) %>
     <ul class="article__item horizontal-btn-list horizontal-btn-list--right">
       <li class="horizontal-btn-list__item"><%= link_to "投稿編集", edit_article_path(article), class: "horizontal-btn-list__btn rounded-btn" %></li>
-      <li class="horizontal-btn-list__item"><%= link_to "投稿を削除", article_path(article), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %></li>
+      <li class="horizontal-btn-list__item"><%= link_to "投稿削除", article_path(article), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %></li>
     </ul>
   <% end %>
 

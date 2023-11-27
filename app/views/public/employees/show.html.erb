@@ -37,7 +37,7 @@
   </div>
   <div class="introduction-field__item introduction-field__btn">
     <% if @employee == current_employee && !@employee.guest_employee? %>
-      <%= link_to "登録内容を変更する", edit_employee_path(@employee), class: "rounded-btn" %>
+      <%= link_to "登録内容を変更", edit_employee_path(@employee), class: "rounded-btn" %>
     <% end %>
   </div>
 </div>
@@ -61,7 +61,7 @@
     <% if @articles.present? %>
       <%= render partial: "public/articles/article_record", collection: @articles, as: "article" %>
     <% else %>
-      <p>投稿がありません</p>
+      <p>投稿はありません</p>
     <% end %>
   </div>
   

@@ -8,7 +8,7 @@
     <div class="form">
       <p class="form__item"><%= f.label "氏名" %></p>
       <p class="form__item"><%= f.text_field :last_name, autofocus: true, placeholder: "姓", class: "form-text" %></p>
-      <p class="form__item"><%= f.text_field :first_name, autofocus: true, placeholder: "姓", class: "form-text" %></p>
+      <p class="form__item"><%= f.text_field :first_name, autofocus: true, placeholder: "名", class: "form-text" %></p>
     </div>
     <div class="form">
       <p class="form__item"><%= f.label "氏名(カナ)" %></p>
@@ -36,7 +36,7 @@
       <p class="form__item"><%= f.text_area :introduction, class: "form-text form-text--l" %></p>
     </div>
     <div class="form-group__btn">
-      <%= f.submit "変更内容を保存する", class: "rounded-btn" %>
+      <%= f.submit "変更内容を保存", class: "rounded-btn" %>
     </div>
   </div>
 <% end %>
