@@ -2,13 +2,13 @@ class Favorite < ApplicationRecord
 
   belongs_to :employee
   belongs_to :article
-  
-  
   has_one :activity, as: :subject, dependent: :destroy
-  after_create_commit :create_activities
   
   
   validates :employee_id, uniqueness: {scope: :article_id}
+  
+  
+  after_create_commit :create_activities
   
   
   private

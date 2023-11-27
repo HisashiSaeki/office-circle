@@ -1,7 +1,7 @@
 class Public::ActivitiesController < ApplicationController
 
   def index
-    @activities = current_employee.activities.order(created_at: "DESC").page(params[:page]).per(20)
+    @activities = current_employee.activities.includes(subject: :article).order(created_at: "DESC").page(params[:page]).per(20)
     @activities.where(checked: false).each { |activity| activity.update(checked: true) }
   end
 
