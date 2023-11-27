@@ -5,12 +5,17 @@ class Group < ApplicationRecord
   belongs_to :creater, -> { includes(:department)}, class_name: "Employee"
   has_many :notices, -> { order(created_at: :desc) }, dependent: :destroy
   
+  
+  after_create_commit :create_group_members
+  
 
   with_options presence: do
     validates :name, length: { maximum: 100 }
     validates :description
     validates :creater_id
   end
+  
+  def create_group_members = GroupMember.create(employee_id: self.creater_id, group_id: self.id)
 
   def created_by?(employee) = self.creater_id == employee.id
 

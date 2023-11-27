@@ -27,7 +27,8 @@ class Public::GroupsController < ApplicationController
   end
 
   def destroy
-    redirect_to groups_path if @group.destroy
+    @group.destroy
+    redirect_to groups_path
   end
 
 
