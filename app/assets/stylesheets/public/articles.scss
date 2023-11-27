@@ -43,9 +43,6 @@
 }
 
 // 詳細ページ
-.article {
-  
-}
 
 .article-body {
   padding: 20px;
@@ -70,4 +67,16 @@
 .article__comment-title {
   padding-bottom: 2px;
   border-bottom: 1px solid #888;
+}
+
+.horizontal-date {
+  display: flex;
+}
+
+.horizontal-date > *:last-child {
+  margin-right: 0;
+}
+
+.horizontal-date__item {
+  margin-right: 20px;
 }

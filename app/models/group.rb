@@ -15,6 +15,7 @@ class Group < ApplicationRecord
     validates :creater_id
   end
   
+  
   def create_group_members = GroupMember.create(employee_id: self.creater_id, group_id: self.id)
 
   def created_by?(employee) = self.creater_id == employee.id

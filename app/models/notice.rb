@@ -10,7 +10,7 @@ class Notice < ApplicationRecord
   end
   
   after_create_commit :create_activities
-  
+
   
   def create_activities
     logger.debug("create_activities")

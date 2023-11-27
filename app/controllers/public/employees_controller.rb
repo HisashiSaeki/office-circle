@@ -8,7 +8,8 @@ class Public::EmployeesController < ApplicationController
   end
 
   def show
-    @my_articles = @employee.articles.order(created_at: "DESC")
+    @articles = @employee.articles.order(created_at: "DESC") if @employee == current_employee
+    @articles = @employee.articles.where(is_published: true).order(created_at: "DESC") if @employee != current_employee
     @favorite_articles = @employee.favorite_articles
     @groups = @employee.groups
   end

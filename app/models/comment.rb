@@ -10,10 +10,9 @@ class Comment < ApplicationRecord
   
   validates :comment, presence: true
   
+  
+  def created_by?(current_employee) = self.employee == current_employee
     
-  private
-  
-  
   def create_activities = Activity.create(subject: self, employee: article.employee, action_type: :commented_to_own_article)
     
     

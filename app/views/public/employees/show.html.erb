@@ -58,8 +58,8 @@
   <% end %>
   
   <div class="tabs__content" id="employee-articles_content">
-    <% if @my_articles.present? %>
-      <%= render partial: "public/articles/article_record", collection: @my_articles, as: "article" %>
+    <% if @articles.present? %>
+      <%= render partial: "public/articles/article_record", collection: @articles, as: "article" %>
     <% else %>
       <p>投稿がありません</p>
     <% end %>

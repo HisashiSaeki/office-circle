@@ -215,6 +215,7 @@
   height: 400px;
 }
 
+// テキスト表示用
 .text-box {
  border: 2px solid #000000;
  border-radius: 10px;
@@ -361,17 +362,6 @@ input[name="tabs__item"] {
   color: #fff;
 }
 
-.horizontal-date {
-  display: flex;
-}
-
-.horizontal-date > *:last-child {
-  margin-right: 0;
-}
-
-.horizontal-date__item {
-  margin-right: 20px;
-}
 // 社員や記事のステータス
 .status {
   color: #1A4D2E;
@@ -401,7 +391,7 @@ input[name="tabs__item"] {
   font-weight: bold;
 }
 
-// エラー
+// バリデーションエラーメッセージ
 .error-message-list {
   margin-bottom: 10px;
   padding-top: 5px;

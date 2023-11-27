@@ -6,7 +6,7 @@
     <div class="article-record-header__item">
       <%= article.employee.full_name %>
     </div>
-    <% if article.employee == current_employee && current_page?(employee_path(article.employee)) %>
+    <% if article.created_by?(current_employee) && current_page?(employee_path(article.employee)) %>
       <div class="article-record-header__item">
         <% if article.is_published %>
           <p class="status">公開中</p>
