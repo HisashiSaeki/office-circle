@@ -14,7 +14,7 @@
       <%= link_to "戻る", group_path(@notice.group), class: "horizontal-btn-list__btn rounded-btn" %>
     </li>
     <li class="horizontal-btn-list__item">
-      <%= link_to "お知らせを削除する", group_notice_path(group_id: @notice.group, notice_id: @notice), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %>
+      <%= link_to "お知らせを削除", group_notice_path(group_id: @notice.group, notice_id: @notice), method: :delete, class: "horizontal-btn-list__btn rounded-btn rounded-btn--danger" %>
     </li>
   <% else %>
     <%= link_to "戻る", group_path(@notice.group), class: "rounded-btn" %>
