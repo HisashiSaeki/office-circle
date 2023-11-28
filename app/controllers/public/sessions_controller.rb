@@ -18,7 +18,7 @@ class Public::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
-  
+
   def guest_sign_in
     employee = Employee.guest
     sign_in employee
@@ -31,23 +31,20 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  
+
   def after_sign_in_path_for(resource)
     employee_path(resource)
   end
-  
+
   def after_sign_out_path_for(resource)
     root_path
   end
-  
+
   def employee_state
     employee = Employee.find_by(email: params[:employee][:email])
     return if !employee
     return unless employee.valid_password?(params[:employee][:password])
-    if !employee.is_active
-      flash[:notice] = "アカウント停止中です。管理者にご連絡ください。"
-      redirect_to root_path
-    end
+    redirect_to root_path, notice: "アカウント停止中です。管理者にご連絡ください。" if !employee.is_active
   end
-  
+
 end
