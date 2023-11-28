@@ -3,7 +3,7 @@
     <%= render "public/shared/error_messages", resource: f.object %>
     <div class="form form--session">
       <p class="form__item"><%= f.label :email, "メールアドレス" %></p>
-      <p class="form__item"><%= f.email_field :email, placeholder: "example@example.com", class: "form-text" %></p>
+      <p class="form__item"><%= f.email_field :email, placeholder: "example@example.com", autofocus: true, class: "form-text" %></p>
     </div>
     <div class="form form--session">
       <p class="form__item"><%= f.label :password, "パスワード" %></p>
