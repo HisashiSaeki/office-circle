@@ -6,8 +6,10 @@
       
       <div class="vertical-employee-info">
         <h5>グループリーダー</h5>
-        <%= @group.creater.full_name %>
-        (<%= @group.creater.department.name %>)
+        <%= link_to employee_path(@group.creater), class: "employee-name" do %>
+          <%= @group.creater.full_name %>
+          (<%= @group.creater.department.name %>)
+        <% end %>
       </div>
       
       <%= render "public/group_members/group_member_btn", group: @group %>
