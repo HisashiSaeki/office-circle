@@ -37,6 +37,7 @@ ja:
     failure:
       already_authenticated: すでにログインしています。
       inactive: アカウントが有効化されていません。メールに記載された手順にしたがって、アカウントを有効化してください。
+      account_inactive: アカウントがロックされています。管理者にご連絡ください。
       invalid: "%{authentication_keys}またはパスワードが違います。"
       last_attempt: もう一回誤るとアカウントがロックされます。
       locked: アカウントはロックされています。

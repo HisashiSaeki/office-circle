@@ -62,6 +62,12 @@ class Employee < ApplicationRecord
     end
   end
   
-  def guest_employee? = email == GUEST_USER_EMAIL
+  def guest_employee?
+    email == GUEST_USER_EMAIL
+  end
+  
+  def active_for_authentication? = super && is_active
+    
+  def inactive_message = is_active ? super : :account_inactive
   
 end
