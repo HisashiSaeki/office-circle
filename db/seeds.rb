@@ -25,7 +25,7 @@ puts "employeeを作成"
 
 
 Employee.find_or_create_by!( email: "tanaka@example.com" ) do |employee|
-  employee.department_id = 1
+  employee.department_id = Department.find_or_create_by!(name: "営業部").id
   employee.last_name = "田中"
   employee.first_name = "太朗"
   employee.last_name_furigana = "タナカ"
@@ -41,7 +41,7 @@ Employee.find_or_create_by!( email: "tanaka@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "satou@example.com" ) do |employee|
-  employee.department_id = 1
+  employee.department_id = Department.find_or_create_by!(name: "営業部").id
   employee.last_name = "佐藤"
   employee.first_name = "由美"
   employee.last_name_furigana = "サトウ"
@@ -57,7 +57,7 @@ Employee.find_or_create_by!( email: "satou@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "yamada@example.com" ) do |employee|
-  employee.department_id = 2
+  employee.department_id = Department.find_or_create_by!(name: "開発部").id
   employee.last_name = "山田"
   employee.first_name = "花子"
   employee.last_name_furigana = "ヤマダ"
@@ -76,7 +76,7 @@ Employee.find_or_create_by!( email: "yamada@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "suzuki@example.com" ) do |employee|
-  employee.department_id = 2
+  employee.department_id = Department.find_or_create_by!(name: "開発部").id
   employee.last_name = "鈴木"
   employee.first_name = "美香"
   employee.last_name_furigana = "スズキ"
@@ -94,7 +94,7 @@ Employee.find_or_create_by!( email: "suzuki@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "takahashi@example.com" ) do |employee|
-  employee.department_id = 3
+  employee.department_id = Department.find_or_create_by!(name: "人事部").id
   employee.last_name = "高橋"
   employee.first_name = "一郎"
   employee.last_name_furigana = "タカハシ"
@@ -111,7 +111,7 @@ Employee.find_or_create_by!( email: "takahashi@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "watanabe@example.com" ) do |employee|
-  employee.department_id = 3
+  employee.department_id = Department.find_or_create_by!(name: "人事部").id
   employee.last_name = "渡辺"
   employee.first_name = "太一"
   employee.last_name_furigana = "ワタナベ"
@@ -128,7 +128,7 @@ Employee.find_or_create_by!( email: "watanabe@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "shimizu@example.com" ) do |employee|
-  employee.department_id = 4
+  employee.department_id = Department.find_or_create_by!(name: "企画部").id
   employee.last_name = "清水"
   employee.first_name = "由美子"
   employee.last_name_furigana = "シミズ"
@@ -146,7 +146,7 @@ Employee.find_or_create_by!( email: "shimizu@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "kawanaka@example.com" ) do |employee|
-  employee.department_id = 4
+  employee.department_id = Department.find_or_create_by!(name: "企画部").id
   employee.last_name = "川中"
   employee.first_name = "雄太"
   employee.last_name_furigana = "カワナカ"
@@ -164,7 +164,7 @@ Employee.find_or_create_by!( email: "kawanaka@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "nakamura@example.com" ) do |employee|
-  employee.department_id = 5
+  employee.department_id = Department.find_or_create_by!(name: "総務部").id
   employee.last_name = "中村"
   employee.first_name = "美香"
   employee.last_name_furigana = "ナカムラ"
@@ -182,7 +182,7 @@ Employee.find_or_create_by!( email: "nakamura@example.com" ) do |employee|
 end
 
 Employee.find_or_create_by!( email: "kobayashi@example.com" ) do |employee|
-  employee.department_id = 5
+  employee.department_id = Department.find_or_create_by!(name: "総務部").id
   employee.last_name = "小林"
   employee.first_name = "大輝"
   employee.last_name_furigana = "コバヤシ"
@@ -340,7 +340,7 @@ tags = [
   { name: "スケジュール管理"},
   { name: "失敗談"},
   { name: "良い話"},
-  { name: "非公開"}
+  { name: "非公開"},
   ]
   
 tags.each { |tag| Tag.find_or_create_by!(name: tag[:name]) }
@@ -355,41 +355,41 @@ puts "コメントを作成"
 text1 = "記事に関してのコメントを書きます"
 text2 =  "感想や質問などを書くようにしましょう"
 
-100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: 1, comment: text1) }
-100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: 2, comment: text2) }
+100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "田中").id, comment: text1) }
+100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "佐藤").id, comment: text2) }
 
 puts "groupを作成"
 
 group_record = [
-  { creater_id: 1, 
+  { creater_id: Employee.find_by(last_name: "田中").id, 
     name: "色々なジャンルの勉強会をしましょう！", 
     description: "グループの主旨: さまざまなジャンルに興味を持つメンバーが集まり、共に学び合う場です。
 活動内容: 定期的な勉強会やディスカッション、質問・回答セッションなど、様々な形式で知識の共有を行います。
-活動頻度: 月に一度のペースでイベントを開催し、参加者同士の交流を深めます。"
+活動頻度: 月に一度のペースでイベントを開催し、参加者同士の交流を深めます。",
   },
-  { creater_id: 2,
+  { creater_id: Employee.find_by(last_name: "佐藤").id,
     name: "猫について話しましょう！",
     description: "グループの主旨: 猫好きが集まり、猫に関する情報やエピソードを共有するコミュニティです。
 活動内容: 猫の飼い方や面白いエピソード、健康管理などに関するトピックでのディスカッションや情報交換を行います。
-活動頻度: 月に２回、オンラインまたはオフラインでミーティングを開催し、メンバー同士が親睦を深めます。"
+活動頻度: 月に２回、オンラインまたはオフラインでミーティングを開催し、メンバー同士が親睦を深めます。",
   },
-  { creater_id: 3,
+  { creater_id: Employee.find_by(last_name: "山田").id,
     name: "犬について話しましょう！",
     description: "グループの主旨: 犬好きが集まり、犬に関する情報や経験を分かち合うコミュニティです。
 活動内容: 犬のトレーニング方法や健康管理、可愛いエピソードについてのトークセッションや写真共有を行います。
-活動頻度: 月に１回、リラックスした雰囲気で情報交換と交流を楽しむミーティングを開催します。"
+活動頻度: 月に１回、リラックスした雰囲気で情報交換と交流を楽しむミーティングを開催します。",
   },
-  { creater_id: 4,
+  { creater_id: Employee.find_by(last_name: "鈴木").id,
     name: "お昼休みに一緒に散歩する仲間募集！",
     description: "グループの主旨: お昼休みに散歩を楽しむ仲間を募集し、健康促進とリフレッシュを図るグループです。
 活動内容: 毎週火曜日と木曜日のお昼休みに、周辺の公園や景色の良いエリアで散歩を行います。
-活動頻度: 毎週２回、リーダーがコースを提案し、メンバー同士が気軽に参加できる散歩を実施します。"
+活動頻度: 毎週２回、リーダーがコースを提案し、メンバー同士が気軽に参加できる散歩を実施します。",
   },
-  { creater_id: 5,
+  { creater_id: Employee.find_by(last_name: "田中").id,
     name: "バイクについて話しましょう！",
     description: "グループの主旨: バイク愛好者が集まり、バイクに関する情報や体験を共有するコミュニティです。
 活動内容: ツーリング計画やおすすめのバイクギアについての情報交換、バイクメンテナンスのノウハウを共有します。
-活動頻度: 月に１回、オンラインでのミーティングや季節によるツーリングイベントを開催し、メンバー同士が親睦を深めます。"
+活動頻度: 月に１回、オンラインでのミーティングや季節によるツーリングイベントを開催し、メンバー同士が親睦を深めます。",
   }
 ]
 
@@ -403,7 +403,7 @@ puts "グループメンバーを作成"
 puts "お知らせを作成"
 
 notice_record = [
-  { group_id: 1,
+  { group_id: Group.find_by(name: "色々なジャンルの勉強会をしましょう！").id,
     title: "次回勉強会のお知らせ！",
     body: "次回の勉強会詳細:
 日時: [日付と時間]
@@ -412,9 +412,9 @@ notice_record = [
 この勉強会では、みんなで一緒に学び合いましょう！ディスカッションや質問・回答セッションも行いますので、気軽に参加してください。
 注意事項:
 イベントの変更がある場合は再度お知らせします。
-次回の勉強会で皆さんにお会いできることを楽しみにしています！"
+次回の勉強会で皆さんにお会いできることを楽しみにしています！",
   },
-  { group_id: 2,
+  { group_id: Group.find_by(name: "猫について話しましょう！").id,
     title: "次回のグループ活動について!",
     body: "次回の活動詳細:
 日時: [日付と時間]
@@ -425,9 +425,9 @@ notice_record = [
 注意事項:
 イベントの変更がある場合は再度お知らせします。
 次回の活動で、新しい猫仲間との出会いや素敵な情報交換ができることを楽しみにしています。
-みなさんにお会いできることを心待ちにしています！"
+みなさんにお会いできることを心待ちにしています！",
   },
-  { group_id: 3,
+  { group_id: Group.find_by(name: "犬について話しましょう！").id,
     title: "次回のグループ活動について!",
     body: "*次回の活動詳細:
 日時: [日付と時間]
@@ -437,9 +437,9 @@ notice_record = [
 注意事項:
 参加希望の方はこのお知らせに返信してください。
 イベントの変更がある場合は再度お知らせします。
-次回の活動で、新しい犬友との出会いや素敵な情報交換ができることを楽しみにしています。みなさんにお会いできることを心待ちにしています！"
+次回の活動で、新しい犬友との出会いや素敵な情報交換ができることを楽しみにしています。みなさんにお会いできることを心待ちにしています！",
   },
-  { group_id: 4,
+  { group_id: Group.find_by(name: "お昼休みに一緒に散歩する仲間募集！").id,
     title: "次回の散歩コースについて!",
     body: "次回の散歩コース詳細:
 日時: [日付と時間]
@@ -449,9 +449,9 @@ notice_record = [
 リーダーが新しいコースを提案しますので、みなさんも楽しみにしていてください！
 注意事項:
 イベントの変更がある場合は再度お知らせします。
-次回の散歩コースで、新しい発見や気分転換を一緒に楽しみましょう！"
+次回の散歩コースで、新しい発見や気分転換を一緒に楽しみましょう！",
   },
-  { group_id: 5,
+  { group_id: Group.find_by(name: "バイクについて話しましょう！").id,
     title: "次回のツーリングについて！",
     body: "次回ツーリング詳細情報:
 日時: [日付と時間]
@@ -462,8 +462,8 @@ notice_record = [
 注意事項:
 参加希望の方はこのお知らせに返信してください。
 イベントの変更がある場合は再度お知らせします。
-次回のツーリングで、新しい景色とメンバーとの出会いを楽しんでください！"
-  }
+次回のツーリングで、新しい景色とメンバーとの出会いを楽しんでください！",
+  },
 ]
 
 notice_record.each { |record| Notice.find_or_create_by!(group_id: record[:group_id], title: record[:title], body: record[:body]) } 
