@@ -30,7 +30,7 @@ Employee.find_or_create_by!( email: "tanaka@example.com" ) do |employee|
   employee.first_name = "太朗"
   employee.last_name_furigana = "タナカ"
   employee.first_name_furigana = "タロウ"
-  employee.introduction = 
+  employee.introduction =
   "田中太郎です。よろしくお願いします。
   人と話をすることが好きです。たくさんの人とお話しできればと思っています！"
   employee.birthdate = "1996-04-01"
@@ -46,7 +46,7 @@ Employee.find_or_create_by!( email: "satou@example.com" ) do |employee|
   employee.first_name = "由美"
   employee.last_name_furigana = "サトウ"
   employee.first_name_furigana = "ユミ"
-  employee.introduction = 
+  employee.introduction =
   "佐藤由美です。よろしくお願いします。
   猫が好きです。たくさんの人と猫の話をしたいです！"
   employee.birthdate = "1996-04-02"
@@ -62,7 +62,7 @@ Employee.find_or_create_by!( email: "yamada@example.com" ) do |employee|
   employee.first_name = "花子"
   employee.last_name_furigana = "ヤマダ"
   employee.first_name_furigana = "ハナコ"
-  employee.introduction = 
+  employee.introduction =
   "山田花子と申します。よろしくお願いします。
   犬が大好きで、毎日の生活に欠かせません。
   趣味は犬の訓練や散歩で、新しいトリックを教えたり、可愛いポーズを覚えさせることが好きです。
@@ -81,7 +81,7 @@ Employee.find_or_create_by!( email: "suzuki@example.com" ) do |employee|
   employee.first_name = "美香"
   employee.last_name_furigana = "スズキ"
   employee.first_name_furigana = "ミカ"
-  employee.introduction = 
+  employee.introduction =
   "鈴木美香と申します。よろしくお願いします。
   特に好きなのは自然の中での散歩です。新しい場所を発見することが好きで、週末には友達と一緒に山や公園に出かけます。自然の美しさからインスピレーションを得て、仕事にも活かしています。
   また、趣味で写真を撮ることもあり、季節ごとの風景や可愛い動物たちをキャッチするのが楽しみです。
@@ -99,7 +99,7 @@ Employee.find_or_create_by!( email: "takahashi@example.com" ) do |employee|
   employee.first_name = "一郎"
   employee.last_name_furigana = "タカハシ"
   employee.first_name_furigana = "イチロウ"
-  employee.introduction = 
+  employee.introduction =
   "高橋一郎と言います。
   バイクが大好きで、週末には友達とツーリングに出かけることが楽しみです。新しい場所を訪れることで、さまざまな景色や文化に触れ、リフレッシュしています。
   仕事ではチームプレーヤーとして協力し、新しいアイデアにも常にオープンです。一緒に働けることを楽しみにしています！"
@@ -116,7 +116,7 @@ Employee.find_or_create_by!( email: "watanabe@example.com" ) do |employee|
   employee.first_name = "太一"
   employee.last_name_furigana = "ワタナベ"
   employee.first_name_furigana = "タイチ"
-  employee.introduction = 
+  employee.introduction =
   "渡辺太一と言います。ゲームが大好きで、特にRPGやアクションゲームがお気に入りです。休日には友達とオンラインで協力プレイを楽しむこともあります。
   仕事ではチームの一員としてコミュニケーションを大切にし、クリエイティブなアプローチで問題に取り組みます。
   一緒に新しいプロジェクトに挑戦できることを楽しみにしています！"
@@ -133,7 +133,7 @@ Employee.find_or_create_by!( email: "shimizu@example.com" ) do |employee|
   employee.first_name = "由美子"
   employee.last_name_furigana = "シミズ"
   employee.first_name_furigana = "ユミコ"
-  employee.introduction = 
+  employee.introduction =
   "私は清水由美子です。
   趣味は読書とお菓子作りで、特に小説やパン作りが好きです。
   仕事ではチームプレーヤーとして、協力とコミュニケーションを大切にしています。
@@ -151,7 +151,7 @@ Employee.find_or_create_by!( email: "kawanaka@example.com" ) do |employee|
   employee.first_name = "雄太"
   employee.last_name_furigana = "カワナカ"
   employee.first_name_furigana = "ユウタ"
-  employee.introduction = 
+  employee.introduction =
   "こんにちは、川中雄太と言います。
   趣味はアウトドア活動で、週末には山登りやキャンプに出かけることがあります。
   仕事では新しいアイデアを提案し、チーム全体を刺激することに貢献したいと考えています。
@@ -169,7 +169,7 @@ Employee.find_or_create_by!( email: "nakamura@example.com" ) do |employee|
   employee.first_name = "美香"
   employee.last_name_furigana = "ナカムラ"
   employee.first_name_furigana = "ミカ"
-  employee.introduction = 
+  employee.introduction =
   "中村美佳です。
   趣味は音楽鑑賞で、特にクラシックやジャズが好きです。
   仕事ではクリエイティブな解決策を見つけ、チームと協力してプロジェクトを成功に導くことが得意です。
@@ -187,7 +187,7 @@ Employee.find_or_create_by!( email: "kobayashi@example.com" ) do |employee|
   employee.first_name = "大輝"
   employee.last_name_furigana = "コバヤシ"
   employee.first_name_furigana = "ダイキ"
-  employee.introduction = 
+  employee.introduction =
   "こんにちは、小林大輝と申します。
   趣味はスポーツで、特にサッカーとランニングが好きです。
   仕事では目標に向かって効果的に取り組み、チームと協力して成果を上げることに注力しています。
@@ -209,23 +209,23 @@ end
 puts "articleを作成"
 
 article_date_published = [
-  { title: "猫の話で盛り上がりました", 
+  { title: "猫の話で盛り上がりました",
     body: "先日、ランチタイムに同僚と一緒に庭のベンチで座っていると、不意に近くにいた野良猫がやってきました。同僚も猫好きとのことで、お互いの愛猫について熱く語り合いました。彼女の家には4匹もの可愛い猫がいるそうで、それぞれの特徴やエピソードについて聞くのがとても楽しかったです。特に、一匹の猫がおもちゃで遊ぶ姿勢が面白いとの話には笑いが絶えませんでした。
-  今度は彼女の家で、猫たちとのほっこりする時間を共有できることを楽しみにしています。" 
+  今度は彼女の家で、猫たちとのほっこりする時間を共有できることを楽しみにしています。"
   },
-  { title: "飼っているネコが増えました！", 
+  { title: "飼っているネコが増えました！",
     body: "最近、我が家に新しい仲間が加わりました！これで家の中はもっとにぎやかになりました。
   新入りのネコちゃんは非常に好奇心旺盛で、どんな小さなものにも興味津々。先住猫との初対面は戦慄の時刻でしたが、すぐに打ち解けて遊び始めました。飼い主冥利につきます。
-  日々のネコたちとの楽しいエピソードをここに綴ります。" 
+  日々のネコたちとの楽しいエピソードをここに綴ります。"
   },
-  { title: "自分の好きな犬種について", 
+  { title: "自分の好きな犬種について",
     body: "私の好きな犬種はゴールデン・レトリバーです。その明るくて愛らしい性格に一目惚れし、我が家に迎え入れたのは数年前のことです。
   最初に出会った瞬間、その愛くるしい笑顔に心を奪われました。以来、一緒に過ごす時間は多くの幸せな瞬間で満ちています。特に、散歩での楽しいエピソードは数えきれないほど。
   四季折々の風景を眺めながらの散歩や、彼とのボール遊び、水辺でのひととき。これらの瞬間が私にとって癒しであり、喜びの源となっています。
   犬との生活は、日常の中に潜む小さな幸せを見つける手助けとなっています。彼の存在がもたらす癒しと喜びは計り知れません。
-  皆さんもぜひ、愛犬との特別な瞬間を感じてみてください。" 
+  皆さんもぜひ、愛犬との特別な瞬間を感じてみてください。"
   },
-  { title: "おすすめの散歩コースを教えます！", 
+  { title: "おすすめの散歩コースを教えます！",
     body: "私が心からおすすめする散歩コースは、季節ごとに変わる美しい風景が楽しめるところです。四季折々の自然の美しさを感じながら、健康を保ちつつ心もリフレッシュできる場所ばかりです。
   春には桜が咲き誇る桜並木が広がり、花見客で賑わいます。桜の花びらが風に舞う光景はまさに圧巻。夏には緑豊かな公園での散歩がおすすめ。木々の緑と鳥のさえずりが癒しを提供してくれます。
   秋になると、周囲が紅葉に染まるスポットもあり、まるで絵画の中を歩いているかのような感覚。これらの場所での散歩は、自然の美と共に新たなエネルギーをもらえることでしょう。
@@ -281,7 +281,7 @@ article_date_published = [
   ぜひいくつか試してみて、自分に最適なアプリを見つけてみてください。
   時間の管理がより効果的になり、ストレスなくスケジュールをこなす手助けになることでしょう。"
   },
-  { title: "今日の失敗談", 
+  { title: "今日の失敗談",
     body: "人は誰でも失敗するもの。今日も私は、些細ながらもちょっとしたハプニングに見舞われました。この出来事を通して得た気づきや学びを、率直にお伝えします。
   朝、仕事に向かう準備を整える中での出来事。普段使っているはずの鍵がどこにあるのか分からず、焦りながら家中を探し回りました。思い出すには、前日の帰宅時に急いでいていい加減に置いてしまったことが原因でした。
   鍵を見つけて外に出たものの、電車の遅延や混雑などもあり、予定よりも遅れて会社に到着。仕事がスタートする前から、既に失敗という気分が漂っていました。これにはちょっとしたストレスもついてまわりますよね。
@@ -303,7 +303,7 @@ article_date_published = [
 ]
 
 article_date_private = [
-  { title: "非公開記事", 
+  { title: "非公開記事",
     body: "非公開用の記事です"
   }
   ]
@@ -342,7 +342,7 @@ tags = [
   { name: "良い話"},
   { name: "非公開"},
   ]
-  
+
 tags.each { |tag| Tag.find_or_create_by!(name: tag[:name]) }
 
 puts "記事にタグ付け"
@@ -361,8 +361,8 @@ text2 =  "感想や質問などを書くようにしましょう"
 puts "groupを作成"
 
 group_record = [
-  { creater_id: Employee.find_by(last_name: "田中").id, 
-    name: "色々なジャンルの勉強会をしましょう！", 
+  { creater_id: Employee.find_by(last_name: "田中").id,
+    name: "色々なジャンルの勉強会をしましょう！",
     description: "グループの主旨: さまざまなジャンルに興味を持つメンバーが集まり、共に学び合う場です。
 活動内容: 定期的な勉強会やディスカッション、質問・回答セッションなど、様々な形式で知識の共有を行います。
 活動頻度: 月に一度のペースでイベントを開催し、参加者同士の交流を深めます。",
@@ -385,7 +385,7 @@ group_record = [
 活動内容: 毎週火曜日と木曜日のお昼休みに、周辺の公園や景色の良いエリアで散歩を行います。
 活動頻度: 毎週２回、リーダーがコースを提案し、メンバー同士が気軽に参加できる散歩を実施します。",
   },
-  { creater_id: Employee.find_by(last_name: "田中").id,
+  { creater_id: Employee.find_by(last_name: "高橋").id,
     name: "バイクについて話しましょう！",
     description: "グループの主旨: バイク愛好者が集まり、バイクに関する情報や体験を共有するコミュニティです。
 活動内容: ツーリング計画やおすすめのバイクギアについての情報交換、バイクメンテナンスのノウハウを共有します。
@@ -393,7 +393,7 @@ group_record = [
   }
 ]
 
-group_record.each { |record| Group.find_or_create_by!(creater_id: record[:creater_id], name: record[:name], description: record[:description]) } 
+group_record.each { |record| Group.find_or_create_by!(creater_id: record[:creater_id], name: record[:name], description: record[:description]) }
 
 
 puts "グループメンバーを作成"
@@ -466,6 +466,6 @@ notice_record = [
   },
 ]
 
-notice_record.each { |record| Notice.find_or_create_by!(group_id: record[:group_id], title: record[:title], body: record[:body]) } 
+notice_record.each { |record| Notice.find_or_create_by!(group_id: record[:group_id], title: record[:title], body: record[:body]) }
 
 puts "seedを終了"
