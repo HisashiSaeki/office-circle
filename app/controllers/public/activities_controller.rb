@@ -1,8 +1,8 @@
 class Public::ActivitiesController < ApplicationController
 
   def index
-    @activities = current_employee.activities.includes(subject: :article).order(created_at: "DESC").page(params[:page]).per(20)
-    @activities.where(checked: false).each { |activity| activity.update(checked: true) }
+    @activities = current_employee.activities.includes(subject: :article).order(created_at: "DESC")
+    @activities.where(checked: false).update_all(checked: true)
   end
 
   def destroy_all
