@@ -24,7 +24,7 @@ puts "employeeを作成"
 
 
 
-Employee.find_or_create_by!( email: "tanaka@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "tanaka@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "営業部").id
   employee.last_name = "田中"
   employee.first_name = "太朗"
@@ -40,7 +40,7 @@ Employee.find_or_create_by!( email: "tanaka@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
 end
 
-Employee.find_or_create_by!( email: "satou@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "satou@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "営業部").id
   employee.last_name = "佐藤"
   employee.first_name = "由美"
@@ -56,7 +56,7 @@ Employee.find_or_create_by!( email: "satou@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
 end
 
-Employee.find_or_create_by!( email: "yamada@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "yamada@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "開発部").id
   employee.last_name = "山田"
   employee.first_name = "花子"
@@ -75,7 +75,7 @@ Employee.find_or_create_by!( email: "yamada@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
 end
 
-Employee.find_or_create_by!( email: "suzuki@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "suzuki@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "開発部").id
   employee.last_name = "鈴木"
   employee.first_name = "美香"
@@ -93,7 +93,7 @@ Employee.find_or_create_by!( email: "suzuki@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
 end
 
-Employee.find_or_create_by!( email: "takahashi@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "takahashi@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "人事部").id
   employee.last_name = "高橋"
   employee.first_name = "一郎"
@@ -110,7 +110,7 @@ Employee.find_or_create_by!( email: "takahashi@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
 end
 
-Employee.find_or_create_by!( email: "watanabe@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "watanabe@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "人事部").id
   employee.last_name = "渡辺"
   employee.first_name = "太一"
@@ -127,7 +127,7 @@ Employee.find_or_create_by!( email: "watanabe@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
 end
 
-Employee.find_or_create_by!( email: "shimizu@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "shimizu@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "企画部").id
   employee.last_name = "清水"
   employee.first_name = "由美子"
@@ -145,7 +145,7 @@ Employee.find_or_create_by!( email: "shimizu@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
 end
 
-Employee.find_or_create_by!( email: "kawanaka@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "kawanaka@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "企画部").id
   employee.last_name = "川中"
   employee.first_name = "雄太"
@@ -163,7 +163,7 @@ Employee.find_or_create_by!( email: "kawanaka@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
 end
 
-Employee.find_or_create_by!( email: "nakamura@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "nakamura@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "総務部").id
   employee.last_name = "中村"
   employee.first_name = "美香"
@@ -181,7 +181,7 @@ Employee.find_or_create_by!( email: "nakamura@example.com" ) do |employee|
   employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
 end
 
-Employee.find_or_create_by!( email: "kobayashi@example.com" ) do |employee|
+Employee.find_or_create_by!(email: "kobayashi@example.com") do |employee|
   employee.department_id = Department.find_or_create_by!(name: "総務部").id
   employee.last_name = "小林"
   employee.first_name = "大輝"
@@ -201,7 +201,7 @@ end
 
 puts "adminを作成"
 
-Admin.find_or_create_by!( email: "admin@example.com" ) do |admin|
+Admin.find_or_create_by!(email: "admin@example.com") do |admin|
   admin.email = "admin@example.com"
   admin.password = "#{ENV['ADMIN_PASSWORD']}"
 end
@@ -211,25 +211,25 @@ puts "articleを作成"
 article_date_published = [
   { title: "猫の話で盛り上がりました",
     body: "先日、ランチタイムに同僚と一緒に庭のベンチで座っていると、不意に近くにいた野良猫がやってきました。同僚も猫好きとのことで、お互いの愛猫について熱く語り合いました。彼女の家には4匹もの可愛い猫がいるそうで、それぞれの特徴やエピソードについて聞くのがとても楽しかったです。特に、一匹の猫がおもちゃで遊ぶ姿勢が面白いとの話には笑いが絶えませんでした。
-  今度は彼女の家で、猫たちとのほっこりする時間を共有できることを楽しみにしています。"
+  今度は彼女の家で、猫たちとのほっこりする時間を共有できることを楽しみにしています。",
   },
   { title: "飼っているネコが増えました！",
     body: "最近、我が家に新しい仲間が加わりました！これで家の中はもっとにぎやかになりました。
   新入りのネコちゃんは非常に好奇心旺盛で、どんな小さなものにも興味津々。先住猫との初対面は戦慄の時刻でしたが、すぐに打ち解けて遊び始めました。飼い主冥利につきます。
-  日々のネコたちとの楽しいエピソードをここに綴ります。"
+  日々のネコたちとの楽しいエピソードをここに綴ります。",
   },
   { title: "自分の好きな犬種について",
     body: "私の好きな犬種はゴールデン・レトリバーです。その明るくて愛らしい性格に一目惚れし、我が家に迎え入れたのは数年前のことです。
   最初に出会った瞬間、その愛くるしい笑顔に心を奪われました。以来、一緒に過ごす時間は多くの幸せな瞬間で満ちています。特に、散歩での楽しいエピソードは数えきれないほど。
   四季折々の風景を眺めながらの散歩や、彼とのボール遊び、水辺でのひととき。これらの瞬間が私にとって癒しであり、喜びの源となっています。
   犬との生活は、日常の中に潜む小さな幸せを見つける手助けとなっています。彼の存在がもたらす癒しと喜びは計り知れません。
-  皆さんもぜひ、愛犬との特別な瞬間を感じてみてください。"
+  皆さんもぜひ、愛犬との特別な瞬間を感じてみてください。",
   },
   { title: "おすすめの散歩コースを教えます！",
     body: "私が心からおすすめする散歩コースは、季節ごとに変わる美しい風景が楽しめるところです。四季折々の自然の美しさを感じながら、健康を保ちつつ心もリフレッシュできる場所ばかりです。
   春には桜が咲き誇る桜並木が広がり、花見客で賑わいます。桜の花びらが風に舞う光景はまさに圧巻。夏には緑豊かな公園での散歩がおすすめ。木々の緑と鳥のさえずりが癒しを提供してくれます。
   秋になると、周囲が紅葉に染まるスポットもあり、まるで絵画の中を歩いているかのような感覚。これらの場所での散歩は、自然の美と共に新たなエネルギーをもらえることでしょう。
-  これからの季節、ぜひ皆さんも私のおすすめ散歩コースで自然の美を感じ、心地よい時間を過ごしてみてください。"
+  これからの季節、ぜひ皆さんも私のおすすめ散歩コースで自然の美を感じ、心地よい時間を過ごしてみてください。",
   },
   { title: "僕のバイクの話",
     body: "バイクとの出会いは、まるで運命のようでした。ある日、中古バイク店を訪れていると、そこに一台のバイクが目に留まりました。そのバイクは、黒を基調としたシンプルなデザインで、一目見て心惹かれました。
@@ -237,13 +237,13 @@ article_date_published = [
   友達とのバイク仲間との出会いも、この新たなライフスタイルの魅力の一部。ツーリング先での楽しいひと時や、困難を共に乗り越える絆は、何よりも尊い宝物となりました。
   バイクメンテナンスやカスタマイズは、愛車を自分好みに仕上げるための大切な作業。その過程で知識を深めることで、愛車との絆も一層深まりました。
   これからバイクに乗りたい方には、ぜひこの魅力を伝えたくなります。風を感じながら、自分だけの冒険に挑戦してみてください。
-  バイクとの出会いが、新たな人生のスタートを切るきっかけになることを願っています。"
+  バイクとの出会いが、新たな人生のスタートを切るきっかけになることを願っています。",
   },
   { title: "新しいゲーム機を買いました!",
     body: "最新のゲーム機を手に入れてワクワクしています！新しいゲーム機との出会いは、まるで未知の世界への扉を開く瞬間。その先に広がる冒険や感動を求めて、新作ソフトを手に入れました。
   最初のプレイでは、グラフィックの進化や新機能の楽しさに驚きと興奮が入り混じります。オンラインプレイでの連携や対戦も、新しい友達との出会いが期待できる面白さ。
   このゲーム機は、忙しい日常を忘れさせてくれる心のオアシス。おすすめのソフトやアクセサリーなども紹介しながら、ゲーム愛好者やこれから新しいゲームを始めたい方に役立つ情報をお届けします。
-  一緒にゲームの世界に浸り、新たな冒険に挑戦しましょう！"
+  一緒にゲームの世界に浸り、新たな冒険に挑戦しましょう！",
   },
   { title: "資料作成のコツ！",
     body: "資料作成は、仕事やプロジェクトにおいて不可欠なスキルの一つです。しかし、ただ情報を詰め込むだけでは伝わりにくく、効果的な資料に仕上げるためにはいくつかのコツがあります。ここでは、プロの資料作成者が実践しているテクニックを紹介します。
@@ -269,7 +269,7 @@ article_date_published = [
   7. プレゼンテーションに合わせて作成
   資料は単体で読まれるだけでなく、プレゼンテーション資料としても利用されることがあります。口頭での説明をサポートする要素を取り入れましょう。
   ---
-  これらのコツを意識して、次回の資料作成に挑戦してみてください。伝えたいメッセージがクリアになり、読者に確実に伝わることでしょう。成功を祈っています！"
+  これらのコツを意識して、次回の資料作成に挑戦してみてください。伝えたいメッセージがクリアになり、読者に確実に伝わることでしょう。成功を祈っています！",
   },
   { title: "スケジュール管理におすすめのアプリ！",
     body: "現代の忙しい生活では、効率的なスケジュール管理が不可欠です。その中で頼りになるのが、スマートフォンやタブレットを活用したスケジュール管理アプリです。ここでは、おすすめのアプリとその特徴について紹介します。
@@ -279,7 +279,7 @@ article_date_published = [
   これらのアプリはそれぞれ特有の特徴を持っており、利用者の好みやライフスタイルによって選び方も異なります。
   スケジュール管理アプリは、自分の使いやすさや必要な機能に合わせて選ぶことが大切です。
   ぜひいくつか試してみて、自分に最適なアプリを見つけてみてください。
-  時間の管理がより効果的になり、ストレスなくスケジュールをこなす手助けになることでしょう。"
+  時間の管理がより効果的になり、ストレスなくスケジュールをこなす手助けになることでしょう。",
   },
   { title: "今日の失敗談",
     body: "人は誰でも失敗するもの。今日も私は、些細ながらもちょっとしたハプニングに見舞われました。この出来事を通して得た気づきや学びを、率直にお伝えします。
@@ -289,7 +289,7 @@ article_date_published = [
   この一連の出来事から気づいたのは、計画性と余裕の大切さです。鍵の置き場所や予定の確認、プロジェクトの進捗管理など、これらは計画を立て、余裕をもって行動することで防げることでした。忙しさに追われる中でも、冷静な判断と計画性を持ち、余裕をもって行動することが重要だと痛感しました。
   失敗はただのミスではなく、学びと成長の機会でもあります。
   今日の出来事を通して、日々の生活や仕事において、計画性や余裕を持つことの重要性を改めて実感しました。
-  これからも失敗を恐れず、前向きに受け止め、成長につなげていきたいと思います。"
+  これからも失敗を恐れず、前向きに受け止め、成長につなげていきたいと思います。",
   },
   { title: "最近良かったこと",
     body: "最近、何気ない日常の中で嬉しいことがありました。この小さな幸せが私の心を温かく包んでくれ、日々の喧騒から一瞬解放されることができました。
@@ -298,13 +298,13 @@ article_date_published = [
   また、最近始めた趣味が新しい喜びをもたらしています。日々の仕事や責任に追われがちな中、その時間は自分だけのもの。好きなことに没頭することで、心のリフレッシュが図れ、新たなエネルギーを感じています。
   そして、仕事での小さな成功もありました。一生懸命取り組んだプロジェクトが評価され、チームと共に達成感を分かち合う瞬間。努力が実り、成果が出たことで、やりがいを感じることができました。
   これらの小さな幸せが、私にポジティブなエネルギーを与えてくれています。何気ない日常の中で感じる喜びや成就感は、大きな幸せにつながっていくのだと実感しています。
-  日々の喜びを見つけ、感謝の気持ちを忘れずに過ごしていくことが、より豊かな人生に繋がるのかもしれません。"
-  }
+  日々の喜びを見つけ、感謝の気持ちを忘れずに過ごしていくことが、より豊かな人生に繋がるのかもしれません。",
+  },
 ]
 
 article_date_private = [
   { title: "非公開記事",
-    body: "非公開用の記事です"
+    body: "非公開用の記事です",
   }
   ]
 
