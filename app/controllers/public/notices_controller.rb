@@ -1,7 +1,7 @@
 class Public::NoticesController < ApplicationController
   before_action :ensure_correct_creater, only: [:new, :create, :destroy]
   before_action :set_notice, only: [:show, :destroy]
-  
+
   def new
     @notice = Notice.new
   end
@@ -21,9 +21,9 @@ class Public::NoticesController < ApplicationController
 
 
   private
-  
 
-  def notice_params 
+
+  def notice_params
     params.require(:notice).permit(:title, :body)
   end
 

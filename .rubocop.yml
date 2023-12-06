@@ -19,6 +19,11 @@ AllCops:
     - 'actionmailbox/test/dummy/**/*'
     - 'actiontext/test/dummy/**/*'
     - '**/node_modules/**/*'
+    # 自動生成であるため
+    - 'bin/bundle'
+    - 'bin/webpack'
+    - 'bin/webpack-dev-server'
+    - 'bin/yarn'
  
 Performance:
   Exclude:
@@ -72,25 +77,6 @@ Layout/EndOfLine:
   Enabled: true
  
 Layout/EmptyLineAfterMagicComment:
-  Enabled: true
- 
-Layout/EmptyLinesAroundAccessModifier:
-  Enabled: true
-  EnforcedStyle: only_before
- 
-Layout/EmptyLinesAroundBlockBody:
-  Enabled: true
- 
-# In a regular class definition, no empty lines around the body.
-Layout/EmptyLinesAroundClassBody:
-  Enabled: true
- 
-# In a regular method definition, no empty lines around the body.
-Layout/EmptyLinesAroundMethodBody:
-  Enabled: true
- 
-# In a regular module definition, no empty lines around the body.
-Layout/EmptyLinesAroundModuleBody:
   Enabled: true
  
 # Use Ruby >= 1.9 syntax for hashes. Prefer { a: :b } over { :a => :b }.
@@ -148,17 +134,17 @@ Style/ExplicitBlockArgument:
   Enabled: true
  
 Style/FrozenStringLiteralComment:
-  Enabled: true
-  EnforcedStyle: always
-  Exclude:
-    - 'actionview/test/**/*.builder'
-    - 'actionview/test/**/*.ruby'
-    - 'actionpack/test/**/*.builder'
-    - 'actionpack/test/**/*.ruby'
-    - 'activestorage/db/migrate/**/*.rb'
-    - 'activestorage/db/update_migrate/**/*.rb'
-    - 'actionmailbox/db/migrate/**/*.rb'
-    - 'actiontext/db/migrate/**/*.rb'
+  Enabled: false
+  # EnforcedStyle: always
+  # Exclude:
+  #   - 'actionview/test/**/*.builder'
+  #   - 'actionview/test/**/*.ruby'
+  #   - 'actionpack/test/**/*.builder'
+  #   - 'actionpack/test/**/*.ruby'
+  #   - 'activestorage/db/migrate/**/*.rb'
+  #   - 'activestorage/db/update_migrate/**/*.rb'
+  #   - 'actionmailbox/db/migrate/**/*.rb'
+  #   - 'actiontext/db/migrate/**/*.rb'
  
 Style/MapToHash:
   Enabled: true
@@ -166,9 +152,10 @@ Style/MapToHash:
 Style/RedundantFreeze:
   Enabled: true
  
-# Use `foo {}` not `foo{}`.
+# Use `foo{}` not `foo {}`.
 Layout/SpaceBeforeBlockBraces:
   Enabled: true
+  EnforcedStyle: no_space
  
 # Use `foo { bar }` not `foo {bar}`.
 Layout/SpaceInsideBlockBraces:
@@ -308,6 +295,10 @@ Performance/DeleteSuffix:
  
 Performance/OpenStruct:
   Enabled: true
- 
-Minitest/UnreachableAssertion:
-  Enabled: true
+
+# [:sample1, :sample2] → %w[sample1 sample2]
+Style/SymbolArray:
+  Enabled: false
+# モデル内など意図的に空白行を一行の部分と二行の部分に分けているため一行に統一しない
+Layout/EmptyLines:
+  Enabled: false

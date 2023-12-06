@@ -30,10 +30,10 @@ class Admin::SearchesController < ApplicationController
   def set_tags
     @tags = Tag.published_article_tags
   end
-  
+
   def set_departments
     @departments = Department.all
   end
-  
-  
+
+
 end

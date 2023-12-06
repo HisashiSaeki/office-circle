@@ -6,11 +6,11 @@ class Public::SearchesController < ApplicationController
   def employees_search
       @employees = Employee.search(@keyword).includes(:department).order(created_at: "DESC").page(params[:page])
   end
-  
+
   def articles_search
     @articles = Article.search(@keyword).is_published_articles.order(created_at: "DESC").page(params[:page])
   end
-  
+
   def groups_search
     @groups = Group.search(@keyword).includes(:creater).order(created_at: "DESC").page(params[:page])
   end
@@ -22,19 +22,19 @@ class Public::SearchesController < ApplicationController
   def tag_search
     @articles = Tag.find(params[:tag_id]).articles.page(params[:page])
   end
-  
-  
+
+
   private
-  
-  
-  def set_keyword 
+
+
+  def set_keyword
     @keyword = params[:keyword]
   end
-  
-  def set_tags 
+
+  def set_tags
     @tags = Tag.published_article_tags
   end
-  
+
   def set_departments
     @departments = Department.all
   end

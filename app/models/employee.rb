@@ -3,21 +3,21 @@ class Employee < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
-  
+
+
   belongs_to :department
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :group_members, dependent: :destroy
   has_many :activities, dependent: :destroy
-  has_many :articles, -> { includes(:tags, :favorites, :comments) }, dependent: :destroy
-  has_many :groups, -> { includes(:creater, :group_members) }, through: :group_members, source: :group
-  has_many :favorite_articles, -> { includes(:tags, :favorites, :comments) }, through: :favorites, source: :article
-  
-  
+  has_many :articles, ->{ includes(:tags, :favorites, :comments) }, dependent: :destroy
+  has_many :groups, ->{ includes(:creater, :group_members) }, through: :group_members, source: :group
+  has_many :favorite_articles, ->{ includes(:tags, :favorites, :comments) }, through: :favorites, source: :article
+
+
   has_one_attached :profile_image
-  
-  
+
+
   with_options presence: do
     validates :last_name
     validates :first_name
@@ -26,8 +26,8 @@ class Employee < ApplicationRecord
     validates :birthdate
     validates :prefecture
   end
-  
-  
+
+
   def get_profile_image(width,height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -35,20 +35,20 @@ class Employee < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def full_name = self.last_name + " " + self.first_name
-    
+
   def full_name_furigana = self.last_name_furigana + " " + self.first_name_furigana
-    
+
   def self.search(keyword)
     self.where(
-      "first_name LIKE ? or last_name LIKE ? or first_name_furigana LIKE ? or last_name_furigana LIKE ?", 
+      "first_name LIKE ? or last_name LIKE ? or first_name_furigana LIKE ? or last_name_furigana LIKE ?",
       "%#{keyword}%","%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
     )
   end
-  
+
   GUEST_USER_EMAIL = "guest@example.com"
-  
+
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL ) do |employee|
       employee.password = SecureRandom.urlsafe_base64
@@ -61,13 +61,13 @@ class Employee < ApplicationRecord
       employee.prefecture = "東京都"
     end
   end
-  
+
   def guest_employee?
     email == GUEST_USER_EMAIL
   end
-  
+
   def active_for_authentication? = super && is_active
-    
+
   def inactive_message = is_active ? super : :account_inactive
-  
+
 end

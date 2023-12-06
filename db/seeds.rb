@@ -17,7 +17,7 @@ departments = [
   { name: "総務部" },
   ]
 
-departments.each { |department| Department.find_or_create_by!(name: department[:name]) }
+departments.each{ |department| Department.find_or_create_by!(name: department[:name]) }
 
 password = "123456"
 puts "employeeを作成"
@@ -343,11 +343,11 @@ tags = [
   { name: "非公開"},
   ]
 
-tags.each { |tag| Tag.find_or_create_by!(name: tag[:name]) }
+tags.each{ |tag| Tag.find_or_create_by!(name: tag[:name]) }
 
 puts "記事にタグ付け"
 
-100.times { |n| ArticleTag.find_or_create_by!(article_id: "#{n + 1}", tag_id: "#{n % 10 + 1}") }
+100.times{ |n| ArticleTag.find_or_create_by!(article_id: "#{n + 1}", tag_id: "#{n % 10 + 1}") }
 
 puts "コメントを作成"
 
@@ -355,8 +355,8 @@ puts "コメントを作成"
 text1 = "記事に関してのコメントを書きます"
 text2 =  "感想や質問などを書くようにしましょう"
 
-100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "田中").id, comment: text1) }
-100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "佐藤").id, comment: text2) }
+100.times{ |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "田中").id, comment: text1) }
+100.times{ |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "佐藤").id, comment: text2) }
 
 puts "groupを作成"
 
@@ -393,12 +393,12 @@ group_record = [
   }
 ]
 
-group_record.each { |record| Group.find_or_create_by!(creater_id: record[:creater_id], name: record[:name], description: record[:description]) }
+group_record.each{ |record| Group.find_or_create_by!(creater_id: record[:creater_id], name: record[:name], description: record[:description]) }
 
 
 puts "グループメンバーを作成"
 
-10.times { |n| GroupMember.find_or_create_by!( group_id: "#{n % 5 + 1}", employee_id: "#{n + 1}" ) }
+10.times{ |n| GroupMember.find_or_create_by!( group_id: "#{n % 5 + 1}", employee_id: "#{n + 1}" ) }
 
 puts "お知らせを作成"
 
@@ -466,6 +466,6 @@ notice_record = [
   },
 ]
 
-notice_record.each { |record| Notice.find_or_create_by!(group_id: record[:group_id], title: record[:title], body: record[:body]) }
+notice_record.each{ |record| Notice.find_or_create_by!(group_id: record[:group_id], title: record[:title], body: record[:body]) }
 
 puts "seedを終了"
