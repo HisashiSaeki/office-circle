@@ -152,10 +152,10 @@ Style/MapToHash:
 Style/RedundantFreeze:
   Enabled: true
  
-# Use `foo{}` not `foo {}`.
+# Use `foo {}` not `foo{}`.
 Layout/SpaceBeforeBlockBraces:
   Enabled: true
-  EnforcedStyle: no_space
+  EnforcedStyle: space
  
 # Use `foo { bar }` not `foo {bar}`.
 Layout/SpaceInsideBlockBraces:

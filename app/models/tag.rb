@@ -1,6 +1,6 @@
 class Tag < ApplicationRecord
   has_many :article_tags
-  has_many :articles, ->{ where(is_published: true).includes(:tags, :favorites, :comments, employee: :department).order(created_at: :desc) }, through: :article_tags, source: :article
+  has_many :articles, -> { where(is_published: true).includes(:tags, :favorites, :comments, employee: :department).order(created_at: :desc) }, through: :article_tags, source: :article
 
   validates :name, presence: true, uniqueness: true
 

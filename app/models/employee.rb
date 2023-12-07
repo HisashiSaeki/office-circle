@@ -10,9 +10,9 @@ class Employee < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :group_members, dependent: :destroy
   has_many :activities, dependent: :destroy
-  has_many :articles, ->{ includes(:tags, :favorites, :comments) }, dependent: :destroy
-  has_many :groups, ->{ includes(:creater, :group_members) }, through: :group_members, source: :group
-  has_many :favorite_articles, ->{ includes(:tags, :favorites, :comments) }, through: :favorites, source: :article
+  has_many :articles, -> { includes(:tags, :favorites, :comments) }, dependent: :destroy
+  has_many :groups, -> { includes(:creater, :group_members) }, through: :group_members, source: :group
+  has_many :favorite_articles, -> { includes(:tags, :favorites, :comments) }, through: :favorites, source: :article
 
 
   has_one_attached :profile_image
@@ -21,7 +21,7 @@ class Employee < ApplicationRecord
   with_options presence: do
     validates :last_name
     validates :first_name
-    validates :last_name_furigana
+    validates :last_name_furigana, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :first_name_furigana
     validates :birthdate
     validates :prefecture
