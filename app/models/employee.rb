@@ -22,7 +22,7 @@ class Employee < ApplicationRecord
     validates :last_name
     validates :first_name
     validates :last_name_furigana, format: { with: /\A[ァ-ヶー－]+\z/ }
-    validates :first_name_furigana
+    validates :first_name_furigana, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :birthdate
     validates :prefecture
   end
@@ -42,8 +42,8 @@ class Employee < ApplicationRecord
 
   def self.search(keyword)
     self.where(
-      "first_name LIKE ? or last_name LIKE ? or first_name_furigana LIKE ? or last_name_furigana LIKE ?",
-      "%#{keyword}%","%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
+      "last_name LIKE ? or first_name LIKE ? or last_name_furigana LIKE ? or first_name_furigana LIKE ?",
+      "%#{keyword}%","%#{keyword}%", "%#{keyword}%", "%#{keyword}%",
     )
   end
 
