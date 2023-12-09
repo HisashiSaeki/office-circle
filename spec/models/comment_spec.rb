@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Comment, type: :model do
   describe "バリデーションテスト" do
     let!(:employee) { create(:employee) }
-    let!(:article) { create(:article) }
+    let!(:article) { create(:article, employee_id: employee.id) }
     let!(:comment) { Comment.new(
       employee_id: employee.id,
       article_id: article.id,

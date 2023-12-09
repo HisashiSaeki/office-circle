@@ -4,7 +4,8 @@ require "rails_helper"
 
 RSpec.describe Notice, type: :model do
   describe "バリデーションテスト" do
-    let!(:group) { create(:group) }
+    let!(:employee) { create(:employee) }
+    let!(:group) { create(:group, creater_id: employee.id) }
     let!(:notice) { Notice.new(
       title: "お知らせタイトル",
       body: "活動詳細",
