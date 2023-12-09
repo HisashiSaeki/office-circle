@@ -15,7 +15,9 @@ class Article < ApplicationRecord
 
   def favorited_by?(current_employee) = favorites.exists?(employee_id: current_employee.id)
 
-  def created_by?(current_employee) = self.employee == current_employee
+  def created_by?(current_employee)
+    self.employee == current_employee
+  end
 
   def save_published
     self.is_published = true

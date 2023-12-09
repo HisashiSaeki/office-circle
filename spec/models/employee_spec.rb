@@ -9,7 +9,7 @@ RSpec.describe Employee, type: :model do
       first_name: "太朗",
       last_name_furigana: "ササキ",
       first_name_furigana: "タロウ",
-      department_id: department.id,
+      department_id: Department.create(name: "営業部").id,
       birthdate: "1996-06-22",
       prefecture: "東京都",
       email: "example@example.com",
@@ -17,87 +17,79 @@ RSpec.describe Employee, type: :model do
       is_active: true,
     }
   }
-  let(:department) { Department.create(name: "営業部") }
-  subject { employee.save }
   describe "バリデーションテスト" do
-    context "正しい内容を保存する場合" do
-      it { is_expected.to be_truthy }
+    it "正しい内容を保存する場合" do
+      expect(employee.save).to be_truthy
     end
 
-    context "last_nameカラムの値が空である場合" do
-      before do
-        employee.last_name = ""
-      end
-      it { is_expected.to be_falsey }
+    it "last_nameカラムの値が空である場合" do
+      employee.last_name = ""
+      expect(employee.save).to be_falsey
     end
 
-    context "first_nameカラムの値が空である場合" do
-      before do
-        employee.first_name = ""
-      end
-      it { is_expected.to be_falsey }
+    it "first_nameカラムの値が空である場合" do
+      employee.first_name = ""
+      expect(employee.save).to be_falsey
     end
 
-    context "last_name_furiganaカラムの値が空である場合" do
-      before do
-        employee.last_name_furigana = ""
-      end
-      it { is_expected.to be_falsey }
+    it "last_name_furiganaカラムの値が空である場合" do
+      employee.last_name_furigana = ""
+      expect(employee.save).to be_falsey
     end
 
-    context "first_name_furiganaカラムの値が空である場合" do
-      before do
-        employee.last_name_furigana = ""
-      end
-      it { is_expected.to be_falsey }
+    it "first_name_furiganaカラムの値が空である場合" do
+      employee.first_name_furigana = ""
+      expect(employee.save).to be_falsey
     end
 
-    context "birthdateカラムの値が空である場合" do
-      before do
-        employee.birthdate = ""
-      end
-      it { is_expected.to be_falsey }
+    it "birthdateカラムの値が空である場合" do
+      employee.birthdate = ""
+      expect(employee.save).to be_falsey
     end
 
-    context "prefectureカラムの値が空である場合" do
-      before do
-        employee.prefecture = ""
-      end
-      it { is_expected.to be_falsey }
+    it "prefectureカラムの値が空である場合" do
+      employee.prefecture = ""
+      expect(employee.save).to be_falsey
     end
 
-    context "last_name_furiganaカラムの値がカナ文字でない場合" do
-      before do
-        employee.last_name_furigana = "ささき"
-      end
-      it { is_expected.to be_falsey }
+    it "last_name_furiganaカラムの値がカナ文字でない場合" do
+      employee.last_name_furigana = "ささき"
+      expect(employee.save).to be_falsey
     end
 
-    context "first_name_furiganaカラムの値がカナ文字でない場合" do
-      before do
-        employee.last_name_furigana = "たろう"
-      end
-      it { is_expected.to be_falsey }
+    it "first_name_furiganaカラムの値がカナ文字でない場合" do
+      employee.last_name_furigana = "たろう"
+      expect(employee.save).to be_falsey
     end
   end
 
-  describe "メソッドのテスト" do
-    context "#full_name" do
-      it "last_nameとfirst_nameの間に空白が空いている" do
-        expect(employee.full_name).to eq "佐々木 太朗"
-      end
+  describe "#full_name" do
+    it "last_nameとfirst_nameが結合し、間に空白が空いている" do
+      expect(employee.full_name).to eq "佐々木 太朗"
     end
-    context "#full_name_furigana" do
-      it "last_name_furiganaとfirst_name_furiganaの間に空白が空いている" do
-        expect(employee.full_name_furigana).to eq "ササキ タロウ"
-      end
+  end
+  describe "#full_name_furigana" do
+    it "last_name_furiganaとfirst_name_furiganaが結合し、間に空白が空いている" do
+      expect(employee.full_name_furigana).to eq "ササキ タロウ"
     end
-    context "#self.search(keyword)" do
-      it "キーワードで部分検索ができる" do
-        employee.save
-        keyword = "佐々木"
-        expect(Employee.search(keyword)).to include(employee)
-      end
+  end
+  describe "#self.search(keyword)" do
+    before { employee.save }
+    it "キーワードでlast_nameの部分検索ができる" do
+      keyword = "佐々木"
+      expect(Employee.search(keyword)).to include(employee)
+    end
+    it "キーワードでfirst_nameの部分検索ができる" do
+      keyword = "太朗"
+      expect(Employee.search(keyword)).to include(employee)
+    end
+    it "キーワードでlast_name_furiganaの部分検索ができる" do
+      keyword = "ササキ"
+      expect(Employee.search(keyword)).to include(employee)
+    end
+    it "キーワードでfirst_name_furiganaの部分検索ができる" do
+      keyword = "タロウ"
+      expect(Employee.search(keyword)).to include(employee)
     end
   end
 end

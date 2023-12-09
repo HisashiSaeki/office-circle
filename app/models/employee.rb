@@ -21,8 +21,8 @@ class Employee < ApplicationRecord
   with_options presence: do
     validates :last_name
     validates :first_name
-    validates :last_name_furigana, format: { with: /\A[ァ-ヶー－]+\z/ }
-    validates :first_name_furigana, format: { with: /\A[ァ-ヶー－]+\z/ }
+    validates :last_name_furigana, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" }
+    validates :first_name_furigana, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" }
     validates :birthdate
     validates :prefecture
   end
