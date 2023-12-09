@@ -3,18 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Article, type: :model do
-  let!(:employee) { Employee.create(
-    last_name: "佐々木",
-    first_name: "太朗",
-    last_name_furigana: "ササキ",
-    first_name_furigana: "タロウ",
-    department_id: Department.create(name: "営業部").id,
-    birthdate: "1996-06-22",
-    prefecture: "東京都",
-    email: "example@example.com",
-    password: "123456",
-    is_active: true,
-  ) }
+  let!(:employee) { create(:employee) }
   let!(:article) { Article.new(**params) }
   let(:params) { {
     employee_id: employee.id,
