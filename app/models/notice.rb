@@ -13,9 +13,7 @@ class Notice < ApplicationRecord
 
 
   def create_activities
-    logger.debug("create_activities")
     members = self.group.employees
-    logger.debug("members=#{members}")
     members.each { |member| Activity.create(subject: self, employee: member, action_type: :noticed_to_participating_group) }
   end
 
