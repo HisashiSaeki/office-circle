@@ -4,23 +4,18 @@ require "rails_helper"
 
 RSpec.describe Department, type: :model do
   describe "バリデーションテスト" do
-    let(:department) { Department.new(**params) }
-    let(:params) { { name: } }
+    let(:department) { Department.new(name: "営業部") }
     subject { department.save }
-    context "正しい内容の場合" do
-      let(:name) { "営業部" }
-      it { is_expected.to be_truthy }
+    it "正しい内容の場合" do
+      expect(department.save).to be_truthy
     end
-    context "nameカラムの値が空である場合" do
-      let(:name) { "" }
-      it { is_expected.to be_falsey }
+    it "nameカラムの値が空である場合" do
+      department.name = ""
+      expect(department.save).to be_falsey
     end
-    context "nameカラムの値が重複する場合" do
-      before do
-        Department.create(name: "営業部")
-      end
-      let(:name) { "営業部" }
-      it { is_expected.to be_falsey }
+    it "nameカラムの値が重複する場合" do
+      Department.create(name: "営業部") 
+      expect(department.save).to be_falsey
     end
   end
 end

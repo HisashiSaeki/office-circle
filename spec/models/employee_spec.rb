@@ -3,13 +3,14 @@
 require "rails_helper"
 
 RSpec.describe Employee, type: :model do
+  let!(:department) { create(:department)}
   let!(:employee) { Employee.new(**params) }
   let(:params) {
     { last_name: "佐々木",
       first_name: "太朗",
       last_name_furigana: "ササキ",
       first_name_furigana: "タロウ",
-      department_id: Department.create(name: "営業部").id,
+      department_id: department.id,
       birthdate: "1996-06-22",
       prefecture: "東京都",
       email: "example@example.com",
