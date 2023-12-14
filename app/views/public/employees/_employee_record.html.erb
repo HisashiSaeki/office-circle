@@ -4,13 +4,13 @@
       <%= image_tag employee.get_profile_image(80, 80) %>
     </div>
     <div class="employee-record__employee-info">
-      <p class="employee-name"><%= employee.full_name %></p>
-      <span class="employee-department"><%= employee.department.name %></span>
+      <p><%= employee.full_name %></p>
+      <p><%= employee.department.name %></p>
     </div>
     <div class="employee-record__employee-description">
       <% if employee.introduction %>
         <!--一覧表示の際に2行程度で収まる文字数を指定-->
-        <p class="employee-introduction"><%= employee.introduction.truncate(63, omission: "...") %></p>
+        <p><%= employee.introduction.truncate(63, omission: "...") %></p>
       <% end %>
     </div>
   </div>

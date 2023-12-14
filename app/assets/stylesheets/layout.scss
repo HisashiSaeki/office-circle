@@ -25,6 +25,15 @@ main {
   align-items: center;
 }
 
+.header__inner a {
+  color: #fff;
+}
+
+.header__inner a:focus,
+.header__inner a:hover {
+  text-decoration-color: #fff;
+}
+
 .header__logo:focus,
 .header__logo:hover {
   text-decoration: none;

@@ -28,7 +28,7 @@ RSpec.describe "[STEP1]管理者ログイン前のテスト" do
       before do
         fill_in "admin_email", with: admin.email
         fill_in "admin_password", with: admin.password
-        click_button "ログイン"
+        click_on "ログイン"
       end
       it "ログイン後のリダイレクト先が管理者側の社員一覧画面になっている" do
         expect(current_path).to eq admin_employees_path
@@ -42,7 +42,7 @@ RSpec.describe "[STEP1]管理者ログイン前のテスト" do
       before do
         fill_in "admin_email", with: ""
         fill_in "admin_password", with: ""
-        click_button "ログイン"
+        click_on "ログイン"
       end
       it "ログインに失敗し、ログイン画面にリダイレクトされる" do
         expect(current_path).to eq new_admin_session_path
@@ -58,7 +58,7 @@ RSpec.describe "[STEP1]管理者ログイン前のテスト" do
       visit new_admin_session_path
       fill_in "admin_email", with: admin.email
       fill_in "admin_password", with: admin.password
-      click_button "ログイン"
+      click_on "ログイン"
     end
 
     context "ヘッダーの表示を確認" do
@@ -85,8 +85,8 @@ RSpec.describe "[STEP1]管理者ログイン前のテスト" do
       visit new_admin_session_path
       fill_in "admin_email", with: admin.email
       fill_in "admin_password", with: admin.password
-      click_button "ログイン"
-      click_link "ログアウト"
+      click_on "ログイン"
+      click_on "ログアウト"
     end
     it "正しくログアウトできている: ログアウト後のリダイレクト先がトップ画面になっている" do
       expect(current_path).to eq "/"
