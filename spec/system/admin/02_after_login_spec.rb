@@ -107,26 +107,58 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
     end
   end
 
-  # describe "投稿一覧画面のテスト" do
-  #   context "表示内容の確認" do
-  #     it "URLが正しい" do
+  describe "投稿一覧画面のテスト" do
+    let!(:employee) { create(:employee) }
+    let!(:article) { create(:article, employee_id: employee.id) }
+    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "テスト")}
+    before do
+      list_tags = ["公開中"]
+      article.save_tags(list_tags)
+      visit admin_articles_path
+    end
+    
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/admin/articles"
+      end
+      it "検索フォームが存在する" do
+        expect(page).to have_field "keyword"
+      end
+      it "検索ボタンが存在する" do
+        expect(page).to have_button "検索"
+      end
+      it "タグ検索の見出しが存在する" do
+        expect(page).to have_content "タグ検索"
+      end
+      it "公開中の記事に紐づくタグがタグ検索欄に表示されている" do
+        within ".search-group" do
+          expect(page).to have_content "公開中"
+        end
+      end
+      it "投稿した記事が存在する" do
+        expect(page).to have_content "#{article.title}"
+      end
+      it "投稿した記事の作成日が表示される" do
+        expect(page).to have_content "#{ Time.zone.today.strftime("%Y年%m月%d日")}"
+      end
+      it "投稿した記事の作者が表示される" do
+        expect(page).to have_content "#{article.employee.full_name}"
+      end
+      it "投稿した記事のタイトルが表示される" do
+        expect(page).to have_selector "h2", text: "#{article.title}"
+      end
+      it "投稿した記事に紐づくタグが表示される" do
+        within ".article-record" do
+          expect(page).to have_content "公開中"
+        end
+      end
+      it "投稿した記事のコメントアイコンが表示される" do
+        expect(page).to have_selector "i.fa-regular.fa-comments"
+      end
+      it "投稿した記事のコメント数が表示される" do
+        expect(page).to have_selector ".horizontal-icon-list__item", text: "#{article.comments.size}"
+      end
+    end
 
-  #     end
-  #     it "検索フォームが存在する" do
-
-  #     end
-  #     it "検索ボタンが存在する" do
-
-  #     end
-  #     it "タグ検索の見出しが存在する" do
-
-  #     end
-  #     it "公開中の記事に紐づくタグが存在する" do
-
-  #     end
-  #     it "投稿した記事" do
-
-  #     end
-  #   end
-  # end
+  end
 end
