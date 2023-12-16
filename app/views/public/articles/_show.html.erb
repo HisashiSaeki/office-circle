@@ -1,13 +1,20 @@
 <div class="article">
   <div class="article__item">
     <div class="employee-profile">
-      <div class="image">
+      <div class="article-employee-image">
         <%= image_tag article.employee.get_profile_image(100, 100) %>
       </div>
       <div class="employee-info">
-        <%= link_to employee_path(article.employee.id), class: "employee-name" do %>
-          <%= article.employee.full_name %>
-          (<%= article.employee.department.name %>)
+        <% if admin_signed_in? %>
+          <%= link_to admin_employee_path(article.employee.id), class: "employee-name" do %>
+            <%= article.employee.full_name %>
+            (<%= article.employee.department.name %>)
+          <% end %>
+        <% else %>
+          <%= link_to employee_path(article.employee.id), class: "employee-name" do %>
+            <%= article.employee.full_name %>
+            (<%= article.employee.department.name %>)
+          <% end %>
         <% end %>
       </div>
       <% unless admin_signed_in? %>

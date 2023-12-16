@@ -159,6 +159,110 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
         expect(page).to have_selector ".horizontal-icon-list__item", text: "#{article.comments.size}"
       end
     end
-
+    
+    context "リンクの内容を確認" do
+      it "投稿した記事のタイトルのリンクが正しい" do
+        expect(page).to have_link article.title, href: admin_article_path(article)
+      end
+      it "タグ検索欄のタグのリンクが正しい" do
+        within ".search-group" do
+          expect(page).to have_link "公開中", href: admin_tag_search_path(tag_id: 1)
+        end
+      end
+      it "投稿した記事に紐づくタグのリンクが正しい" do
+        within ".article-record" do
+          expect(page).to have_link "公開中", href: admin_tag_search_path(tag_id: 1)
+        end
+      end
+    end
+  end
+  
+  describe "投稿詳細画面のテスト" do
+    let!(:employee) {create(:employee)}
+    let!(:other_employee) {create(:employee)}
+    let!(:article) {create(:article, employee_id: employee.id)}
+    let!(:comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "テスト")}
+    before do
+      list_tags = ["公開中"]
+      article.save_tags(list_tags)
+      visit admin_articles_path
+      click_on article.title
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to  eq "/admin/articles/#{article.id}"
+      end
+      it "作者のプロフィール画像が表示される" do
+        within ".article-employee-image" do
+          expect(page).to have_selector "img"
+        end
+      end
+      it "作者の名前が表示される" do
+        expect(page).to have_content article.employee.full_name
+      end
+      it "作者の部署名が表示される" do
+        expect(page).to have_content "(#{article.employee.department.name})"
+      end
+      it "記事のタイトルが表示される" do
+        expect(page).to have_content article.title
+      end
+      it "記事に紐づくタグが表示される" do
+        expect(page).to have_content "公開中"
+      end
+      it "投稿日が表示される" do
+        expect(page).to have_content "投稿日：#{article.created_at.strftime("%Y年%m月%d日")}"
+      end
+      it "最終更新日が表示される" do
+        expect(page).to have_content "最終更新日：#{article.updated_at.strftime("%Y年%m月%d日 %H時%M分")}"
+      end
+      it "記事の本文が表示される" do
+        expect(page).to have_content article.body
+      end
+      it "コメントの見出しが表示される" do
+        expect(page).to have_content "コメント"
+      end
+      it "コメントの作者のプロフィール画像が表示される" do
+        within ".comment-content" do
+          expect(page).to have_selector "img"
+        end
+      end
+      it "コメントの作者の名前が表示される" do
+        expect(page).to have_content other_employee.full_name
+      end
+      it "コメントの作者の部署名が表示される" do
+        expect(page).to have_content "(#{other_employee.department.name})"
+      end
+      it "コメントの作成日が表示される" do
+        expect(page).to have_content comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+      end
+      it "コメントの内容が表示される" do
+        expect(page).to have_content comment.comment
+      end
+      it "コメントの削除ボタンが表示される" do
+        expect(page).to have_link "削除"
+      end
+    end
+    
+    context "リンクの内容を確認" do
+      it "作者の名前のリンクが正しい" do
+        expect(page).to have_link article.employee.full_name, href: admin_employee_path(employee)
+      end
+      it "記事に紐づくタグのリンクが正しい" do
+        expect(page).to have_link "公開中", href: admin_tag_search_path(tag_id: 1)
+      end
+      it "コメントの削除ボタンのリンクが正しい" do
+        expect(page).to have_link "削除", href: admin_article_comment_path(article, comment)
+      end
+    end
+    
+    # context "コメントの削除成功テスト" do
+    #   it "削除ボタンを押すとコメントが削除されている", js: true do
+    #     expect { click_on "削除" }.to change { Comment.count}.by(-1)
+    #   end
+    #   it "コメントを削除した後、他の画面に遷移しない", js: true do
+    #     click_on "削除"
+    #     expect(current_path).to eq admin_article_path(article)
+    #   end
+    # end
   end
 end
