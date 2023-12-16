@@ -382,15 +382,75 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
     end
   end
   
-  # describe "社員情報編集画面のテスト" do
-  #   let!(:employee) { create(:employee) }
-  #   before do
-  #     click_on employee.full_name
-  #     click_on "社員情報を編集"
-  #   end
-  #   context "表示内容の確認" do
-      
-  #   end
+  describe "社員情報編集画面のテスト" do
+    let!(:employee) { create(:employee) }
+    before do
+      visit admin_employees_path
+      click_on employee.full_name
+      click_on "社員情報を変更"
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/admin/employees/#{employee.id}/edit"
+      end
+      it "「社員ID」が表示されている" do
+        expect(page).to have_content "社員ID"
+      end
+      it "「氏名」が表示されている" do
+        expect(page).to have_content "氏名"
+      end
+      it "「氏名(カナ)」が表示されている" do
+        expect(page).to have_content "氏名(カナ)"
+      end
+      it "「生年月日」が表示されている" do
+        expect(page).to have_content "生年月日"
+      end
+      it "「出身地」が表示されている" do
+        expect(page).to have_content "出身地"
+      end
+      it "「部署」が表示されている" do
+        expect(page).to have_content "部署"
+      end
+      it "「メールアドレス」が表示されている" do
+        expect(page).to have_content "メールアドレス"
+      end
+      it "「社員ステータス」が表示されている" do
+        expect(page).to have_content "社員ステータス"
+      end
+      it "登録された社員のIDが表示されている" do
+        expect(page).to have_content "#{employee.id}"
+      end
+      it "登録された社員の苗字が表示されている" do
+        expect(page).to have_field "employee[last_name]", with: employee.last_name
+      end
+      it "登録された社員の名前が表示されている" do
+        expect(page).to have_field "employee[first_name]", with: employee.first_name
+      end
+      it "登録された社員の苗字(フリガナ)が表示されている" do
+        expect(page).to have_field "employee[last_name_furigana]", with: employee.last_name_furigana
+      end
+      it "登録された社員の名前(フリガナ)が表示されている" do
+        expect(page).to have_field "employee[first_name_furigana]", with: employee.first_name_furigana
+      end
+      it "登録された社員の生年月日が表示されている" do
+        expect(page).to have_field "employee[birthdate]", with: employee.birthdate
+      end
+      it "登録された社員の出身地が表示されている" do
+        expect(page).to have_field "employee[prefecture]", with: employee.prefecture
+      end
+      it "登録された社員の部署が表示されている" do
+        expect(page).to have_select("部署", selected: employee.department.name)
+      end
+      it "登録された社員のメールアドレスが表示されている" do
+        expect(page).to have_field "employee[email]", with: employee.email
+      end
+      it "登録された社員の社員ステータスがラジオボタンで選択されている" do
+        expect(page).to have_checked_field('有効')
+      end
+      it "登録情報を変更ボタンが存在する" do
+        expect(page).to have_button "登録情報を変更"
+      end
+    end
   end
   
 end
