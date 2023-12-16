@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Employee, type: :model do
-  let!(:department) { create(:department)}
+  let!(:department) { create(:department) }
   let!(:employee) { Employee.new(**params) }
   let(:params) {
     { last_name: "佐々木",

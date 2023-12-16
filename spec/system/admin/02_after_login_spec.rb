@@ -59,7 +59,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
         fill_in "department[name]", with: "開発部"
       end
       it "新しい部署が正しく保存される" do
-        expect { click_on "登録"}.to change { Department.count }.by(1)
+        expect { click_on "登録" }.to change { Department.count }.by(1)
       end
       it "保存は非同期で行われるため、リロードせず部署一覧に追加される" do
         click_on "登録"
@@ -110,13 +110,13 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
   describe "投稿一覧画面のテスト" do
     let!(:employee) { create(:employee) }
     let!(:article) { create(:article, employee_id: employee.id) }
-    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "テスト")}
+    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "テスト") }
     before do
       list_tags = ["公開中"]
       article.save_tags(list_tags)
       visit admin_articles_path
     end
-    
+
     context "表示内容の確認" do
       it "URLが正しい" do
         expect(current_path).to eq "/admin/articles"
@@ -159,7 +159,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
         expect(page).to have_selector ".horizontal-icon-list__item", text: "#{article.comments.size}"
       end
     end
-    
+
     context "リンクの内容を確認" do
       it "投稿した記事のタイトルのリンクが正しい" do
         expect(page).to have_link article.title, href: admin_article_path(article)
@@ -176,12 +176,12 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       end
     end
   end
-  
+
   describe "投稿詳細画面のテスト" do
-    let!(:employee) {create(:employee)}
-    let!(:other_employee) {create(:employee)}
-    let!(:article) {create(:article, employee_id: employee.id)}
-    let!(:comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "テスト")}
+    let!(:employee) { create(:employee) }
+    let!(:other_employee) { create(:employee) }
+    let!(:article) { create(:article, employee_id: employee.id) }
+    let!(:comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "テスト") }
     before do
       list_tags = ["公開中"]
       article.save_tags(list_tags)
@@ -190,7 +190,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
     end
     context "表示内容の確認" do
       it "URLが正しい" do
-        expect(current_path).to  eq "/admin/articles/#{article.id}"
+        expect(current_path).to eq "/admin/articles/#{article.id}"
       end
       it "作者のプロフィール画像が表示される" do
         within ".article-employee-image" do
@@ -242,7 +242,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
         expect(page).to have_link "削除"
       end
     end
-    
+
     context "リンクの内容を確認" do
       it "作者の名前のリンクが正しい" do
         expect(page).to have_link article.employee.full_name, href: admin_employee_path(employee)
@@ -254,15 +254,67 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
         expect(page).to have_link "削除", href: admin_article_comment_path(article, comment)
       end
     end
-    
-    # context "コメントの削除成功テスト" do
-    #   it "削除ボタンを押すとコメントが削除されている", js: true do
-    #     expect { click_on "削除" }.to change { Comment.count}.by(-1)
-    #   end
-    #   it "コメントを削除した後、他の画面に遷移しない", js: true do
-    #     click_on "削除"
-    #     expect(current_path).to eq admin_article_path(article)
-    #   end
-    # end
+
+    context "コメントの削除成功テスト" do
+      it "コメントが表示されない" do
+        expect(Comment.find(1).delete).to have_no_content "テスト"
+      end
+      it "コメントを削除した後、他の画面に遷移しない" do
+        Comment.find(1).delete
+        expect(current_path).to eq admin_article_path(article)
+      end
+    end
+  end
+
+  describe "社員一覧画面のテスト" do
+    let!(:employee) { create(:employee) }
+    before { visit admin_employees_path }
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/admin/employees"
+      end
+      it "検索フォームが存在する" do
+        expect(page).to have_field "氏名を入力"
+      end
+      it "検索ボタンが存在する" do
+        expect(page).to have_button "検索"
+      end
+      it "部署検索の見出しが存在する" do
+        expect(page).to have_content "部署検索"
+      end
+      it "部署検索欄に登録済みの部署が表示されている" do
+        within ".search-group" do
+          expect(page).to have_content employee.department.name
+        end
+      end
+      it "thタグに社員IDが表示されている" do
+        expect(page).to have_selector "thead th", text: "社員ID"
+      end
+      it "thタグに社員名が表示されている" do
+        expect(page).to have_selector "thead th", text: "社員名"
+      end
+      it "thタグに所属部署が表示されている" do
+        expect(page).to have_selector "thead th", text: "所属部署"
+      end
+      it "thタグにメールアドレスが表示されている" do
+        expect(page).to have_selector "thead th", text: "メールアドレス"
+      end
+      it "thタグに社員ステータスが表示されている" do
+        expect(page).to have_selector "thead th", text: "社員ステータス"
+      end
+      it "登録された社員が表示されている" do
+        expect(page).to have_content employee.full_name
+      end
+    end
+    context "リンクの確認" do
+      it "部署検索欄の部署名のリンクが正しい" do
+        within ".search-group" do
+          expect(page).to have_link employee.department.name, href: admin_department_search_path(department_id: employee.department.id)
+        end
+      end
+      it "登録された社員名のリンクが正しい" do
+        expect(page).to have_link employee.full_name, href: admin_employee_path(employee)
+      end
+    end
   end
 end

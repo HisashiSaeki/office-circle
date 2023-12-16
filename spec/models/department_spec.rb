@@ -14,7 +14,7 @@ RSpec.describe Department, type: :model do
       expect(department.save).to be_falsey
     end
     it "nameカラムの値が重複する場合" do
-      Department.create(name: "営業部") 
+      Department.create(name: "営業部")
       expect(department.save).to be_falsey
     end
   end
