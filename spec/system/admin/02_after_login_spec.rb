@@ -317,4 +317,80 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       end
     end
   end
+  
+  describe "社員詳細画面のテスト" do
+    let!(:employee) { create(:employee) }
+    before do
+      visit admin_employees_path
+      click_on employee.full_name
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/admin/employees/#{employee.id}"
+      end
+      it "「社員ID」が表示されている" do
+        expect(page).to have_content "社員ID"
+      end
+      it "「名前」が表示されている" do
+        expect(page).to have_content "名前"
+      end
+      it "「名前(フリガナ)」が表示されている" do
+        expect(page).to have_content "名前(フリガナ)"
+      end
+      it "「生年月日」が表示されている" do
+        expect(page).to have_content "生年月日"
+      end
+      it "「出身地」が表示されている" do
+        expect(page).to have_content "出身地"
+      end
+      it "「部署」が表示されている" do
+        expect(page).to have_content "部署"
+      end
+      it "「メールアドレス」が表示されている" do
+        expect(page).to have_content "メールアドレス"
+      end
+      it "「社員ステータス」が表示されている" do
+        expect(page).to have_content "社員ステータス"
+      end
+      it "登録された社員のIDが表示されている" do
+        expect(page).to have_content "#{employee.id}"
+      end
+      it "登録された社員の氏名が表示されている" do
+        expect(page).to have_content employee.full_name
+      end
+      it "登録された社員の氏名(フリガナ)が表示されている" do
+        expect(page).to have_content employee.full_name_furigana
+      end
+      it "登録された社員の生年月日が表示されている" do
+        expect(page).to have_content employee.birthdate
+      end
+      it "登録された社員の出身地が表示されている" do
+        expect(page).to have_content employee.prefecture
+      end
+      it "登録された社員の部署が表示されている" do
+        expect(page).to have_content employee.department.name
+      end
+      it "登録された社員のメールアドレスが表示されている" do
+        expect(page).to have_content employee.email
+      end
+      it "登録された社員の社員ステータスが表示されている" do
+        expect(page).to have_content "有効"
+      end
+      it "社員情報を変更ボタンが存在する" do
+        expect(page).to have_link "社員情報を変更", href: edit_admin_employee_path(employee)
+      end
+    end
+  end
+  
+  # describe "社員情報編集画面のテスト" do
+  #   let!(:employee) { create(:employee) }
+  #   before do
+  #     click_on employee.full_name
+  #     click_on "社員情報を編集"
+  #   end
+  #   context "表示内容の確認" do
+      
+  #   end
+  end
+  
 end
