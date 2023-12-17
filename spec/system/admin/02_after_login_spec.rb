@@ -4,7 +4,6 @@ require "rails_helper"
 
 RSpec.describe "[STEP2]管理者ログイン後のテスト" do
   let!(:admin) { create(:admin) }
-  let!(:department) { create(:department) }
   before do
     visit new_admin_session_path
     fill_in "admin_email", with: admin.email
@@ -30,6 +29,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
   end
 
   describe "部署一覧/新規作成画面のテスト" do
+    let!(:department) { create(:department) }
     before do
       visit admin_departments_path
     end
@@ -61,7 +61,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       it "新しい部署が正しく保存される" do
         expect { click_on "登録" }.to change { Department.count }.by(1)
       end
-      it "保存は非同期で行われるため、リロードせず部署一覧に追加される" do
+      it "登録後は部署一覧に追加される" do
         click_on "登録"
         expect(page).to have_content "開発部"
       end
@@ -76,6 +76,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
   end
 
   describe "部署編集画面のテスト" do
+    let!(:department) { create(:department) }
     before do
       visit edit_admin_department_path(department)
     end
@@ -267,6 +268,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
   end
 
   describe "社員一覧画面のテスト" do
+    let!(:department) { create(:department) }
     let!(:employee) { create(:employee) }
     before { visit admin_employees_path }
     context "表示内容の確認" do
@@ -383,6 +385,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
   end
   
   describe "社員情報編集画面のテスト" do
+    let!(:department) { create(:department, name: "営業部") }
     let!(:employee) { create(:employee) }
     before do
       visit admin_employees_path
@@ -439,7 +442,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
         expect(page).to have_field "employee[prefecture]", with: employee.prefecture
       end
       it "登録された社員の部署が表示されている" do
-        expect(page).to have_select("部署", selected: employee.department.name)
+        expect(page).to have_select("部署", selected: employee.department.name, options: ["部署を選択してください", "営業部", "#{employee.department.name}"])
       end
       it "登録された社員のメールアドレスが表示されている" do
         expect(page).to have_field "employee[email]", with: employee.email
@@ -449,6 +452,60 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       end
       it "登録情報を変更ボタンが存在する" do
         expect(page).to have_button "登録情報を変更"
+      end
+    end
+    
+    context "編集の成功テスト" do
+      before do
+        @old_last_name = employee.last_name
+        @old_first_name = employee.first_name
+        @old_last_name_furigana = employee.last_name_furigana
+        @old_first_name_furigana = employee.first_name_furigana
+        @old_birthdate = employee.birthdate
+        @old_prefecture = employee.prefecture
+        @old_department = employee.department.name
+        @old_email = employee.email
+        @old_is_active = "有効"
+        fill_in "employee[last_name]", with: "田中"
+        fill_in "employee[first_name]", with: "太一"
+        fill_in "employee[last_name_furigana]", with: "タナカ"
+        fill_in "employee[first_name_furigana]", with: "タイチ"
+        fill_in "employee[birthdate]", with: "2000-01-01"
+        fill_in "employee[prefecture]", with: "北海道"
+        select "#{department.name}"
+        fill_in "employee[email]", with: "tanaka@example.com"
+        choose "停止"
+        click_on "登録情報を変更"
+      end
+      it "苗字が正しく更新されている" do
+        expect(page).to have_no_content @old_last_name
+      end
+      it "名前が正しく更新されている" do
+        expect(page).to have_no_content @old_first_name
+      end
+      it "苗字のフリガナが正しく更新されている" do
+        expect(page).to have_no_content @old_last_name_furigana
+      end
+      it "名前のフリガナが正しく更新されている" do
+        expect(page).to have_no_content @old_first_name_furigana
+      end
+      it "生年月日が正しく更新されている" do
+        expect(page).to have_no_content @old_birthdate
+      end
+      it "出身地が正しく更新されている" do
+        expect(page).to have_no_content @old_prefecture
+      end
+      it "部署が正しく更新されている" do
+        expect(page).to have_no_content @old_department
+      end
+      it "メールアドレスが正しく更新されている" do
+        expect(page).to have_no_content @old_email
+      end
+      it "社員ステータスが正しく更新されている" do
+        expect(page).to have_no_content @old_is_active
+      end
+      it "社員情報を編集完了後の遷移先が社員詳細画面になっている" do
+        expect(current_path).to eq admin_employee_path(employee)
       end
     end
   end
