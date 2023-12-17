@@ -507,7 +507,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       it "社員情報を編集完了後の遷移先が社員詳細画面になっている" do
         expect(current_path).to eq admin_employee_path(employee)
       end
-    end
+    end # context "編集の成功テスト"
   end
 
 end

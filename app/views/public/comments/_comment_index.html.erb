@@ -1,4 +1,4 @@
-<div class="comment-content">
+<div class="comment-content comment-<%= comment.id %>">
   <div class="employee-profile">
     <%= image_tag comment.employee.get_profile_image(50, 50) %>
     
@@ -9,9 +9,9 @@
     </div>
     
     <% if admin_signed_in? %>
-      <%= link_to "削除", admin_article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+      <%= link_to "削除", admin_article_comment_path(comment.article, comment), method: :delete, remote: true, class: "rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
     <% elsif comment.created_by?(current_employee) %>
-      <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete, remote: true, class:"rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
+      <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete, remote: true, class: "rounded-btn rounded-btn--danger rounded-btn--danger-s" %>
     <% else %>
     <% end %>
     

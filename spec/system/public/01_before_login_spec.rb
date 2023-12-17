@@ -3,8 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "[STEP1]社員ログイン前のテスト" do
-  let!(:employee) {create(:employee)}
-  let!(:department) {create(:department)}
+  let!(:employee) { create(:employee) }
+  let!(:department) { create(:department) }
   describe "トップ画面のテスト" do
     before do
       visit "/"
@@ -72,7 +72,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       end
     end
   end
-  
+
   describe "新規登録画面のテスト" do
     before do
       visit new_employee_registration_path
@@ -115,7 +115,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
         expect(page).to have_link "登録済みの方はこちらからログイン"
       end
     end
-    
+
     context "新規登録成功のテスト" do
       before do
         fill_in "employee[last_name]", with: "田中"
@@ -170,7 +170,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
         expect(page).to have_link "グループ一覧", href: groups_path
       end
       it "ログアウトが表示される" do
-        expect(page).to have_link "ログアウト" , href: destroy_employee_session_path
+        expect(page).to have_link "ログアウト", href: destroy_employee_session_path
       end
     end
   end

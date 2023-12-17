@@ -3,6 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "[STEP2]社員ログイン後のテスト" do
+  let!(:department) {create(:department, name: "営業部")}
   let!(:employee) { create(:employee) }
   before do
     visit new_employee_session_path
@@ -142,9 +143,8 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "表示内容の確認"
   end # describe "マイページのテスト"
-  
+
   describe "社員編集画面のテスト" do
-    let!(:department) {create(:department, name: "営業部")}
     before do
       click_on "登録内容を変更"
     end
@@ -204,7 +204,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_button "変更内容を保存"
       end
     end # context "表示内容の確認"
-    
+
     context "編集の成功テスト" do
       before do
         @old_last_name = employee.last_name
@@ -258,7 +258,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "編集の成功テスト"
   end # describe "社員編集画面のテスト"
-  
+
   describe "社員一覧画面のテスト" do
     before do
       visit edit_employee_path(employee)
@@ -297,7 +297,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_content "自己紹介文"
       end
     end # context "表示内容の確認"
-    
+
     context "リンクの確認" do
       it "部署検索欄の部署名のリンクが正しい" do
         within ".search-group" do
@@ -309,73 +309,213 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "リンクの確認"
   end # describe "社員一覧画面のテスト"
-  
-  # describe "投稿一覧画面のテスト" do
-  #   let!(:article) { create(:article, employee_id: employee.id) }
-  #   let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "テスト") }
-  #   before do
-  #     list_tags = ["公開中"]
-  #     article.save_tags(list_tags)
-  #     visit admin_articles_path
-  #   end
 
-  #   context "表示内容の確認" do
-  #     it "URLが正しい" do
-  #       expect(current_path).to eq "/admin/articles"
-  #     end
-  #     it "検索フォームが存在する" do
-  #       expect(page).to have_field "keyword"
-  #     end
-  #     it "検索ボタンが存在する" do
-  #       expect(page).to have_button "検索"
-  #     end
-  #     it "タグ検索の見出しが存在する" do
-  #       expect(page).to have_content "タグ検索"
-  #     end
-  #     it "公開中の記事に紐づくタグがタグ検索欄に表示されている" do
-  #       within ".search-group" do
-  #         expect(page).to have_content "公開中"
-  #       end
-  #     end
-  #     it "投稿した記事が存在する" do
-  #       expect(page).to have_content "#{article.title}"
-  #     end
-  #     it "投稿した記事の作成日が表示される" do
-  #       expect(page).to have_content "#{ Time.zone.today.strftime("%Y年%m月%d日")}"
-  #     end
-  #     it "投稿した記事の作者が表示される" do
-  #       expect(page).to have_content "#{article.employee.full_name}"
-  #     end
-  #     it "投稿した記事のタイトルが表示される" do
-  #       expect(page).to have_selector "h2", text: "#{article.title}"
-  #     end
-  #     it "投稿した記事に紐づくタグが表示される" do
-  #       within ".article-record" do
-  #         expect(page).to have_content "公開中"
-  #       end
-  #     end
-  #     it "投稿した記事のコメントアイコンが表示される" do
-  #       expect(page).to have_selector "i.fa-regular.fa-comments"
-  #     end
-  #     it "投稿した記事のコメント数が表示される" do
-  #       expect(page).to have_selector ".horizontal-icon-list__item", text: "#{article.comments.size}"
-  #     end
-  #   end
+  describe "投稿一覧画面のテスト" do
+    let!(:article) { create(:article, employee_id: employee.id) }
+    before do
+      list_tags = ["公開中"]
+      article.save_tags(list_tags)
+      visit articles_path
+    end
 
-  #   context "リンクの内容を確認" do
-  #     it "投稿した記事のタイトルのリンクが正しい" do
-  #       expect(page).to have_link article.title, href: admin_article_path(article)
-  #     end
-  #     it "タグ検索欄のタグのリンクが正しい" do
-  #       within ".search-group" do
-  #         expect(page).to have_link "公開中", href: admin_tag_search_path(tag_id: 1)
-  #       end
-  #     end
-  #     it "投稿した記事に紐づくタグのリンクが正しい" do
-  #       within ".article-record" do
-  #         expect(page).to have_link "公開中", href: admin_tag_search_path(tag_id: 1)
-  #       end
-  #     end
-  #   end
-  # end # describe "投稿一覧画面のテスト"
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/articles"
+      end
+      it "検索フォームが存在する" do
+        expect(page).to have_field "記事タイトルを入力"
+      end
+      it "検索ボタンが存在する" do
+        expect(page).to have_button "検索"
+      end
+      it "タグ検索の見出しが存在する" do
+        expect(page).to have_content "タグ検索"
+      end
+      it "公開中の記事に紐づくタグがタグ検索欄に表示されている" do
+        within ".search-group" do
+          expect(page).to have_content "公開中"
+        end
+      end
+      it "投稿した記事が存在する" do
+        expect(page).to have_content "#{article.title}"
+      end
+      it "投稿した記事の作成日が表示される" do
+        expect(page).to have_content "#{ article.created_at.strftime("%Y年%m月%d日")}"
+      end
+      it "投稿した記事の作者が表示される" do
+        expect(page).to have_content "#{article.employee.full_name}"
+      end
+      it "投稿した記事のタイトルが表示される" do
+        expect(page).to have_selector "h2", text: "#{article.title}"
+      end
+      it "投稿した記事に紐づくタグが表示される" do
+        within ".article-record" do
+          expect(page).to have_content "公開中"
+        end
+      end
+      it "投稿した記事のいいねアイコンが表示される" do
+        expect(page).to have_selector "i.fa-regular.fa-thumbs-up"
+      end
+      it "投稿した記事のいいね数が表示される" do
+        expect(page).to have_selector "#favorite_btn_#{article.id}", text: "#{article.favorites.size}"
+      end
+      it "投稿した記事のコメントアイコンが表示される" do
+        expect(page).to have_selector "i.fa-regular.fa-comments"
+      end
+      it "投稿した記事のコメント数が表示される" do
+        expect(page).to have_selector ".horizontal-icon-list__item", text: "#{article.comments.size}"
+      end
+    end # context "表示内容の確認"
+
+    context "リンクの内容を確認" do
+      it "投稿した記事のタイトルのリンクが正しい" do
+        expect(page).to have_link article.title, href: article_path(article)
+      end
+      it "タグ検索欄のタグのリンクが正しい" do
+        within ".search-group" do
+          expect(page).to have_link "公開中", href: tag_search_path(tag_id: 1)
+        end
+      end
+      it "投稿した記事に紐づくタグのリンクが正しい" do
+        within ".article-record" do
+          expect(page).to have_link "公開中", href: tag_search_path(tag_id: 1)
+        end
+      end
+    end # context "リンクの内容を確認"
+  end # describe "投稿一覧画面のテスト"
+
+  describe "自分の投稿詳細画面のテスト" do
+    let!(:other_employee) { create(:employee) }
+    let!(:article) { create(:article, employee_id: employee.id) }
+    let!(:other_article) {create(:article, employee_id: other_employee.id)}
+    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "employeeのコメント")}
+    let!(:other_comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "other_employeeのコメント") }
+    before do
+      click_on "投稿一覧"
+      list_tags = ["公開中"]
+      article.save_tags(list_tags)
+      visit articles_path
+      click_on article.title
+    end
+
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/articles/#{article.id}"
+      end
+      it "投稿した記事のいいねアイコンが表示される" do
+        expect(page).to have_selector "i.fa-regular.fa-thumbs-up"
+      end
+      it "投稿した記事のいいね数が表示される" do
+        expect(page).to have_selector "#favorite_btn_#{article.id}", text: "#{article.favorites.size}"
+      end
+      it "作者のプロフィール画像が表示される" do
+        within ".article-employee-image" do
+          expect(page).to have_selector "img"
+        end
+      end
+      it "作者の名前が表示される" do
+        expect(page).to have_content article.employee.full_name
+      end
+      it "作者の部署名が表示される" do
+        expect(page).to have_content "(#{article.employee.department.name})"
+      end
+      it "記事のタイトルが表示される" do
+        expect(page).to have_content article.title
+      end
+      it "記事に紐づくタグが表示される" do
+        expect(page).to have_content "公開中"
+      end
+      it "投稿日が表示される" do
+        expect(page).to have_content "投稿日：#{article.created_at.strftime("%Y年%m月%d日")}"
+      end
+      it "最終更新日が表示される" do
+        expect(page).to have_content "最終更新日：#{article.updated_at.strftime("%Y年%m月%d日 %H時%M分")}"
+      end
+      it "記事の本文が表示される" do
+        expect(page).to have_content article.body
+      end
+      it "コメントの見出しが表示される" do
+        expect(page).to have_content "コメント"
+      end
+      it "コメントの作者のプロフィール画像が表示される" do
+        within ".comment-#{comment.id}" do
+          expect(page).to have_selector "img"
+        end
+      end
+      it "コメントの作者の名前が表示される" do
+        expect(page).to have_content employee.full_name
+        expect(page).to have_content other_employee.full_name
+      end
+      it "コメントの作者の部署名が表示される" do
+        expect(page).to have_content "(#{employee.department.name})"
+        expect(page).to have_content "(#{other_employee.department.name})"
+      end
+      it "コメントの作成日が表示される" do
+        expect(page).to have_content comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+        expect(page).to have_content other_comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+      end
+      it "コメントの内容が表示される" do
+        expect(page).to have_content comment.comment
+        expect(page).to have_content other_comment.comment
+      end
+      it "自分のコメントの削除ボタンが表示される" do
+        expect(page).to have_link "削除", href: article_comment_path(article_id: article.id, id: Comment.find_by(employee_id: employee.id))
+      end
+      it "別の社員のコメントの削除ボタンが表示されない" do
+        expect(page).to have_no_link "削除", href: article_comment_path(article_id: article.id, id: Comment.find_by(employee_id: other_employee.id))
+      end
+      it "コメント入力フォームが存在する" do
+        expect(page).to have_field "comment[comment]"
+      end
+      it "コメントを作成ボタンが存在する" do
+        expect(page).to have_button "コメントを作成"
+      end
+    end # context "表示内容の確認"
+
+    context "リンクの内容を確認" do
+      it "作者の名前のリンクが正しい" do
+        expect(page).to have_link article.employee.full_name, href: employee_path(employee)
+      end
+      it "記事に紐づくタグのリンクが正しい" do
+        expect(page).to have_link "公開中", href: tag_search_path(tag_id: 1)
+      end
+    end # context "リンクの内容を確認"
+
+    context "いいねの登録テスト", js: true do
+      it "いいねアイコンを押すと登録できる" do
+        find(".favorite_link_#{article.id}").click
+        expect{ article.favorites.all}.to change {article.favorites.count}.by(1)
+      end
+      it "いいねを登録するとアイコンが削除用のいいねアイコンに切り替わる" do
+        find(".favorite_link_#{article.id}").click
+        expect(page).to have_selector "i.fa-solid.fa-thumbs-up"
+      end
+    end # context "いいねの登録テスト"
+
+    context "コメント作成成功テスト", js: true do
+      before do
+        fill_in "comment[comment]", with: "新規コメント"
+        click_on "コメントを作成"
+      end
+      it "コメントが作成される" do
+        expect {Comment.all}.to change {Comment.count}.by(1)
+      end
+      it "コメントを作成すると、コメント入力フォームが空になる" do
+        expect(page).to have_field "comment[comment]", with: ""
+      end
+      it "コメント作成後、投稿詳細画面から遷移しない" do
+        expect(current_path).to eq article_path(article)
+      end
+    end # context "コメント作成成功テスト"
+
+    context "コメントの削除成功テスト", js: true do
+      it "コメントが表示されない" do
+        expect(Comment.find_by(employee_id: employee.id).delete).to have_no_content "employeeのコメント"
+      end
+      it "コメントを削除した後、他の画面に遷移しない" do
+        Comment.find_by(employee_id: employee.id).delete
+        expect(current_path).to eq article_path(article)
+      end
+    end # context "コメントの削除成功テスト"
+  end # describe "投稿詳細画面のテスト"
 end
