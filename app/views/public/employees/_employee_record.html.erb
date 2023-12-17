@@ -7,7 +7,7 @@
       <p><%= employee.full_name %></p>
       <p><%= employee.department.name %></p>
     </div>
-    <div class="employee-record__employee-description">
+    <div class="employee-record__employee-introduction">
       <% if employee.introduction %>
         <!--一覧表示の際に2行程度で収まる文字数を指定-->
         <p><%= employee.introduction.truncate(63, omission: "...") %></p>
