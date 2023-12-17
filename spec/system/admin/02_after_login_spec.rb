@@ -319,7 +319,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       end
     end
   end
-  
+
   describe "社員詳細画面のテスト" do
     let!(:employee) { create(:employee) }
     before do
@@ -383,7 +383,7 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       end
     end
   end
-  
+
   describe "社員情報編集画面のテスト" do
     let!(:department) { create(:department, name: "営業部") }
     let!(:employee) { create(:employee) }
@@ -448,13 +448,13 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
         expect(page).to have_field "employee[email]", with: employee.email
       end
       it "登録された社員の社員ステータスがラジオボタンで選択されている" do
-        expect(page).to have_checked_field('有効')
+        expect(page).to have_checked_field("有効")
       end
       it "登録情報を変更ボタンが存在する" do
         expect(page).to have_button "登録情報を変更"
       end
     end
-    
+
     context "編集の成功テスト" do
       before do
         @old_last_name = employee.last_name
@@ -509,5 +509,5 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
       end
     end
   end
-  
+
 end
