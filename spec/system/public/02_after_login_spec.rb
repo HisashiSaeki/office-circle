@@ -854,4 +854,43 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "リンクの確認"
   end # describe "グループ詳細画面のテスト"
+  
+  describe "グループ新規作成画面のテスト" do
+    before do
+      visit new_group_path
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/groups/new"
+      end
+      it "1.グループ名を入力してくださいが表示されている" do
+        expect(page).to have_content "1.グループ名を入力してください"
+      end
+      it "2.活動内容や紹介文を入力してくださいが表示されている" do
+        expect(page).to have_content "2.活動内容や紹介文を入力してください"
+      end
+      it "グループ名の入力フォームが存在する" do
+        expect(page).to have_field "group[name]"
+      end
+      it "活動内容の入力フォームが存在する" do
+        expect(page).to have_field "group[description]"
+      end
+      it "グループ作成ボタンが存在する" do
+        expect(page).to have_button "グループ作成"
+      end
+    end # context "表示内容の確認"
+    context "グループ新規作成テスト: 成功ケースのみ" do
+      before do
+        fill_in "group[name]", with: Faker::Lorem.characters(number: 10)
+        fill_in "group[description]", with: Faker::Lorem.characters(number: 10)
+      end
+      it "グループ作成ボタンを押すと、グループを作成できる" do
+        expect{click_on "グループ作成"}.to change {Group.count}.by(1)
+      end
+      it "グループを作成すると、グループ詳細画面に遷移する" do
+        click_on "グループ作成"
+        expect(current_path).to eq group_path(Group.find_by(creater_id: employee.id))
+      end
+    end # context "グループ新規作成テスト: 成功ケースのみ"
+  end # describe "グループ新規作成画面のテスト"
 end # RSpec.describe "[STEP2]社員ログイン後のテスト"
