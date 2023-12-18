@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "[STEP2]社員ログイン後のテスト" do
-  let!(:department) { create(:department, name: "営業部") }
+  let!(:department) {create(:department, name: "営業部")}
   let!(:employee) { create(:employee) }
-  let!(:other_employee) { create(:employee) }
+  let!(:other_employee) {create(:employee)}
   before do
     visit new_employee_session_path
     fill_in "employee[email]", with: employee.email
@@ -132,7 +132,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_content "参加中のグループはありません"
       end
       it "タブメニューのうち、参加中のグループがチェックされている時、 グループに参加している場合、参加中のグループが表示される" do
-        Group.create(creater_id: employee.id, name: "テストグループ", description: "テスト")
+        Group.create(creater_id: employee.id, name: "テストグループ", description: "テスト" )
         visit current_path
         choose "参加中のグループ"
         expect(page).to have_link "テストグループ", href: group_path(Group.find_by(creater_id: employee).id)
@@ -404,8 +404,8 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
 
   describe "投稿詳細画面のテスト: 自分の投稿" do
     let!(:article) { create(:article, employee_id: employee.id) }
-    let!(:other_article) { create(:article, employee_id: other_employee.id) }
-    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "employeeのコメント") }
+    let!(:other_article) {create(:article, employee_id: other_employee.id)}
+    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "employeeのコメント")}
     let!(:other_comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "other_employeeのコメント") }
     before do
       click_on "投稿一覧"
@@ -506,7 +506,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
 
     context "投稿削除テスト" do
       it "投稿削除ボタンを押すと投稿が削除される" do
-        expect { click_on "投稿削除" }.to change { Article.count }.by(-1)
+        expect{click_on "投稿削除"}.to change {Article.count}.by(-1)
       end
       it "投稿を削除すると、投稿一覧画面に遷移する" do
         click_on "投稿削除"
@@ -552,7 +552,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   end # describe "投稿詳細画面のテスト: 自分の投稿"
 
   describe "投稿詳細画面のテスト: 他の社員の投稿" do
-    let!(:other_article) { create(:article, employee_id: other_employee.id) }
+    let!(:other_article) {create(:article, employee_id: other_employee.id)}
     before do
       visit article_path(other_article)
     end
@@ -608,7 +608,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         fill_in "article[tag]", with: "投稿タグ"
       end
       it "投稿するボタンを押すと投稿に成功する" do
-        expect { click_on "投稿する" }.to change { Article.count }.by(1)
+        expect {click_on "投稿する"}.to change { Article.count}.by(1)
       end
       it "投稿に成功すると、記事詳細画面に遷移する" do
         click_on "投稿する"
@@ -639,7 +639,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         fill_in "article[tag]", with: "下書き投稿タグ"
       end
       it "下書き保存するボタンを押すと投稿に成功する" do
-        expect { click_on "下書き保存する" }.to change { Article.count }.by(1)
+        expect {click_on "下書き保存する"}.to change { Article.count}.by(1)
       end
       it "下書き保存に成功すると、記事詳細画面に遷移する" do
         click_on "下書き保存する"
@@ -665,7 +665,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   end # describe "新規投稿画面のテスト"
 
   describe "投稿編集画面のテスト" do
-    let!(:article) { create(:article, employee_id: employee.id) }
+    let!(:article) {create(:article, employee_id: employee.id)}
     before do
       list_tags = ["タグ"]
       article.save_tags(list_tags)
@@ -727,4 +727,48 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end
   end # describe "投稿編集画面のテスト"
+
+  describe "グループ一覧画面のテスト" do
+    let!(:group) {create(:group, creater_id: employee.id)}
+    before do
+      click_on "グループ一覧"
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/groups"
+      end
+      it "検索フォームが存在する" do
+        expect(page).to have_field "キーワードを入力"
+      end
+      it "検索ボタンが存在する" do
+        expect(page).to have_button "検索"
+      end
+      it "グループ新規作成ボタンが表示される" do
+        expect(page).to have_link "グループ新規作成", href: new_group_path
+      end
+      it "グループ名が表示される" do
+        expect(page).to have_link group.name
+      end
+      it "グループリーダー名が表示される" do
+        expect(page).to have_content "グループリーダー: #{employee.full_name} (#{employee.department.name})"
+      end
+      it "グループ作成日が表示される" do
+        expect(page).to have_content group.created_at.strftime("%Y年%m月%d日")
+      end
+      it "グループメンバー数が表示される" do
+        expect(page).to have_content "メンバー数:#{group.group_members.count}人"
+      end
+    end # context "表示内容の確認"
+    
+    context "リンクの確認" do
+      it "グループ新規作成ボタンを押すと、グループ新規作成画面に遷移する" do
+        click_on "グループ新規作成"
+        expect(current_path).to eq new_group_path
+      end
+      it "グループ名のリンクを押すと、グループ詳細画面に遷移する" do
+        click_on group.title
+        expect(current_path).to eq group_path(group)
+      end
+    end # context "リンクの確認"
+  end # describe "グループ一覧画面のテスト"
 end # RSpec.describe "[STEP2]社員ログイン後のテスト"
