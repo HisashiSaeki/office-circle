@@ -759,16 +759,99 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_content "メンバー数:#{group.group_members.count}人"
       end
     end # context "表示内容の確認"
-    
+
     context "リンクの確認" do
       it "グループ新規作成ボタンを押すと、グループ新規作成画面に遷移する" do
         click_on "グループ新規作成"
         expect(current_path).to eq new_group_path
       end
       it "グループ名のリンクを押すと、グループ詳細画面に遷移する" do
-        click_on group.title
+        click_on group.name
         expect(current_path).to eq group_path(group)
       end
     end # context "リンクの確認"
   end # describe "グループ一覧画面のテスト"
+  
+  describe "グループ詳細画面のテスト" do
+    let!(:group) {create(:group, creater_id: employee.id)}
+    before do
+      visit group_path(group)
+    end
+    
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/groups/#{group.id}"
+      end
+      it "グループリーダーのプロフィール画像が表示される" do
+        within "#creater-#{group.creater_id}" do
+          expect(page).to have_selector "img"
+        end
+      end
+      it "グループリーダーが表示されている" do
+        expect(page).to have_content "グループリーダー"
+      end
+      it "グループリーダーの氏名が表示されている" do
+        expect(page).to have_link group.creater.full_name
+      end
+      it "グループリーダーの部署が表示されている" do
+        expect(page).to have_content group.creater.department.name
+      end
+      it "グループ名が表示されている" do
+        expect(page).to have_content group.name
+      end
+      it "グループ作成日が表示されている" do
+        expect(page).to have_content "グループ作成日：#{group.created_at.strftime("%Y年%m月%d日")}"
+      end
+      it "グループ紹介/活動内容が表示されている" do
+        expect(page).to have_content "グループ紹介/活動内容"
+      end
+      it "descriptionカラムの内容が表示されている" do
+        expect(page).to have_content group.description
+      end
+      it "お知らせを作成するリンクが存在する" do
+        expect(page).to have_link "お知らせを作成", href: new_group_notice_path(group_id: group.id)
+      end
+      it "グループを編集リンクが存在する" do
+        expect(page).to have_link "グループを編集", href: edit_group_path(group)
+      end
+      it "グループを削除リンクが存在する" do
+        expect(page).to have_link "グループを削除"
+      end
+      it "タブメニューにお知らせが表示されている" do
+        expect(page).to have_field "お知らせ"
+      end
+      it "タブメニューにグループメンバーが表示されている" do
+        expect(page).to have_field "グループメンバー"
+      end
+      it "タブメニューのうち、お知らせがチェックされている" do
+        expect(page).to have_checked_field "お知らせ"
+      end
+      it "タブメニューのうち、お知らせがチェックされている時、 お知らせがない場合、お知らせはありませんが表示される" do
+        expect(page).to have_content "お知らせはありません"
+      end
+      it "タブメニューのうち、グループメンバーがチェックされている時、 グループメンバーが表示される" do
+        choose "グループメンバー"
+        within "#employee-#{employee.id}" do
+          expect(page).to have_content employee.full_name
+        end
+      end
+    end # context "表示内容の確認"
+    
+    context "リンクの確認" do
+      it "グループリーダーの氏名リンクを押すとグループリーダーの詳細画面に遷移する" do
+        within "#creater-#{group.creater_id}" do
+          click_on group.creater.full_name
+          expect(current_path).to eq employee_path(id: group.creater_id)
+        end
+      end
+      it "お知らせを作成リンクを押すと、お知らせ新規作成画面に遷移する" do
+        click_on "お知らせを作成"
+        expect(current_path).to eq new_group_notice_path(group)
+      end
+      it "グループを編集リンクを押すと、グループ編集画面に遷移する" do
+        click_on "グループを編集"
+        expect(current_path).to eq edit_group_path(group)
+      end
+    end # context "リンクの確認"
+  end # describe "グループ詳細画面のテスト"
 end # RSpec.describe "[STEP2]社員ログイン後のテスト"

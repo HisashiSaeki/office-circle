@@ -1,7 +1,7 @@
 <div class="group">
   <div class="group__item">
     
-    <div class="employee-profile">
+    <div id="creater-<%= @group.creater_id %>" class="employee-profile">
       <%= image_tag @group.creater.get_profile_image(100, 100) %>
       
       <div class="vertical-employee-info">
@@ -11,8 +11,9 @@
           (<%= @group.creater.department.name %>)
         <% end %>
       </div>
-      
-      <%= render "public/group_members/group_member_btn", group: @group %>
+      <% unless @group.created_by?(current_employee) %>
+        <%= render "public/group_members/group_member_btn", group: @group %>
+      <% end %>
       
       <% if @group.created_by?(current_employee) %>
         <%= link_to "お知らせを作成", new_group_notice_path(group_id: @group), class: "rounded-btn" %>
@@ -73,11 +74,7 @@
     </div>
     
     <div class="tabs__content" id="group-members_content">
-      <% if @group.employees.present? %>
-        <%= render partial: "public/employees/employee_record", collection: @group.employees, as: "employee" %>
-      <% else %>
-        <p>グループメンバーがいません</p>
-      <% end %>
+      <%= render partial: "public/employees/employee_record", collection: @group.employees, as: "employee" %>
     </div>
   </div>
   

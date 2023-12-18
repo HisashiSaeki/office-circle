@@ -1,5 +1,5 @@
 <%= link_to employee_path(employee) do %>
-  <div class="employee-record">
+  <div id="employee-<%= employee.id %>" class="employee-record">
     <div class="employee-record__profile-image">
       <%= image_tag employee.get_profile_image(80, 80) %>
     </div>
