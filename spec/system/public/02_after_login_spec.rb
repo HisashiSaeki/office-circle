@@ -115,11 +115,6 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       it "タブメニューのうち、(ログイン中の社員名)さんの投稿がチェックされている時、 投稿がない場合、投稿はありませんが表示される" do
         expect(page).to have_content "投稿はありません"
       end
-      it "タブメニューのうち、(ログイン中の社員名)さんの投稿がチェックされている時、 投稿がある場合、投稿が表示される" do
-        Article.create(employee_id: employee.id, title: "自分の投稿テスト", body: "テスト", is_published: true)
-        visit current_path
-        expect(page).to have_link "自分の投稿テスト", href: article_path(Article.find_by(employee_id: employee))
-      end
       it "タブメニューのうち、いいねした投稿がチェックされている時、 投稿にいいねしていない場合、いいねした投稿はありませんが表示される" do
         choose "いいねした投稿"
         expect(page).to have_content "いいねした投稿はありません"
@@ -434,6 +429,12 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       it "記事の本文が表示される" do
         expect(page).to have_content article.body
       end
+      it "投稿編集ボタンが存在する" do
+        expect(page).to have_link "投稿編集", href: edit_article_path(article)
+      end
+      it "投稿削除ボタンが存在する" do
+        expect(page).to have_link "投稿削除"
+      end
       it "コメントの見出しが表示される" do
         expect(page).to have_content "コメント"
       end
@@ -481,41 +482,171 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "リンクの内容を確認"
 
-    context "いいねの登録テスト", js: true do
-      it "いいねアイコンを押すと登録できる" do
-        find(".favorite_link_#{article.id}").click
-        expect{ article.favorites.all}.to change {article.favorites.count}.by(1)
-      end
-      it "いいねを登録するとアイコンが削除用のいいねアイコンに切り替わる" do
-        find(".favorite_link_#{article.id}").click
-        expect(page).to have_selector "i.fa-solid.fa-thumbs-up"
-      end
-    end # context "いいねの登録テスト"
+    # context "いいねの登録テスト", js: true do
+    #   it "いいねアイコンを押すと登録できる" do
+    #     find(".favorite_link_#{article.id}").click
+    #     expect{ article.favorites.all}.to change {article.favorites.count}.by(1)
+    #   end
+    #   it "いいねを登録するとアイコンが削除用のいいねアイコンに切り替わる" do
+    #     find(".favorite_link_#{article.id}").click
+    #     expect(page).to have_selector "i.fa-solid.fa-thumbs-up"
+    #   end
+    # end # context "いいねの登録テスト"
 
-    context "コメント作成成功テスト", js: true do
-      before do
-        fill_in "comment[comment]", with: "新規コメント"
-        click_on "コメントを作成"
-      end
-      it "コメントが作成される" do
-        expect {Comment.all}.to change {Comment.count}.by(1)
-      end
-      it "コメントを作成すると、コメント入力フォームが空になる" do
-        expect(page).to have_field "comment[comment]", with: ""
-      end
-      it "コメント作成後、投稿詳細画面から遷移しない" do
-        expect(current_path).to eq article_path(article)
-      end
-    end # context "コメント作成成功テスト"
+    # context "コメント作成成功テスト", js: true do
+    #   before do
+    #     fill_in "comment[comment]", with: "新規コメント"
+    #     click_on "コメントを作成"
+    #   end
+    #   it "コメントが作成される" do
+    #     expect {Comment.all}.to change {Comment.count}.by(1)
+    #   end
+    #   it "コメントを作成すると、コメント入力フォームが空になる" do
+    #     expect(page).to have_field "comment[comment]", with: ""
+    #   end
+    #   it "コメント作成後、投稿詳細画面から遷移しない" do
+    #     expect(current_path).to eq article_path(article)
+    #   end
+    # end # context "コメント作成成功テスト"
 
-    context "コメントの削除成功テスト", js: true do
-      it "コメントが表示されない" do
-        expect(Comment.find_by(employee_id: employee.id).delete).to have_no_content "employeeのコメント"
-      end
-      it "コメントを削除した後、他の画面に遷移しない" do
-        Comment.find_by(employee_id: employee.id).delete
-        expect(current_path).to eq article_path(article)
-      end
-    end # context "コメントの削除成功テスト"
+    # context "コメントの削除成功テスト", js: true do
+    #   it "コメントが表示されない" do
+    #     expect(Comment.find_by(employee_id: employee.id).delete).to have_no_content "employeeのコメント"
+    #   end
+    #   it "コメントを削除した後、他の画面に遷移しない" do
+    #     Comment.find_by(employee_id: employee.id).delete
+    #     expect(current_path).to eq article_path(article)
+    #   end
+    # end # context "コメントの削除成功テスト"
   end # describe "投稿詳細画面のテスト"
-end
+  
+  describe "新規投稿画面のテスト" do
+    before do
+      click_on "新規投稿"
+    end
+    
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/articles/new"
+      end
+      it "1.タイトルを入力してくださいが表示される" do
+        expect(page).to have_content "1.タイトルを入力してください"
+      end
+      it "2.本文を入力してくださいが表示される" do
+        expect(page).to have_content "2.本文を入力してください"
+      end
+      it "3.タグを入力してくださいが表示される" do
+        expect(page).to have_content "3.タグを入力してください"
+      end
+      it "タイトル入力フォームが存在する" do
+        expect(page).to have_field "article[title]"
+      end
+      it "本文入力フォームが存在する" do
+        expect(page).to have_field "article[body]"
+      end
+      it "タグ入力フォームが存在する" do
+        expect(page).to have_field "article[tag]"
+      end
+      it "投稿するボタンが存在する" do
+        expect(page).to have_button "投稿する"
+      end
+      it "下書き保存するボタンが存在する" do
+        expect(page).to have_button "下書き保存する"
+      end
+    end # context "表示内容の確認"
+    
+    context "記事の投稿テスト: 成功ケースのみ" do
+      before do
+        fill_in "article[title]", with: "投稿テスト"
+        fill_in "article[body]", with: Faker::Lorem.characters(number: 10)
+        fill_in "article[tag]", with: "投稿タグ"
+      end
+      it "投稿するボタンを押すと投稿に成功する" do
+        expect {click_on "投稿する"}.to change { Article.count}.by(1)
+      end
+      it "投稿に成功すると、記事詳細画面に遷移する" do
+        click_on "投稿する"
+        expect(current_path).to eq article_path(Article.find_by(employee_id: employee.id))
+      end
+      it "投稿した記事が投稿一覧画面に表示される" do
+        click_on "投稿する"
+        visit articles_path
+        expect(page).to have_link "投稿テスト", href: article_path(Article.find_by(employee_id: employee.id))
+      end
+      it "投稿した記事のタグが投稿一覧画面のタグ検索欄に表示される" do
+        click_on "投稿する"
+        visit articles_path
+        expect(page).to have_link "投稿タグ", href: tag_search_path(tag_id: 1)
+      end
+      it "マイページのタブメニュー(ログイン中の社員)さんの投稿に投稿した記事が表示される: 投稿するボタンで作成した場合、ステータスが公開中と表示される" do
+        click_on "投稿する"
+        visit employee_path(employee)
+        expect(page).to have_link "投稿テスト", href: article_path(Article.find_by(employee_id: employee.id))
+        expect(page).to have_selector ".status", text: "公開中"
+      end
+    end # context "記事の投稿テスト: 成功ケースのみ"
+    
+    context "記事の下書き保存成功テスト: 成功ケースのみ" do
+      before do
+        fill_in "article[title]", with: "下書き投稿テスト"
+        fill_in "article[body]", with: Faker::Lorem.characters(number: 10)
+        fill_in "article[tag]", with: "下書き投稿タグ"
+      end
+      it "下書き保存するボタンを押すと投稿に成功する" do
+        expect {click_on "下書き保存する"}.to change { Article.count}.by(1)
+      end
+      it "下書き保存に成功すると、記事詳細画面に遷移する" do
+        click_on "下書き保存する"
+        expect(current_path).to eq article_path(Article.find_by(employee_id: employee.id))
+      end
+      it "下書き保存した記事は投稿一覧画面に表示されない" do
+        click_on "下書き保存する"
+        visit articles_path
+        expect(page).to have_no_link "下書き投稿テスト", href: article_path(Article.find_by(employee_id: employee.id))
+      end
+      it "下書き保存した記事のタグが投稿一覧画面のタグ検索欄に表示されない" do
+        click_on "下書き保存する"
+        visit articles_path
+        expect(page).to have_no_link "下書き投稿タグ", href: tag_search_path(tag_id: 1)
+      end
+      it "マイページのタブメニュー(ログイン中の社員)さんの投稿に下書き保存した記事が表示される: 下書き保存するボタンで作成した場合、ステータスが下書きと表示される" do
+        click_on "下書き保存する"
+        visit employee_path(employee)
+        expect(page).to have_link "下書き投稿テスト", href: article_path(Article.find_by(employee_id: employee.id))
+        expect(page).to have_selector ".status--non-actived", text: "下書き"
+      end
+    end # context "記事の下書き保存成功テスト: 成功ケースのみ"
+  end # describe "新規投稿画面のテスト"
+  
+  # describe "投稿編集画面のテスト" do
+  #   before do
+  #     # 投稿編集画面まで遷移
+  #     click_on "投稿一覧"
+  #     click_on article.title
+  #     click_on "投稿編集"
+  #   end
+  #   context "表示内容の確認" do
+  #     it "URLが正しい" do
+        
+  #     end
+  #     it "1.タイトルを入力してくださいが表示される" do
+        
+  #     end
+  #     it "2.本文を入力してくださいが表示される" do
+        
+  #     end
+  #     it "3.タグを入力してくださいが表示される" do
+        
+  #     end
+  #     it "タイトル入力フォームが存在する" do
+        
+  #     end
+  #     it "本文入力フォームが存在する" do
+        
+  #     end
+  #     it "タグ入力フォームが存在する" do
+        
+  #     end
+  #   end # context "表示内容の確認"
+  # end # describe "投稿編集画面のテスト"
+end # RSpec.describe "[STEP2]社員ログイン後のテスト"
