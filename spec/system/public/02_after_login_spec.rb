@@ -947,4 +947,49 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "グループ編集成功テスト"
   end # describe "グループ編集画面のテスト"
+  
+  describe "お知らせの新規作成画面のテスト" do
+    before do
+      visit new_group_notice_path(group)
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/groups/#{group.id}/notices/new"
+      end
+      it "1.件名を入力が表示されている" do
+        expect(page).to have_content "1.件名を入力"
+      end
+      it "2.本文を入力が表示されている" do
+        expect(page).to have_content "2.本文を入力"
+      end
+      it "件名入力フォームが存在する" do
+        expect(page).to have_field "notice[title]"
+      end
+      it "本文入力フォームが存在する" do
+        expect(page).to have_field "notice[body]"
+      end
+      it "送信ボタンが存在する" do
+        expect(page).to have_button "送信"
+      end
+    end # context "表示内容の確認"
+    context "お知らせの新規作成テスト: 成功ケースのみ" do
+      before do
+        visit new_group_notice_path(group)
+        fill_in "notice[title]", with: "お知らせテスト"
+        fill_in "notice[body]", with: "テスト本文"
+      end
+      it "送信ボタンを押すと、お知らせが作成される" do
+        expect{click_on "送信"}.to change{Notice.count}.by(1)
+      end
+      it "お知らせを作成すると、お知らせ詳細画面に遷移する" do
+        click_on "送信"
+        expect(current_path).to eq group_notice_path(group_id: group.id, id: Notice.find_by(group_id: group))
+      end
+      it "お知らせを作成すると、グループ詳細画面にお知らせが追加される" do
+        click_on "送信"
+        visit group_path(group)
+        expect(page).to have_link "お知らせテスト"
+      end
+    end # context "お知らせの新規作成テスト: 成功ケースのみ"
+  end # describe "お知らせの新規作成画面のテスト"
 end # RSpec.describe "[STEP2]社員ログイン後のテスト"
