@@ -3,10 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "[STEP2]社員ログイン後のテスト" do
-  let!(:department) {create(:department, name: "営業部")}
+  let!(:department) { create(:department, name: "営業部") }
   let!(:employee) { create(:employee) }
-  let!(:other_employee) {create(:employee)}
-  let!(:group) {create(:group, creater_id: employee.id)}
+  let!(:other_employee) { create(:employee) }
+  let!(:group) { create(:group, creater_id: employee.id) }
   before do
     visit new_employee_session_path
     fill_in "employee[email]", with: employee.email
@@ -405,8 +405,8 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
 
   describe "投稿詳細画面のテスト: 自分の投稿" do
     let!(:article) { create(:article, employee_id: employee.id) }
-    let!(:other_article) {create(:article, employee_id: other_employee.id)}
-    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "employeeのコメント")}
+    let!(:other_article) { create(:article, employee_id: other_employee.id) }
+    let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "employeeのコメント") }
     let!(:other_comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "other_employeeのコメント") }
     before do
       click_on "投稿一覧"
@@ -507,7 +507,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
 
     context "投稿削除テスト" do
       it "投稿削除ボタンを押すと投稿が削除される" do
-        expect{click_on "投稿削除"}.to change {Article.count}.by(-1)
+        expect { click_on "投稿削除" }.to change { Article.count }.by(-1)
       end
       it "投稿を削除すると、投稿一覧画面に遷移する" do
         click_on "投稿削除"
@@ -553,7 +553,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   end # describe "投稿詳細画面のテスト: 自分の投稿"
 
   describe "投稿詳細画面のテスト: 他の社員の投稿" do
-    let!(:other_article) {create(:article, employee_id: other_employee.id)}
+    let!(:other_article) { create(:article, employee_id: other_employee.id) }
     before do
       visit article_path(other_article)
     end
@@ -609,7 +609,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         fill_in "article[tag]", with: "投稿タグ"
       end
       it "投稿するボタンを押すと投稿に成功する" do
-        expect {click_on "投稿する"}.to change { Article.count}.by(1)
+        expect { click_on "投稿する" }.to change { Article.count }.by(1)
       end
       it "投稿に成功すると、記事詳細画面に遷移する" do
         click_on "投稿する"
@@ -640,7 +640,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         fill_in "article[tag]", with: "下書き投稿タグ"
       end
       it "下書き保存するボタンを押すと投稿に成功する" do
-        expect {click_on "下書き保存する"}.to change { Article.count}.by(1)
+        expect { click_on "下書き保存する" }.to change { Article.count }.by(1)
       end
       it "下書き保存に成功すると、記事詳細画面に遷移する" do
         click_on "下書き保存する"
@@ -666,7 +666,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   end # describe "新規投稿画面のテスト"
 
   describe "投稿編集画面のテスト" do
-    let!(:article) {create(:article, employee_id: employee.id)}
+    let!(:article) { create(:article, employee_id: employee.id) }
     before do
       list_tags = ["タグ"]
       article.save_tags(list_tags)
@@ -771,12 +771,12 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "リンクの確認"
   end # describe "グループ一覧画面のテスト"
-  
+
   describe "グループ詳細画面のテスト" do
     before do
       visit group_path(group)
     end
-    
+
     context "表示内容の確認" do
       it "URLが正しい" do
         expect(current_path).to eq "/groups/#{group.id}"
@@ -835,7 +835,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         end
       end
     end # context "表示内容の確認"
-    
+
     context "リンクの確認" do
       it "グループリーダーの氏名リンクを押すとグループリーダーの詳細画面に遷移する" do
         within "#creater-#{group.creater_id}" do
@@ -852,10 +852,10 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(current_path).to eq edit_group_path(group)
       end
     end # context "リンクの確認"
-    
+
     context "グループ削除テスト" do
       it "グループを削除リンクからグループを削除できる" do
-        expect{click_on "グループを削除"}.to change {Group.count}.by(-1)
+        expect { click_on "グループを削除" }.to change { Group.count }.by(-1)
       end
       it "グループを削除すると、グループ一覧画面に遷移する" do
         click_on "グループを削除"
@@ -863,7 +863,33 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "グループ削除テスト"
   end # describe "グループ詳細画面のテスト"
-  
+
+  describe "グループ詳細画面のテスト: グループリーダー以外の場合" do
+    let!(:other_group) { create(:group, creater_id: other_employee.id) }
+    before do
+      visit group_path(other_group)
+    end
+    context "表示内容の確認" do
+      it "お知らせを作成するリンクが存在しない" do
+        expect(page).to have_no_link "お知らせを作成", href: new_group_notice_path(group_id: other_group.id)
+      end
+      it "グループを編集リンクが存在しない" do
+        expect(page).to have_no_link "グループを編集", href: edit_group_path(other_group)
+      end
+      it "グループを削除リンクが存在しない" do
+        expect(page).to have_no_link "グループを削除"
+      end
+      it "参加ボタンが存在する: グループに参加していない場合" do
+        expect(page).to have_link "参加"
+      end
+      it "退会ボタンが存在する: グループに参加している場合" do
+        click_on "参加"
+        visit current_path
+        expect(page).to have_link "退会"
+      end
+    end # context "表示内容の確認"
+  end # describe "グループ詳細画面のテスト: グループリーダー以外の場合"
+
   describe "グループ新規作成画面のテスト" do
     before do
       visit new_group_path
@@ -894,7 +920,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         fill_in "group[description]", with: Faker::Lorem.characters(number: 10)
       end
       it "グループ作成ボタンを押すと、グループを作成できる" do
-        expect{click_on "グループ作成"}.to change {Group.count}.by(1)
+        expect { click_on "グループ作成" }.to change { Group.count }.by(1)
       end
       it "グループを作成すると、グループ詳細画面に遷移する" do
         click_on "グループ作成"
@@ -902,7 +928,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "グループ新規作成テスト: 成功ケースのみ"
   end # describe "グループ新規作成画面のテスト"
-  
+
   describe "グループ編集画面のテスト" do
     before do
       visit edit_group_path(group)
@@ -927,7 +953,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_button "変更内容を保存"
       end
     end # context "表示内容の確認"
-    
+
     context "グループ編集成功テスト" do
       before do
         @old_group_name = group.name
@@ -947,7 +973,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "グループ編集成功テスト"
   end # describe "グループ編集画面のテスト"
-  
+
   describe "お知らせの新規作成画面のテスト" do
     before do
       visit new_group_notice_path(group)
@@ -979,7 +1005,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         fill_in "notice[body]", with: "テスト本文"
       end
       it "送信ボタンを押すと、お知らせが作成される" do
-        expect{click_on "送信"}.to change{Notice.count}.by(1)
+        expect { click_on "送信" }.to change { Notice.count }.by(1)
       end
       it "お知らせを作成すると、お知らせ詳細画面に遷移する" do
         click_on "送信"
@@ -992,4 +1018,56 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "お知らせの新規作成テスト: 成功ケースのみ"
   end # describe "お知らせの新規作成画面のテスト"
+
+  describe "お知らせ詳細画面のテスト" do
+    let!(:notice) { Notice.create(group_id: group.id, title: "テスト", body: "テスト") }
+    before do
+      visit group_notice_path(group, notice)
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/groups/#{group.id}/notices/#{notice.id}"
+      end
+      it "お知らせの件名が表示されている" do
+        expect(page).to have_content notice.title
+      end
+      it "お知らせの本文が表示されている" do
+        expect(page).to have_content notice.body
+      end
+      it "戻るリンクが存在する" do
+        expect(page).to have_link "戻る", href: group_path(group)
+      end
+      it "お知らせを削除リンクが存在する" do
+        expect(page).to have_link "削除"
+      end
+    end # context "表示内容の確認"
+
+    context "リンクの確認" do
+      it "戻るリンクを押すとグループ詳細画面に遷移する" do
+        click_on "戻る"
+        expect(current_path).to eq group_path(group)
+      end
+      it "お知らせを削除リンクを押すと、お知らせが削除される" do
+        expect { click_on "削除" }.to change { Notice.count }.by(-1)
+      end
+      it "お知らせを削除すると、グループ詳細画面に遷移する" do
+        click_on "削除"
+        expect(current_path).to eq group_path(group)
+      end
+    end
+  end # describe "お知らせ詳細画面のテスト"
+
+  describe "お知らせ詳細画面のテスト: グループリーダー以外の場合" do
+    let!(:other_group) { create(:group, creater_id: other_employee.id) }
+    let!(:other_group_notice) { Notice.create(group_id: other_group.id, title: "テスト", body: "テスト") }
+    before do
+      visit group_notice_path(other_group, other_group_notice)
+    end
+
+    context "表示内容の確認" do
+      it "お知らせを削除リンクが存在しない" do
+        expect(page).to have_no_link "削除"
+      end
+    end # context "表示内容の確認"
+  end # describe "お知らせ詳細画面のテスト: グループリーダー以外の場合"
 end # RSpec.describe "[STEP2]社員ログイン後のテスト"
