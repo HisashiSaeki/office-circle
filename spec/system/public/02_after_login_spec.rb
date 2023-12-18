@@ -6,6 +6,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   let!(:department) {create(:department, name: "営業部")}
   let!(:employee) { create(:employee) }
   let!(:other_employee) {create(:employee)}
+  let!(:group) {create(:group, creater_id: employee.id)}
   before do
     visit new_employee_session_path
     fill_in "employee[email]", with: employee.email
@@ -128,14 +129,14 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_link "いいねテスト", href: article_path(Article.find_by(employee_id: employee).id)
       end
       it "タブメニューのうち、参加中のグループがチェックされている時、 グループに参加していない場合、参加中のグループはありませんが表示される" do
+        Group.find_by(creater_id: employee.id).delete
+        visit current_path
         choose "参加中のグループ"
         expect(page).to have_content "参加中のグループはありません"
       end
       it "タブメニューのうち、参加中のグループがチェックされている時、 グループに参加している場合、参加中のグループが表示される" do
-        Group.create(creater_id: employee.id, name: "テストグループ", description: "テスト" )
-        visit current_path
         choose "参加中のグループ"
-        expect(page).to have_link "テストグループ", href: group_path(Group.find_by(creater_id: employee).id)
+        expect(page).to have_link group.name, href: group_path(group)
       end
     end # context "表示内容の確認"
   end # describe "社員詳細画面のテスト: マイページの場合"
@@ -729,7 +730,6 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   end # describe "投稿編集画面のテスト"
 
   describe "グループ一覧画面のテスト" do
-    let!(:group) {create(:group, creater_id: employee.id)}
     before do
       click_on "グループ一覧"
     end
@@ -773,7 +773,6 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   end # describe "グループ一覧画面のテスト"
   
   describe "グループ詳細画面のテスト" do
-    let!(:group) {create(:group, creater_id: employee.id)}
     before do
       visit group_path(group)
     end
@@ -853,6 +852,16 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(current_path).to eq edit_group_path(group)
       end
     end # context "リンクの確認"
+    
+    context "グループ削除テスト" do
+      it "グループを削除リンクからグループを削除できる" do
+        expect{click_on "グループを削除"}.to change {Group.count}.by(-1)
+      end
+      it "グループを削除すると、グループ一覧画面に遷移する" do
+        click_on "グループを削除"
+        expect(current_path).to eq groups_path
+      end
+    end # context "グループ削除テスト"
   end # describe "グループ詳細画面のテスト"
   
   describe "グループ新規作成画面のテスト" do
@@ -889,8 +898,53 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
       it "グループを作成すると、グループ詳細画面に遷移する" do
         click_on "グループ作成"
-        expect(current_path).to eq group_path(Group.find_by(creater_id: employee.id))
+        expect(current_path).to eq group_path(Group.find(2))
       end
     end # context "グループ新規作成テスト: 成功ケースのみ"
   end # describe "グループ新規作成画面のテスト"
+  
+  describe "グループ編集画面のテスト" do
+    before do
+      visit edit_group_path(group)
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/groups/#{group.id}/edit"
+      end
+      it "1.グループ名を入力してくださいが表示されている" do
+        expect(page).to have_content "1.グループ名を入力してください"
+      end
+      it "2.活動内容や紹介文を入力してくださいが表示されている" do
+        expect(page).to have_content "2.活動内容や紹介文を入力してください"
+      end
+      it "グループ名の入力フォームが存在する" do
+        expect(page).to have_field "group[name]", with: group.name
+      end
+      it "活動内容の入力フォームが存在する" do
+        expect(page).to have_field "group[description]", with: group.description
+      end
+      it "変更内容を保存ボタンが存在する" do
+        expect(page).to have_button "変更内容を保存"
+      end
+    end # context "表示内容の確認"
+    
+    context "グループ編集成功テスト" do
+      before do
+        @old_group_name = group.name
+        @old_group_description = group.description
+        fill_in "group[name]", with: Faker::Lorem.characters(number: 10)
+        fill_in "group[description]", with: Faker::Lorem.characters(number: 10)
+        click_on "変更内容を保存"
+      end
+      it "グループの編集に成功すると、グループ詳細画面に遷移する" do
+        expect(current_path).to eq group_path(group)
+      end
+      it "グループ名が編集されている" do
+        expect(page).to have_no_content @old_group_name
+      end
+      it "グループの活動内容が編集されている" do
+        expect(page).to have_no_content @old_group_description
+      end
+    end # context "グループ編集成功テスト"
+  end # describe "グループ編集画面のテスト"
 end # RSpec.describe "[STEP2]社員ログイン後のテスト"
