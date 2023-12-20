@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "[STEP3]その他のテスト" do
-  let!(:admin) { create(:admin) }
-  let!(:employee) { create(:employee) }
-  let!(:department) { create(:department) }
+  let!(:admin) { create(:admin)}
+  let!(:employee) { create(:employee)}
+  let!(:department) {create(:department)}
   before do
     visit new_admin_session_path
     fill_in "admin_email", with: admin.email
@@ -42,11 +42,11 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_button "登録"
         expect(page).to have_field "department[name]", with: ""
       end
-      it "バリデーションエラーが表示される" do
+      it "エラーメッセージが表示される" do
         expect(page).to have_content "部署名を入力してください"
       end
     end
-
+      
     context "部署の変更失敗: nameを空にする" do
       before do
         visit edit_admin_department_path(department)
@@ -56,11 +56,11 @@ RSpec.describe "[STEP3]その他のテスト" do
       it "部署編集画面が表示されており、フォームの内容が正しい" do
         expect(page).to have_field "department[name]", with: ""
       end
-      it "バリデーションエラーが表示される" do
+      it "エラーメッセージが表示される" do
         expect(page).to have_content "部署名を入力してください"
       end
     end
-
+    
     context "社員情報の変更失敗" do
       before do
         visit edit_admin_employee_path(employee)
@@ -73,15 +73,15 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_field "employee[last_name]", with: ""
         expect(page).to have_field "employee[last_name_furigana]", with: "たろう"
       end
-      it "バリデーションエラーが表示される(空の場合のメッセージを検証)" do
+      it "エラーメッセージが表示される(空の場合のメッセージを検証)" do
         expect(page).to have_content "苗字を入力してください"
       end
-      it "バリデーションエラーが表示される(カナ表記でない場合のメッセージを検証)" do
+      it "エラーメッセージが表示される(カナ表記でない場合のメッセージを検証)" do
         expect(page).to have_content "苗字のフリガナは全角カタカナで入力してください"
       end
     end
   end
-
+  
   describe "社員のアカウント停止〜ログイン無効テスト" do
     context "ログアウト状態の社員の場合" do
       before do
@@ -102,7 +102,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "アカウント停止中です。管理者にご連絡ください。"
       end
     end
-
+    
     context "ログイン中の社員の場合" do
       before do
         # 管理者と社員が同時にログインした状態で、管理者側からログイン中の社員ステータスを停止する

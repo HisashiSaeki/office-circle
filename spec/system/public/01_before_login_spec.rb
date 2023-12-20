@@ -118,6 +118,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
 
     context "新規登録成功のテスト" do
       before do
+        expect(employee.profile_image).to be_attached
         fill_in "employee[last_name]", with: "田中"
         fill_in "employee[first_name]", with: "太一"
         fill_in "employee[last_name_furigana]", with: "タナカ"

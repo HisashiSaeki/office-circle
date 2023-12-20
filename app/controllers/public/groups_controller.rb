@@ -8,7 +8,7 @@ class Public::GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.creater_id = current_employee.id
-    @group.save ? (redirect_to group_path(@group)) : (render :new)
+    @group.save ? (redirect_to group_path(@group), notice: "グループを作成しました") : (render :new)
   end
 
   def index
@@ -23,7 +23,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def update
-    @group.update(group_params) ? (redirect_to group_path(@group)) : (render :edit)
+    @group.update(group_params) ? (redirect_to group_path(@group), notice: "グループの変更が完了しました") : (render :edit)
   end
 
   def destroy

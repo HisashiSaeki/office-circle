@@ -2,7 +2,7 @@
   <%= render "public/shared/error_messages", resource: f.object %>
   <div class="form-group">
     <div class="form">
-      <p class="form__item"><%= f.label "プロフィール画像" %></p>
+      <p class="form__item"><%= f.label :profile_image, "プロフィール画像" %></p>
       <p class="form__item"><%= f.file_field :profile_image, accept: "image/*" %></p>
     </div>
     <div class="form">
