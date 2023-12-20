@@ -9,7 +9,7 @@
   <ul class="vertical-activities">
     <% if @activities.present? %>
       <% @activities.each do |activity| %>
-      <li class="vertical-activities__item">
+      <li id="activity-<%= activity.id %>" class="vertical-activities__item">
         <%= render "#{activity.action_type}", activity: activity %>
       </li>
       <% end %>

@@ -1020,7 +1020,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   end # describe "お知らせの新規作成画面のテスト"
 
   describe "お知らせ詳細画面のテスト" do
-    let!(:notice) { Notice.create(group_id: group.id, title: "テスト", body: "テスト") }
+    let!(:notice) { Notice.create(group_id: group.id, title: Faker::Lorem.characters(number: 10), body: Faker::Lorem.characters(number: 10)) }
     before do
       visit group_notice_path(group, notice)
     end
@@ -1059,7 +1059,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
 
   describe "お知らせ詳細画面のテスト: グループリーダー以外の場合" do
     let!(:other_group) { create(:group, creater_id: other_employee.id) }
-    let!(:other_group_notice) { Notice.create(group_id: other_group.id, title: "テスト", body: "テスト") }
+    let!(:other_group_notice) { Notice.create(group_id: other_group.id, title: Faker::Lorem.characters(number: 10), body: Faker::Lorem.characters(number: 10)) }
     before do
       visit group_notice_path(other_group, other_group_notice)
     end
@@ -1070,4 +1070,71 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "表示内容の確認"
   end # describe "お知らせ詳細画面のテスト: グループリーダー以外の場合"
+  
+  describe "通知一覧画面のテスト" do
+    let!(:article) {create(:article, employee_id: employee.id)}
+    let!(:favorite) {Favorite.create(employee_id: other_employee.id, article_id: article.id)}
+    let!(:comment) {Comment.create(employee_id: other_employee.id, article_id: article.id, comment: Faker::Lorem.characters(number: 10))}
+    let!(:notice) {Notice.create(group_id: group.id, title: Faker::Lorem.characters(number: 10), body: Faker::Lorem.characters(number: 10))}
+    before do
+      visit activities_path
+    end
+    context "表示内容の確認" do
+      it "URLが正しい" do
+        expect(current_path).to eq "/activities"
+      end
+      it "「通知一覧」が表示されている" do
+        expect(page).to have_content "通知一覧"
+      end
+      it "全削除リンクが存在する" do
+        expect(page).to have_link "全削除"
+      end
+      it "いいねに関する通知が表示されている" do
+        expect(page).to have_content "にいいねしました (1分未満前)"
+      end
+      it "コメントに関する通知が表示されている" do
+        expect(page).to have_content "にコメントしました (1分未満前)"
+      end
+      it "お知らせに関する通知が表示されている" do
+        expect(page).to have_content "を作成しました (1分未満前)"
+      end
+      it "全削除リンクを押すと通知が削除され、通知はありませんが表示される" do
+        click_on "全削除"
+        expect(page).to have_content "通知はありません"
+      end
+    end # context "表示内容の確認"
+    
+    context "リンクの確認" do
+      it "いいねをした社員のリンクが正しい" do
+        within "#activity-1" do
+          expect(page).to have_link other_employee.full_name, href: employee_path(other_employee)
+        end
+      end
+      it "いいねをされた投稿のリンクが正しい" do
+        within "#activity-1" do
+          expect(page).to have_link "投稿", href: article_path(article)
+        end
+      end
+      it "コメントをした社員のリンクが正しい" do
+        within "#activity-2" do
+          expect(page).to have_link other_employee.full_name, href: employee_path(other_employee)
+        end
+      end
+      it "コメントをされた投稿のリンクが正しい" do
+        within "#activity-2" do
+          expect(page).to have_link "投稿", href: article_path(article)
+        end
+      end
+      it "お知らせをしたグループのリンクが正しい" do
+        within "#activity-3" do
+          expect(page).to have_link group.name, href: group_path(group)
+        end
+      end
+      it "作成されたお知らせのリンクが正しい" do
+        within "#activity-3" do
+          expect(page).to have_link "お知らせ", href: group_notice_path(group, notice)
+        end
+      end
+    end # context "リンクの確認"
+  end # describe "通知一覧画面のテスト"
 end # RSpec.describe "[STEP2]社員ログイン後のテスト"
