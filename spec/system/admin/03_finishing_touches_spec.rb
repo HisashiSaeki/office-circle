@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "[STEP3]その他のテスト" do
-  let!(:admin) { create(:admin)}
-  let!(:employee) { create(:employee)}
-  let!(:department) {create(:department)}
+  let!(:admin) { create(:admin) }
+  let!(:employee) { create(:employee) }
+  let!(:department) { create(:department) }
   before do
     visit new_admin_session_path
     fill_in "admin_email", with: admin.email
@@ -46,7 +46,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "部署名を入力してください"
       end
     end
-      
+
     context "部署の変更失敗: nameを空にする" do
       before do
         visit edit_admin_department_path(department)
@@ -60,7 +60,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "部署名を入力してください"
       end
     end
-    
+
     context "社員情報の変更失敗" do
       before do
         visit edit_admin_employee_path(employee)
@@ -81,7 +81,7 @@ RSpec.describe "[STEP3]その他のテスト" do
       end
     end
   end
-  
+
   describe "社員のアカウント停止〜ログイン無効テスト" do
     context "ログアウト状態の社員の場合" do
       before do
@@ -102,7 +102,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "アカウント停止中です。管理者にご連絡ください。"
       end
     end
-    
+
     context "ログイン中の社員の場合" do
       before do
         # 管理者と社員が同時にログインした状態で、管理者側からログイン中の社員ステータスを停止する

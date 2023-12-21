@@ -9,6 +9,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
     before do
       visit "/"
     end
+
     context "表示内容の確認" do
       it "ゲストログインボタンが存在する" do
         expect(page).to have_link "ゲストログイン", href: "/employees/guest_sign_in"
@@ -19,8 +20,9 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       it "新規登録ボタンが存在する" do
         expect(page).to have_link "新規登録", href: new_employee_registration_path
       end
-    end
-  end
+    end # context "表示内容の確認"
+  end # describe "トップ画面のテスト"
+
   describe "ログイン画面のテスト" do
     before do
       visit new_employee_session_path
@@ -42,7 +44,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       it "新規登録画面へのリンクが表示される" do
         expect(page).to have_link "新規登録がまだの方はこちらから新規登録をお願いします"
       end
-    end
+    end # context "表示内容の確認"
 
     context "ログイン成功のテスト" do
       before do
@@ -56,7 +58,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       it "ログイン時にフラッシュメッセージが表示される" do
         expect(page).to have_content "ログインしました。"
       end
-    end
+    end # context "ログイン成功のテスト"
 
     context "ログイン失敗のテスト" do
       before do
@@ -70,13 +72,14 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       it "ログインに失敗し、エラーメッセージが表示される" do
         expect(page).to have_content "メールアドレスまたはパスワードが違います。"
       end
-    end
-  end
+    end # context "ログイン失敗のテスト"
+  end # describe "ログイン画面のテスト"
 
   describe "新規登録画面のテスト" do
     before do
       visit new_employee_registration_path
     end
+
     context "表示内容の確認" do
       it "URLが正しい" do
         expect(current_path).to eq "/employees/sign_up"
@@ -114,7 +117,7 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       it "新規登録画面へのリンクが表示される" do
         expect(page).to have_link "登録済みの方はこちらからログイン"
       end
-    end
+    end # context "表示内容の確認"
 
     context "新規登録成功のテスト" do
       before do
@@ -137,8 +140,8 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       it "新規登録時にフラッシュメッセージが表示される" do
         expect(page).to have_content "アカウント登録が完了しました。"
       end
-    end
-  end
+    end # context "新規登録成功のテスト"
+  end # describe "新規登録画面のテスト"
 
   describe "ヘッダーのテスト: ログイン時" do
     before do
@@ -173,8 +176,8 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
       it "ログアウトが表示される" do
         expect(page).to have_link "ログアウト", href: destroy_employee_session_path
       end
-    end
-  end
+    end # context "ヘッダーの表示を確認"
+  end # describe "ヘッダーのテスト: ログイン時"
 
   describe "ログアウト機能のテスト" do
     before do
@@ -187,5 +190,5 @@ RSpec.describe "[STEP1]社員ログイン前のテスト" do
     it "正しくログアウトできている: ログアウト後のリダイレクト先がトップ画面になっている" do
       expect(current_path).to eq "/"
     end
-  end
-end
+  end # describe "ログアウト機能のテスト"
+end # RSpec.describe "[STEP1]社員ログイン前のテスト"

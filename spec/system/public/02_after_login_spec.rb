@@ -1070,12 +1070,12 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
     end # context "表示内容の確認"
   end # describe "お知らせ詳細画面のテスト: グループリーダー以外の場合"
-  
+
   describe "通知一覧画面のテスト" do
-    let!(:article) {create(:article, employee_id: employee.id)}
-    let!(:favorite) {Favorite.create(employee_id: other_employee.id, article_id: article.id)}
-    let!(:comment) {Comment.create(employee_id: other_employee.id, article_id: article.id, comment: Faker::Lorem.characters(number: 10))}
-    let!(:notice) {Notice.create(group_id: group.id, title: Faker::Lorem.characters(number: 10), body: Faker::Lorem.characters(number: 10))}
+    let!(:article) { create(:article, employee_id: employee.id) }
+    let!(:favorite) { Favorite.create(employee_id: other_employee.id, article_id: article.id) }
+    let!(:comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: Faker::Lorem.characters(number: 10)) }
+    let!(:notice) { Notice.create(group_id: group.id, title: Faker::Lorem.characters(number: 10), body: Faker::Lorem.characters(number: 10)) }
     before do
       visit activities_path
     end
@@ -1103,7 +1103,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_content "通知はありません"
       end
     end # context "表示内容の確認"
-    
+
     context "リンクの確認" do
       it "いいねをした社員のリンクが正しい" do
         within "#activity-1" do

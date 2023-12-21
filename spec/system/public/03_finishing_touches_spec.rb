@@ -3,10 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "[STEP3]その他のテスト" do
-  let!(:employee) {create(:employee)}
-  let!(:article) {create(:article, employee_id: employee.id)}
-  let!(:group) {create(:group, creater_id: employee.id)}
-  let!(:notice) {Notice.create(group_id: group.id, title: Faker::Lorem.characters(number: 10), body: Faker::Lorem.characters(number: 10))}
+  let!(:employee) { create(:employee) }
+  let!(:article) { create(:article, employee_id: employee.id) }
+  let!(:group) { create(:group, creater_id: employee.id) }
+  let!(:notice) { Notice.create(group_id: group.id, title: Faker::Lorem.characters(number: 10), body: Faker::Lorem.characters(number: 10)) }
   before do
     visit new_employee_session_path
     fill_in "employee[email]", with: employee.email
@@ -75,12 +75,12 @@ RSpec.describe "[STEP3]その他のテスト" do
   end
   describe "処理失敗時のメッセージテスト(保存されないことに関しては単体テストで実証済み)" do
     context "社員の編集失敗" do
-    before do
-        visit edit_employee_path(employee)
-        fill_in "employee[last_name]", with: ""
-        fill_in "employee[last_name_furigana]", with: "たろう"
-        click_on "変更内容を保存"
-      end
+      before do
+          visit edit_employee_path(employee)
+          fill_in "employee[last_name]", with: ""
+          fill_in "employee[last_name_furigana]", with: "たろう"
+          click_on "変更内容を保存"
+        end
       it "社員情報編集画面が表示されており、フォームの内容が正しい" do
         expect(page).to have_button "変更内容を保存"
         expect(page).to have_field "employee[last_name]", with: ""
@@ -93,7 +93,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "苗字のフリガナは全角カタカナで入力してください"
       end
     end # context "社員の編集失敗"
-    
+
     context "記事の投稿失敗" do
       before do
         visit new_article_path
@@ -113,7 +113,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "本文を入力してください"
       end
     end # context "記事の投稿失敗"
-    
+
     context "記事の編集失敗" do
       before do
         visit edit_article_path(article)
@@ -133,7 +133,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "本文を入力してください"
       end
     end # context "記事の編集失敗"
-    
+
     context "グループの新規作成失敗" do
       before do
         visit new_group_path
@@ -153,7 +153,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "活動内容を入力してください"
       end
     end # context "グループの新規作成失敗"
-    
+
     context "グループの編集失敗" do
       before do
         visit edit_group_path(group)
@@ -173,7 +173,7 @@ RSpec.describe "[STEP3]その他のテスト" do
         expect(page).to have_content "活動内容を入力してください"
       end
     end # context "グループの編集失敗"
-    
+
     context "お知らせの新規作成失敗" do
       before do
         visit new_group_notice_path(group)
