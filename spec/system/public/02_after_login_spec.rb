@@ -513,43 +513,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         click_on "投稿削除"
         expect(current_path).to eq articles_path
       end
-    end
-    # context "いいねの登録テスト", js: true do
-    #   it "いいねアイコンを押すと登録できる" do
-    #     find(".favorite_link_#{article.id}").click
-    #     expect{ article.favorites.all}.to change {article.favorites.count}.by(1)
-    #   end
-    #   it "いいねを登録するとアイコンが削除用のいいねアイコンに切り替わる" do
-    #     find(".favorite_link_#{article.id}").click
-    #     expect(page).to have_selector "i.fa-solid.fa-thumbs-up"
-    #   end
-    # end # context "いいねの登録テスト"
-
-    # context "コメント作成成功テスト", js: true do
-    #   before do
-    #     fill_in "comment[comment]", with: "新規コメント"
-    #     click_on "コメントを作成"
-    #   end
-    #   it "コメントが作成される" do
-    #     expect {Comment.all}.to change {Comment.count}.by(1)
-    #   end
-    #   it "コメントを作成すると、コメント入力フォームが空になる" do
-    #     expect(page).to have_field "comment[comment]", with: ""
-    #   end
-    #   it "コメント作成後、投稿詳細画面から遷移しない" do
-    #     expect(current_path).to eq article_path(article)
-    #   end
-    # end # context "コメント作成成功テスト"
-
-    # context "コメントの削除成功テスト", js: true do
-    #   it "コメントが表示されない" do
-    #     expect(Comment.find_by(employee_id: employee.id).delete).to have_no_content "employeeのコメント"
-    #   end
-    #   it "コメントを削除した後、他の画面に遷移しない" do
-    #     Comment.find_by(employee_id: employee.id).delete
-    #     expect(current_path).to eq article_path(article)
-    #   end
-    # end # context "コメントの削除成功テスト"
+    end # context "投稿削除テスト"
   end # describe "投稿詳細画面のテスト: 自分の投稿"
 
   describe "投稿詳細画面のテスト: 他の社員の投稿" do

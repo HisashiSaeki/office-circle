@@ -333,7 +333,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
-  capybara (>= 3.26)
+  capybara
   devise
   dotenv-rails
   enum_help
@@ -358,7 +358,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   sass-rails (>= 6)
-  selenium-webdriver (>= 4.0.0.rc1)
+  selenium-webdriver
   spring
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
