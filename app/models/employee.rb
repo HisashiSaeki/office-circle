@@ -36,9 +36,9 @@ class Employee < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  def full_name = self.last_name + " " + self.first_name
+  def full_name = "#{last_name} #{first_name}"
 
-  def full_name_furigana = self.last_name_furigana + " " + self.first_name_furigana
+  def full_name_furigana = "#{last_name_furigana} #{first_name_furigana}"
 
   def self.search(keyword)
     self.where(
@@ -50,7 +50,7 @@ class Employee < ApplicationRecord
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest
-    find_or_create_by!(email: GUEST_USER_EMAIL ) do |employee|
+    find_or_create_by!(email: GUEST_USER_EMAIL ) { |employee|
       employee.password = SecureRandom.urlsafe_base64
       employee.last_name = "ゲスト"
       employee.first_name = "ユーザー"
@@ -59,7 +59,7 @@ class Employee < ApplicationRecord
       employee.department = Department.find_by(id: 1)
       employee.birthdate = "1999-11-11"
       employee.prefecture = "東京都"
-    end
+    }
   end
 
   def guest_employee?

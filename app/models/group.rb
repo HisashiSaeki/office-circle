@@ -19,7 +19,7 @@ class Group < ApplicationRecord
   def create_group_members = GroupMember.create(employee_id: self.creater_id, group_id: self.id)
 
   def created_by?(employee)
-    self.creater_id == employee.id
+    creater_id == employee.id
   end
 
   def self.search(keyword) = self.where("name LIKE ? or description LIKE ?", "%#{keyword}%", "%#{keyword}%")
