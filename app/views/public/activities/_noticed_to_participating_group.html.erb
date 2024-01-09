@@ -1,9 +1,7 @@
-<%= link_to transition_path(activity) do %>
-  <div>
-    <%= link_to "グループ名:#{activity.subject.group.name}", group_path(activity.subject.group), class: "activity-link" %>
-    が
-    <%= link_to 'お知らせ', group_notice_path(activity.subject.group, activity.subject), class: "activity-link" %>
-    を作成しました
-    <%= " (#{time_ago_in_words(activity.created_at)}前)" %>
-  </div>
-<% end %>
+<div>
+  <%= link_to "グループ名:#{activity.subject.group.name}", group_path(activity.subject.group), class: "activity-link" %>
+  が
+  <%= link_to 'お知らせ', group_notice_path(activity.subject.group, activity.subject), class: "activity-link" %>
+  を作成しました
+  <%= " (#{time_ago_in_words(activity.created_at)}前)" %>
+</div>
