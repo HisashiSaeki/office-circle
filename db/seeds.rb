@@ -37,7 +37,7 @@ Employee.find_or_create_by!(email: "tanaka@example.com") do |employee|
   employee.prefecture = "東京都"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename: "sample-employee1.jpg")
 end
 
 Employee.find_or_create_by!(email: "satou@example.com") do |employee|
@@ -53,7 +53,7 @@ Employee.find_or_create_by!(email: "satou@example.com") do |employee|
   employee.prefecture = "京都府"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename: "sample-employee2.jpg")
 end
 
 Employee.find_or_create_by!(email: "yamada@example.com") do |employee|
@@ -72,7 +72,7 @@ Employee.find_or_create_by!(email: "yamada@example.com") do |employee|
   employee.prefecture = "大阪府"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename: "sample-employee2.jpg")
 end
 
 Employee.find_or_create_by!(email: "suzuki@example.com") do |employee|
@@ -90,7 +90,7 @@ Employee.find_or_create_by!(email: "suzuki@example.com") do |employee|
   employee.prefecture = "奈良県"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename: "sample-employee2.jpg")
 end
 
 Employee.find_or_create_by!(email: "takahashi@example.com") do |employee|
@@ -107,7 +107,7 @@ Employee.find_or_create_by!(email: "takahashi@example.com") do |employee|
   employee.prefecture = "北海道"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename: "sample-employee1.jpg")
 end
 
 Employee.find_or_create_by!(email: "watanabe@example.com") do |employee|
@@ -124,7 +124,7 @@ Employee.find_or_create_by!(email: "watanabe@example.com") do |employee|
   employee.prefecture = "島根県"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename: "sample-employee1.jpg")
 end
 
 Employee.find_or_create_by!(email: "shimizu@example.com") do |employee|
@@ -142,7 +142,7 @@ Employee.find_or_create_by!(email: "shimizu@example.com") do |employee|
   employee.prefecture = "鳥取県"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename: "sample-employee2.jpg")
 end
 
 Employee.find_or_create_by!(email: "kawanaka@example.com") do |employee|
@@ -160,7 +160,7 @@ Employee.find_or_create_by!(email: "kawanaka@example.com") do |employee|
   employee.prefecture = "香川県"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename: "sample-employee1.jpg")
 end
 
 Employee.find_or_create_by!(email: "nakamura@example.com") do |employee|
@@ -178,7 +178,7 @@ Employee.find_or_create_by!(email: "nakamura@example.com") do |employee|
   employee.prefecture = "徳島県"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename:"sample-employee2.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee2.jpg"), filename: "sample-employee2.jpg")
 end
 
 Employee.find_or_create_by!(email: "kobayashi@example.com") do |employee|
@@ -196,7 +196,7 @@ Employee.find_or_create_by!(email: "kobayashi@example.com") do |employee|
   employee.prefecture = "高知県"
   employee.password = password
   employee.is_active = true
-  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename:"sample-employee1.jpg")
+  employee.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-employee1.jpg"), filename: "sample-employee1.jpg")
 end
 
 puts "adminを作成"
@@ -330,17 +330,17 @@ end
 puts "タグを作成"
 
 tags = [
-  { name: "猫"},
-  { name: "家族"},
-  { name: "犬"},
-  { name: "散歩"},
-  { name: "バイク"},
-  { name: "ゲーム"},
-  { name: "資料作成"},
-  { name: "スケジュール管理"},
-  { name: "失敗談"},
-  { name: "良い話"},
-  { name: "非公開"},
+  { name: "猫" },
+  { name: "家族" },
+  { name: "犬" },
+  { name: "散歩" },
+  { name: "バイク" },
+  { name: "ゲーム" },
+  { name: "資料作成" },
+  { name: "スケジュール管理" },
+  { name: "失敗談" },
+  { name: "良い話" },
+  { name: "非公開" },
   ]
 
 tags.each { |tag| Tag.find_or_create_by!(name: tag[:name]) }
@@ -353,7 +353,7 @@ puts "コメントを作成"
 
 
 text1 = "記事に関してのコメントを書きます"
-text2 =  "感想や質問などを書くようにしましょう"
+text2 = "感想や質問などを書くようにしましょう"
 
 100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "田中").id, comment: text1) }
 100.times { |n| Comment.find_or_create_by!(article_id: "#{n + 1}", employee_id: Employee.find_by(last_name: "佐藤").id, comment: text2) }
@@ -398,7 +398,7 @@ group_record.each { |record| Group.find_or_create_by!(creater_id: record[:create
 
 puts "グループメンバーを作成"
 
-10.times { |n| GroupMember.find_or_create_by!( group_id: "#{n % 5 + 1}", employee_id: "#{n + 1}" ) }
+10.times { |n| GroupMember.find_or_create_by!(group_id: "#{n % 5 + 1}", employee_id: "#{n + 1}") }
 
 puts "お知らせを作成"
 

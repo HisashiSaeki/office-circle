@@ -28,10 +28,10 @@ class Employee < ApplicationRecord
   end
 
 
-  def get_profile_image(width,height)
+  def get_profile_image(width, height)
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      file_path = Rails.root.join("app/assets/images/no_image.jpg")
+      profile_image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
@@ -43,14 +43,14 @@ class Employee < ApplicationRecord
   def self.search(keyword)
     self.where(
       "last_name LIKE ? or first_name LIKE ? or last_name_furigana LIKE ? or first_name_furigana LIKE ?",
-      "%#{keyword}%","%#{keyword}%", "%#{keyword}%", "%#{keyword}%",
+      "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%",
     )
   end
 
   GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest
-    find_or_create_by!(email: GUEST_USER_EMAIL ) { |employee|
+    find_or_create_by!(email: GUEST_USER_EMAIL) { |employee|
       employee.password = SecureRandom.urlsafe_base64
       employee.last_name = "ゲスト"
       employee.first_name = "ユーザー"

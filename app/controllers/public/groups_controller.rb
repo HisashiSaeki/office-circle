@@ -35,13 +35,13 @@ class Public::GroupsController < ApplicationController
   private
 
 
-  def group_params
-    params.require(:group).permit(:name, :description)
-  end
+    def group_params
+      params.require(:group).permit(:name, :description)
+    end
 
-  def ensure_correct_creater
-    @group = Group.find(params[:id])
-    redirect_to group_path(@group) unless @group.created_by?(current_employee)
-  end
+    def ensure_correct_creater
+      @group = Group.find(params[:id])
+      redirect_to group_path(@group) unless @group.created_by?(current_employee)
+    end
 
 end

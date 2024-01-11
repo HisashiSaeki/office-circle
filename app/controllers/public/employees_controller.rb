@@ -23,28 +23,28 @@ class Public::EmployeesController < ApplicationController
 
   private
 
-  def employee_params
-    params.require(:employee).permit(
-      :profile_image,
-      :last_name,
-      :first_name,
-      :last_name_furigana,
-      :first_name_furigana,
-      :birthdate,
-      :prefecture,
-      :department_id,
-      :introduction,
-      :email,
-      :is_active
-    )
-  end
+    def employee_params
+      params.require(:employee).permit(
+        :profile_image,
+        :last_name,
+        :first_name,
+        :last_name_furigana,
+        :first_name_furigana,
+        :birthdate,
+        :prefecture,
+        :department_id,
+        :introduction,
+        :email,
+        :is_active
+      )
+    end
 
-  def ensure_correct_employee
-    redirect_to employee_path(@employee) if @employee != current_employee || @employee.guest_employee?
-  end
+    def ensure_correct_employee
+      redirect_to employee_path(@employee) if @employee != current_employee || @employee.guest_employee?
+    end
 
-  def set_employee
-    @employee = Employee.find(params[:id])
-  end
+    def set_employee
+      @employee = Employee.find(params[:id])
+    end
 
 end

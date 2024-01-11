@@ -13,7 +13,7 @@ class Public::FavoritesController < ApplicationController
 
   private
 
-  def set_article
-    @article = Article.find(params[:article_id])
-  end
+    def set_article
+      @article = Article.find(params[:article_id])
+    end
 end

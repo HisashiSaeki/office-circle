@@ -5,7 +5,7 @@ class Favorite < ApplicationRecord
   has_one :activity, as: :subject, dependent: :destroy
 
 
-  validates :employee_id, uniqueness: {scope: :article_id}
+  validates :employee_id, uniqueness: { scope: :article_id }
 
 
   after_create_commit :create_activities
@@ -14,7 +14,7 @@ class Favorite < ApplicationRecord
   private
 
 
-  def create_activities = Activity.create(subject: self, employee: self.article.employee, action_type: :liked_to_own_article)
+    def create_activities = Activity.create(subject: self, employee: self.article.employee, action_type: :liked_to_own_article)
 
 
 end

@@ -16,18 +16,18 @@ class Public::CommentsController < ApplicationController
   private
 
 
-  def comment_params
-    params.require(:comment).permit(:comment)
-  end
+    def comment_params
+      params.require(:comment).permit(:comment)
+    end
 
-  def ensure_correct_employee
-    @comment = Comment.find(params[:id])
-    redirect_to articles_path unless @comment.employee == current_employee || admin_signed_in?
-  end
+    def ensure_correct_employee
+      @comment = Comment.find(params[:id])
+      redirect_to articles_path unless @comment.employee == current_employee || admin_signed_in?
+    end
 
-  def set_comments
-    @article = Article.find(params[:article_id])
-    @comments = Comment.where(article_id: @article).includes(:employee)
-  end
+    def set_comments
+      @article = Article.find(params[:article_id])
+      @comments = Comment.where(article_id: @article).includes(:employee)
+    end
 
 end

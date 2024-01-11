@@ -13,7 +13,7 @@ FactoryBot.define do
     is_active { true }
 
     after(:build) do |employee|
-      employee.profile_image.attach(io: File.open("spec/images/profile_image.jpg"), filename: "profile_image.jpg", content_type: "application/xlsx")
+      employee.profile_image.attach(io: File.open("spec/images/profile_image.jpg"), filename: "profile_image.jpg", content_type: "image/jpeg")
     end
   end
 end
