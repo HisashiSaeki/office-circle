@@ -23,17 +23,17 @@ class Public::NoticesController < ApplicationController
   private
 
 
-    def notice_params
-      params.require(:notice).permit(:title, :body)
-    end
+  def notice_params
+    params.require(:notice).permit(:title, :body)
+  end
 
-    def ensure_correct_creater
-      @group = Group.find(params[:group_id])
-      redirect_to group_path(@group) unless @group.created_by?(current_employee)
-    end
+  def ensure_correct_creater
+    @group = Group.find(params[:group_id])
+    redirect_to group_path(@group) unless @group.created_by?(current_employee)
+  end
 
-    def set_notice
-      @notice = Notice.find(params[:id])
-    end
+  def set_notice
+    @notice = Notice.find(params[:id])
+  end
 
 end

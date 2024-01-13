@@ -27,15 +27,15 @@ class Public::SearchesController < ApplicationController
   private
 
 
-    def set_keyword
-      @keyword = params[:keyword]
-    end
+  def set_keyword
+    @keyword = params[:keyword]
+  end
 
-    def set_tags
-      @tags = Tag.published_article_tags
-    end
+  def set_tags
+    @tags = Tag.published_article_tags
+  end
 
-    def set_departments
-      @departments = Department.all
-    end
+  def set_departments
+    @departments = Department.all
+  end
 end

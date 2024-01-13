@@ -7,17 +7,17 @@ class Public::ArticlesController < ApplicationController
 
   def create
     @article = current_employee.articles.new(article_params)
-    list_tags = params[:article][:tag].split("、").uniq
+    send_tag = params[:article][:tag]
     if params[:post].present?
       if @article.save_published
-        @article.save_tags(list_tags)
+        @article.save_tags(send_tag)
         redirect_to article_path(@article), notice: "投稿完了しました"
       else
         render :new
       end
     elsif params[:draft].present?
       if @article.save_private
-        @article.save_tags(list_tags)
+        @article.save_tags(send_tag)
         redirect_to article_path(@article), notice: "投稿を下書き保存しました"
       else
         render :new

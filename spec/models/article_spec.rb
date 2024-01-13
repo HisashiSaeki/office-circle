@@ -30,10 +30,10 @@ RSpec.describe Article, type: :model do
   end
   describe "#save_tags(send_tags)" do
     before { article.save }
-    let(:send_tags1) { "タグ、保存、テスト".split("、").uniq }
-    it "send_tags1のタグが記事に紐づけられる" do
-      article.save_tags(send_tags1)
-      expect(article.tags.pluck(:name)).to eq ["タグ", "保存", "テスト"]
+    let(:send_tag1) { "タグ,保存、テスト 成功" }
+    it "send_tag1のタグが記事に紐づけられる" do
+      article.save_tags(send_tag1)
+      expect(article.tags.pluck(:name)).to eq ["タグ", "保存", "テスト", "成功"]
     end
   end
   describe "#update_tags(send_tags)" do
