@@ -46,11 +46,12 @@ class Article < ApplicationRecord
     tag_list.each { |tag| self.tags << Tag.find_or_create_by(name: tag) }
   end
   
-  def update_tags(send_tags)
+  def update_tags(send_tag)
+    tag_list = send_tag.split(/([、,\s]+)/).grep(/[^、,\s]+/).uniq
     # 編集前の投稿にタグが付いていれば、current_tagsに入れる
     current_tags = self.tags.pluck(:name) if self.tags
-    old_tags = current_tags - send_tags
-    new_tags = send_tags - current_tags
+    old_tags = current_tags - tag_list
+    new_tags = tag_list - current_tags
     old_tags.each { |old_tag| self.tags.delete(Tag.find_by(name: old_tag)) }
     new_tags.each { |new_tag| self.tags << Tag.find_or_create_by(name: new_tag) }
   end

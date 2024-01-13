@@ -38,12 +38,12 @@ RSpec.describe Article, type: :model do
   end
   describe "#update_tags(send_tags)" do
     before { article.save }
-    let(:send_tags1) { "タグ、保存、テスト".split("、").uniq }
-    let(:send_tags2) { "タグ、更新".split("、").uniq }
-    before { article.save_tags(send_tags1) }
-    it "記事に紐づくsend_tags1のタグをsend_tags2のタグが上書きする" do
-      article.update_tags(send_tags2)
-      expect(article.tags.pluck(:name)).to eq ["タグ", "更新"]
+    let(:send_tag1) { "タグ,保存、テスト 成功" }
+    let(:send_tag2) { "タグ、更新,複数 完了" }
+    before { article.save_tags(send_tag1) }
+    it "記事に紐づくsend_tag1のタグをsend_tag2のタグが上書きする" do
+      article.update_tags(send_tag2)
+      expect(article.tags.pluck(:name)).to eq ["タグ", "更新", "複数", "完了"]
     end
   end
   describe "#self.search(keyword)" do
