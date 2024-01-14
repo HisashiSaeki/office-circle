@@ -113,8 +113,8 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
     let!(:article) { create(:article, employee_id: employee.id) }
     let!(:comment) { Comment.create(employee_id: employee.id, article_id: article.id, comment: "テスト") }
     before do
-      list_tags = ["公開中"]
-      article.save_tags(list_tags)
+      send_tag = "公開中"
+      article.save_tags(send_tag)
       visit admin_articles_path
     end
 
@@ -184,8 +184,8 @@ RSpec.describe "[STEP2]管理者ログイン後のテスト" do
     let!(:article) { create(:article, employee_id: employee.id) }
     let!(:comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "テスト") }
     before do
-      list_tags = ["公開中"]
-      article.save_tags(list_tags)
+      send_tag = "公開中"
+      article.save_tags(send_tag)
       visit admin_articles_path
       click_on article.title
     end

@@ -61,4 +61,7 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
+  config.after(:all) do
+    FileUtils.rm_rf(ActiveStorage::Blob.service.root) if Rails.env.test?
+  end
 end

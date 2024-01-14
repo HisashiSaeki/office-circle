@@ -78,19 +78,19 @@ RSpec.describe Employee, type: :model do
     before { employee.save }
     it "キーワードでlast_nameの部分検索ができる" do
       keyword = "佐々木"
-      expect(Employee.search(keyword)).to include(Employee.where(last_name: "佐々木"))
+      expect(Employee.search(keyword)).to include(employee)
     end
     it "キーワードでfirst_nameの部分検索ができる" do
       keyword = "太朗"
-      expect(Employee.search(keyword)).to include(Employee.where(last_name: "佐々木"))
+      expect(Employee.search(keyword)).to include(employee)
     end
     it "キーワードでlast_name_furiganaの部分検索ができる" do
       keyword = "ササキ"
-      expect(Employee.search(keyword)).to include(Employee.where(last_name: "佐々木"))
+      expect(Employee.search(keyword)).to include(employee)
     end
     it "キーワードでfirst_name_furiganaの部分検索ができる" do
       keyword = "タロウ"
-      expect(Employee.search(keyword)).to include(Employee.where(last_name: "佐々木"))
+      expect(Employee.search(keyword)).to include(employee)
     end
   end
 end

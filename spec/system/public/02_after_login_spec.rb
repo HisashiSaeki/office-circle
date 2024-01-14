@@ -332,8 +332,8 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   describe "投稿一覧画面のテスト" do
     let!(:article) { create(:article, employee_id: employee.id) }
     before do
-      list_tags = ["公開中"]
-      article.save_tags(list_tags)
+      send_tag = "公開中"
+      article.save_tags(send_tag)
       visit articles_path
     end
 
@@ -410,8 +410,8 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
     let!(:other_comment) { Comment.create(employee_id: other_employee.id, article_id: article.id, comment: "other_employeeのコメント") }
     before do
       click_on "投稿一覧"
-      list_tags = ["公開中"]
-      article.save_tags(list_tags)
+      send_tag = "公開中"
+      article.save_tags(send_tag)
       visit articles_path
       click_on article.title
     end
@@ -462,7 +462,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
         expect(page).to have_content "コメント"
       end
       it "コメントの作者のプロフィール画像が表示される" do
-        within ".comment-#{comment.id}" do
+        within "#comment-#{comment.id}" do
           expect(page).to have_selector "img"
         end
       end
@@ -632,8 +632,8 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
   describe "投稿編集画面のテスト" do
     let!(:article) { create(:article, employee_id: employee.id) }
     before do
-      list_tags = ["タグ"]
-      article.save_tags(list_tags)
+      send_tag = "タグ"
+      article.save_tags(send_tag)
       # 投稿編集画面まで遷移
       visit edit_article_path(article)
     end
@@ -1086,7 +1086,7 @@ RSpec.describe "[STEP2]社員ログイン後のテスト" do
       end
       it "コメントをされた投稿のリンクが正しい" do
         within "#activity-2" do
-          expect(page).to have_link "投稿", href: article_path(article)
+          expect(page).to have_link "投稿", href: article_path(article, anchor: "comment-#{comment.id}")
         end
       end
       it "お知らせをしたグループのリンクが正しい" do
