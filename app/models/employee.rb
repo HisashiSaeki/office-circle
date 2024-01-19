@@ -41,6 +41,7 @@ class Employee < ApplicationRecord
   def full_name_furigana = "#{last_name_furigana} #{first_name_furigana}"
 
   def self.search(keyword)
+
     self.where(
       "last_name LIKE ? or first_name LIKE ? or last_name_furigana LIKE ? or first_name_furigana LIKE ?",
       "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%",

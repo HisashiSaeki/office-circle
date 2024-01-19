@@ -42,10 +42,10 @@ class Article < ApplicationRecord
   def join_tags = self.tags.pluck(:name).join("、")
 
   def save_tags(send_tag)
-    tag_list = send_tag.split(/([、,\s]+)/).grep(/[^、,\s]+/).uniq 
+    tag_list = send_tag.split(/([、,\s]+)/).grep(/[^、,\s]+/).uniq
     tag_list.each { |tag| self.tags << Tag.find_or_create_by(name: tag) }
   end
-  
+
   def update_tags(send_tag)
     tag_list = send_tag.split(/([、,\s]+)/).grep(/[^、,\s]+/).uniq
     # 編集前の投稿にタグが付いていれば、current_tagsに入れる
